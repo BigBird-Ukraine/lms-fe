@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://lms.site',
+  apiUrl: 'https://qa.lms.site',
   apiVersion: 'api',
-  adminEmail: 'admin@somemail.com',
+  adminEmail: 'curatorQA@somemail.com',
   infoEmail: 'info@somemail.com',
 };
