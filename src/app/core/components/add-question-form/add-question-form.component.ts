@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-add-question-form',
@@ -27,23 +27,37 @@ export class AddQuestionFormComponent implements OnInit {
     {value: '3', viewValue: '3'}
   ];
 
-  constructor() {
-  }
+  answers = [
+    {valid: 'false', label: ''},
+    {valid: 'false', label: ''},
+    {valid: 'false', label: ''},
+    {valid: 'false', label: ''},
+  ];
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.questionForm = new FormGroup({
-      subject: new FormControl(this.subjects[0].value, [
-        Validators.required
-      ]),
-      theme: new FormControl(null, [
-        Validators.required
-      ]),
-      level: new FormControl(null, [
-        Validators.required
-      ]),
-      question: new FormControl(null, [
-        Validators.required
-      ])
+    this.questionForm = this.fb.group({
+      subject: this.fb.control(null),
+      theme: this.fb.control(null),
+      level: this.fb.control(null),
+      question: this.fb.control(null),
+      answersForm: this.fb.array([])
+    });
+    this.patch();
+  }
+
+  patchValues(label, valid) {
+    return this.fb.group({
+      label: [label],
+      valid: [false]
+    });
+  }
+
+  patch() {
+    const control = this.questionForm.get('answersForm') as FormArray;
+    this.answers.forEach(x => {
+      control.push(this.patchValues(x.label, x.valid));
     });
   }
 

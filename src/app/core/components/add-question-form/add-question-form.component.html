@@ -1,41 +1,55 @@
-<form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
+<div>
+  <h2 style="text-align: center; margin-top: 20px">Додайте, будь ласка, своє питання</h2>
+  <form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
 
-  <div class="form">
-    <mat-form-field>
-      <mat-label>Виберіть предмет</mat-label>
-      <mat-select formControlName="subject">
-        <mat-option *ngFor="let sub of subjects" [value]="sub.value">
-          {{sub.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Виберіть предмет</mat-label>
+        <mat-select formControlName="subject">
+          <mat-option *ngFor="let sub of subjects" [value]="sub.value">
+            {{sub.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Виберіть тему</mat-label>
-      <mat-select formControlName="theme">
-        <mat-option *ngFor="let theme of themes" [value]="theme.value">
-          {{theme.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Виберіть тему</mat-label>
+        <mat-select formControlName="theme">
+          <mat-option *ngFor="let theme of themes" [value]="theme.value">
+            {{theme.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Виберіть складність</mat-label>
-      <mat-select formControlName="level">
-        <mat-option *ngFor="let level of levels" [value]="level.value">
-          {{level.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Виберіть складність</mat-label>
+        <mat-select formControlName="level">
+          <mat-option *ngFor="let level of levels" [value]="level.value">
+            {{level.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Сформулюйте питтаня" formControlName="question">
-    </mat-form-field>
-  </div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Сформулюйте питтаня" formControlName="question">
+      </mat-form-field>
+    </div>
 
+    <div formArrayName="answersForm">
+      <div *ngFor="let answer of answers; let i = index">
+        <div [formGroupName]="i" class="d-flex align-items-end">
+          <mat-form-field class="example-full-width">
+            <input matInput value="" formControlName="label" placeholder="Відповідь{{i+1}}">
+          </mat-form-field>
+          <mat-checkbox class="checkbox" value="false" formControlName="valid">Правильна відповідь</mat-checkbox>
+        </div>
+      </div>
+    </div>
 
-  <button mat-raised-button
-          color="primary"
-          type="submit">Submit
-  </button>
-</form>
+    <button mat-raised-button
+            color="primary"
+            type="submit">Submit
+    </button>
+  </form>
+
+</div>
