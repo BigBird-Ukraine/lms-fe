@@ -54,7 +54,7 @@ export class AddQuestionFormComponent implements OnInit {
       subject: this.fb.control(null, Validators.required),
       theme: this.fb.control(null, Validators.required),
       level: this.fb.control(null, Validators.required),
-      tags: this.fb.array([]),
+      tags: this.fb.array([], Validators.required),
       question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
