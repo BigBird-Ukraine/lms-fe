@@ -31,8 +31,8 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Вкажіть теги для питання" formControlName="tags"
-               [errorStateMatcher]="matcher">
+        <input matInput placeholder="Вкажіть теги для питання" formGroupName="tags"
+               [errorStateMatcher]="matcher" (input)="newTag($event)">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -45,7 +45,7 @@
             color="primary"
             type="button"
             (click)="addAnswer()"
-    [disabled]="questionForm.get('answersForm').controls.length > 4">
+            [disabled]="questionForm.get('answersForm').controls.length > 4">
       Add Answer
     </button>
 

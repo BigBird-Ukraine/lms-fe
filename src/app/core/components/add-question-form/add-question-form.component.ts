@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
+import {log} from 'util';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,6 +19,7 @@ export class AddQuestionFormComponent implements OnInit {
   questionForm: FormGroup;
   matcher = new MyErrorStateMatcher();
   clickCount = 0;
+  text = '';
 
   subjects = [
     {value: 'history', viewValue: 'History'},
@@ -52,7 +54,7 @@ export class AddQuestionFormComponent implements OnInit {
       subject: this.fb.control(null, Validators.required),
       theme: this.fb.control(null, Validators.required),
       level: this.fb.control(null, Validators.required),
-      tags: this.fb.control(null, Validators.required),
+      tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
@@ -73,6 +75,10 @@ export class AddQuestionFormComponent implements OnInit {
   //     control.push(this.patchValues(x.label, x.valid));
   //   });
   // }
+
+  newTag(tag) {
+    this.text = tag.target.value;
+  }
 
   removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
@@ -97,9 +103,12 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
+    const tagArr = this.text.split(/\s*,\s*/);
+    const control = new FormControl(tagArr, Validators.required);
+    (this.questionForm.get('tags') as FormArray).push(control);
+
     const formData = this.questionForm.value;
     console.log(formData);
     this.questionForm.reset();
   }
-
 }
