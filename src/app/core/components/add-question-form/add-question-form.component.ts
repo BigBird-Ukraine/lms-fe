@@ -15,12 +15,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./add-question-form.component.scss']
 })
 export class AddQuestionFormComponent implements OnInit {
+
+  // all variable must have interface, like tags:Tags[], or type boolean, string
+
   questionForm: FormGroup;
   matcher = new MyErrorStateMatcher();
   clickCount = 0;
-  text = '';
+
+  // todo - create interface for tags
+  // todo - create interface for all form
+  tags = [];
+
   arrAnswerLength = AnswersArrLengthEnum.LENGTH;
   answerClickCount = AddAnswerClickCountEnum.CLICK_COUNT;
+
+
+  // Create interface for all object
 
   subjects = [
     {value: 'history', viewValue: 'History'},
@@ -40,51 +50,43 @@ export class AddQuestionFormComponent implements OnInit {
     {value: '3', viewValue: '3'}
   ];
 
-  // answers = [
-  //   {valid: 'false', label: ''},
-  //   {valid: 'false', label: ''},
-  //   {valid: 'false', label: ''},
-  //   {valid: 'false', label: ''},
-  // ];
-
   constructor(private fb: FormBuilder) {
   }
 
+
   ngOnInit() {
+    // Create function formData value, imlement in ngOnInit
     this.questionForm = this.fb.group({
-      subject: this.fb.control(null, Validators.required),
-      theme: this.fb.control(null, Validators.required),
+      subject: this.fb.control(null, [
+        Validators.required
+      ]),
+      theme: this.fb.control(null, [Validators.required]),
       level: this.fb.control(null, Validators.required),
       tags: this.fb.array([], Validators.required),
       question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
-    // this.patch();
   }
-
-  // patchValues(label, valid) {
-  //   return this.fb.group({
-  //     label: [label],
-  //     valid: [false]
-  //   });
-  // }
-  //
-  //
-  // patch() {
-  //   const control = this.questionForm.get('answersForm') as FormArray;
-  //   this.answers.forEach(x => {
-  //     control.push(this.patchValues(x.label, x.valid));
-  //   });
-  // }
 
   newTag(tag) {
-    this.text = tag.target.value;
+    const text = tag.target.value;
+
+    if (text.length > 1) {
+      this.tags.push(text);
+    }
+    const control = new FormControl(this.tags[0], Validators.required);
+    (this.questionForm.get('tags') as FormArray).push(control);
+    tag.target.value = '';
   }
+
 
   removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
-    const index = control.value.indexOf(answerToRemove => answerToRemove === answer);
-    control.removeAt(index);
+    const idx = control.value.findIndex((a) => a.label === answer.value.label);
+
+    if (idx > -1) {
+      control.removeAt(idx);
+    }
     this.clickCount--;
   }
 
@@ -104,12 +106,7 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
-    const tagArr = this.text.split(/\s*,\s*/);
-    const control = new FormControl(tagArr, Validators.required);
-    (this.questionForm.get('tags') as FormArray).push(control);
-
     const formData = this.questionForm.value;
     console.log(formData);
-    this.questionForm.reset();
   }
 }
