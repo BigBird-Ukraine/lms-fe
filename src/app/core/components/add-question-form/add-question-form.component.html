@@ -5,7 +5,7 @@
     <div class="form">
       <mat-form-field>
         <mat-label>Виберіть предмет</mat-label>
-        <mat-select formControlName="subject">
+        <mat-select formControlName="subject" [errorStateMatcher]="matcher">
           <mat-option *ngFor="let sub of subjects" [value]="sub.value">
             {{sub.viewValue}}
           </mat-option>
@@ -14,7 +14,7 @@
 
       <mat-form-field>
         <mat-label>Виберіть тему</mat-label>
-        <mat-select formControlName="theme">
+        <mat-select formControlName="theme" [errorStateMatcher]="matcher">
           <mat-option *ngFor="let theme of themes" [value]="theme.value">
             {{theme.viewValue}}
           </mat-option>
@@ -23,7 +23,7 @@
 
       <mat-form-field>
         <mat-label>Виберіть складність</mat-label>
-        <mat-select formControlName="level">
+        <mat-select formControlName="level" [errorStateMatcher]="matcher">
           <mat-option *ngFor="let level of levels" [value]="level.value">
             {{level.viewValue}}
           </mat-option>
@@ -31,24 +31,41 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Сформулюйте питтаня" formControlName="question">
+        <input matInput placeholder="Вкажіть теги для питання" formControlName="tags"
+               [errorStateMatcher]="matcher">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Сформулюйте питтаня" formControlName="question"
+               [errorStateMatcher]="matcher">
       </mat-form-field>
     </div>
 
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addAnswer()"
+    [disabled]="questionForm.get('answersForm').controls.length > 4">
+      Add Answer
+    </button>
+
     <div formArrayName="answersForm">
-      <div *ngFor="let answer of answers; let i = index">
+      <div *ngFor="let answer of questionForm.get('answersForm').controls; let i = index">
         <div [formGroupName]="i" class="d-flex align-items-end">
+          <mat-checkbox class="checkbox" value="false" formControlName="valid"></mat-checkbox>
           <mat-form-field class="example-full-width">
-            <input matInput value="" formControlName="label" placeholder="Відповідь{{i+1}}">
+            <input matInput value="" formControlName="label" placeholder="Відповідь{{i + 1}}">
           </mat-form-field>
-          <mat-checkbox class="checkbox" value="false" formControlName="valid">Правильна відповідь</mat-checkbox>
+          <button mat-mini-fab color="primary" (click)="removeAnswer(answer)">&times;</button>
         </div>
       </div>
     </div>
 
     <button mat-raised-button
             color="primary"
-            type="submit">Submit
+            type="submit"
+            [disabled]="questionForm.invalid"
+    >Submit
     </button>
   </form>
 

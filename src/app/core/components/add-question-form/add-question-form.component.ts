@@ -1,5 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+}
 
 @Component({
   selector: 'app-add-question-form',
@@ -8,6 +16,8 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 })
 export class AddQuestionFormComponent implements OnInit {
   questionForm: FormGroup;
+  matcher = new MyErrorStateMatcher();
+  clickCount = 0;
 
   subjects = [
     {value: 'history', viewValue: 'History'},
@@ -18,7 +28,7 @@ export class AddQuestionFormComponent implements OnInit {
   levels = [
     {value: 'low', viewValue: 'Low'},
     {value: 'medium', viewValue: 'Medium'},
-    {value: 'hight', viewValue: 'Hight'}
+    {value: 'height', viewValue: 'Height'}
   ];
 
   themes = [
@@ -27,42 +37,69 @@ export class AddQuestionFormComponent implements OnInit {
     {value: '3', viewValue: '3'}
   ];
 
-  answers = [
-    {valid: 'false', label: ''},
-    {valid: 'false', label: ''},
-    {valid: 'false', label: ''},
-    {valid: 'false', label: ''},
-  ];
+  // answers = [
+  //   {valid: 'false', label: ''},
+  //   {valid: 'false', label: ''},
+  //   {valid: 'false', label: ''},
+  //   {valid: 'false', label: ''},
+  // ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.questionForm = this.fb.group({
-      subject: this.fb.control(null),
-      theme: this.fb.control(null),
-      level: this.fb.control(null),
-      question: this.fb.control(null),
+      subject: this.fb.control(null, Validators.required),
+      theme: this.fb.control(null, Validators.required),
+      level: this.fb.control(null, Validators.required),
+      tags: this.fb.control(null, Validators.required),
+      question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
-    this.patch();
+    // this.patch();
   }
 
-  patchValues(label, valid) {
-    return this.fb.group({
-      label: [label],
-      valid: [false]
-    });
-  }
+  // patchValues(label, valid) {
+  //   return this.fb.group({
+  //     label: [label],
+  //     valid: [false]
+  //   });
+  // }
+  //
+  //
+  // patch() {
+  //   const control = this.questionForm.get('answersForm') as FormArray;
+  //   this.answers.forEach(x => {
+  //     control.push(this.patchValues(x.label, x.valid));
+  //   });
+  // }
 
-  patch() {
+  removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
-    this.answers.forEach(x => {
-      control.push(this.patchValues(x.label, x.valid));
-    });
+    const index = control.value.indexOf(ans => ans === answer);
+    control.removeAt(index);
+    this.clickCount--;
+  }
+
+  addAnswer() {
+    if (this.clickCount < 5) {
+
+      const control = new FormGroup({
+        label: new FormControl('', Validators.required),
+        valid: new FormControl(false)
+      });
+      (this.questionForm.get('answersForm') as FormArray).push(control);
+
+      this.clickCount++;
+    } else {
+      return;
+    }
   }
 
   addQuestion() {
     const formData = this.questionForm.value;
     console.log(formData);
+    this.questionForm.reset();
   }
+
 }
