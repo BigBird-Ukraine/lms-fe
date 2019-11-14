@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
+
+import {QuestionsService} from '../../services/questions/questions.service';
+
 import {AddAnswerClickCountEnum, AnswersArrLengthEnum} from '../../enums';
+import {QuestionModel} from '../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -50,7 +54,8 @@ export class AddQuestionFormComponent implements OnInit {
     {value: '3', viewValue: '3'}
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private questionService: QuestionsService) {
   }
 
 
@@ -108,5 +113,10 @@ export class AddQuestionFormComponent implements OnInit {
   addQuestion() {
     const formData = this.questionForm.value;
     console.log(formData);
+    // this.createQuestion(formData);
+  }
+
+  createQuestion(question: QuestionModel) {
+    this.questionService.createQuestion(question).subscribe(result => console.log(result));
   }
 }
