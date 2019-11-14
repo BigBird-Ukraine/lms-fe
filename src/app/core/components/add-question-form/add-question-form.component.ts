@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
-import {log} from 'util';
+import {AddAnswerClickCountEnum, AnswersArrLengthEnum} from '../../enums';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched));
   }
 }
@@ -20,6 +19,8 @@ export class AddQuestionFormComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   clickCount = 0;
   text = '';
+  arrAnswerLength = AnswersArrLengthEnum.LENGTH;
+  answerClickCount = AddAnswerClickCountEnum.CLICK_COUNT;
 
   subjects = [
     {value: 'history', viewValue: 'History'},
@@ -82,13 +83,13 @@ export class AddQuestionFormComponent implements OnInit {
 
   removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
-    const index = control.value.indexOf(ans => ans === answer);
+    const index = control.value.indexOf(answerToRemove => answerToRemove === answer);
     control.removeAt(index);
     this.clickCount--;
   }
 
   addAnswer() {
-    if (this.clickCount < 5) {
+    if (this.clickCount < this.answerClickCount) {
 
       const control = new FormGroup({
         label: new FormControl('', Validators.required),

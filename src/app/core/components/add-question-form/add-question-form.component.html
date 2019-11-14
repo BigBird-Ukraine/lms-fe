@@ -45,7 +45,7 @@
             color="primary"
             type="button"
             (click)="addAnswer()"
-            [disabled]="questionForm.get('answersForm').controls.length > 4">
+            [disabled]="questionForm.get('answersForm').controls.length > arrAnswerLength">
       Add Answer
     </button>
 
