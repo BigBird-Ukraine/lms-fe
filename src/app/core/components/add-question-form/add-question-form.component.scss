@@ -1,0 +1,42 @@
+button {
+  margin: 10px;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-top: 20px;
+  color: #673ab7
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.answers {
+  display: flex;
+  align-items: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.checkbox {
+  margin: 10px;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+}
+
+.tag {
+  margin: 5px;
+  border: 1px solid black;
+  padding: 3px;
+  background: #673ab7;
+  color: white;
+}
+
