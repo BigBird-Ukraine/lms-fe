@@ -1,3 +1,1 @@
-export * from './add-answer-click-count.enum';
-export * from './answers-arr-length.enum';
-
+export * from './level.enum';

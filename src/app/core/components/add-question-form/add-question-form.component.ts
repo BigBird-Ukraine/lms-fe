@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
-import {AddAnswerClickCountEnum, AnswersArrLengthEnum} from '../../enums';
+import {QuestionFormConsts} from '../../constans';
+import {Level, Subjects, Themes} from '../../models';
+import {LevelEnum} from '../../enums';
+import {log} from 'util';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,43 +22,45 @@ export class AddQuestionFormComponent implements OnInit {
   // all variable must have interface, like tags:Tags[], or type boolean, string
 
   questionForm: FormGroup;
-  matcher = new MyErrorStateMatcher();
   clickCount = 0;
 
   // todo - create interface for tags
   // todo - create interface for all form
-  tags = [];
 
-  arrAnswerLength = AnswersArrLengthEnum.LENGTH;
-  answerClickCount = AddAnswerClickCountEnum.CLICK_COUNT;
-
+  answerClickCount = QuestionFormConsts.CLICK_COUNT;
+  tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
   // Create interface for all object
 
-  subjects = [
+  subjects: Subjects[] = [
     {value: 'history', viewValue: 'History'},
     {value: 'math', viewValue: 'Math'},
     {value: 'language', viewValue: 'Language'}
   ];
 
-  levels = [
-    {value: 'low', viewValue: 'Low'},
-    {value: 'medium', viewValue: 'Medium'},
-    {value: 'height', viewValue: 'Height'}
+  levels: Level[] = [
+    {value: 'low', viewValue: LevelEnum.LOW},
+    {value: 'medium', viewValue: LevelEnum.MEDIUM},
+    {value: 'height', viewValue: LevelEnum.HEIGHT}
   ];
 
-  themes = [
+  themes: Themes[] = [
     {value: '1', viewValue: '1'},
     {value: '2', viewValue: '2'},
     {value: '3', viewValue: '3'}
   ];
 
+  tags: string[] = [];
+
   constructor(private fb: FormBuilder) {
   }
 
-
   ngOnInit() {
     // Create function formData value, imlement in ngOnInit
+    this.formData();
+  }
+
+  formData() {
     this.questionForm = this.fb.group({
       subject: this.fb.control(null, [
         Validators.required
@@ -71,18 +76,21 @@ export class AddQuestionFormComponent implements OnInit {
   newTag(tag) {
     const text = tag.target.value;
 
-    if (text.length > 1) {
+    if (text.length > this.tagArrLength) {
       this.tags.push(text);
     }
-    const control = new FormControl(this.tags[0], Validators.required);
-    (this.questionForm.get('tags') as FormArray).push(control);
+
+    // const control = new FormControl(this.tags, Validators.required);
+    this.questionForm.value.tags = this.tags;
+    // (this.questionForm.get('tags') as FormArray).push(control);
     tag.target.value = '';
+
   }
 
 
   removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
-    const idx = control.value.findIndex((a) => a.label === answer.value.label);
+    const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);
 
     if (idx > -1) {
       control.removeAt(idx);
@@ -100,8 +108,6 @@ export class AddQuestionFormComponent implements OnInit {
       (this.questionForm.get('answersForm') as FormArray).push(control);
 
       this.clickCount++;
-    } else {
-      return;
     }
   }
 
