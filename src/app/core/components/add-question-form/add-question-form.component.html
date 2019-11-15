@@ -16,11 +16,11 @@
   <!--  </form>-->
   <!--    ADD FORM VALIDATION LIKE https://material.angular.io/components/input/overview -->
 
-<!--  TODO Form must validate [required, min-length] and show to user-->
+  <!--  TODO Form must validate [required, min-length] and show to user-->
 
   <!--  // Todo code like this, better to read-->
 
-  <h2 style="text-align: center; margin-top: 20px; color: #673ab7">
+  <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
   <form
@@ -36,37 +36,59 @@
             {{sub.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="questionForm.get('subject').hasError('required')">
+          Виберіть, будь ласка, предмет
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Виберіть тему</mat-label>
         <mat-select formControlName="theme">
-          <mat-option *ngFor="let theme of themes" [value]="theme.value">
+          <mat-option *ngFor="let theme of themes"
+                      [value]="theme.value">
             {{theme.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="questionForm.get('theme').hasError('required')">
+          Виберіть, будь ласка, тему
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Виберіть складність</mat-label>
         <mat-select formControlName="level">
-          <mat-option *ngFor="let level of levels" [value]="level.value">
+          <mat-option *ngFor="let level of levels"
+                      [value]="level.value">
             {{level.viewValue}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="questionForm.get('level').hasError('required')">
+          Виберіть, будь ласка, складність
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Вкажіть теги для питання" formGroupName="tags"
+        <input matInput placeholder="Вкажіть теги для питання"
+               formGroupName="tags"
                (keyup.enter)="newTag($event)">
+        <mat-error *ngIf="questionForm.get('tags').hasError('required')">
+          Це поле не може бути пустим
+        </mat-error>
       </mat-form-field>
 
       <div class="tags">
-        <span *ngFor="let t of tags" class="tag">{{t}}</span>
+        <span *ngFor="let t of tags"
+              class="tag">
+          {{t}}
+        </span>
       </div>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Сформулюйте питтаня" formControlName="question">
+        <input matInput placeholder="Сформулюйте питтаня"
+               formControlName="question">
+        <mat-error *ngIf="questionForm.get('question').hasError('required')">
+          Це поле не може бути пустим
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -74,18 +96,28 @@
             color="primary"
             type="button"
             (click)="addAnswer()">
-      Add Answer
+      Додати відповідь
     </button>
 
     <div formArrayName="answersForm">
       <div *ngFor="let answer of questionForm.get('answersForm').controls; let i = index">
-        <div [formGroupName]="i" class="d-flex align-items-end">
-          <mat-checkbox class="checkbox" value="false" formControlName="valid"></mat-checkbox>
+        <div [formGroupName]="i"
+             class="d-flex align-items-end">
+          <mat-checkbox class="checkbox"
+                        value="false"
+                        formControlName="valid">
+
+          </mat-checkbox>
           <mat-form-field class="example-full-width">
-            <input matInput value="" (keyup.enter)="addAnswer()" formControlName="label"
+            <input matInput value=""
+                   (keyup.enter)="addAnswer()"
+                   formControlName="label"
                    placeholder="Відповідь{{i + 1}}">
           </mat-form-field>
-          <button mat-mini-fab color="primary" (click)="removeAnswer(answer)">&times;</button>
+          <button mat-mini-fab color="primary"
+                  (click)="removeAnswer(answer)">
+            &times;
+          </button>
         </div>
       </div>
     </div>
@@ -93,7 +125,8 @@
     <button mat-raised-button
             color="primary"
             type="submit"
-    >Submit
+            [disabled]="questionForm.invalid"
+    >Надіслати
     </button>
 
     <!--    <button mat-raised-button-->
