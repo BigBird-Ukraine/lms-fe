@@ -3,8 +3,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgFo
 import {ErrorStateMatcher} from '@angular/material';
 
 import {QuestionsService} from '../../services/questions/questions.service';
-
-import {AddAnswerClickCountEnum, AnswersArrLengthEnum} from '../../enums';
+import {QuestionFormConsts} from '../../constans';
+import {Level, Subjects, Themes} from '../../models';
+import {LevelEnum} from '../../enums';
 import {QuestionModel} from '../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,54 +21,46 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AddQuestionFormComponent implements OnInit {
 
-  // all variable must have interface, like tags:Tags[], or type boolean, string
-
   questionForm: FormGroup;
-  matcher = new MyErrorStateMatcher();
   clickCount = 0;
+  answerClickCount = QuestionFormConsts.CLICK_COUNT;
+  tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  // todo - create interface for tags
-  // todo - create interface for all form
-  tags = [];
-
-  arrAnswerLength = AnswersArrLengthEnum.LENGTH;
-  answerClickCount = AddAnswerClickCountEnum.CLICK_COUNT;
-
-
-  // Create interface for all object
-
-  subjects = [
+  subjects: Subjects[] = [
     {value: 'history', viewValue: 'History'},
     {value: 'math', viewValue: 'Math'},
     {value: 'language', viewValue: 'Language'}
   ];
 
-  levels = [
-    {value: 'low', viewValue: 'Low'},
-    {value: 'medium', viewValue: 'Medium'},
-    {value: 'height', viewValue: 'Height'}
+  levels: Level[] = [
+    {value: 'low', viewValue: LevelEnum.LOW},
+    {value: 'medium', viewValue: LevelEnum.MEDIUM},
+    {value: 'height', viewValue: LevelEnum.HEIGHT}
   ];
 
-  themes = [
+  themes: Themes[] = [
     {value: '1', viewValue: '1'},
     {value: '2', viewValue: '2'},
     {value: '3', viewValue: '3'}
   ];
 
-  constructor(private fb: FormBuilder,
-              private questionService: QuestionsService) {
-  }
+  tags: string[] = [];
 
+  constructor(private fb: FormBuilder,
+              private questionService: QuestionsService) { }
 
   ngOnInit() {
-    // Create function formData value, imlement in ngOnInit
+    this.formData();
+  }
+
+  formData() {
     this.questionForm = this.fb.group({
       subject: this.fb.control(null, [
         Validators.required
       ]),
       theme: this.fb.control(null, [Validators.required]),
       level: this.fb.control(null, Validators.required),
-      tags: this.fb.array([], Validators.required),
+      tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
@@ -76,18 +69,16 @@ export class AddQuestionFormComponent implements OnInit {
   newTag(tag) {
     const text = tag.target.value;
 
-    if (text.length > 1) {
+    if (text.length > this.tagArrLength) {
       this.tags.push(text);
     }
-    const control = new FormControl(this.tags[0], Validators.required);
-    (this.questionForm.get('tags') as FormArray).push(control);
+    this.questionForm.value.tags = this.tags;
     tag.target.value = '';
   }
 
-
   removeAnswer(answer) {
     const control = this.questionForm.get('answersForm') as FormArray;
-    const idx = control.value.findIndex((a) => a.label === answer.value.label);
+    const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);
 
     if (idx > -1) {
       control.removeAt(idx);
@@ -97,23 +88,18 @@ export class AddQuestionFormComponent implements OnInit {
 
   addAnswer() {
     if (this.clickCount < this.answerClickCount) {
-
       const control = new FormGroup({
         label: new FormControl('', Validators.required),
         valid: new FormControl(false)
       });
       (this.questionForm.get('answersForm') as FormArray).push(control);
-
       this.clickCount++;
-    } else {
-      return;
     }
   }
 
   addQuestion() {
     const formData = this.questionForm.value;
     console.log(formData);
-    // this.createQuestion(formData);
   }
 
   createQuestion(question: QuestionModel) {
