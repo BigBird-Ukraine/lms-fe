@@ -13,7 +13,7 @@ export class QuestionsService {
   }
 
   createQuestion(question): Observable<QuestionModel> {
-    return this.http.post<QuestionModel>('http://localhost:3000/api/questions', question);
+    return this.http.post<QuestionModel>('https://localhost:3000/api/questions', question);
   }
 
   getAllQuestion(): Observable<QuestionModel[]> {

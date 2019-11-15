@@ -25,13 +25,13 @@
 
       <mat-form-field>
         <mat-label>Виберіть тему</mat-label>
-        <mat-select formControlName="theme">
-          <mat-option *ngFor="let theme of themes"
-                      [value]="theme.value">
-            {{theme.viewValue}}
+        <mat-select formControlName="group">
+          <mat-option *ngFor="let g of group"
+                      [value]="g.value">
+            {{g.viewValue}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="questionForm.get('theme').hasError('required')">
+        <mat-error *ngIf="questionForm.get('group').hasError('required')">
           Виберіть, будь ласка, тему
         </mat-error>
       </mat-form-field>
@@ -71,14 +71,14 @@
              class="d-flex align-items-end">
           <mat-checkbox class="checkbox"
                         value="false"
-                        formControlName="valid">
+                        formControlName="correct">
 
           </mat-checkbox>
           <mat-form-field class="example-full-width">
             <input matInput value=""
                    (keyup.enter)="addAnswer()"
-                   formControlName="label"
-                   placeholder="Відповідь{{i + 1}}">
+                   formControlName="value"
+                   placeholder="Відповідь {{i + 1}}">
           </mat-form-field>
           <button mat-mini-fab color="primary"
                   (click)="removeAnswer(answer)">

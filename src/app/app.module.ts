@@ -9,6 +9,7 @@ import {FormModule, MaterialModule, SharedModule} from './shared/modules';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
 import {AddQuestionFormComponent} from './core/components/add-question-form/add-question-form.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {AddQuestionFormComponent} from './core/components/add-question-form/add-
     SharedModule,
     FormModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,8 +10,8 @@ export interface Tags {
 export class QuestionModel {
   constructor(
     public subject: string,
-    public theme: string,
-    public level: number,
+    public group: string,
+    public level: string,
     public tags: Tags,
     public question: string,
     public answersForm: Answers

@@ -1,10 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators
+} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 
 import {QuestionsService} from '../../services/questions/questions.service';
 import {QuestionFormConsts} from '../../constans';
-import {Level, Subjects, Themes} from '../../models';
+import {Level, Subjects, Group} from '../../models';
 import {LevelEnum} from '../../enums';
 import {QuestionModel} from '../../interface';
 
@@ -38,7 +46,7 @@ export class AddQuestionFormComponent implements OnInit {
     {value: 'height', viewValue: LevelEnum.HEIGHT}
   ];
 
-  themes: Themes[] = [
+  group: Group[] = [
     {value: '1', viewValue: '1'},
     {value: '2', viewValue: '2'},
     {value: '3', viewValue: '3'}
@@ -47,7 +55,8 @@ export class AddQuestionFormComponent implements OnInit {
   tags: string[] = [];
 
   constructor(private fb: FormBuilder,
-              private questionService: QuestionsService) { }
+              private questionService: QuestionsService) {
+  }
 
   ngOnInit() {
     this.formData();
@@ -58,7 +67,7 @@ export class AddQuestionFormComponent implements OnInit {
       subject: this.fb.control(null, [
         Validators.required
       ]),
-      theme: this.fb.control(null, [Validators.required]),
+      group: this.fb.control(null, [Validators.required]),
       level: this.fb.control(null, Validators.required),
       tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
@@ -89,8 +98,8 @@ export class AddQuestionFormComponent implements OnInit {
   addAnswer() {
     if (this.clickCount < this.answerClickCount) {
       const control = new FormGroup({
-        label: new FormControl('', Validators.required),
-        valid: new FormControl(false)
+        value: new FormControl('', Validators.required),
+        correct: new FormControl(false)
       });
       (this.questionForm.get('answersForm') as FormArray).push(control);
       this.clickCount++;
@@ -100,6 +109,7 @@ export class AddQuestionFormComponent implements OnInit {
   addQuestion() {
     const formData = this.questionForm.value;
     console.log(formData);
+    this.createQuestion(formData);
   }
 
   createQuestion(question: QuestionModel) {

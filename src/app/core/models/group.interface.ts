@@ -1,4 +1,4 @@
-export interface Themes {
+export interface Group {
   value: string;
   viewValue: string;
 }
