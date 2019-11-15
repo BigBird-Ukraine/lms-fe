@@ -71,7 +71,7 @@ export class AddQuestionFormComponent implements OnInit {
       level: this.fb.control(null, Validators.required),
       tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
-      answersForm: this.fb.array([])
+      answers: this.fb.array([])
     });
   }
 
@@ -86,7 +86,7 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   removeAnswer(answer) {
-    const control = this.questionForm.get('answersForm') as FormArray;
+    const control = this.questionForm.get('answers') as FormArray;
     const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);
 
     if (idx > -1) {
@@ -101,7 +101,7 @@ export class AddQuestionFormComponent implements OnInit {
         value: new FormControl('', Validators.required),
         correct: new FormControl(false)
       });
-      (this.questionForm.get('answersForm') as FormArray).push(control);
+      (this.questionForm.get('answers') as FormArray).push(control);
       this.clickCount++;
     }
   }

@@ -4,7 +4,7 @@ export interface Answers {
 }
 
 export interface Tags {
-  tags: string;
+  tag: string;
 }
 
 export class QuestionModel {
@@ -14,7 +14,7 @@ export class QuestionModel {
     public level: string,
     public tags: Tags [],
     public question: string,
-    public answersForm: Answers []
+    public answers: Answers []
   ) {
   }
 }
