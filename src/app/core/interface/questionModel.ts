@@ -1,10 +1,10 @@
 export interface Answers {
-  label: string;
-  valid: false;
+  value: string;
+  correct: false;
 }
 
 export interface Tags {
-  tags: Tags;
+  tags: string;
 }
 
 export class QuestionModel {
@@ -12,9 +12,9 @@ export class QuestionModel {
     public subject: string,
     public group: string,
     public level: string,
-    public tags: Tags,
+    public tags: Tags [],
     public question: string,
-    public answersForm: Answers
+    public answersForm: Answers []
   ) {
   }
 }
