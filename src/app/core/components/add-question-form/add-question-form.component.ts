@@ -5,7 +5,6 @@ import {ErrorStateMatcher} from '@angular/material';
 import {QuestionFormConsts} from '../../constans';
 import {Level, Subjects, Themes} from '../../models';
 import {LevelEnum} from '../../enums';
-import {log} from 'util';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,18 +19,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AddQuestionFormComponent implements OnInit {
 
-  // all variable must have interface, like tags:Tags[], or type boolean, string
-
   questionForm: FormGroup;
   clickCount = 0;
-
-  // todo - create interface for tags
-  // todo - create interface for all form
-
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
-
-  // Create interface for all object
 
   subjects: Subjects[] = [
     {value: 'history', viewValue: 'History'},
@@ -57,7 +48,6 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Create function formData value, imlement in ngOnInit
     this.formData();
   }
 
@@ -68,7 +58,7 @@ export class AddQuestionFormComponent implements OnInit {
       ]),
       theme: this.fb.control(null, [Validators.required]),
       level: this.fb.control(null, Validators.required),
-      tags: this.fb.array([], Validators.required),
+      tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
       answersForm: this.fb.array([])
     });
@@ -81,9 +71,7 @@ export class AddQuestionFormComponent implements OnInit {
       this.tags.push(text);
     }
 
-    // const control = new FormControl(this.tags, Validators.required);
     this.questionForm.value.tags = this.tags;
-    // (this.questionForm.get('tags') as FormArray).push(control);
     tag.target.value = '';
 
   }
