@@ -1,5 +1,5 @@
-<div>
-
+<div class="form-container">
+  
   <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
@@ -25,13 +25,13 @@
 
       <mat-form-field>
         <mat-label>Виберіть тему</mat-label>
-        <mat-select formControlName="theme">
-          <mat-option *ngFor="let theme of themes"
-                      [value]="theme.value">
-            {{theme.viewValue}}
+        <mat-select formControlName="group">
+          <mat-option *ngFor="let g of group"
+                      [value]="g.value">
+            {{g.viewValue}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="questionForm.get('theme').hasError('required')">
+        <mat-error *ngIf="questionForm.get('group').hasError('required')">
           Виберіть, будь ласка, тему
         </mat-error>
       </mat-form-field>
@@ -65,20 +65,20 @@
       Додати відповідь
     </button>
 
-    <div formArrayName="answersForm">
-      <div *ngFor="let answer of questionForm.get('answersForm').controls; let i = index">
+    <div formArrayName="answers">
+      <div *ngFor="let answer of questionForm.get('answers').controls; let i = index">
         <div [formGroupName]="i"
              class="d-flex align-items-end">
           <mat-checkbox class="checkbox"
                         value="false"
-                        formControlName="valid">
-
+                        formControlName="correct">
           </mat-checkbox>
           <mat-form-field class="example-full-width">
             <input matInput value=""
                    (keyup.enter)="addAnswer()"
-                   formControlName="label"
-                   placeholder="Відповідь{{i + 1}}">
+                   formControlName="value"
+                   placeholder="Відповідь {{i + 1}}">
+
           </mat-form-field>
           <button mat-mini-fab color="primary"
                   (click)="removeAnswer(answer)">

@@ -1,10 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators
+} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 
+import {QuestionsService} from '../../services/questions/questions.service';
 import {QuestionFormConsts} from '../../constans';
-import {Level, Subjects, Themes} from '../../models';
+import {Level, Subjects, Group} from '../../models';
 import {LevelEnum} from '../../enums';
+import {QuestionModel} from '../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -36,7 +46,7 @@ export class AddQuestionFormComponent implements OnInit {
     {value: 'height', viewValue: LevelEnum.HEIGHT}
   ];
 
-  themes: Themes[] = [
+  group: Group[] = [
     {value: '1', viewValue: '1'},
     {value: '2', viewValue: '2'},
     {value: '3', viewValue: '3'}
@@ -44,7 +54,8 @@ export class AddQuestionFormComponent implements OnInit {
 
   tags: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private questionService: QuestionsService) {
   }
 
   ngOnInit() {
@@ -56,11 +67,11 @@ export class AddQuestionFormComponent implements OnInit {
       subject: this.fb.control(null, [
         Validators.required
       ]),
-      theme: this.fb.control(null, [Validators.required]),
+      group: this.fb.control(null, [Validators.required]),
       level: this.fb.control(null, Validators.required),
       tags: this.fb.array([]),
       question: this.fb.control(null, Validators.required),
-      answersForm: this.fb.array([])
+      answers: this.fb.array([])
     });
   }
 
@@ -70,15 +81,12 @@ export class AddQuestionFormComponent implements OnInit {
     if (text.length > this.tagArrLength) {
       this.tags.push(text);
     }
-
     this.questionForm.value.tags = this.tags;
     tag.target.value = '';
-
   }
 
-
   removeAnswer(answer) {
-    const control = this.questionForm.get('answersForm') as FormArray;
+    const control = this.questionForm.get('answers') as FormArray;
     const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);
 
     if (idx > -1) {
@@ -89,13 +97,11 @@ export class AddQuestionFormComponent implements OnInit {
 
   addAnswer() {
     if (this.clickCount < this.answerClickCount) {
-
       const control = new FormGroup({
-        label: new FormControl('', Validators.required),
-        valid: new FormControl(false)
+        value: new FormControl('', Validators.required),
+        correct: new FormControl(false)
       });
-      (this.questionForm.get('answersForm') as FormArray).push(control);
-
+      (this.questionForm.get('answers') as FormArray).push(control);
       this.clickCount++;
     }
   }
@@ -103,5 +109,10 @@ export class AddQuestionFormComponent implements OnInit {
   addQuestion() {
     const formData = this.questionForm.value;
     console.log(formData);
+    this.createQuestion(formData);
+  }
+
+  createQuestion(question: QuestionModel) {
+    this.questionService.createQuestion(question).subscribe((f) => console.log(`question was created`));
   }
 }
