@@ -1,5 +1,5 @@
 <div class="form-container">
-
+  
   <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
@@ -72,13 +72,13 @@
           <mat-checkbox class="checkbox"
                         value="false"
                         formControlName="correct">
-
           </mat-checkbox>
           <mat-form-field class="example-full-width">
             <input matInput value=""
                    (keyup.enter)="addAnswer()"
                    formControlName="value"
                    placeholder="Відповідь {{i + 1}}">
+
           </mat-form-field>
           <button mat-mini-fab color="primary"
                   (click)="removeAnswer(answer)">
