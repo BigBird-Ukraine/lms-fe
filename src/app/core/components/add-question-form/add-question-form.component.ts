@@ -113,6 +113,6 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   createQuestion(question: QuestionModel) {
-    this.questionService.createQuestion(question).subscribe();
+    this.questionService.createQuestion(question).subscribe((f) => console.log(`question was created`));
   }
 }
