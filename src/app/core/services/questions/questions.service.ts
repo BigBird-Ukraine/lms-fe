@@ -9,8 +9,7 @@ import {QuestionModel} from '../../interface';
 })
 export class QuestionsService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   createQuestion(question): Observable<QuestionModel> {
     return this.http.post<QuestionModel>('http://localhost:3000/api/questions', question);

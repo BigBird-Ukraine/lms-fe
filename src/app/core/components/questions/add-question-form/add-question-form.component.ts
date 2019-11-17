@@ -10,11 +10,13 @@ import {
 } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 
-import {QuestionsService} from '../../services/questions/questions.service';
-import {QuestionFormConsts} from '../../constans';
-import {Level, Subjects, Group} from '../../models';
-import {LevelEnum} from '../../enums';
-import {QuestionModel} from '../../interface';
+import {QuestionsService} from '../../../services/questions/questions.service';
+import {InfoHelperService} from '../../../services/questions/infohelper.service';
+
+import {QuestionFormConsts} from '../../../constans';
+import {Level, Subjects, Group} from '../../../models';
+import {LevelEnum} from '../../../enums';
+import {QuestionModel} from '../../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,6 +42,8 @@ export class AddQuestionFormComponent implements OnInit {
     {value: 'language', viewValue: 'Language'}
   ];
 
+  // subjects: Subjects[] = [];
+
   levels: Level[] = [
     {value: 'low', viewValue: LevelEnum.LOW},
     {value: 'medium', viewValue: LevelEnum.MEDIUM},
@@ -55,7 +59,8 @@ export class AddQuestionFormComponent implements OnInit {
   tags: string[] = [];
 
   constructor(private fb: FormBuilder,
-              private questionService: QuestionsService) {
+              private questionService: QuestionsService,
+              private infoService: InfoHelperService) {
   }
 
   ngOnInit() {
@@ -64,14 +69,12 @@ export class AddQuestionFormComponent implements OnInit {
 
   formData() {
     this.questionForm = this.fb.group({
-      subject: this.fb.control(null, [
-        Validators.required
-      ]),
+      subject: this.fb.control(null, [Validators.required]),
       group: this.fb.control(null, [Validators.required]),
-      level: this.fb.control(null, Validators.required),
-      tags: this.fb.array([]),
-      question: this.fb.control(null, Validators.required),
-      answers: this.fb.array([])
+      level: this.fb.control(null, [Validators.required]),
+      tags: this.fb.array([], [Validators.required]),
+      question: this.fb.control(null, [Validators.required]),
+      answers: this.fb.array([], [Validators.required])
     });
   }
 
@@ -110,9 +113,43 @@ export class AddQuestionFormComponent implements OnInit {
     const formData = this.questionForm.value;
     console.log(formData);
     this.createQuestion(formData);
+    this.questionForm.reset();
   }
 
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe((f) => console.log(`question was created`));
+  }
+
+  getSubjects() {
+    this.infoService.getSubject().subscribe((s) => {
+      this.subjects = this.objCreator(s);
+    });
+  }
+
+  getLevel() {
+    this.infoService.getLevel().subscribe((l) => {
+      console.log(l);
+    });
+  }
+
+  getTags() {
+    this.infoService.getTags().subscribe((t) => {
+      console.log(t);
+    });
+  }
+
+  objCreator(arr) {
+    let obj = {};
+    const res = [];
+
+    arr.forEach(o => {
+      obj = {
+        value: String(o),
+        viewValue: String(o)
+      };
+      res.push(obj);
+    });
+
+    return res;
   }
 }

@@ -1,9 +1,7 @@
 <div class="form-container">
-  
   <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
-
   <form
     [formGroup]="questionForm"
     (ngSubmit)="addQuestion()"
@@ -50,8 +48,9 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
+
         <input matInput placeholder="Сформулюйте питтаня"
-               formControlName="question">
+               formControlName="question" #message>
         <mat-error *ngIf="questionForm.get('question').hasError('required')">
           Це поле не може бути пустим
         </mat-error>
@@ -92,6 +91,9 @@
       <input matInput placeholder="Вкажіть теги для питання"
              formGroupName="tags"
              (keyup.enter)="newTag($event)">
+      <mat-error *ngIf="questionForm.get('tags').hasError('required')">
+        Це поле не може бути пустим
+      </mat-error>
     </mat-form-field>
 
     <div class="tags">
