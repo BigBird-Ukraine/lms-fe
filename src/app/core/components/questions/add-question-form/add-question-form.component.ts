@@ -14,9 +14,9 @@ import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 
 import {QuestionFormConsts} from '../../../constans';
-import {Level, Subjects, Group} from '../../../models';
+import {Group} from '../../../models';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel} from '../../../interface';
+import {QuestionModel, Level, Subject, Tags} from '../../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -36,19 +36,19 @@ export class AddQuestionFormComponent implements OnInit {
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  subjects: Subjects[] = [
-    {value: 'history', viewValue: 'History'},
-    {value: 'math', viewValue: 'Math'},
-    {value: 'language', viewValue: 'Language'}
+  subjects: Subject[] = [
+    {subject: 'Історія'},
+    {subject: 'Математика'},
+    {subject: 'Література'}
   ];
-
-  // subjects: Subjects[] = [];
-
   levels: Level[] = [
-    {value: 'low', viewValue: LevelEnum.LOW},
-    {value: 'medium', viewValue: LevelEnum.MEDIUM},
-    {value: 'height', viewValue: LevelEnum.HEIGHT}
+    {level: LevelEnum.LOW},
+    {level: LevelEnum.LOW_STRONG},
+    {level: LevelEnum.MEDIUM},
+    {level: LevelEnum.MEDIUM_STRONG},
+    {level: LevelEnum.HEIGHT}
   ];
+  tags: Tags[] = [];
 
   group: Group[] = [
     {value: '1', viewValue: '1'},
@@ -56,7 +56,6 @@ export class AddQuestionFormComponent implements OnInit {
     {value: '3', viewValue: '3'}
   ];
 
-  tags: string[] = [];
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,

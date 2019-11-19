@@ -1,5 +1,7 @@
 export enum LevelEnum {
-  LOW = 'Легкий',
-  MEDIUM = 'Середній',
-  HEIGHT = 'Важкий'
+  LOW = 1,
+  LOW_STRONG,
+  MEDIUM ,
+  MEDIUM_STRONG,
+  HEIGHT ,
 }

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
+import {InfoHelperService} from '../../../services/questions/infohelper.service';
+import {Subject} from '../../../interface';
 
 @Component({
   selector: 'app-info-helper',
@@ -13,7 +15,7 @@ import {
 export class InfoHelperComponent implements OnInit {
 
   subjectForm: FormGroup;
-  subjects = [];
+  subjects: Subject[] = [];
 
   groupForm: FormGroup;
   groups = [];
@@ -24,12 +26,15 @@ export class InfoHelperComponent implements OnInit {
   questionForm: FormGroup;
   questions = [];
 
-  constructor() { }
+  constructor(private infoService: InfoHelperService) {
+  }
 
   ngOnInit() {
     this.subjectForm = new FormGroup({subject: new FormControl(null, Validators.required)});
     this.groupForm = new FormGroup({group: new FormControl(null, Validators.required)});
     this.levelForm = new FormGroup({level: new FormControl(null, Validators.required)});
+
+    this.infoService.getSubject().subscribe(subj => this.subjects = subj);
   }
 
   createSubject() {

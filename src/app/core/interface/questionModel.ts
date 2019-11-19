@@ -12,8 +12,9 @@ export interface Subject {
 }
 
 export interface Level {
-  level: string;
+  level: number;
 }
+
 
 export class QuestionModel {
   constructor(
@@ -22,7 +23,8 @@ export class QuestionModel {
     public level: Level,
     public tags: Tags [],
     public question: string,
-    public answers: Answers []
+    public answers: Answers [],
+    public id?: string,
   ) {
   }
 }

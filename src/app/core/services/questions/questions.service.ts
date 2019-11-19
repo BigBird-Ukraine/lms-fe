@@ -34,4 +34,5 @@ export class QuestionsService {
   deleteQuestionById(id): Observable<QuestionModel> {
     return this.http.delete<QuestionModel>(`http://localhost:3000/api/questions/${id}`);
   }
+
 }
