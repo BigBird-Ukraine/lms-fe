@@ -1,6 +1,6 @@
 export interface Answers {
   value: string;
-  correct: false;
+  correct?: false;
 }
 
 export interface Tags {

@@ -10,7 +10,7 @@ import {take} from 'rxjs/operators';
 })
 export class QuestionsLayoutComponent implements OnInit {
 
-  questions: QuestionModel[];
+  questions: QuestionModel[] = [];
 
   constructor(private questionsService: QuestionsService) {
   }
