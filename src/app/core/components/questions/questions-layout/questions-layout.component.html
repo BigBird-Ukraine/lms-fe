@@ -1,0 +1,19 @@
+<div class="questions_container">
+  <mat-card>
+    <mat-card-title>
+      Тестування по предмету: {{subject}}
+    </mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let q of questions; let i = index">
+        <mat-card>
+          {{i + 1}}
+          <span>{{q.question}}</span>
+          <div *ngFor="let a of q.answers">
+            <mat-checkbox></mat-checkbox>
+            <span>{{a.value}}</span>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
