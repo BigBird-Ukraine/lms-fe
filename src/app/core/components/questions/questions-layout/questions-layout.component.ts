@@ -10,7 +10,8 @@ import {Answers, QuestionModel} from '../../../interface';
 })
 export class QuestionsLayoutComponent implements OnInit {
 
-  questions: QuestionModel[] = [];
+  questions: QuestionModel[];
+
 
   constructor(private questionsService: QuestionsService) {
   }
@@ -21,7 +22,9 @@ export class QuestionsLayoutComponent implements OnInit {
 
   getData() {
     this.questionsService.getAllQuestion().subscribe((s) => {
-      this.questions = JSON.parse(localStorage.getItem('questions'));
+      // this.questions = JSON.parse(localStorage.getItem('questions'));
+      this.questions = s.data.questions;
+      console.log(s);
     });
   }
 }

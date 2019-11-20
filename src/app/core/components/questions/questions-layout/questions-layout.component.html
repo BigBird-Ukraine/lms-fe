@@ -1,30 +1,46 @@
 <div class="questions_container">
   <mat-card>
     <mat-card-title>
-      Тестування по предмету:
+      Тестування по предмету :
     </mat-card-title>
-    .
+
     <mat-card-content>
       <table >
-        <thead>
-        <tr>
-          <th colspan="2" style="border: 1px solid black; padding: 5px">Answer</th>
-        </tr>
-        </thead>
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th colspan="2" style="border: 1px solid black; padding: 5px">Answer</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+
         <tbody class="question_table" *ngFor="let item of questions; let i = index">
-        <tr style="border: 1px solid black; padding: 5px">
-          <td *ngFor="let a of item.answers let i = index">
+        <mat-card class="question">
+        <tr>
+          <td>
             <span>
                 {{i + 1}}
              </span>
+            <span>
+              {{item.question}}
+            </span>
+          </td>
+        </tr>
+        <tr *ngFor="let a of item.answers let i = index">
+          <td >
+<!--            <span>-->
+<!--                {{i + 1}}-->
+<!--             </span>-->
+            <mat-checkbox>
              <span>
                 {{a.value}}
              </span>
-            <span>
-                {{a.correct}}
-             </span>
+            </mat-checkbox>
+<!--            <span>-->
+<!--                {{a.correct}}-->
+<!--             </span>-->
           </td>
+        </mat-card>
         </tbody>
+
       </table>
       <mat-card-actions class="btn">
         <button mat-raised-button color="primary" type="submit">Перевірити</button>

@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 import {Subject} from '../../../interface';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-helper',
@@ -15,7 +16,7 @@ import {Subject} from '../../../interface';
 export class InfoHelperComponent implements OnInit {
 
   subjectForm: FormGroup;
-  subjects: Subject[] = [];
+  subjects = [];
 
   groupForm: FormGroup;
   groups = [];
@@ -34,7 +35,6 @@ export class InfoHelperComponent implements OnInit {
     this.groupForm = new FormGroup({group: new FormControl(null, Validators.required)});
     this.levelForm = new FormGroup({level: new FormControl(null, Validators.required)});
 
-    this.infoService.getSubject().subscribe(subj => this.subjects = subj);
   }
 
   createSubject() {

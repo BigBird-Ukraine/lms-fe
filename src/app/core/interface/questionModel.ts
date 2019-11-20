@@ -1,5 +1,9 @@
-export interface Data {
-  data: QuestionModel;
+export interface QuestionData {
+  data: {
+    count: number;
+    pageCount: number;
+    questions: QuestionModel[]
+  };
 }
 
 export interface Answers {
@@ -29,8 +33,8 @@ export class QuestionModel {
     public question: string,
     public answers: Answers [],
     public id?: string,
-    public data?: QuestionModel,
-    public questions?: Data
+    // public data?: QuestionModel,
+    // public questions?: QuestionData
   ) {
   }
 }
