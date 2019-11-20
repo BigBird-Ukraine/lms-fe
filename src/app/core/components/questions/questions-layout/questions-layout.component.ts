@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionsService} from '../../../services/questions/questions.service';
 
-import {Answers, QuestionModel} from '../../../interface';
+import {QuestionModel} from '../../../interface';
 
 @Component({
   selector: 'app-questions-layout',
@@ -11,7 +11,6 @@ import {Answers, QuestionModel} from '../../../interface';
 export class QuestionsLayoutComponent implements OnInit {
 
   questions: QuestionModel[];
-
 
   constructor(private questionsService: QuestionsService) {
   }
@@ -26,5 +25,6 @@ export class QuestionsLayoutComponent implements OnInit {
       this.questions = s.data.questions;
       console.log(s);
     });
+
   }
 }

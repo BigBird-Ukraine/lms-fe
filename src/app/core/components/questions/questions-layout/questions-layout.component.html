@@ -5,7 +5,7 @@
     </mat-card-title>
 
     <mat-card-content>
-      <table >
+      <table>
 <!--        <thead>-->
 <!--        <tr>-->
 <!--          <th colspan="2" style="border: 1px solid black; padding: 5px">Answer</th>-->
@@ -15,9 +15,9 @@
         <tbody class="question_table" *ngFor="let item of questions; let i = index">
         <mat-card class="question">
         <tr>
-          <td>
+          <td class="q_text">
             <span>
-                {{i + 1}}
+                {{i + 1}}.
              </span>
             <span>
               {{item.question}}

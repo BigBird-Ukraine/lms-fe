@@ -4,25 +4,16 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormGroupDirective,
-  NgForm,
   Validators
 } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material';
 
 import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 
 import {QuestionFormConsts} from '../../../constans';
-import {Group} from '../../../models';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Subject, Tags} from '../../../interface';
+import {QuestionModel, Level, Subject, Tags, Group} from '../../../interface';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && control.invalid && (control.dirty || control.touched));
-  }
-}
 
 @Component({
   selector: 'app-add-question-form',
@@ -37,9 +28,9 @@ export class AddQuestionFormComponent implements OnInit {
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
   subjects: Subject[] = [
-    {subject: 'Історія'},
-    {subject: 'Математика'},
-    {subject: 'Література'}
+    // {subject: 'Історія'},
+    // {subject: 'Математика'},
+    // {subject: 'Література'}
   ];
   levels: Level[] = [
     {level: LevelEnum.LOW},
@@ -50,12 +41,11 @@ export class AddQuestionFormComponent implements OnInit {
   ];
   tags: Tags[] = [];
 
-  group: Group[] = [
-    {value: '1', viewValue: '1'},
-    {value: '2', viewValue: '2'},
-    {value: '3', viewValue: '3'}
+  groups: Group[] = [
+    // {group: '1'},
+    // {group: '2'},
+    // {group: '3'}
   ];
-
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
@@ -64,6 +54,8 @@ export class AddQuestionFormComponent implements OnInit {
 
   ngOnInit() {
     this.formData();
+    this.getSubjects();
+    this.getGroups();
   }
 
   formData() {
@@ -121,8 +113,14 @@ export class AddQuestionFormComponent implements OnInit {
 
   getSubjects() {
     this.infoService.getSubject().subscribe((s) => {
-      this.subjects = this.objCreator(s);
+      // this.subjects = this.objCreator(s);
+      this.subjects = s;
+      console.log(s);
     });
+  }
+
+  getGroups() {
+    this.infoService.getGroups().subscribe(group => this.groups = group);
   }
 
   getLevel() {
