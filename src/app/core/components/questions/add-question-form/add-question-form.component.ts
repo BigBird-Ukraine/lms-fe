@@ -14,9 +14,9 @@ import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 
 import {QuestionFormConsts} from '../../../constans';
-import {Level, Subjects, Group} from '../../../models';
+import {Subjects, Group} from '../../../models';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel} from '../../../interface';
+import {QuestionModel, Level} from '../../../interface';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -45,9 +45,11 @@ export class AddQuestionFormComponent implements OnInit {
   // subjects: Subjects[] = [];
 
   levels: Level[] = [
-    {value: 'low', viewValue: LevelEnum.LOW},
-    {value: 'medium', viewValue: LevelEnum.MEDIUM},
-    {value: 'height', viewValue: LevelEnum.HEIGHT}
+    {level: `${LevelEnum.EASY}`},
+    {level: `${LevelEnum.EASY_PLUS}`},
+    {level: `${LevelEnum.MEDIUM}`},
+    {level: `${LevelEnum.MEDIUM_PLUS}`},
+    {level: `${LevelEnum.HARD}`}
   ];
 
   group: Group[] = [
