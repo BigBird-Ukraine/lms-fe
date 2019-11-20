@@ -6,12 +6,10 @@ import {InfoHelperComponent} from './info-helper/info-helper.component';
 import {QuestionsLayoutComponent} from './questions-layout/questions-layout.component';
 
 const routes: Routes = [
-    {path: 'questions', component: AddQuestionFormComponent},
-    {path: 'info', component: InfoHelperComponent},
-
+  {path: 'questions', component: AddQuestionFormComponent},
+  {path: 'info', component: InfoHelperComponent},
   {path: 'layout_q', component: QuestionsLayoutComponent}
-
-  ];
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

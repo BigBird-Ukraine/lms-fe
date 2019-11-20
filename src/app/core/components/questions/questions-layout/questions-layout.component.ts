@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionsService} from '../../../services/questions/questions.service';
-import {QuestionModel} from '../../../interface';
+
+import {Answers, QuestionModel} from '../../../interface';
 
 @Component({
   selector: 'app-questions-layout',
@@ -9,14 +10,18 @@ import {QuestionModel} from '../../../interface';
 })
 export class QuestionsLayoutComponent implements OnInit {
 
-
   questions: QuestionModel[] = [];
 
   constructor(private questionsService: QuestionsService) {
   }
 
   ngOnInit() {
-    this.questionsService.getAllQuestion()
-      .subscribe(question => this.questions = question);
+    this.getData();
+  }
+
+  getData() {
+    this.questionsService.getAllQuestion().subscribe((s) => {
+      this.questions = JSON.parse(localStorage.getItem('questions'));
+    });
   }
 }
