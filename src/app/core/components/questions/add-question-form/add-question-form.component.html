@@ -37,9 +37,8 @@
       <mat-form-field>
         <mat-label>Виберіть складність</mat-label>
         <mat-select formControlName="level">
-          <mat-option *ngFor="let level of levels"
-                      [value]="level.value">
-            {{level.viewValue}}
+          <mat-option *ngFor="let level of levels">
+            {{level.level}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="questionForm.get('level').hasError('required')">
