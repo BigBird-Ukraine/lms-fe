@@ -15,10 +15,14 @@ export interface Level {
   level: string;
 }
 
+export interface Groups {
+  group: string;
+}
+
 export class QuestionModel {
   constructor(
     public subject: Subject,
-    public group: string,
+    public group: Groups,
     public level: Level,
     public tags: Tags [],
     public question: string,

@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 import {
   Level,
   Subject,
-  Tags
+  Tags,
+  Groups
 } from '../../interface';
 
 @Injectable({
@@ -20,10 +21,14 @@ export class InfoHelperService {
   }
 
   getLevel(): Observable<Level[]> {
-    return this.http.get<Level[]>('http://localhost:3000/api/helpers/level');
+    return this.http.get<Level[]>('http://localhost:3000/api/helpers/levels');
   }
 
   getTags(): Observable<Tags[]> {
     return this.http.get<Tags[]>('http://localhost:3000/api/helpers/tags');
+  }
+
+  getGroups(): Observable<Groups[]> {
+    return this.http.get<Groups[]>('http://localhost:3000/api/helpers/groups');
   }
 }
