@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {
   FormArray,
   FormBuilder,
@@ -9,11 +10,9 @@ import {
 
 import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
-
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
 import {QuestionModel, Level, Subject, Tags, Groups} from '../../../interface';
-import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -28,11 +27,7 @@ export class AddQuestionFormComponent implements OnInit {
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  subjects: Subject[] = [
-    // {subject: 'Історія'},
-    // {subject: 'Математика'},
-    // {subject: 'Література'}
-  ];
+  subjects: Subject[] = [];
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
@@ -43,11 +38,7 @@ export class AddQuestionFormComponent implements OnInit {
 
   tags: Tags[] = [];
 
-  groups: Groups[] = [
-    // {group: '1'},
-    // {group: '2'},
-    // {group: '3'}
-  ];
+  groups: Groups[] = [];
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
@@ -115,7 +106,6 @@ export class AddQuestionFormComponent implements OnInit {
 
   getSubjects() {
     this.infoService.getSubject().subscribe((s) => {
-      // this.subjects = this.objCreator(s);
       this.subjects = s;
       console.log(s);
     });
