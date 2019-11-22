@@ -6,7 +6,7 @@ import {InfoHelperComponent} from './info-helper/info-helper.component';
 import {QuestionsLayoutComponent} from './questions-layout/questions-layout.component';
 
 const routes: Routes = [
-  {path: 'questions', component: AddQuestionFormComponent},
+  {path: 'add_questions', component: AddQuestionFormComponent},
   {path: 'info', component: InfoHelperComponent},
   {path: 'layout_q', component: QuestionsLayoutComponent}
 ];
