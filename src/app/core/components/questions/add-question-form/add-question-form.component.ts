@@ -32,13 +32,12 @@ export class AddQuestionFormComponent implements OnInit {
     // {subject: 'Математика'},
     // {subject: 'Література'}
   ];
-  levels: Level[] = [
-    {level: LevelEnum.LOW},
-    {level: LevelEnum.LOW_STRONG},
-    {level: LevelEnum.MEDIUM},
-    {level: LevelEnum.MEDIUM_STRONG},
-    {level: LevelEnum.HEIGHT}
-  ];
+
+    {level: `${LevelEnum.EASY}`},
+    {level: `${LevelEnum.EASY_PLUS}`},
+    {level: `${LevelEnum.MEDIUM}`},
+    {level: `${LevelEnum.MEDIUM_PLUS}`},
+    {level: `${LevelEnum.HARD}`}
   tags: Tags[] = [];
 
   groups: Group[] = [
