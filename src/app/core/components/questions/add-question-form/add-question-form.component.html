@@ -12,7 +12,7 @@
         <mat-label>Виберіть предмет</mat-label>
         <mat-select formControlName="subject">
           <mat-option *ngFor="let sub of subjects"
-          [value]="sub">
+                      [value]="sub">
             {{sub}}
           </mat-option>
         </mat-select>
@@ -37,7 +37,8 @@
       <mat-form-field>
         <mat-label>Виберіть складність</mat-label>
         <mat-select formControlName="level">
-          <mat-option *ngFor="let level of levels">
+          <mat-option *ngFor="let level of levels"
+                      [value]="level.level">
             {{level.level}}
           </mat-option>
         </mat-select>

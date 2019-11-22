@@ -9,10 +9,9 @@ import {
 
 import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
-
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Subject, Tags, Group} from '../../../interface';
+import {QuestionModel, Level, Subject, Tags, Groups} from '../../../interface';
 
 
 @Component({
@@ -27,11 +26,7 @@ export class AddQuestionFormComponent implements OnInit {
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  subjects: Subject[] = [
-    // {subject: 'Історія'},
-    // {subject: 'Математика'},
-    // {subject: 'Література'}
-  ];
+  subjects: Subject[] = [];
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
@@ -39,13 +34,10 @@ export class AddQuestionFormComponent implements OnInit {
     {level: LevelEnum.MEDIUM},
     {level: LevelEnum.MEDIUM_PLUS},
     {level: LevelEnum.HARD}];
+
   tags: Tags[] = [];
 
-  groups: Group[] = [
-    // {group: '1'},
-    // {group: '2'},
-    // {group: '3'}
-  ];
+  groups: Groups[] = [];
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
@@ -108,31 +100,18 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   createQuestion(question: QuestionModel) {
-    this.questionService.createQuestion(question).subscribe((f) => console.log(`question was created`));
+    this.questionService.createQuestion(question).subscribe((f: QuestionModel) => console.log(`question was created`));
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((s) => {
-      // this.subjects = this.objCreator(s);
+    this.infoService.getSubject().subscribe((s: Subject[]) => {
       this.subjects = s;
       console.log(s);
     });
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe(group => this.groups = group);
-  }
-
-  getLevel() {
-    this.infoService.getLevel().subscribe((l) => {
-      console.log(l);
-    });
-  }
-
-  getTags() {
-    this.infoService.getTags().subscribe((t) => {
-      console.log(t);
-    });
+    this.infoService.getGroups().subscribe((group: Groups[]) => this.groups = group);
   }
 
   objCreator(arr) {

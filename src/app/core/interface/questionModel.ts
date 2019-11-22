@@ -24,21 +24,19 @@ export interface Level {
   level: number;
 }
 
-export interface Group {
+export interface Groups {
   group: string;
 }
 
 export class QuestionModel {
   constructor(
     public subject: Subject,
-    public group: Group,
+    public group: Groups,
     public level: Level,
     public tags: Tags [],
     public question: string,
     public answers: Answers [],
-    public id?: string,
-    // public data?: QuestionModel,
-    // public questions?: QuestionData
+    public id?: string
   ) {
   }
 }

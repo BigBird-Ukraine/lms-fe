@@ -1,0 +1,76 @@
+<div>
+
+  <h2 class="pageTitle">
+    Виберіть, за якими категоріями ви хочете скласти тест
+  </h2>
+
+  <form [formGroup]="filterQuestions"
+        (ngSubmit)="startTest()"
+        (keydown.enter)="$event.preventDefault()"
+  >
+
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Предмет"
+             matInput
+             formControlName="subject"
+             [matAutocomplete]="auto1"
+             [(ngModel)]="search1"
+      >
+      <mat-autocomplete #auto1="matAutocomplete">
+        <mat-option *ngFor="let subject of subjects | filter: search1" [value]="subject">
+          {{subject}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Група"
+             matInput
+             formControlName="group"
+             [matAutocomplete]="auto2"
+             [(ngModel)]="search2"
+      >
+      <mat-autocomplete #auto2="matAutocomplete">
+        <mat-option *ngFor="let group of groups | filter: search2" [value]="group">
+          {{group}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Рівень складності"
+             matInput
+             formControlName="level"
+             [matAutocomplete]="auto3"
+             [(ngModel)]="search3"
+      >
+      <mat-autocomplete #auto3="matAutocomplete">
+        <mat-option *ngFor="let level of levels | filter: search3" [value]="level">
+          {{level}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Вкажіть теги до тесту"
+             formGroupName="tags"
+             (keyup.enter)="searchTag($event)">
+    </mat-form-field>
+
+    <div class="tags">
+        <span *ngFor="let tag of tags"
+              class="tag">
+          {{tag}}
+        </span>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Пройти тест</button>
+
+  </form>
+
+</div>

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionsService} from '../../../services/questions/questions.service';
+import {ActivatedRoute} from '@angular/router';
 
-import {QuestionModel} from '../../../interface';
+import {QuestionsService} from '../../../services/questions/questions.service';
+import {QuestionData, QuestionModel} from '../../../interface';
 
 @Component({
   selector: 'app-questions-layout',
@@ -12,7 +13,9 @@ export class QuestionsLayoutComponent implements OnInit {
 
   questions: QuestionModel[];
 
-  constructor(private questionsService: QuestionsService) {
+  constructor(private questionsService: QuestionsService,
+              private activatedRoute: ActivatedRoute,
+  ) {
   }
 
   ngOnInit() {
@@ -20,11 +23,10 @@ export class QuestionsLayoutComponent implements OnInit {
   }
 
   getData() {
-    this.questionsService.getAllQuestion().subscribe((s) => {
-      // this.questions = JSON.parse(localStorage.getItem('questions'));
-      this.questions = s.data.questions;
-      console.log(s);
+    this.activatedRoute.queryParams.subscribe((params: object) => {
+      this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
+        this.questions = questions.data.questions;
+      });
     });
-
   }
 }
