@@ -1,6 +1,15 @@
+export interface QuestionData {
+  data: {
+    count: number;
+    pageCount: number;
+    questions: QuestionModel[]
+  };
+}
+
 export interface Answers {
   value: string;
-  correct: false;
+  correct?: false;
+  id?: string;
 }
 
 export interface Tags {
@@ -12,7 +21,11 @@ export interface Subject {
 }
 
 export interface Level {
-  level: string;
+  level: number;
+}
+
+export interface Group {
+  group: string;
 }
 
 export interface Groups {
@@ -26,7 +39,11 @@ export class QuestionModel {
     public level: Level,
     public tags: Tags [],
     public question: string,
-    public answers: Answers []
+    public answers: Answers [],
+    public id?: string,
+    // public data?: QuestionModel,
+    // public questions?: QuestionData
   ) {
   }
 }
+

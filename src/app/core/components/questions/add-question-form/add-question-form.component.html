@@ -12,8 +12,8 @@
         <mat-label>Виберіть предмет</mat-label>
         <mat-select formControlName="subject">
           <mat-option *ngFor="let sub of subjects"
-                      [value]="sub.value">
-            {{sub.viewValue}}
+          [value]="sub">
+            {{sub}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="questionForm.get('subject').hasError('required')">
@@ -22,15 +22,15 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Виберіть тему</mat-label>
+        <mat-label>Виберіть курс</mat-label>
         <mat-select formControlName="group">
-          <mat-option *ngFor="let g of group"
-                      [value]="g.value">
-            {{g.viewValue}}
+          <mat-option *ngFor="let group of groups"
+                      [value]="group">
+            {{group}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="questionForm.get('group').hasError('required')">
-          Виберіть, будь ласка, тему
+          Виберіть, будь ласка, курс
         </mat-error>
       </mat-form-field>
 
