@@ -24,7 +24,7 @@ export class QuestionsService {
   }
 
   findQuestionByParams(params): Observable<QuestionModel> {
-    return this.http.get<QuestionModel>('http://localhost:3000/api/questions/find', {
+    return this.http.get<QuestionModel>('http://localhost:3000/api/questions', {
       params: new HttpParams({
         fromObject: params
       })

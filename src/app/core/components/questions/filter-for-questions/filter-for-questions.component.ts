@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Groups, Level, Subject, Tags} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
-import {Router} from '@angular/router';
 import {QuestionFormConsts} from '../../../constans';
+import {QuestionsService} from '../../../services/questions/questions.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-filter-for-questions',
@@ -22,11 +23,13 @@ export class FilterForQuestionsComponent implements OnInit {
   search2 = '';
   search3 = '';
 
+
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
   constructor(private fb: FormBuilder,
               private  router: Router,
-              private infoHelperService: InfoHelperService
+              private infoHelperService: InfoHelperService,
+              private  questionService: QuestionsService
   ) {
   }
 
@@ -68,8 +71,21 @@ export class FilterForQuestionsComponent implements OnInit {
     tag.target.value = '';
   }
 
+  queryParams() {
+    const params = {
+      subject: this.filterQuestions.get('subject').value,
+      group: this.filterQuestions.get('group').value,
+      level: this.filterQuestions.get('level').value,
+      tags: this.tags.join()
+    };
+
+    this.questionService.findQuestionByParams(params).subscribe(questions => console.log(questions));
+
+
+  }
+
   startTest() {
-    console.log(this.filterQuestions.value);
+    this.queryParams();
 
     this.router.navigate(['/questions'], {
       queryParams: {
