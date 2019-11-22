@@ -1,84 +1,84 @@
-<div class="info-helper">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Subject
-        </mat-panel-title>
-        <mat-panel-description>
-          Додайте предмет
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<!--<div class="info-helper">-->
+<!--  <mat-accordion>-->
+<!--    <mat-expansion-panel>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Subject-->
+<!--        </mat-panel-title>-->
+<!--        <mat-panel-description>-->
+<!--          Додайте предмет-->
+<!--        </mat-panel-description>-->
+<!--      </mat-expansion-panel-header>-->
 
-      <form [formGroup]="subjectForm" (ngSubmit)="createSubject()">
-        <div class="subject__item">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Введіть назву предмета" value="" formControlName="subject" >
-          </mat-form-field>
-          <ul *ngFor="let subject of subjects; let idx = index">
-            <li>{{subject}}</li>
-          </ul>
-        </div>
-        <button mat-raised-button
-                color="primary"
-                type="submit">
-          Додати
-        </button>
-      </form>
-    </mat-expansion-panel>
+<!--      <form [formGroup]="subjectForm" (ngSubmit)="createSubject()">-->
+<!--        <div class="subject__item">-->
+<!--          <mat-form-field class="example-full-width">-->
+<!--            <input matInput placeholder="Введіть назву предмета" value="" formControlName="subject" >-->
+<!--          </mat-form-field>-->
+<!--          <ul *ngFor="let subject of subjects; let idx = index">-->
+<!--            <li>{{subject}}</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <button mat-raised-button-->
+<!--                color="primary"-->
+<!--                type="submit">-->
+<!--          Додати-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </mat-expansion-panel>-->
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Group
-        </mat-panel-title>
-        <mat-panel-description>
-          Добавте групу
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<!--    <mat-expansion-panel>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Group-->
+<!--        </mat-panel-title>-->
+<!--        <mat-panel-description>-->
+<!--          Добавте групу-->
+<!--        </mat-panel-description>-->
+<!--      </mat-expansion-panel-header>-->
 
-      <form [formGroup]="groupForm" (ngSubmit)="createGroup()">
-        <div class="subject__item">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Введіть назву групи" value="" formControlName="group" >
-          </mat-form-field>
-          <ul *ngFor="let group of groups; let idx = index">
-            <li>{{group.group}}</li>
-          </ul>
-        </div>
-        <button mat-raised-button
-                color="primary"
-                type="submit">
-          Додати
-        </button>
-      </form>
-    </mat-expansion-panel>
+<!--      <form [formGroup]="groupForm" (ngSubmit)="createGroup()">-->
+<!--        <div class="subject__item">-->
+<!--          <mat-form-field class="example-full-width">-->
+<!--            <input matInput placeholder="Введіть назву групи" value="" formControlName="group" >-->
+<!--          </mat-form-field>-->
+<!--          <ul *ngFor="let group of groups; let idx = index">-->
+<!--            <li>{{group.group}}</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <button mat-raised-button-->
+<!--                color="primary"-->
+<!--                type="submit">-->
+<!--          Додати-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </mat-expansion-panel>-->
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Level
-        </mat-panel-title>
-        <mat-panel-description>
-          Введіть рівень складності
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<!--    <mat-expansion-panel>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Level-->
+<!--        </mat-panel-title>-->
+<!--        <mat-panel-description>-->
+<!--          Введіть рівень складності-->
+<!--        </mat-panel-description>-->
+<!--      </mat-expansion-panel-header>-->
 
-      <form [formGroup]="levelForm" (ngSubmit)="createLevel()">
-        <div class="subject__item">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Введіть назву групи" value="" formControlName="level">
-          </mat-form-field>
-          <ul *ngFor="let level of levels; let idx = index">
-            <li>{{level.level}}</li>
-          </ul>
-        </div>
-        <button mat-raised-button
-                color="primary"
-                type="submit">
-          Додати
-        </button>
-      </form>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
+<!--      <form [formGroup]="levelForm" (ngSubmit)="createLevel()">-->
+<!--        <div class="subject__item">-->
+<!--          <mat-form-field class="example-full-width">-->
+<!--            <input matInput placeholder="Введіть назву групи" value="" formControlName="level">-->
+<!--          </mat-form-field>-->
+<!--          <ul *ngFor="let level of levels; let idx = index">-->
+<!--            <li>{{level.level}}</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <button mat-raised-button-->
+<!--                color="primary"-->
+<!--                type="submit">-->
+<!--          Додати-->
+<!--        </button>-->
+<!--      </form>-->
+<!--    </mat-expansion-panel>-->
+<!--  </mat-accordion>-->
+<!--</div>-->
