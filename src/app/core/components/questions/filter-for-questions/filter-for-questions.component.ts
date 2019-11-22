@@ -46,17 +46,17 @@ export class FilterForQuestionsComponent implements OnInit {
 
   getSubjects() {
     this.infoHelperService.getSubject()
-      .subscribe(subjects => this.subjects = subjects);
+      .subscribe((subjects: Subject[]) => this.subjects = subjects);
   }
 
   getGroups() {
     this.infoHelperService.getGroups()
-      .subscribe(groups => this.groups = groups);
+      .subscribe((groups: Groups[]) => this.groups = groups);
   }
 
   getLevels() {
     this.infoHelperService.getLevel()
-      .subscribe(levels => this.levels = levels);
+      .subscribe((levels: Level[]) => this.levels = levels);
   }
 
   searchTag(tag) {

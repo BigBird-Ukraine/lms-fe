@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {QuestionsService} from '../../../services/questions/questions.service';
-import {QuestionModel} from '../../../interface';
+import {QuestionData, QuestionModel} from '../../../interface';
 
 @Component({
   selector: 'app-questions-layout',
@@ -23,8 +23,8 @@ export class QuestionsLayoutComponent implements OnInit {
   }
 
   getData() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.questionsService.findQuestionByParams(params).subscribe(questions => {
+    this.activatedRoute.queryParams.subscribe((params: object) => {
+      this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
         this.questions = questions.data.questions;
       });
     });

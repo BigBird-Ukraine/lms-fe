@@ -8,7 +8,7 @@ import {QuestionRoutingModule} from './question-routing.module';
 import {QuestionPipe} from '../../../shared/pipe/question.pipe';
 import {InfoHelperComponent} from './info-helper/info-helper.component';
 import {AddQuestionFormComponent} from './add-question-form/add-question-form.component';
-import { FilterForQuestionsComponent } from './filter-for-questions/filter-for-questions.component';
+import {FilterForQuestionsComponent} from './filter-for-questions/filter-for-questions.component';
 import {FilterPipe} from './filter.pipe';
 import {QuestionsLayoutComponent} from './questions-layout/questions-layout.component';
 
@@ -39,4 +39,6 @@ import {QuestionsLayoutComponent} from './questions-layout/questions-layout.comp
   ]
 })
 
-export class QuestionModule { }
+export class QuestionModule {
+
+}

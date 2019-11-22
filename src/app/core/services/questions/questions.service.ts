@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {QuestionData, QuestionModel} from '../../interface';
-import {tap} from 'rxjs/operators';
+import {config} from '../../../shared/config';
 
 
 @Injectable({
@@ -17,26 +17,19 @@ export class QuestionsService {
   }
 
   createQuestion(question): Observable<QuestionModel> {
-    return this.http.post<QuestionModel>('http://localhost:3000/api/questions', question);
+    return this.http.post<QuestionModel>(`${config.apiUrl}/${config.apiVersion}/questions`, question);
   }
 
   getAllQuestion(): Observable<QuestionData> {
-    return this.http.get<QuestionData>('http://localhost:3000/api/questions');
-    // .pipe(
-    //   tap(
-    //     ({data}) => {
-    //       localStorage.setItem('questions', JSON.stringify(data.questions));
-    //     }
-    //   )
-    // );
+    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions`);
   }
 
   getProductById(id): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`http://localhost:3000/api/questions/${id}`);
+    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`);
   }
 
   findQuestionByParams(params): Observable<QuestionData> {
-    return this.http.get<QuestionData>('http://localhost:3000/api/questions', {
+    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions`, {
       params: new HttpParams({
         fromObject: params
       })
@@ -44,7 +37,7 @@ export class QuestionsService {
   }
 
   deleteQuestionById(id): Observable<QuestionData> {
-    return this.http.delete<QuestionData>(`http://localhost:3000/api/questions/${id}`);
+    return this.http.delete<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`);
   }
 
 }

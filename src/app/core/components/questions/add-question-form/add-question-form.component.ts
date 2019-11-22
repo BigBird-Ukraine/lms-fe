@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {
   FormArray,
   FormBuilder,
@@ -101,30 +100,18 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   createQuestion(question: QuestionModel) {
-    this.questionService.createQuestion(question).subscribe((f) => console.log(`question was created`));
+    this.questionService.createQuestion(question).subscribe((f: QuestionModel) => console.log(`question was created`));
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((s) => {
+    this.infoService.getSubject().subscribe((s: Subject[]) => {
       this.subjects = s;
       console.log(s);
     });
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe(group => this.groups = group);
-  }
-
-  getLevel() {
-    this.infoService.getLevel().subscribe((l) => {
-      console.log(l);
-    });
-  }
-
-  getTags() {
-    this.infoService.getTags().subscribe((t) => {
-      console.log(t);
-    });
+    this.infoService.getGroups().subscribe((group: Groups[]) => this.groups = group);
   }
 
   objCreator(arr) {
