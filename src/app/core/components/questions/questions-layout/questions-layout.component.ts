@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionsService} from '../../../services/questions/questions.service';
-
-import {QuestionModel} from '../../../interface';
 import {ActivatedRoute} from '@angular/router';
+
+import {QuestionsService} from '../../../services/questions/questions.service';
+import {QuestionModel} from '../../../interface';
 
 @Component({
   selector: 'app-questions-layout',
@@ -19,7 +19,6 @@ export class QuestionsLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getData();
   }
 
