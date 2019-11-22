@@ -10,6 +10,7 @@ import {QuestionModule} from './core/components/questions/question.module';
 
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,11 @@ import {HomePageComponent} from './core/components/home-page/home-page.component
     BrowserAnimationsModule,
     SharedModule,
     QuestionModule,
+    HttpClientModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
