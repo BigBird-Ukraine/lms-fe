@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'questions', component: FilterForQuestionsComponent},
   {path: 'add_questions', component: AddQuestionFormComponent},
   {path: 'info', component: InfoHelperComponent},
-  {path: 'layout_q', component: QuestionsLayoutComponent}
+  {path: 'test', component: QuestionsLayoutComponent}
 ];
 
 @NgModule({

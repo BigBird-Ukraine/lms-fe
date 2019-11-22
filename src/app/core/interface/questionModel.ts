@@ -24,10 +24,6 @@ export interface Level {
   level: number;
 }
 
-export interface Group {
-  group: string;
-}
-
 export interface Groups {
   group: string;
 }
@@ -40,9 +36,7 @@ export class QuestionModel {
     public tags: Tags [],
     public question: string,
     public answers: Answers [],
-    public id?: string,
-    // public data?: QuestionModel,
-    // public questions?: QuestionData
+    public id?: string
   ) {
   }
 }

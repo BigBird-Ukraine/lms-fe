@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
 import {Groups, Level, Subject, Tags} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 import {QuestionFormConsts} from '../../../constans';
-import {QuestionsService} from '../../../services/questions/questions.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-filter-for-questions',
@@ -23,22 +23,20 @@ export class FilterForQuestionsComponent implements OnInit {
   search2 = '';
   search3 = '';
 
-
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
   constructor(private fb: FormBuilder,
               private  router: Router,
               private infoHelperService: InfoHelperService,
-              private  questionService: QuestionsService
   ) {
   }
 
   ngOnInit() {
     this.filterQuestions = this.fb.group({
-      subject: this.fb.control(null, [Validators.required]),
-      group: this.fb.control(null, [Validators.required]),
-      level: this.fb.control(null, [Validators.required]),
-      tags: this.fb.control(null, [Validators.required])
+      subject: this.fb.control(null),
+      group: this.fb.control(null),
+      level: this.fb.control(null),
+      tags: this.fb.control(null)
     });
 
     this.getSubjects();
@@ -71,28 +69,14 @@ export class FilterForQuestionsComponent implements OnInit {
     tag.target.value = '';
   }
 
-  queryParams() {
-    const params = {
-      subject: this.filterQuestions.get('subject').value,
-      group: this.filterQuestions.get('group').value,
-      level: this.filterQuestions.get('level').value,
-      tags: this.tags.join()
-    };
-
-    this.questionService.findQuestionByParams(params).subscribe(questions => console.log(questions));
-
-
-  }
-
   startTest() {
-    this.queryParams();
 
-    this.router.navigate(['/questions'], {
+    this.router.navigate(['/test'], {
       queryParams: {
         subject: this.filterQuestions.get('subject').value,
         group: this.filterQuestions.get('group').value,
         level: this.filterQuestions.get('level').value,
-        tag: this.tags.join()
+        tags: this.tags.join()
       }
     });
   }

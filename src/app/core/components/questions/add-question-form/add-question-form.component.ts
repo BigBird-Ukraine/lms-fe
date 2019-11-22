@@ -12,7 +12,8 @@ import {InfoHelperService} from '../../../services/questions/infohelper.service'
 
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Subject, Tags, Group} from '../../../interface';
+import {QuestionModel, Level, Subject, Tags, Groups} from '../../../interface';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -39,9 +40,10 @@ export class AddQuestionFormComponent implements OnInit {
     {level: LevelEnum.MEDIUM},
     {level: LevelEnum.MEDIUM_PLUS},
     {level: LevelEnum.HARD}];
+
   tags: Tags[] = [];
 
-  groups: Group[] = [
+  groups: Groups[] = [
     // {group: '1'},
     // {group: '2'},
     // {group: '3'}

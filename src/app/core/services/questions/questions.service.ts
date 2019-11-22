@@ -31,20 +31,20 @@ export class QuestionsService {
     // );
   }
 
-  getProductById(id): Observable<QuestionModel> {
-    return this.http.get<QuestionModel>(`http://localhost:3000/api/questions/${id}`);
+  getProductById(id): Observable<QuestionData> {
+    return this.http.get<QuestionData>(`http://localhost:3000/api/questions/${id}`);
   }
 
-  findQuestionByParams(params): Observable<QuestionModel> {
-    return this.http.get<QuestionModel>('http://localhost:3000/api/questions', {
+  findQuestionByParams(params): Observable<QuestionData> {
+    return this.http.get<QuestionData>('http://localhost:3000/api/questions', {
       params: new HttpParams({
         fromObject: params
       })
     });
   }
 
-  deleteQuestionById(id): Observable<QuestionModel> {
-    return this.http.delete<QuestionModel>(`http://localhost:3000/api/questions/${id}`);
+  deleteQuestionById(id): Observable<QuestionData> {
+    return this.http.delete<QuestionData>(`http://localhost:3000/api/questions/${id}`);
   }
 
 }

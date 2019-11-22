@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatCardModule} from '@angular/material';
-import {MatExpansionModule} from '@angular/material/expansion';
 
 import {FormModule, MaterialModule} from '../../../shared/modules';
 import {QuestionRoutingModule} from './question-routing.module';
@@ -20,7 +19,7 @@ import {QuestionsLayoutComponent} from './questions-layout/questions-layout.comp
     InfoHelperComponent,
     AddQuestionFormComponent,
     FilterForQuestionsComponent,
-    FilterPipe
+    FilterPipe,
     QuestionsLayoutComponent,
     QuestionPipe,
 
@@ -31,7 +30,7 @@ import {QuestionsLayoutComponent} from './questions-layout/questions-layout.comp
     FormModule,
     QuestionRoutingModule,
     MatExpansionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
     MatExpansionModule,
     MatCardModule,
   ],

@@ -6,6 +6,7 @@
 
   <form [formGroup]="filterQuestions"
         (ngSubmit)="startTest()"
+        (keydown.enter)="$event.preventDefault()"
   >
 
     <mat-form-field class="example-full-width">
