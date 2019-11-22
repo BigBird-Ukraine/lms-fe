@@ -10,12 +10,13 @@
 
       <mat-form-field>
         <mat-label>Виберіть предмет</mat-label>
-        <mat-select formControlName="subject">
-          <mat-option *ngFor="let sub of subjects"
-                      [value]="sub">
-            {{sub}}
+        <input type="text" matInput formControlName="subject" [matAutocomplete]="autoSubject" (input)="filterSubjects()">
+        <mat-autocomplete #autoSubject="matAutocomplete">
+          <mat-option *ngFor="let subject of filteredSubject" [value]="subject">
+            {{subject}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
+
         <mat-error *ngIf="questionForm.get('subject').hasError('required')">
           Виберіть, будь ласка, предмет
         </mat-error>
@@ -23,12 +24,13 @@
 
       <mat-form-field>
         <mat-label>Виберіть курс</mat-label>
-        <mat-select formControlName="group">
-          <mat-option *ngFor="let group of groups"
-                      [value]="group">
+        <input type="text" matInput formControlName="group" [matAutocomplete]="autoGroup" (input)="filterGroups()">
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-option *ngFor="let group of filteredGroups" [value]="group">
             {{group}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
+
         <mat-error *ngIf="questionForm.get('group').hasError('required')">
           Виберіть, будь ласка, курс
         </mat-error>
@@ -57,13 +59,6 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            (click)="addAnswer()">
-      Додати відповідь
-    </button>
-
     <div formArrayName="answers">
       <div *ngFor="let answer of questionForm.get('answers').controls; let i = index">
         <div [formGroupName]="i"
@@ -87,6 +82,13 @@
       </div>
     </div>
 
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addAnswer()">
+      Додати відповідь
+    </button>
+
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Вкажіть теги для питання"
              formGroupName="tags"
@@ -109,5 +111,6 @@
     >Надіслати
     </button>
 
+    <h3 *ngIf="isAdded" class="question-added"> Додано успішно! </h3>
   </form>
 </div>
