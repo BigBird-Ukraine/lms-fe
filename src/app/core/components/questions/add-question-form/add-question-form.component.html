@@ -85,6 +85,7 @@
     <button mat-raised-button
             color="primary"
             type="button"
+            [disabled] = "questionForm.value.answers.length >= 5"
             (click)="addAnswer()">
       Додати відповідь
     </button>

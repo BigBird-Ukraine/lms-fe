@@ -71,12 +71,16 @@ export class FilterForQuestionsComponent implements OnInit {
 
   startTest() {
 
+    const keys = Object.keys(this.filterQuestions.value);
+    keys.forEach(key => {
+      if (!this.filterQuestions.value[key]) {
+        delete this.filterQuestions.value[key];
+      }
+    });
+
     this.router.navigate(['/test'], {
       queryParams: {
-        subject: this.filterQuestions.get('subject').value,
-        group: this.filterQuestions.get('group').value,
-        level: this.filterQuestions.get('level').value,
-        tags: this.tags.join()
+       ...this.filterQuestions.value
       }
     });
   }
