@@ -10,7 +10,8 @@
 
       <mat-form-field>
         <mat-label>Виберіть предмет</mat-label>
-        <input type="text" matInput formControlName="subject" [matAutocomplete]="autoSubject" (input)="filterSubjects()">
+        <input type="text" matInput formControlName="subject" [matAutocomplete]="autoSubject"
+               (input)="filterSubjects()">
         <mat-autocomplete #autoSubject="matAutocomplete">
           <mat-option *ngFor="let subject of filteredSubject" [value]="subject">
             {{subject}}
@@ -75,20 +76,20 @@
 
           </mat-form-field>
           <button mat-mini-fab color="primary"
-                  (click)="removeAnswer(answer)">
+                  (click)="removeAnswer(answer)"
+                  type="button"
+          >
             &times;
           </button>
         </div>
       </div>
+      <button mat-raised-button
+              color="primary"
+              type="button"
+              (click)="addAnswer()">
+        Додати відповідь
+      </button>
     </div>
-
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            [disabled] = "questionForm.value.answers.length >= 5"
-            (click)="addAnswer()">
-      Додати відповідь
-    </button>
 
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Вкажіть теги для питання"
@@ -109,6 +110,7 @@
     <button mat-raised-button
             color="primary"
             type="submit"
+            [disabled]="questionForm.invalid || !tags.length"
     >Надіслати
     </button>
 
