@@ -11,7 +11,7 @@ import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Subject, Tags, Groups} from '../../../interface';
+import {QuestionModel, Level, Tags} from '../../../interface';
 
 
 @Component({
@@ -26,7 +26,12 @@ export class AddQuestionFormComponent implements OnInit {
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  subjects: Subject[] = [];
+  subjects: string[] = [];
+  filteredSubject: string[];
+
+  groups: string[] = [];
+  filteredGroups: string[];
+
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
@@ -36,8 +41,7 @@ export class AddQuestionFormComponent implements OnInit {
     {level: LevelEnum.HARD}];
 
   tags: Tags[] = [];
-
-  groups: Groups[] = [];
+  private isAdded: boolean;
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
@@ -94,38 +98,33 @@ export class AddQuestionFormComponent implements OnInit {
 
   addQuestion() {
     const formData = this.questionForm.value;
-    console.log(formData);
     this.createQuestion(formData);
     this.questionForm.reset();
   }
 
   createQuestion(question: QuestionModel) {
-    this.questionService.createQuestion(question).subscribe((f: QuestionModel) => console.log(`question was created`));
+    this.questionService.createQuestion(question).subscribe(() => {
+      this.isAdded = true;
+      setTimeout(() => { this.isAdded = false; }, 4000);
+    });
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((s: Subject[]) => {
-      this.subjects = s;
-      console.log(s);
-    });
+    this.infoService.getSubject().subscribe((s: any[]) => this.subjects = s);
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe((group: Groups[]) => this.groups = group);
+    this.infoService.getGroups().subscribe((group: any[]) => this.groups = group);
   }
 
-  objCreator(arr) {
-    let obj = {};
-    const res = [];
+  filterSubjects() {
+    const currentValue = this.questionForm.value.subject.toLocaleLowerCase();
 
-    arr.forEach(o => {
-      obj = {
-        value: String(o),
-        viewValue: String(o)
-      };
-      res.push(obj);
-    });
+    this.filteredSubject = this.subjects.filter(sub => sub.toLocaleLowerCase().startsWith(currentValue));
+  }
+  filterGroups() {
+    const currentValue = this.questionForm.value.group.toLocaleLowerCase();
 
-    return res;
+    this.filteredGroups = this.groups.filter(group => group.toLocaleLowerCase().startsWith(currentValue));
   }
 }
