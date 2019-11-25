@@ -41,6 +41,7 @@ export class AddQuestionFormComponent implements OnInit {
     {level: LevelEnum.HARD}];
 
   tags: Tags[] = [];
+  tagsForAutocomplete: Tags[] = [];
   private isAdded: boolean;
 
   constructor(private fb: FormBuilder,
@@ -52,6 +53,7 @@ export class AddQuestionFormComponent implements OnInit {
     this.formData();
     this.getSubjects();
     this.getGroups();
+    this.getTags();
   }
 
   formData() {
@@ -105,7 +107,9 @@ export class AddQuestionFormComponent implements OnInit {
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe(() => {
       this.isAdded = true;
-      setTimeout(() => { this.isAdded = false; }, 4000);
+      setTimeout(() => {
+        this.isAdded = false;
+      }, 4000);
     });
   }
 
@@ -117,11 +121,16 @@ export class AddQuestionFormComponent implements OnInit {
     this.infoService.getGroups().subscribe((group: any[]) => this.groups = group);
   }
 
+  getTags() {
+    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
+  }
+
   filterSubjects() {
     const currentValue = this.questionForm.value.subject.toLocaleLowerCase();
 
     this.filteredSubject = this.subjects.filter(sub => sub.toLocaleLowerCase().startsWith(currentValue));
   }
+
   filterGroups() {
     const currentValue = this.questionForm.value.group.toLocaleLowerCase();
 

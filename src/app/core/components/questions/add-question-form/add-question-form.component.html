@@ -95,10 +95,15 @@
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Вкажіть теги для питання"
              formGroupName="tags"
-             (keyup.enter)="newTag($event)">
-      <mat-error *ngIf="questionForm.get('tags').hasError('required')">
-        Це поле не може бути пустим
-      </mat-error>
+             (keyup.enter)="newTag($event)"
+             [matAutocomplete]="autoTag"
+             #search
+      >
+      <mat-autocomplete #autoTag="matAutocomplete">
+        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: search.value" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <div class="tags">
