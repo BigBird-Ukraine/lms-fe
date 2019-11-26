@@ -104,10 +104,10 @@
              formGroupName="tags"
              (keyup.enter)="newTag($event)"
              [matAutocomplete]="autoTag"
-             #search
+             #searchTags
       >
       <mat-autocomplete #autoTag="matAutocomplete">
-        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: search.value" [value]="tag">
+        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: searchTags.value" [value]="tag">
           {{tag}}
         </mat-option>
       </mat-autocomplete>

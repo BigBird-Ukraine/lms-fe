@@ -14,11 +14,11 @@
              placeholder="Предмет"
              matInput
              formControlName="subject"
-             [matAutocomplete]="auto1"
-             [(ngModel)]="search1"
+             [matAutocomplete]="autoSubject"
+             #searchSubject
       >
-      <mat-autocomplete #auto1="matAutocomplete">
-        <mat-option *ngFor="let subject of subjects | filter: search1" [value]="subject">
+      <mat-autocomplete #autoSubject="matAutocomplete">
+        <mat-option *ngFor="let subject of subjects | filter: searchSubject.value" [value]="subject">
           {{subject}}
         </mat-option>
       </mat-autocomplete>
@@ -30,11 +30,11 @@
              placeholder="Група"
              matInput
              formControlName="group"
-             [matAutocomplete]="auto2"
-             [(ngModel)]="search2"
+             [matAutocomplete]="autoGroup"
+             #searchGroup
       >
-      <mat-autocomplete #auto2="matAutocomplete">
-        <mat-option *ngFor="let group of groups | filter: search2" [value]="group">
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-option *ngFor="let group of groups | filter: searchGroup.value" [value]="group">
           {{group}}
         </mat-option>
       </mat-autocomplete>
@@ -46,25 +46,33 @@
              placeholder="Рівень складності"
              matInput
              formControlName="level"
-             [matAutocomplete]="auto3"
-             [(ngModel)]="search3"
+             [matAutocomplete]="autoLevel"
+             #searchLevel
       >
-      <mat-autocomplete #auto3="matAutocomplete">
-        <mat-option *ngFor="let level of levels | filter: search3" [value]="level">
+      <mat-autocomplete #autoLevel="matAutocomplete">
+        <mat-option *ngFor="let level of levels | filter: searchLevel.value" [value]="level">
           {{level}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Вкажіть теги до тесту"
+      <input matInput placeholder="Вкажіть теги для питання"
              formGroupName="tags"
-             (keyup.enter)="searchTag($event)">
+             (keyup.enter)="searchTag($event)"
+             [matAutocomplete]="autoTag"
+             #searchTags
+      >
+      <mat-autocomplete #autoTag="matAutocomplete">
+        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: searchTags.value" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <div class="tags">
+    <div class="blocks">
         <span *ngFor="let tag of tags"
-              class="tag">
+              class="block">
           {{tag}}
         </span>
     </div>
