@@ -11,7 +11,7 @@ import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Tags} from '../../../interface';
+import {QuestionModel, Level, Tags, Groups} from '../../../interface';
 
 
 @Component({
@@ -27,11 +27,12 @@ export class AddQuestionFormComponent implements OnInit {
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
   subjects: string[] = [];
-  filteredSubject: string[];
+  // filteredSubject: string[];
 
-  groups: string[] = [];
-  filteredGroups: string[];
-
+  group: Groups[] = [];
+  groupForAuto: Groups[] = [];
+  tags: Tags[] = [];
+  tagsForAutocomplete: Tags[] = [];
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
@@ -40,7 +41,6 @@ export class AddQuestionFormComponent implements OnInit {
     {level: LevelEnum.MEDIUM_PLUS},
     {level: LevelEnum.HARD}];
 
-  tags: Tags[] = [];
   private isAdded: boolean;
 
   constructor(private fb: FormBuilder,
@@ -52,17 +52,27 @@ export class AddQuestionFormComponent implements OnInit {
     this.formData();
     this.getSubjects();
     this.getGroups();
+    this.getTags();
   }
 
   formData() {
     this.questionForm = this.fb.group({
       subject: this.fb.control(null, [Validators.required]),
-      group: this.fb.control(null, [Validators.required]),
+      group: this.fb.array([]),
       level: this.fb.control(null, [Validators.required]),
       tags: this.fb.array([]),
       question: this.fb.control(null, [Validators.required]),
       answers: this.fb.array([], [Validators.required])
     });
+  }
+
+  newGroups(group) {
+    const text = group.target.value;
+
+    if (text.length) {
+      this.group.push(text);
+    }
+    group.target.value = '';
   }
 
   newTag(tag) {
@@ -71,7 +81,6 @@ export class AddQuestionFormComponent implements OnInit {
     if (text.length > this.tagArrLength) {
       this.tags.push(text);
     }
-    this.questionForm.value.tags = this.tags;
     tag.target.value = '';
   }
 
@@ -97,6 +106,8 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   addQuestion() {
+    this.questionForm.value.group = this.group;
+    this.questionForm.value.tags = this.tags;
     const formData = this.questionForm.value;
     this.createQuestion(formData);
     this.questionForm.reset();
@@ -105,7 +116,9 @@ export class AddQuestionFormComponent implements OnInit {
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe(() => {
       this.isAdded = true;
-      setTimeout(() => { this.isAdded = false; }, 4000);
+      setTimeout(() => {
+        this.isAdded = false;
+      }, 4000);
     });
   }
 
@@ -114,17 +127,23 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe((group: any[]) => this.groups = group);
+    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups);
   }
 
-  filterSubjects() {
-    const currentValue = this.questionForm.value.subject.toLocaleLowerCase();
-
-    this.filteredSubject = this.subjects.filter(sub => sub.toLocaleLowerCase().startsWith(currentValue));
+  getTags() {
+    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
   }
-  filterGroups() {
-    const currentValue = this.questionForm.value.group.toLocaleLowerCase();
 
-    this.filteredGroups = this.groups.filter(group => group.toLocaleLowerCase().startsWith(currentValue));
-  }
+  // filterSubjects() {
+  //   const currentValue = this.questionForm.value.subject.toLocaleLowerCase();
+  //
+  //   this.filteredSubject = this.subjects.filter(sub => sub.toLocaleLowerCase().startsWith(currentValue));
+// }
+
+// filterGroups() {
+//   const currentValue = this.questionForm.value.group.toLocaleLowerCase();
+//
+//   this.filteredGroups = this.groups.filter(group => group.toLocaleLowerCase().startsWith(currentValue));
+// }
+
 }

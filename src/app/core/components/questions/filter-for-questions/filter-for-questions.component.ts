@@ -18,10 +18,7 @@ export class FilterForQuestionsComponent implements OnInit {
   groups: Groups[] = [];
   levels: Level[] = [];
   tags: Tags[] = [];
-
-  search1 = '';
-  search2 = '';
-  search3 = '';
+  tagsForAutocomplete: Tags[] = [];
 
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
@@ -42,6 +39,7 @@ export class FilterForQuestionsComponent implements OnInit {
     this.getSubjects();
     this.getGroups();
     this.getLevels();
+    this.getTags();
   }
 
   getSubjects() {
@@ -59,17 +57,22 @@ export class FilterForQuestionsComponent implements OnInit {
       .subscribe((levels: Level[]) => this.levels = levels);
   }
 
+  getTags() {
+    this.infoHelperService.getTags()
+      .subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
+  }
+
   searchTag(tag) {
     const text = tag.target.value;
 
     if (text.length > this.tagArrLength) {
       this.tags.push(text);
     }
-    this.filterQuestions.value.tags = this.tags;
     tag.target.value = '';
   }
 
   startTest() {
+    this.filterQuestions.value.tags = this.tags;
 
     const keys = Object.keys(this.filterQuestions.value);
     keys.forEach(key => {
