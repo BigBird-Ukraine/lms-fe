@@ -31,7 +31,7 @@ export interface Groups {
 export class QuestionModel {
   constructor(
     public subject: Subject,
-    public group: Groups,
+    public group: Groups[],
     public level: Level,
     public tags: Tags [],
     public question: string,

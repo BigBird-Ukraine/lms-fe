@@ -11,9 +11,9 @@
       <mat-form-field>
         <mat-label>Виберіть предмет</mat-label>
         <input type="text" matInput formControlName="subject" [matAutocomplete]="autoSubject"
-               (input)="filterSubjects()">
+               #searchSubject>
         <mat-autocomplete #autoSubject="matAutocomplete">
-          <mat-option *ngFor="let subject of filteredSubject" [value]="subject">
+          <mat-option *ngFor="let subject of subjects | filter: searchSubject.value" [value]="subject">
             {{subject}}
           </mat-option>
         </mat-autocomplete>
@@ -23,19 +23,26 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Виберіть курс</mat-label>
-        <input type="text" matInput formControlName="group" [matAutocomplete]="autoGroup" (input)="filterGroups()">
-        <mat-autocomplete #autoGroup="matAutocomplete">
-          <mat-option *ngFor="let group of filteredGroups" [value]="group">
-            {{group}}
-          </mat-option>
-        </mat-autocomplete>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Вкажіть групу"
+               formGroupName="group"
+               (keyup.enter)="newGroups($event)"
+               [matAutocomplete]="autoGroup"
+               #searchGroup
+        >
 
-        <mat-error *ngIf="questionForm.get('group').hasError('required')">
-          Виберіть, будь ласка, курс
-        </mat-error>
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-option *ngFor="let group of groupForAuto | filter: searchGroup.value" [value]="group">
+          {{group}}
+        </mat-option>
+      </mat-autocomplete>
       </mat-form-field>
+      <div class="blocks">
+        <span *ngFor="let gr of group"
+              class="block">
+          {{gr}}
+        </span>
+      </div>
 
       <mat-form-field>
         <mat-label>Виберіть складність</mat-label>
@@ -95,15 +102,20 @@
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Вкажіть теги для питання"
              formGroupName="tags"
-             (keyup.enter)="newTag($event)">
-      <mat-error *ngIf="questionForm.get('tags').hasError('required')">
-        Це поле не може бути пустим
-      </mat-error>
+             (keyup.enter)="newTag($event)"
+             [matAutocomplete]="autoTag"
+             #search
+      >
+      <mat-autocomplete #autoTag="matAutocomplete">
+        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: search.value" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <div class="tags">
+    <div class="blocks">
         <span *ngFor="let tag of tags"
-              class="tag">
+              class="block">
           {{tag}}
         </span>
     </div>
