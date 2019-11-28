@@ -11,7 +11,7 @@ import {QuestionsService} from '../../../services/questions/questions.service';
 import {InfoHelperService} from '../../../services/questions/infohelper.service';
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
-import {QuestionModel, Level, Tags, Groups} from '../../../interface';
+import {QuestionModel, Level, Tags, Groups, Subject} from '../../../interface';
 
 
 @Component({
@@ -26,9 +26,7 @@ export class AddQuestionFormComponent implements OnInit {
   answerClickCount = QuestionFormConsts.CLICK_COUNT;
   tagArrLength = QuestionFormConsts.TAG_ARRAY;
 
-  subjects: string[] = [];
-  // filteredSubject: string[];
-
+  subjects: Subject[] = [];
   group: Groups[] = [];
   groupForAuto: Groups[] = [];
   tags: Tags[] = [];
@@ -62,7 +60,8 @@ export class AddQuestionFormComponent implements OnInit {
       level: this.fb.control(null, [Validators.required]),
       tags: this.fb.array([]),
       question: this.fb.control(null, [Validators.required]),
-      answers: this.fb.array([], [Validators.required])
+      answers: this.fb.array([], [Validators.required]),
+      description: this.fb.control(null)
     });
   }
 
@@ -123,7 +122,7 @@ export class AddQuestionFormComponent implements OnInit {
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((s: any[]) => this.subjects = s);
+    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject);
   }
 
   getGroups() {

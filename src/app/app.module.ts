@@ -11,6 +11,7 @@ import {QuestionModule} from './core/components/questions/question.module';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
 import {HttpClientModule} from '@angular/common/http';
+import {UserModule} from './core/components/user/user.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     QuestionModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule,
   ],
   providers: [],
   exports: [],
