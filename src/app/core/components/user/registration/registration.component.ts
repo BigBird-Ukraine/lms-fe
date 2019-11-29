@@ -12,6 +12,7 @@ import {RegistrationService} from '../../../services/user/registration.service';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  nameRegexp = '^[a-zA-Z]*$';
   passwordRegexp = '^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[@$!%*#?&]).{8,}$';
 
   constructor(private dialog: MatDialog,
@@ -26,9 +27,18 @@ export class RegistrationComponent implements OnInit {
 
   formData() {
     this.registrationForm = this.fb.group({
-        name: this.fb.control(null, [Validators.required]),
-        surname: this.fb.control(null, [Validators.required]),
-        email: this.fb.control(null, [Validators.required, Validators.email]),
+        name: this.fb.control(null, [
+          Validators.required,
+          Validators.pattern(this.nameRegexp)
+        ]),
+        surname: this.fb.control(null, [
+          Validators.required,
+          Validators.pattern(this.nameRegexp)
+        ]),
+        email: this.fb.control(null, [
+          Validators.required,
+          Validators.email
+        ]),
         password: this.fb.control(null, [
           Validators.required,
           Validators.pattern(this.passwordRegexp),
@@ -41,7 +51,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   newUser() {
-    const data = {
+    const data: UserModel = {
       name: this.registrationForm.value.name,
       surname: this.registrationForm.value.surname,
       email: this.registrationForm.value.email,

@@ -15,6 +15,9 @@
         <mat-error *ngIf="registrationForm.get('name').hasError('required')">
           Введіть, будь ласка, ім'я
         </mat-error>
+        <mat-error *ngIf="registrationForm.get('name').hasError('pattern')">
+          Ім'я введено некоректно
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -27,6 +30,9 @@
         >
         <mat-error *ngIf="registrationForm.get('surname').hasError('required')">
           Введіть, будь ласка, прізвище
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('surname').hasError('pattern')">
+          Прізвище введено некоректно
         </mat-error>
       </mat-form-field>
     </div>
