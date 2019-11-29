@@ -60,7 +60,7 @@
       <mat-form-field class="example-full-width">
 
         <input matInput placeholder="Сформулюйте питтаня"
-               formControlName="question" #message>
+               formControlName="question">
         <mat-error *ngIf="questionForm.get('question').hasError('required')">
           Це поле не може бути пустим
         </mat-error>
@@ -98,6 +98,11 @@
         Додати відповідь
       </button>
     </div>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Опис відповіді"
+                formControlName="description"></textarea>
+    </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Вкажіть теги для питання"
