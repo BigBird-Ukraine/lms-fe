@@ -41,7 +41,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   newUser() {
-    const data = this.registrationForm.value;
+    const data = {
+      name: this.registrationForm.value.name,
+      surname: this.registrationForm.value.surname,
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password
+    };
     this.createUser(data);
     console.log(data);
   }
