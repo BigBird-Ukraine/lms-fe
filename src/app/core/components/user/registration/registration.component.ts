@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
-import {RegistrationService} from '../../../services/user/registration.service';
+import {UserService} from '../../../services/user/user.service';
 import {regExp} from '../../../constans';
 
 @Component({
@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,
-              private registrationService: RegistrationService
+              private userService: UserService
   ) {
   }
 
@@ -63,6 +63,6 @@ export class RegistrationComponent implements OnInit {
 
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
-    this.registrationService.createUser(user).subscribe(() => console.log('user create'));
+    this.userService.createUser(user).subscribe(() => alert('user create'));
   }
 }
