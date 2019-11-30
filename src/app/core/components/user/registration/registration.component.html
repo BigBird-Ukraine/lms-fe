@@ -53,33 +53,81 @@
       </mat-form-field>
     </div>
 
+<!--    TODO -->
       <div class="example-full-width pass">
-        <mat-icon aria-hidden="false">vpn_key</mat-icon>
+        <mat-icon aria-hidden="false">
+          vpn_key
+        </mat-icon>
         <mat-form-field>
-          <input type="password" matInput
+<!--          <input type="password" matInput-->
+<!--                 placeholder="Пароль"-->
+<!--                 formControlName="password"-->
+<!--          >-->
+          <input matInput placeholder="Enter your password"
+                 [type]="hide ? 'password' : 'text'"
                  placeholder="Пароль"
                  formControlName="password"
           >
-          <mat-error *ngIf="registrationForm.get('password').hasError('required')">
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>
+              {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+          <mat-error
+            *ngIf="registrationForm.get('password').hasError('required')"
+          >
             Введіть, будь ласка, пароль
           </mat-error>
-          <mat-error *ngIf="registrationForm.get('password').hasError('minlength')">
+          <mat-error
+            *ngIf="registrationForm.get('password').hasError('minlength')"
+          >
             Пароль має містити щонайменше 8 символів
           </mat-error>
-          <mat-error *ngIf="registrationForm.get('password').hasError('pattern')">
+          <mat-error
+            *ngIf="registrationForm.get('password').hasError('pattern')"
+          >
             Пароль має складатися з малих літер, великих літер, цифр та спеціальних символів
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="example-full-width">
-        <mat-icon aria-hidden="false">vpn_key</mat-icon>
+        <mat-icon aria-hidden="false">
+          vpn_key
+        </mat-icon>
         <mat-form-field>
-          <input type="password" matInput
-                 placeholder="Підтвердження паролю"
-                 formControlName="confirmPassword"
+<!--          <input type="password" matInput-->
+<!--                 placeholder="Підтвердження паролю"-->
+<!--                 formControlName="confirmPassword"-->
+<!--          >-->
+          <input
+            matInput
+            placeholder="Enter your password"
+            [type]="hide2 ? 'password' : 'text'"
+            confirmPassword="password"
           >
-          <mat-error *ngIf="registrationForm.get('confirmPassword').hasError('required')">
+          <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="hide2 = !hide2"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide2"
+          >
+            <mat-icon>
+              {{hide2 ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+          <mat-error
+            *ngIf="registrationForm.get('confirmPassword').hasError('required')"
+          >
             Введіть пароль ще раз для підтвердження
           </mat-error>
 <!--          <mat-error *ngIf="registrationForm.errors?.passwordsMismatch && (registrationForm.touched || registrationForm.dirty)">-->
@@ -88,10 +136,16 @@
         </mat-form-field>
       </div>
 
+<!--    <button mat-raised-button-->
+<!--            color="primary"-->
+<!--            type="submit"-->
+<!--            [disabled]="registrationForm.invalid">-->
+<!--      Прийняти-->
+<!--    </button>-->
+
     <button mat-raised-button
             color="primary"
-            type="submit"
-            [disabled]="registrationForm.invalid">
+            type="submit">
       Прийняти
     </button>
 

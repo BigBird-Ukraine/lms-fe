@@ -1,19 +1,28 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {SharedModule} from './shared/modules';
+import {CustomSnackbarService} from "./shared/services/custom-snackbar.service";
 
+import {TokenInterceptor} from "./shared/interceptor/token.interceptor";
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {QuestionModule} from './core/components/questions/question.module';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
 import {UserModule} from './core/components/user/user.module';
 
+import {
+  MatSnackBarContainer,
+  MatSnackBarModule
+} from "@angular/material/snack-bar";
+
 @NgModule({
+  entryComponents:[
+  ],
   declarations: [
     AppComponent,
     MainLayoutComponent,
@@ -27,10 +36,21 @@ import {UserModule} from './core/components/user/user.module';
     QuestionModule,
     HttpClientModule,
     UserModule,
+    MatSnackBarModule
   ],
-  providers: [],
   exports: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    MatSnackBarContainer,
+    CustomSnackbarService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   multi: true,
+    //   useClass: TokenInterceptor
+    // }
+  ],
 })
+
+
 export class AppModule {
 }
