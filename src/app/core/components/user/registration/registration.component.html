@@ -1,0 +1,100 @@
+<h2 mat-dialog-title class="mat_dialog_title">Зареєструватися</h2>
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="registrationForm"
+        (ngSubmit)="newUser()"
+  >
+
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false">person_outline</mat-icon>
+      <mat-form-field>
+        <input type="text" matInput
+               placeholder="Введіть Ваше ім'я"
+               formControlName="name"
+        >
+        <mat-error *ngIf="registrationForm.get('name').hasError('required')">
+          Введіть, будь ласка, ім'я
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('name').hasError('pattern')">
+          Ім'я введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false">person</mat-icon>
+      <mat-form-field>
+        <input type="text" matInput
+               placeholder="Введіть Ваше прізвище"
+               formControlName="surname"
+        >
+        <mat-error *ngIf="registrationForm.get('surname').hasError('required')">
+          Введіть, будь ласка, прізвище
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('surname').hasError('pattern')">
+          Прізвище введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false">email</mat-icon>
+      <mat-form-field>
+        <input type="email" matInput
+               placeholder="Введіть Ваш email"
+               formControlName="email"
+        >
+        <mat-error *ngIf="registrationForm.get('email').hasError('required')">
+          Введіть, будь ласка, email
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('email').hasError('email')">
+          Email введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+      <div class="example-full-width pass">
+        <mat-icon aria-hidden="false">vpn_key</mat-icon>
+        <mat-form-field>
+          <input type="password" matInput
+                 placeholder="Пароль"
+                 formControlName="password"
+          >
+          <mat-error *ngIf="registrationForm.get('password').hasError('required')">
+            Введіть, будь ласка, пароль
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('password').hasError('minlength')">
+            Пароль має містити щонайменше 8 символів
+          </mat-error>
+          <mat-error *ngIf="registrationForm.get('password').hasError('pattern')">
+            Пароль має складатися з малих літер, великих літер, цифр та спеціальних символів
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="example-full-width">
+        <mat-icon aria-hidden="false">vpn_key</mat-icon>
+        <mat-form-field>
+          <input type="password" matInput
+                 placeholder="Підтвердження паролю"
+                 formControlName="confirmPassword"
+          >
+          <mat-error *ngIf="registrationForm.get('confirmPassword').hasError('required')">
+            Введіть пароль ще раз для підтвердження
+          </mat-error>
+<!--          <mat-error *ngIf="registrationForm.errors?.passwordsMismatch && (registrationForm.touched || registrationForm.dirty)">-->
+<!--            Паролі не співпадають, спробуйте ще раз-->
+<!--          </mat-error>-->
+        </mat-form-field>
+      </div>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="registrationForm.invalid">
+      Прийняти
+    </button>
+
+  </form>
+
+</mat-dialog-content>
