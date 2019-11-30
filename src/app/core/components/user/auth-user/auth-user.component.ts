@@ -30,4 +30,7 @@ export class AuthUserComponent implements OnInit {
     });
   }
 
+  login() {
+
+  }
 }
