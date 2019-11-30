@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-auth-user',
@@ -11,7 +12,8 @@ export class AuthUserComponent implements OnInit {
 
   authForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -31,6 +33,6 @@ export class AuthUserComponent implements OnInit {
   }
 
   login() {
-
+    this.authService.authUser(this.authForm.value).subscribe();
   }
 }
