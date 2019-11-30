@@ -6,29 +6,56 @@
   >
 
     <div class="example-full-width">
-      <mat-icon aria-hidden="false">email</mat-icon>
+      <mat-icon aria-hidden="false">
+        email
+      </mat-icon>
       <mat-form-field>
         <input type="email" matInput
                placeholder="Введіть Ваш email"
                formControlName="email"
         >
-        <mat-error *ngIf="authForm.get('email').hasError('required')">
+        <mat-error
+          *ngIf="authForm.get('email').hasError('required')"
+        >
           Введіть, будь ласка, email
         </mat-error>
-        <mat-error *ngIf="authForm.get('email').hasError('email')">
+        <mat-error
+          *ngIf="authForm.get('email').hasError('email')"
+        >
           Email введено некоректно
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="example-full-width pass">
-      <mat-icon aria-hidden="false">vpn_key</mat-icon>
+      <mat-icon aria-hidden="false">
+        vpn_key
+      </mat-icon>
       <mat-form-field>
-        <input type="password" matInput
-               placeholder="Пароль"
-               formControlName="password"
+<!--        <input type="password" matInput-->
+<!--               placeholder="Пароль"-->
+<!--               formControlName="password"-->
+<!--        >-->
+        <input
+          matInput placeholder="Пароль"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
         >
-        <mat-error *ngIf="authForm.get('password').hasError('required')">
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>
+            {{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </button>
+        <mat-error
+          *ngIf="authForm.get('password').hasError('required')"
+        >
           Введіть, будь ласка, пароль
         </mat-error>
       </mat-form-field>

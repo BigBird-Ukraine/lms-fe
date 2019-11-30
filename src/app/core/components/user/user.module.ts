@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule
+} from '@angular/material';
 
 import {RegistrationComponent} from './registration/registration.component';
 import {UserRoutingModule} from './user-routing.module';
@@ -21,7 +27,7 @@ import { AuthUserComponent } from './auth-user/auth-user.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     UserRoutingModule,

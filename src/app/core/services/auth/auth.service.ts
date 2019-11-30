@@ -97,6 +97,10 @@ export class AuthService {
       );
   }
 
+  public isAuthenticated(): boolean {
+    return !!this.accessTokenKey
+  }
+
   private deleteTokens(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
@@ -110,7 +114,8 @@ export class AuthService {
     localStorage.setItem(this.refreshTokenKey, token);
   }
 
-  private getAccessToken(): string {
+  public getAccessToken(): string {
+    console.log(this.accessTokenKey)
     return localStorage.getItem(this.accessTokenKey);
   }
 

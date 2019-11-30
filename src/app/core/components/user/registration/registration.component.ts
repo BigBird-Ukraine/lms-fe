@@ -6,6 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services/user/user.service';
 import {regExp} from '../../../constans';
+import {ErrorService} from "../../../../shared/services/error.service";
 
 @Component({
   selector: 'app-registration',
@@ -13,11 +14,17 @@ import {regExp} from '../../../constans';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
   registrationForm: FormGroup;
+  hide = true;
+  hide2 = true;
+  durationInSeconds = 5;
+  error = null;
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,
-              private userService: UserService
+              private userService: UserService,
+              private errorService: ErrorService
   ) {
   }
 
@@ -44,7 +51,8 @@ export class RegistrationComponent implements OnInit {
           Validators.pattern(regExp.passwordRegexp),
           Validators.minLength(8)
         ]),
-        confirmPassword: this.fb.control(null, [Validators.required])
+        confirmPassword: this.fb.control(null,
+          [Validators.required])
       },
       {validators: matchPassword}
     );
@@ -63,6 +71,16 @@ export class RegistrationComponent implements OnInit {
 
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
-    this.userService.createUser(user).subscribe(() => alert('user create'));
+    this.userService.createUser(user).subscribe(() => {
+      alert('user create')
+    },
+      error => {
+        this.error = error.error.error.message
+        this.errorService.handleError(this.error)
+        console.log(error.error.error.message);
+      }
+    );
   }
 }
+
+
