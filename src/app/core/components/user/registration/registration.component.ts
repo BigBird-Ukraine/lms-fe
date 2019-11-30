@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {RegistrationService} from '../../../services/user/registration.service';
+import {regExp} from '../../../constans';
 
 @Component({
   selector: 'app-registration',
@@ -12,8 +14,6 @@ import {RegistrationService} from '../../../services/user/registration.service';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
-  nameRegexp = '^[a-zA-Z]*$';
-  passwordRegexp = '^(?!.* )(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[@$!%*#?&]).{8,}$';
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,
@@ -29,11 +29,11 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
         name: this.fb.control(null, [
           Validators.required,
-          Validators.pattern(this.nameRegexp)
+          Validators.pattern(regExp.nameRegexp)
         ]),
         surname: this.fb.control(null, [
           Validators.required,
-          Validators.pattern(this.nameRegexp)
+          Validators.pattern(regExp.nameRegexp)
         ]),
         email: this.fb.control(null, [
           Validators.required,
@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
         ]),
         password: this.fb.control(null, [
           Validators.required,
-          Validators.pattern(this.passwordRegexp),
+          Validators.pattern(regExp.passwordRegexp),
           Validators.minLength(8)
         ]),
         confirmPassword: this.fb.control(null, [Validators.required])
@@ -62,6 +62,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   createUser(user: UserModel) {
+    // todo navigate to login or show success message. Like on question form
     this.registrationService.createUser(user).subscribe(() => console.log('user create'));
   }
 }
