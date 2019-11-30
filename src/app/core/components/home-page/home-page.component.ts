@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {RegistrationComponent} from '../user/registration/registration.component';
+import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 
 @Component({
   selector: 'app-home-page',
@@ -17,5 +18,9 @@ export class HomePageComponent implements OnInit {
 
   openRegForm() {
     this.dialog.open(RegistrationComponent);
+  }
+
+  openLogForm() {
+    this.dialog.open(AuthUserComponent);
   }
 }
