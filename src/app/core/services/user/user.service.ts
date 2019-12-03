@@ -30,7 +30,7 @@ export class UserService {
       })
     };
 
-    this.http.get<ISuccessHttpResponse>(`${config.apiUrl}/${config.apiVersion}/users`, options)
+    this.http.get<ISuccessHttpResponse>(`${config.apiUrl}/${config.apiVersion}/users/info`, options)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           this.userService.userInfo.next(response.data);

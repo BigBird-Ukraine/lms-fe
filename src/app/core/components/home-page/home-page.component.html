@@ -23,18 +23,21 @@
           color="primary"
           type="button"
           (click)="openRegForm()"
+          *ngIf="!authService.isAuthenticated()"
   > Зареєструватися </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="openLogForm()"
+          *ngIf="!authService.isAuthenticated()"
   > Увійти </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="logout()"
+          *ngIf="authService.isAuthenticated()"
   > Вийти </button>
 
 </div>

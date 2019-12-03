@@ -7,6 +7,7 @@ import {UserModel} from '../../../interface';
 import {UserService} from '../../../services/user/user.service';
 import {regExp} from '../../../constans';
 import {ErrorService} from "../../../../shared/services/error.service";
+import {AuthUserComponent} from '../auth-user/auth-user.component';
 
 @Component({
   selector: 'app-registration',
@@ -72,11 +73,11 @@ export class RegistrationComponent implements OnInit {
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
-      alert('user create')
+      this.dialog.open(AuthUserComponent);
     },
       error => {
-        this.error = error.error.error.message
-        this.errorService.handleError(this.error)
+        this.error = error.error.error.message;
+        this.errorService.handleError(this.error);
         console.log(error.error.error.message);
       }
     );

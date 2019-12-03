@@ -1,11 +1,11 @@
-import {Injectable, NgZone} from "@angular/core";
+import {Injectable, NgZone} from '@angular/core';
 
 import {
   MatSnackBar,
   MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition
-} from "@angular/material/snack-bar";
+} from '@angular/material/snack-bar';
 
 @Injectable()
 export class CustomSnackbarService {
