@@ -98,7 +98,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return !!this.accessTokenKey
+    return !!this.accessTokenKey;
   }
 
   private deleteTokens(): void {

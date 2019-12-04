@@ -34,6 +34,7 @@ export class QuestionModel {
     public group: Groups[],
     public level: Level,
     public tags: Tags [],
+    public user_id: string,
     public question: string,
     public answers: Answers [],
     public description?: string,
