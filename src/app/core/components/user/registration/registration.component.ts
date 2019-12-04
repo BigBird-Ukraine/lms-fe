@@ -6,7 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services/user/user.service';
 import {regExp} from '../../../constans';
-import {ErrorService} from "../../../../shared/services/error.service";
+import {ErrorService} from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +19,6 @@ export class RegistrationComponent implements OnInit {
   hide = true;
   hide2 = true;
   durationInSeconds = 5;
-  error = null;
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,
@@ -66,20 +65,14 @@ export class RegistrationComponent implements OnInit {
       password: this.registrationForm.value.password
     };
     this.createUser(data);
-    console.log(data);
   }
 
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
-      alert('user create')
-    },
-      error => {
-        this.error = error.error.error.message
-        this.errorService.handleError(this.error)
-        console.log(error.error.error.message);
-      }
-    );
+        alert('user create');
+      },
+      error => this.errorService.handleError(error));
   }
 }
 
