@@ -13,14 +13,18 @@ import {ISuccessHttpResponse} from '../../../shared/models/interfaces';
 })
 export class QuestionsService {
 
-  data: any;
-
   constructor(private http: HttpClient,
               private authService: AuthService) {
   }
 
   createQuestion(question): Observable<QuestionModel> {
-    return this.http.post<QuestionModel>(`${config.apiUrl}/${config.apiVersion}/questions`, question);
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.post<QuestionModel>(`${config.apiUrl}/${config.apiVersion}/questions`, question, options);
   }
 
   getMyQuestions(limit?: number, offset?: number): Observable<ISuccessHttpResponse> {
@@ -51,7 +55,13 @@ export class QuestionsService {
   }
 
   deleteQuestionById(id): Observable<QuestionData> {
-    return this.http.delete<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`);
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`, options);
   }
 
 }
