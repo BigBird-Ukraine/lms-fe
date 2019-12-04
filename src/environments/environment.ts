@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost',
-  authPort: 3000,
-  questionPort: 3001,
+  authPort: 3001,
+  questionPort: 3000,
   apiVersion: 'api',
   adminEmail: 'admin@somemail.com',
   infoEmail: 'info@somemail.com',

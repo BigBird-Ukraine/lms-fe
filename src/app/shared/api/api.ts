@@ -1,4 +1,5 @@
 import { config } from '../config';
 
-export const commonApiPath = `${config.authUrl}/${config.apiVersion}`;
-export const adminApiPath = `${commonApiPath}/admin`;
+export const commonAuthPath = `${config.authUrl}/${config.apiVersion}`;
+export const commonQuestionPath = `${config.questionUrl}/${config.apiVersion}`;
+export const adminAdminPath = `${commonAuthPath}/admin`; // TODO
