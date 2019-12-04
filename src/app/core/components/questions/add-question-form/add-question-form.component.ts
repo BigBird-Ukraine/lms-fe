@@ -12,6 +12,7 @@ import {InfoHelperService} from '../../../services/questions/infohelper.service'
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
 import {QuestionModel, Level, Tags, Groups, Subject} from '../../../interface';
+import {ErrorService} from '../../../../shared/services/error.service';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class AddQuestionFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
-              private infoService: InfoHelperService) {
+              private infoService: InfoHelperService,
+              private errorService: ErrorService) {
   }
 
   ngOnInit() {
@@ -114,35 +116,27 @@ export class AddQuestionFormComponent implements OnInit {
 
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe(() => {
-      this.isAdded = true;
-      setTimeout(() => {
-        this.isAdded = false;
-      }, 4000);
-    });
+        this.isAdded = true;
+        setTimeout(() => {
+          this.isAdded = false;
+        }, 4000);
+      },
+      error => this.errorService.handleError(error));
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject);
+    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject,
+      error => this.errorService.handleError(error));
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups);
+    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups,
+      error => this.errorService.handleError(error));
   }
 
   getTags() {
-    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
+    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags,
+      error => this.errorService.handleError(error));
   }
-
-  // filterSubjects() {
-  //   const currentValue = this.questionForm.value.subject.toLocaleLowerCase();
-  //
-  //   this.filteredSubject = this.subjects.filter(sub => sub.toLocaleLowerCase().startsWith(currentValue));
-// }
-
-// filterGroups() {
-//   const currentValue = this.questionForm.value.group.toLocaleLowerCase();
-//
-//   this.filteredGroups = this.groups.filter(group => group.toLocaleLowerCase().startsWith(currentValue));
-// }
 
 }

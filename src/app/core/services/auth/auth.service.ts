@@ -5,14 +5,14 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
 import {ISuccessHttpResponse} from '../../../shared/';
-import {commonApiPath} from '../../../shared';
+import {commonAuthPath} from '../../../shared';
 import {ITokensModel, UserModel} from '../../interface';
 import {UserService} from '../user/user.service';
 
 const authApiUrls = {
-  authUser: commonApiPath + '/auth',
-  logoutUser: commonApiPath + '/auth/logout',
-  refreshTokens: commonApiPath + '/auth/refresh'
+  authUser: commonAuthPath + '/auth',
+  logoutUser: commonAuthPath + '/auth/logout',
+  refreshTokens: commonAuthPath + '/auth/refresh'
 };
 
 @Injectable({
@@ -63,7 +63,6 @@ export class AuthService {
           this.setTokens(accessToken, refreshToken);
           this.userService.getUserInfoByToken(accessToken);
 
-          // TODO you still need to test it when BE part will be finished
         }),
         catchError((err: any) => {
           this.redirectToLogin();
@@ -98,7 +97,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return !!this.accessTokenKey
+    return !!this.accessTokenKey;
   }
 
   private deleteTokens(): void {
@@ -115,7 +114,7 @@ export class AuthService {
   }
 
   public getAccessToken(): string {
-    console.log(this.accessTokenKey)
+    console.log(this.accessTokenKey);
     return localStorage.getItem(this.accessTokenKey);
   }
 

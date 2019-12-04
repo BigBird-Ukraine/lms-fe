@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../../../services/auth/auth.service';
-import {ErrorService} from "../../../../shared/services/error.service";
+import {ErrorService} from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-auth-user',
@@ -13,7 +13,6 @@ export class AuthUserComponent implements OnInit {
 
   authForm: FormGroup;
   hide = true;
-  error = null;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -38,12 +37,7 @@ export class AuthUserComponent implements OnInit {
 
   login() {
     this.authService.authUser(this.authForm.value).subscribe(() => {
-    },
-      error => {
-        this.error = error.error.error.message
-        this.errorService.handleError(this.error)
-        console.log(error.error.error.message);
-      }
-  );
+      },
+      error => this.errorService.handleError(error));
   }
 }
