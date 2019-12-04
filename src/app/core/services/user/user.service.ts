@@ -6,15 +6,13 @@ import {catchError, tap} from 'rxjs/operators';
 import {UserModel} from '../../interface';
 import {config} from '../../../shared/config';
 import {IUserSubjectModel} from '../../interface/user-subject.model';
-import {ISuccessHttpResponse} from '../../../shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient,
-              private userService: UserService) {
+  constructor(private http: HttpClient) {
   }
 
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
@@ -29,15 +27,14 @@ export class UserService {
         Authorization: accessToken
       })
     };
-
-    this.http.get<ISuccessHttpResponse>(`${config.apiUrl}/${config.apiVersion}/users/info`, options)
+    this.http.get<IUserSubjectModel>(`${config.apiUrl}/${config.apiVersion}/users/info`, options)
       .pipe(
-        tap((response: ISuccessHttpResponse) => {
-          this.userService.userInfo.next(response.data);
+        tap((response: IUserSubjectModel) => {
+          this.userInfo.next(response);
         }),
         catchError((err: any) => {
           return throwError(err);
         })
-      );
+      ).subscribe();
   }
 }

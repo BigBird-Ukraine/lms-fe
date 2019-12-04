@@ -67,12 +67,12 @@ export class RegistrationComponent implements OnInit {
       password: this.registrationForm.value.password
     };
     this.createUser(data);
-    console.log(data);
   }
 
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
+      this.dialog.closeAll();
       this.dialog.open(AuthUserComponent);
     },
       error => {

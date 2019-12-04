@@ -5,6 +5,7 @@ import {AuthService} from '../../../services/auth/auth.service';
 import {ErrorService} from '../../../../shared/services/error.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
+import {UserService} from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-auth-user',
@@ -19,6 +20,7 @@ export class AuthUserComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
+              private userService: UserService,
               private errorService: ErrorService,
               private dialog: MatDialog) {
   }
@@ -41,7 +43,10 @@ export class AuthUserComponent implements OnInit {
 
   login() {
     this.authService.authUser(this.authForm.value).subscribe(() => {
-      this.dialog.closeAll();
+        this.userService.userInfo.subscribe(info => {
+          console.log(info);
+        });
+        this.dialog.closeAll();
       },
       error => {
         this.error = error.error.error.message;
