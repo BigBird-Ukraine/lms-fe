@@ -20,7 +20,7 @@ export class UserService {
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
 
   createUser(user): Observable<UserModel> {
-    return this.http.post<UserModel>(`${config.apiUrl}/${config.apiVersion}/users`, user);
+    return this.http.post<UserModel>(`${config.authUrl}/${config.apiVersion}/users`, user);
   }
 
   getUserInfoByToken(accessToken: string): void {
@@ -30,7 +30,7 @@ export class UserService {
       })
     };
 
-    this.http.get<ISuccessHttpResponse>(`${config.apiUrl}/${config.apiVersion}/users`, options)
+    this.http.get<ISuccessHttpResponse>(`${config.authUrl}/${config.apiVersion}/users`, options)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           this.userService.userInfo.next(response.data);

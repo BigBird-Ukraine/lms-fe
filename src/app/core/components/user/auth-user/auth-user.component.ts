@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../../../services/auth/auth.service';
-import {ErrorService} from "../../../../shared/services/error.service";
+import {ErrorService} from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-auth-user',

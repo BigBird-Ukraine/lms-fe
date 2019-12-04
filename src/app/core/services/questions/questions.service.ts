@@ -24,7 +24,7 @@ export class QuestionsService {
       })
     };
 
-    return this.http.post<QuestionModel>(`${config.apiUrl}/${config.apiVersion}/questions`, question, options);
+    return this.http.post<QuestionModel>(`${config.questionUrl}/${config.apiVersion}/questions`, question, options);
   }
 
   getMyQuestions(limit?: number, offset?: number): Observable<ISuccessHttpResponse> {
@@ -35,19 +35,19 @@ export class QuestionsService {
     };
 // todo query params in options
     return this.http
-      .get<ISuccessHttpResponse>(`${config.apiUrl}/${config.apiVersion}/questions/my?limit=${limit}&offset=${offset}`, options);
+      .get<ISuccessHttpResponse>(`${config.questionUrl}/questions/my?limit=${limit}&offset=${offset}`, options);
   }
 
   getAllQuestion(): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions`);
+    return this.http.get<QuestionData>(`${config.questionUrl}/${config.apiVersion}/questions`);
   }
 
   getProductById(id): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`);
+    return this.http.get<QuestionData>(`${config.questionUrl}/${config.apiVersion}/questions/${id}`);
   }
 
   findQuestionByParams(params): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions`, {
+    return this.http.get<QuestionData>(`${config.questionUrl}/${config.apiVersion}/questions`, {
       params: new HttpParams({
         fromObject: params
       })
@@ -61,7 +61,7 @@ export class QuestionsService {
       })
     };
 
-    return this.http.delete<QuestionData>(`${config.apiUrl}/${config.apiVersion}/questions/${id}`, options);
+    return this.http.delete<QuestionData>(`${config.questionUrl}/${config.apiVersion}/questions/${id}`, options);
   }
 
 }

@@ -63,7 +63,6 @@ export class AuthService {
           this.setTokens(accessToken, refreshToken);
           this.userService.getUserInfoByToken(accessToken);
 
-          // TODO you still need to test it when BE part will be finished
         }),
         catchError((err: any) => {
           this.redirectToLogin();
