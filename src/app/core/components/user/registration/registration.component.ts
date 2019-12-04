@@ -4,9 +4,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
-import {UserService} from '../../../services/user/user.service';
+import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
-import {ErrorService} from '../../../../shared/services/error.service';
+import {ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +18,6 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   hide2 = true;
-  durationInSeconds = 5;
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,

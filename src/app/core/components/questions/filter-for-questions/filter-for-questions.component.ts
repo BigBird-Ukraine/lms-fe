@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {Groups, Level, Subject, Tags} from '../../../interface';
-import {InfoHelperService} from '../../../services/questions/infohelper.service';
+import {InfoHelperService} from '../../../services';
 import {QuestionFormConsts} from '../../../constans';
-import {ErrorService} from '../../../../shared/services/error.service';
+import {ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-filter-for-questions',

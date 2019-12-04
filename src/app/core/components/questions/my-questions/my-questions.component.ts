@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
 import {QuestionModel} from '../../../interface';
-import {QuestionsService} from '../../../services/questions/questions.service';
-import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
-import {ErrorService} from '../../../../shared/services/error.service';
+import {QuestionsService} from '../../../services';
+import {ISuccessHttpResponse, ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-my-questions',
