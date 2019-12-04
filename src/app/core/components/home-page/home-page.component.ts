@@ -5,6 +5,7 @@ import {RegistrationComponent} from '../user/registration/registration.component
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService} from '../../services/auth/auth.service';
 import {UserService} from '../../services/user/user.service';
+import {ErrorService} from '../../../shared/services/error.service';
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +18,9 @@ export class HomePageComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private authService: AuthService,
-              private userService: UserService) {
+              private userService: UserService,
+              private errorService: ErrorService
+  ) {
   }
 
   ngOnInit() {
@@ -35,6 +38,8 @@ export class HomePageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe();
+    this.authService.logout().subscribe(() => {},
+        error => this.errorService.handleError(error)
+  );
   }
 }

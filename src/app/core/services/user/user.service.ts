@@ -18,7 +18,7 @@ export class UserService {
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
 
   createUser(user): Observable<UserModel> {
-    return this.http.post<UserModel>(`${config.apiUrl}/${config.apiVersion}/users`, user);
+    return this.http.post<UserModel>(`${config.authUrl}/${config.apiVersion}/users`, user);
   }
 
   getUserInfoByToken(accessToken: string): void {
@@ -27,6 +27,7 @@ export class UserService {
         Authorization: accessToken
       })
     };
+
     this.http.get<IUserSubjectModel>(`${config.apiUrl}/${config.apiVersion}/users/info`, options)
       .pipe(
         tap((response: IUserSubjectModel) => {

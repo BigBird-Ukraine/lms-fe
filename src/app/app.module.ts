@@ -19,6 +19,7 @@ import {
   MatSnackBarContainer,
   MatSnackBarModule
 } from "@angular/material/snack-bar";
+import { MyQuestionsComponent } from './core/components/questions/my-questions/my-questions.component';
 
 @NgModule({
   entryComponents:[
@@ -27,6 +28,7 @@ import {
     AppComponent,
     MainLayoutComponent,
     HomePageComponent,
+    MyQuestionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3001',
+  apiUrl: 'http://localhost',
+  authPort: 3001,
+  questionPort: 3000,
   apiVersion: 'api',
   adminEmail: 'admin@somemail.com',
   infoEmail: 'info@somemail.com',
@@ -18,5 +20,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
-

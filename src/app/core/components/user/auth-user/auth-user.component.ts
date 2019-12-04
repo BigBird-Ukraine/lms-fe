@@ -16,7 +16,6 @@ export class AuthUserComponent implements OnInit {
 
   authForm: FormGroup;
   hide = true;
-  error = null;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -48,11 +47,6 @@ export class AuthUserComponent implements OnInit {
         });
         this.dialog.closeAll();
       },
-      error => {
-        this.error = error.error.error.message;
-        this.errorService.handleError(this.error);
-        console.log(error.error.error.message);
-      }
-    );
+      error => this.errorService.handleError(error));
   }
 }

@@ -6,7 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services/user/user.service';
 import {regExp} from '../../../constans';
-import {ErrorService} from "../../../../shared/services/error.service";
+import {ErrorService} from '../../../../shared/services/error.service';
 import {AuthUserComponent} from '../auth-user/auth-user.component';
 
 @Component({
@@ -20,7 +20,6 @@ export class RegistrationComponent implements OnInit {
   hide = true;
   hide2 = true;
   durationInSeconds = 5;
-  error = null;
 
   constructor(private dialog: MatDialog,
               private fb: FormBuilder,
@@ -74,13 +73,9 @@ export class RegistrationComponent implements OnInit {
     this.userService.createUser(user).subscribe(() => {
       this.dialog.closeAll();
       this.dialog.open(AuthUserComponent);
-    },
-      error => {
-        this.error = error.error.error.message;
-        this.errorService.handleError(this.error);
-        console.log(error.error.error.message);
-      }
-    );
+      alert('user create');
+      },
+      error => this.errorService.handleError(error));
   }
 }
 
