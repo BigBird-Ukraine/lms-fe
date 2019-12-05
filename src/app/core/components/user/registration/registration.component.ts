@@ -6,7 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
-import {ErrorService} from '../../../../shared';
+import {CustomSnackbarService, ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-registration',
@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   hide2 = true;
 
   constructor(private dialog: MatDialog,
+              private customSnackbarService: CustomSnackbarService,
               private fb: FormBuilder,
               private userService: UserService,
               private errorService: ErrorService
@@ -69,7 +70,8 @@ export class RegistrationComponent implements OnInit {
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
-        alert('user create');
+        this.dialog.closeAll();
+        this.customSnackbarService.open('Реєстрація успішна', 'success');
       },
       error => this.errorService.handleError(error));
   }

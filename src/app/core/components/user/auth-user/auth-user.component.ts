@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../../../services';
-import {ErrorService} from '../../../../shared';
+import {CustomSnackbarService, ErrorService} from '../../../../shared';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-auth-user',
@@ -15,6 +16,8 @@ export class AuthUserComponent implements OnInit {
   hide = true;
 
   constructor(private fb: FormBuilder,
+              private dialog: MatDialog,
+              private customSnackbarService: CustomSnackbarService,
               private authService: AuthService,
               private errorService: ErrorService) {
   }
@@ -37,6 +40,8 @@ export class AuthUserComponent implements OnInit {
 
   login() {
     this.authService.authUser(this.authForm.value).subscribe(() => {
+        this.dialog.closeAll();
+        this.customSnackbarService.open('Логін успішний', 'success');
       },
       error => this.errorService.handleError(error));
   }
