@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import {QuestionsService} from '../../../services/questions/questions.service';
+import {QuestionsService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
-import {ErrorService} from '../../../../shared/services/error.service';
+import {ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-questions-layout',

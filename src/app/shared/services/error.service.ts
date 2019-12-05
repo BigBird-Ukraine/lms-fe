@@ -3,7 +3,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {throwError} from 'rxjs';
 
 import {CustomSnackbarService} from './custom-snackbar.service';
-import {AuthService} from '../../core/services/auth/auth.service';
+import {AuthService} from '../../core/services/auth';
 
 @Injectable({
   providedIn: 'root'
