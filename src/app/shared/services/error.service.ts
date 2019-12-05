@@ -15,7 +15,6 @@ export class ErrorService {
   }
 
   public handleError(error: HttpErrorResponse | any) {
-    console.log(error);
     if (error.status === 401) {
       this.authService.refreshTokens().subscribe();
     }

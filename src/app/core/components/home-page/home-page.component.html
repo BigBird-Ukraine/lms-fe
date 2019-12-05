@@ -1,13 +1,11 @@
 <div class="home-container">
   <h1>Home Page</h1>
   <span *ngIf="authService.isAuthenticated()"
+        style="color: darkred; font-weight: bold"
   >
-    {{userName}}
+    Welcome {{userName}}
   </span>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    Blanditiis perferendis quis veniam.
-    Atque ea et fugiat recusandae, tempore voluptates.
-    Dolor fuga harum, incidunt perspiciatis qui quod repellendus rerum voluptatem voluptates!</p>
+
   <hr>
 
   <button mat-raised-button

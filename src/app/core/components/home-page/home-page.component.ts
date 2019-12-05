@@ -6,6 +6,7 @@ import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService} from '../../services';
 import {ErrorService} from '../../../shared';
 import {UserService} from '../../services';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -25,13 +26,12 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserInfoByToken(this.authService.getAccessToken())
+      .pipe(
+        catchError(err => this.errorService.handleError(err))
+      )
       .subscribe((user) => {
-          console.log(user);
-        },
-        error => this.errorService.handleError(error));
-
-    this.userService.getUserInfoByToken(this.authService.getAccessToken()).subscribe(user =>
-      this.userName = user.name);
+        this.userName = user.name;
+        });
   }
 
   openRegForm() {
