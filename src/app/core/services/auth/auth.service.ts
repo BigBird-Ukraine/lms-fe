@@ -38,11 +38,10 @@ export class AuthService {
     };
 
     return this.httpClient
-      .post(authApiUrls.refreshTokens, null, options)
+      .post(authApiUrls.refreshTokens, '', options)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           const {accessToken, refreshToken} = response.data;
-
           this.setTokens(accessToken, refreshToken);
         }),
         catchError((err: any) => {

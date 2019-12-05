@@ -5,8 +5,6 @@ import {catchError, tap} from 'rxjs/operators';
 
 import {UserModel, IUserSubjectModel} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
-import {ISuccessHttpResponse} from '../../../shared';
-import {IUserSubjectModel} from '../../interface/user-subject.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +20,14 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
   }
 
-  getUserInfoByToken(accessToken: string): void {
+  getUserInfoByToken(accessToken: string): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         Authorization: accessToken
       })
     };
 
-    this.http.get<IUserSubjectModel>(`${config.apiUrl}/${config.apiVersion}/users/info`, options)
+    return this.http.get<IUserSubjectModel>(`${commonAuthPath}/users/info`, options)
       .pipe(
         tap((response: IUserSubjectModel) => {
           this.userInfo.next(response);
@@ -37,6 +35,6 @@ export class UserService {
         catchError((err: any) => {
           return throwError(err);
         })
-      ).subscribe();
+      );
   }
 }

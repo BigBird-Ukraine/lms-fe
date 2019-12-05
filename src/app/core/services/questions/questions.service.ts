@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {QuestionData, QuestionModel} from '../../interface';
+import { QuestionData, QuestionModel} from '../../interface';
 import {AuthService} from '../auth';
 import {ISuccessHttpResponse, commonQuestionPath} from '../../../shared';
 
@@ -26,7 +26,7 @@ export class QuestionsService {
     return this.http.post<QuestionModel>(`${commonQuestionPath}/questions`, question, options);
   }
 
-  getMyQuestions(limit?: number, offset?: number): Observable<ISuccessHttpResponse> {
+  getMyQuestions(): Observable<ISuccessHttpResponse> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
@@ -34,11 +34,18 @@ export class QuestionsService {
     };
 // todo query params in options
     return this.http
-      .get<ISuccessHttpResponse>(`${commonQuestionPath}/questions/my?limit=${limit}&offset=${offset}`, options);
+      .get<ISuccessHttpResponse>(`${commonQuestionPath}/questions/my`, options);
   }
 
   getAllQuestion(): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${commonQuestionPath}/questions`);
+    // return this.http.get<QuestionData>(`${commonQuestionPath}/questions`);
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<QuestionData>(`${commonQuestionPath}/questions`, options);
   }
 
   getProductById(id): Observable<QuestionData> {

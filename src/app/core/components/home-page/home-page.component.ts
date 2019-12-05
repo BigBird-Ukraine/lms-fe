@@ -24,9 +24,14 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.userService.userInfo.subscribe(user => {
-        this.userName = user.name;
-      });
+    this.userService.getUserInfoByToken(this.authService.getAccessToken())
+      .subscribe((user) => {
+          console.log(user);
+        },
+        error => this.errorService.handleError(error));
+
+    this.userService.getUserInfoByToken(this.authService.getAccessToken()).subscribe(user =>
+      this.userName = user.name);
   }
 
   openRegForm() {
@@ -38,8 +43,10 @@ export class HomePageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {},
-        error => this.errorService.handleError(error)
-  );
+    this.authService.logout().subscribe(() => {
+      },
+      error => this.errorService.handleError(error)
+    );
   }
+
 }
