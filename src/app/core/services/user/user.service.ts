@@ -3,8 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel} from '../../interface';
-import {config} from '../../../shared/config';
+import {UserModel, IUserSubjectModel} from '../../interface';
+import {commonAuthPath} from '../../../shared/api';
+import {ISuccessHttpResponse} from '../../../shared';
 import {IUserSubjectModel} from '../../interface/user-subject.model';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class UserService {
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
 
   createUser(user): Observable<UserModel> {
-    return this.http.post<UserModel>(`${config.authUrl}/${config.apiVersion}/users`, user);
+    return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
   }
 
   getUserInfoByToken(accessToken: string): void {

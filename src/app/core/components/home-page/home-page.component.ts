@@ -3,9 +3,9 @@ import {MatDialog} from '@angular/material';
 
 import {RegistrationComponent} from '../user/registration/registration.component';
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
-import {AuthService} from '../../services/auth/auth.service';
-import {UserService} from '../../services/user/user.service';
-import {ErrorService} from '../../../shared/services/error.service';
+import {AuthService} from '../../services';
+import {ErrorService} from '../../../shared';
+import {UserService} from '../../services';
 
 @Component({
   selector: 'app-home-page',

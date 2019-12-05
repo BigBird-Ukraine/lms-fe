@@ -7,12 +7,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import {QuestionsService} from '../../../services/questions/questions.service';
-import {InfoHelperService} from '../../../services/questions/infohelper.service';
+import {QuestionsService, InfoHelperService} from '../../../services';
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
 import {QuestionModel, Level, Tags, Groups, Subject} from '../../../interface';
-import {ErrorService} from '../../../../shared/services/error.service';
+import {ErrorService} from '../../../../shared';
 
 
 @Component({

@@ -4,10 +4,10 @@ import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {ISuccessHttpResponse} from '../../../shared/';
-import {commonAuthPath} from '../../../shared';
 import {ITokensModel, UserModel} from '../../interface';
-import {UserService} from '../user/user.service';
+import {UserService} from '../user';
+import {commonAuthPath} from '../../../shared/api';
+import {ISuccessHttpResponse} from '../../../shared';
 
 const authApiUrls = {
   authUser: commonAuthPath + '/auth',

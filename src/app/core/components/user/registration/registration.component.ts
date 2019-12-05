@@ -4,10 +4,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
-import {UserService} from '../../../services/user/user.service';
+import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
-import {ErrorService} from '../../../../shared/services/error.service';
 import {AuthUserComponent} from '../auth-user/auth-user.component';
+import {CustomSnackbarService, ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-registration',
@@ -19,9 +19,9 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   hide2 = true;
-  durationInSeconds = 5;
 
   constructor(private dialog: MatDialog,
+              private customSnackbarService: CustomSnackbarService,
               private fb: FormBuilder,
               private userService: UserService,
               private errorService: ErrorService
@@ -71,9 +71,8 @@ export class RegistrationComponent implements OnInit {
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
+      this.customSnackbarService.open('Реєстрація успішна', 'success');
       this.dialog.closeAll();
-      this.dialog.open(AuthUserComponent);
-      alert('user create');
       },
       error => this.errorService.handleError(error));
   }
