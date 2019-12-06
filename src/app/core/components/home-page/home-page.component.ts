@@ -16,6 +16,8 @@ import {UserService} from '../../services';
 export class HomePageComponent implements OnInit {
 
   userName = '';
+  token = this.authService.getAccessToken();
+  userInfo = this.userService.userInfo;
 
   constructor(private dialog: MatDialog,
               private authService: AuthService,
@@ -26,18 +28,18 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userService.getUserInfoByToken(this.authService.getAccessToken())
+    this.userService.getUserInfoByToken(this.token)
       .pipe(
         catchError((err) =>
           this.errorService.handleError(err)
         )
       )
       .subscribe(() => {
-        if (this.userService.userInfo.subscribe()) {
-          this.userService.userInfo.subscribe(name => this.userName = name.name);
+        if (this.userInfo.subscribe()) {
+          this.userInfo.subscribe(name => this.userName = name.name);
         } else {
-          this.userService.getUserInfoByToken(this.authService.getAccessToken()).subscribe();
-          this.userService.userInfo.subscribe(name => this.userName = name.name);
+          this.userService.getUserInfoByToken(this.token).subscribe();
+          this.userInfo.subscribe(name => this.userName = name.name);
         }
       });
 

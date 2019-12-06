@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.2.8',
+  apiUrl: 'http://localhost',
   authPort: 3001,
   questionPort: 3000,
   apiVersion: 'api',
