@@ -25,13 +25,22 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.userService.getUserInfoByToken(this.authService.getAccessToken())
       .pipe(
-        catchError(err => this.errorService.handleError(err))
+        catchError((err) =>
+          this.errorService.handleError(err)
+        )
       )
-      .subscribe((user) => {
-        this.userName = user.name;
-        });
+      .subscribe(() => {
+        if (this.userService.userInfo.subscribe()) {
+          this.userService.userInfo.subscribe(name => this.userName = name.name);
+        } else {
+          this.userService.getUserInfoByToken(this.authService.getAccessToken()).subscribe();
+          this.userService.userInfo.subscribe(name => this.userName = name.name);
+        }
+      });
+
   }
 
   openRegForm() {

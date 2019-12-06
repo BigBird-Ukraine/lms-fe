@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {AuthService} from "../../core/services/auth/auth.service";
+import {AuthService} from '../../core/services/auth';
 
 @Injectable()
 
