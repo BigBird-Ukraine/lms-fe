@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-import {AuthService} from '../../../services';
-import {CustomSnackbarService, ErrorService} from '../../../../shared';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
-import {UserService} from '../../../services';
+
+import {AuthService, UserService} from '../../../services';
+import {CustomSnackbarService, ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-auth-user',
