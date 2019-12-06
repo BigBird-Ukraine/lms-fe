@@ -6,6 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
+import {AuthUserComponent} from '../auth-user/auth-user.component';
 import {CustomSnackbarService, ErrorService} from '../../../../shared';
 
 @Component({
@@ -70,8 +71,8 @@ export class RegistrationComponent implements OnInit {
   createUser(user: UserModel) {
     // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
-        this.dialog.closeAll();
-        this.customSnackbarService.open('Реєстрація успішна', 'success');
+      this.customSnackbarService.open('Реєстрація успішна', 'success');
+      this.dialog.closeAll();
       },
       error => this.errorService.handleError(error));
   }

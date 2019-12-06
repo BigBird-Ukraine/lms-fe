@@ -1,9 +1,11 @@
 <div class="home-container">
   <h1>Home Page</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    Blanditiis perferendis quis veniam.
-    Atque ea et fugiat recusandae, tempore voluptates.
-    Dolor fuga harum, incidunt perspiciatis qui quod repellendus rerum voluptatem voluptates!</p>
+  <span *ngIf="authService.isAuthenticated()"
+        class="userName"
+  >
+    Welcome {{userName}}
+  </span>
+
   <hr>
 
   <button mat-raised-button
@@ -31,18 +33,21 @@
           color="primary"
           type="button"
           (click)="openRegForm()"
+          *ngIf="!authService.isAuthenticated()"
   > Зареєструватися </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="openLogForm()"
+          *ngIf="!authService.isAuthenticated()"
   > Увійти </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="logout()"
+          *ngIf="authService.isAuthenticated()"
   > Вийти </button>
 
 </div>

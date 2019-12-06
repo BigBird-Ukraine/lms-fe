@@ -5,15 +5,13 @@ import {catchError, tap} from 'rxjs/operators';
 
 import {UserModel, IUserSubjectModel} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
-import {ISuccessHttpResponse} from '../../../shared';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient,
-              private userService: UserService) {
+  constructor(private http: HttpClient) {
   }
 
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
@@ -22,17 +20,17 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
   }
 
-  getUserInfoByToken(accessToken: string): void {
+  getUserInfoByToken(accessToken: string): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         Authorization: accessToken
       })
     };
 
-    this.http.get<ISuccessHttpResponse>(`${commonAuthPath}/users`, options)
+    return this.http.get<IUserSubjectModel>(`${commonAuthPath}/users/info`, options)
       .pipe(
-        tap((response: ISuccessHttpResponse) => {
-          this.userService.userInfo.next(response.data);
+        tap((response: IUserSubjectModel) => {
+          this.userInfo.next(response);
         }),
         catchError((err: any) => {
           return throwError(err);

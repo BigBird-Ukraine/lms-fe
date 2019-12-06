@@ -38,16 +38,13 @@ export class AuthService {
     };
 
     return this.httpClient
-      .post(authApiUrls.refreshTokens, null, options)
+      .post(authApiUrls.refreshTokens, '', options)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           const {accessToken, refreshToken} = response.data;
-
           this.setTokens(accessToken, refreshToken);
         }),
         catchError((err: any) => {
-          this.redirectToLogin();
-
           return throwError(err);
         })
       );
@@ -65,8 +62,6 @@ export class AuthService {
 
         }),
         catchError((err: any) => {
-          this.redirectToLogin();
-
           return throwError(err);
         })
       );
@@ -88,16 +83,13 @@ export class AuthService {
           this.userService.userInfo.next({});
         }),
         catchError((err: any) => {
-          // todo maybe we should redirect to other page
-          this.redirectToLogin();
-
           return throwError(err);
         })
       );
   }
 
   public isAuthenticated(): boolean {
-    return !!this.accessTokenKey;
+    return !!this.getAccessToken();
   }
 
   private deleteTokens(): void {
@@ -114,13 +106,7 @@ export class AuthService {
   }
 
   public getAccessToken(): string {
-    console.log(this.accessTokenKey);
     return localStorage.getItem(this.accessTokenKey);
-  }
-
-  private redirectToLogin(): any {
-    // todo for what do you use this?
-    // return this.router.navigateByUrl('/authorization/login');
   }
 
   private getRefreshToken(): string {

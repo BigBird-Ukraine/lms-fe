@@ -9,18 +9,18 @@ import {AuthService} from '../../core/services/auth';
   providedIn: 'root'
 })
 export class ErrorService {
-
   constructor(private customSnackbarService: CustomSnackbarService,
               private authService: AuthService) {
   }
 
   public handleError(error: HttpErrorResponse | any) {
-
-    console.log(error);
     if (error.status === 401) {
-      this.authService.refreshTokens().subscribe();
+      return this.authService.refreshTokens();
+    } else {
+      this.customSnackbarService.open(error.error.error.message, 'error');
+      return throwError(error);
     }
-    this.customSnackbarService.open(error.error.error.message, 'error');
-    return throwError(error);
   }
 }
+
+
