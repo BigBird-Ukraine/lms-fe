@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
+import {catchError} from 'rxjs/operators';
 
 import {RegistrationComponent} from '../user/registration/registration.component';
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService} from '../../services';
 import {ErrorService} from '../../../shared';
 import {UserService} from '../../services';
-import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
