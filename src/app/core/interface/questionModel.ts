@@ -36,9 +36,9 @@ export class QuestionModel {
     public tags: Tags [],
     public user_id: string,
     public question: string,
-    public answers: Answers [],
+    public answers: Answers[],
     public description?: string,
-    public id?: string
+    public _id?: string
   ) {
   }
 }

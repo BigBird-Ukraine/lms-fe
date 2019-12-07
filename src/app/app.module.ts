@@ -20,6 +20,8 @@ import {
   MatSnackBarModule
 } from "@angular/material/snack-bar";
 import { MyQuestionsComponent } from './core/components/questions/my-questions/my-questions.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   entryComponents:[
@@ -29,6 +31,8 @@ import { MyQuestionsComponent } from './core/components/questions/my-questions/m
     MainLayoutComponent,
     HomePageComponent,
     MyQuestionsComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

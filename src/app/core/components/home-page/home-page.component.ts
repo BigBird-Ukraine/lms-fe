@@ -7,6 +7,7 @@ import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService} from '../../services';
 import {ErrorService} from '../../../shared';
 import {UserService} from '../../services';
+import {UserRoleEnum} from '../../enums';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,7 @@ import {UserService} from '../../services';
 export class HomePageComponent implements OnInit {
 
   userName = '';
+  isStudent: boolean;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
 
@@ -36,11 +38,18 @@ export class HomePageComponent implements OnInit {
       )
       .subscribe(() => {
         if (this.userInfo.subscribe()) {
-          this.userInfo.subscribe(name => this.userName = name.name);
-        } else {
-          this.userService.getUserInfoByToken(this.token).subscribe();
-          this.userInfo.subscribe(name => this.userName = name.name);
+          this.userInfo.subscribe(user => {
+            this.userName = user.name;
+            this.isStudent = user.role_id === UserRoleEnum.STUDENT;
+          });
         }
+        // else {
+        //   this.userService.getUserInfoByToken(this.token).subscribe();
+        //   this.userInfo.subscribe(user => {
+        //     this.userName = user.name;
+        //     this.isStudent = user.role_id === UserRoleEnum.STUDENT;
+        //   });
+        // }
       });
 
   }
