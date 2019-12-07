@@ -1,4 +1,33 @@
 <div *ngFor="let question of questions">
-  {{question | json}} <br>
+  Питання: {{question.question}} <br>
+  Предмет: {{question.subject}} <br>
+  Групи: {{question.group}} <br>
+  Опис: {{question.description}} <br>
+  Теги: {{question.tags}} <br>
+  Відповіді:
+  <div *ngFor="let answer of question.answers; let i = index">
+    {{i + 1}}) {{answer.value}}
+    <span *ngIf="answer.correct" class="correct">&#10004;</span>
+    <span *ngIf="!answer.correct" class="incorrect">&#10060;</span>
+  </div>
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="deleteQuestion(question._id)"
+  >Видалити питання
+  </button>
   <hr>
+</div>
+
+<div *ngIf="!questions.length">
+  У вас ще немає свторених питань.
+  <br>
+  Створіть своє перше питання тут
+  <br>
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          [routerLink]="['/add_questions']"
+  >Створити питання
+  </button>
 </div>

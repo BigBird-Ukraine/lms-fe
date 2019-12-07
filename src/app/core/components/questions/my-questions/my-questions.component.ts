@@ -25,4 +25,13 @@ export class MyQuestionsComponent implements OnInit {
         error => this.errorService.handleError(error));
   }
 
+  deleteQuestion(id: string) {
+    this.questionService.deleteQuestionById(id).subscribe(() => {
+      this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
+        this.questions = data.data.questions;
+      },
+          error => this.errorService.handleError(error));
+    },
+      error => this.errorService.handleError(error));
+  }
 }

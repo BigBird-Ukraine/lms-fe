@@ -1,6 +1,6 @@
 <div class="home-container">
   <h1>Home Page</h1>
-  <span *ngIf="authService.isAuthenticated()"
+  <span *ngIf="userName"
         class="userName"
   >
     Welcome {{userName}}
@@ -12,6 +12,7 @@
           color="primary"
           type="button"
           [routerLink]="['/add_questions']"
+          *ngIf="!isStudent && userName"
   >Додати питання
   </button>
 
@@ -19,13 +20,22 @@
           color="primary"
           type="button"
           [routerLink]="['/questions/my']"
+          *ngIf="!isStudent && userName"
   >Мої питання
+
+  </button>  <button mat-raised-button
+          color="primary"
+          type="button"
+          [routerLink]="['/tests/my']"
+          *ngIf="isStudent && userName"
+  >Мої тести
   </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           [routerLink]="['/questions']"
+          *ngIf="userName"
   >Пройти тест
   </button>
 
@@ -33,21 +43,20 @@
           color="primary"
           type="button"
           (click)="openRegForm()"
-          *ngIf="!authService.isAuthenticated()"
+          *ngIf="!userName"
   > Зареєструватися </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="openLogForm()"
-          *ngIf="!authService.isAuthenticated()"
+          *ngIf="!userName"
   > Увійти </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="logout()"
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="userName"
   > Вийти </button>
-
 </div>
