@@ -1,0 +1,77 @@
+<div class="wrapper">
+  <div class="loginForm">
+    <h2 mat-dialog-title class="mat_dialog_title">Увійти</h2>
+    <mat-dialog-content class="mat-typography">
+
+      <form [formGroup]="authForm"
+            (ngSubmit)="login()"
+      >
+
+        <div class="example-full-width">
+          <mat-icon aria-hidden="false">
+            email
+          </mat-icon>
+          <mat-form-field>
+            <input type="email" matInput
+                   placeholder="Введіть Ваш email"
+                   formControlName="email"
+            >
+            <mat-error
+              *ngIf="authForm.get('email').hasError('required')"
+            >
+              Введіть, будь ласка, email
+            </mat-error>
+            <mat-error
+              *ngIf="authForm.get('email').hasError('email')"
+            >
+              Email введено некоректно
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="example-full-width pass">
+          <mat-icon aria-hidden="false">
+            vpn_key
+          </mat-icon>
+          <mat-form-field>
+            <!--        <input type="password" matInput-->
+            <!--               placeholder="Пароль"-->
+            <!--               formControlName="password"-->
+            <!--        >-->
+            <input
+              matInput placeholder="Пароль"
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            >
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>
+                {{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+            </button>
+            <mat-error
+              *ngIf="authForm.get('password').hasError('required')"
+            >
+              Введіть, будь ласка, пароль
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="authForm.invalid">
+          Прийняти
+        </button>
+
+      </form>
+
+    </mat-dialog-content>
+  </div>
+</div>

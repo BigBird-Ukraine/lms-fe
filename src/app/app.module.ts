@@ -22,6 +22,8 @@ import {
 import { MyQuestionsComponent } from './core/components/questions/my-questions/my-questions.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
+import {AdminModule} from './core/components/admin/admin.module';
 
 @NgModule({
   entryComponents:[
@@ -33,6 +35,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     MyQuestionsComponent,
     FooterComponent,
     HeaderComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
     QuestionModule,
     HttpClientModule,
     UserModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AdminModule
   ],
   exports: [],
   bootstrap: [AppComponent],

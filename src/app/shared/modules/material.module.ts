@@ -5,23 +5,27 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule, MatIconModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+
+const Materials = [
+  MatFormFieldModule,
+  MatSelectModule,
+  MatInputModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatDialogModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatSidenavModule
+];
 
 @NgModule({
   imports: [
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatRadioModule
+    Materials
   ],
   exports: [
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatRadioModule
+    Materials
   ]
 })
 

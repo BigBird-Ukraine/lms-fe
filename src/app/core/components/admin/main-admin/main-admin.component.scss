@@ -1,0 +1,57 @@
+.nav{
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  height: 64px;
+}
+.email{
+  justify-content: right;
+}
+.example-container {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid gainsboro;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+
+.buttons a {
+  width: 230px;
+  margin-bottom: 3px;
+  margin-top: 5px;
+}
+
+.buttons {
+  width: 230px;
+  margin: 10px auto;
+}
+
+.active {
+  background: #3f51b5;
+  color: white;
+}
+
+.bottom {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+}
+
+//.name {
+//  text-align: center;
+//  margin-bottom: 10px;
+//  font-family: "Monotype Corsiva", Cursive;
+//  font-size: 25px;
+//  color: #3f51b5;
+//}
+
+

@@ -7,6 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost',
   authPort: 3001,
   questionPort: 3000,
+  adminPort: 3002,
   apiVersion: 'api',
   adminEmail: 'admin@somemail.com',
   infoEmail: 'info@somemail.com',
