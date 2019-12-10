@@ -49,7 +49,6 @@ import {FilterPipe} from './shared/pipe/filter.pipe';
     FilterPipe
   ],
   imports: [
-    FlexLayoutModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -59,7 +58,7 @@ import {FilterPipe} from './shared/pipe/filter.pipe';
     UserModule,
     MatSnackBarModule,
     AdminModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
     MatCardModule
   ],
   exports: [],
