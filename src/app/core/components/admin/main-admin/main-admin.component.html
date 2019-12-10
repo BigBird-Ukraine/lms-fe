@@ -1,23 +1,26 @@
-<mat-toolbar color="primary" class="nav">
-  <div><a mat-button routerLink="/adminPanel/statistics"><h1>Адмінка</h1></a></div>
-  <div class="email">
-    <a mat-button  >admin@gmail.com</a>
-  </div>
-</mat-toolbar>
-<mat-sidenav-container class="example-container" >
-  <mat-sidenav class="sidenav" mode="side" opened>
-    <div class="buttons">
-      <div>
-        <a mat-raised-button color="primary" *ngFor="let link of links" [routerLink]="link.url"
-           routerLinkActive="active">{{link.name}}</a>
-      </div>
-      <div class="bottom">
-        <a mat-raised-button color="primary" routerLink="/login" (click)="logout()" routerLinkActive="active">Вихід</a>
-
-      </div>
+<div *ngIf="adminInfo$ |async as adminInfo">
+  <mat-toolbar color="primary" class="nav">
+    <div><a mat-button routerLink="/adminPanel/statistics"><h1>Адмінка</h1></a></div>
+    <div class="email">
+      <a mat-button>{{adminInfo.email}}</a>
     </div>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav class="sidenav" mode="side" opened>
+      <div class="buttons">
+        <div>
+          <a mat-raised-button color="primary" *ngFor="let link of links" [routerLink]="link.url"
+             routerLinkActive="active">{{link.name}}</a>
+        </div>
+        <div class="bottom">
+          <a mat-raised-button color="primary" routerLink="/login" (click)="logout()"
+             routerLinkActive="active">Вихід</a>
+
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

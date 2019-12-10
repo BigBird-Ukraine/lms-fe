@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthAdminService} from '../../services/auth/auth-admin.service';
+import {AdminAuthService} from './services/admin-auth.service';
 import {Observable, of} from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Observable, of} from 'rxjs';
 })
 
 export class AuthAdminGuard implements CanActivate, CanActivateChild {
-  constructor(private auth: AuthAdminService,
+  constructor(private auth: AdminAuthService,
               private router: Router) {
 
   }

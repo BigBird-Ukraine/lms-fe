@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomSnackbarService, ErrorService} from '../../../../shared/services';
-import {AuthAdminService} from '../../../services/auth/auth-admin.service';
+import {AdminAuthService} from '../services/admin-auth.service';
 import {AuthService} from '../../../services/auth';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
@@ -15,7 +15,7 @@ export class AuthAdminComponent implements OnInit {
   hide = true;
 
   constructor(private fb: FormBuilder,
-              private authAdminService: AuthAdminService,
+              private authAdminService: AdminAuthService,
               private authService: AuthService,
               private customSnackbarService: CustomSnackbarService,
               private errorService: ErrorService,
