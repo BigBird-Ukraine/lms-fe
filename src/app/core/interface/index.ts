@@ -2,4 +2,4 @@ export * from './questionModel';
 export * from './tokensModel';
 export * from './UserModel';
 export * from './user-subject.model';
-export * from './GroupModel';
+export * from '../components/admin/interfaces/GroupModel';
