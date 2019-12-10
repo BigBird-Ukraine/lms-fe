@@ -9,6 +9,7 @@ import {StatisticsPageComponent} from './statistics-page/statistics-page.compone
 import {UsersPageComponent} from './users-page/users-page.component';
 import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
+import { CoursesPageComponent } from './courses-page/courses-page.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
     StatisticsPageComponent,
     UsersPageComponent,
     GroupsPageComponent,
-    QuestionsPageComponent
+    QuestionsPageComponent,
+    CoursesPageComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import {AuthAdminGuard} from './authAdmin.guard';
 import {UsersPageComponent} from './users-page/users-page.component';
 import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
+import {CoursesPageComponent} from './courses-page/courses-page.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsPageComponent},
       {path: 'users', component: UsersPageComponent},
       {path: 'groups', component: GroupsPageComponent},
-      {path: 'questions', component: QuestionsPageComponent}
+      {path: 'questions', component: QuestionsPageComponent},
+      {path: 'courses', component: CoursesPageComponent}
     ]
   }
 ];

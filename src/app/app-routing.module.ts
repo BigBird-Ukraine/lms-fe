@@ -5,6 +5,7 @@ import {MainLayoutComponent} from './shared/components/main-layout/main-layout.c
 import {HomePageComponent} from './core/components/home-page/home-page.component';
 import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layout.component';
 import {AuthAdminComponent} from './core/components/admin/auth-admin/auth-admin.component';
+import {CourseLayoutComponent} from './shared/components/templates/course-layout/course-layout.component';
 
 const routes: Routes = [
   {
