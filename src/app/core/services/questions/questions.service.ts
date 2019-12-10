@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import { QuestionData, QuestionModel} from '../../interface';
+import {QuestionData, QuestionModel} from '../../interface';
 import {AuthService} from '../auth';
 import {ISuccessHttpResponse, commonQuestionPath} from '../../../shared';
 
@@ -54,6 +54,10 @@ export class QuestionsService {
 
   findQuestionByParams(params): Observable<QuestionData> {
     return this.http.get<QuestionData>(`${commonQuestionPath}/questions`, {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      }),
+
       params: new HttpParams({
         fromObject: params
       })

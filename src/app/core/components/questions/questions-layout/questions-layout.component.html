@@ -5,46 +5,43 @@
     </mat-card-title>
 
     <mat-card-content>
-      <table>
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th colspan="2" style="border: 1px solid black; padding: 5px">Answer</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
+      <form formGroup="questionForm">
+        <table>
 
-        <tbody class="question_table" *ngFor="let item of questions; let i = index">
-        <mat-card class="question">
-        <tr>
-          <td class="q_text">
+          <tbody class="question_table" *ngFor="let item of questions; let i = index">
+
+            <mat-card class="question">
+              <tr>
+                <td class="q_text">
             <span>
                 {{i + 1}}.
              </span>
-            <span>
+                  <span>
               {{item.question}}
             </span>
-          </td>
-        </tr>
-        <tr *ngFor="let a of item.answers let i = index">
-          <td >
-<!--            <span>-->
-<!--                {{i + 1}}-->
-<!--             </span>-->
-            <mat-checkbox>
+                </td>
+              </tr>
+
+              <mat-form-field>
+                <tr *ngFor="let a of item.answers">
+                  <td>
+                    <mat-checkbox formControlName="correct">
              <span>
                 {{a.value}}
              </span>
-            </mat-checkbox>
-<!--            <span>-->
-<!--                {{a.correct}}-->
-<!--             </span>-->
-          </td>
-        </mat-card>
-        </tbody>
+                    </mat-checkbox>
 
-      </table>
-      <mat-card-actions class="btn">
-        <button mat-raised-button color="primary" type="submit">Перевірити</button>
-      </mat-card-actions>
+                  </td>
+              </mat-form-field>
+            </mat-card>
+
+          </tbody>
+
+        </table>
+        <mat-card-actions class="btn">
+          <button mat-raised-button color="primary" type="submit">Перевірити</button>
+        </mat-card-actions>
+      </form>
     </mat-card-content>
   </mat-card>
 </div>
