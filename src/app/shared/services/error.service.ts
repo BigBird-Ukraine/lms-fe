@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 import {CustomSnackbarService} from './custom-snackbar.service';
 import {AuthService} from '../../core/services/auth';
@@ -13,10 +13,13 @@ export class ErrorService {
               private authService: AuthService) {
   }
 
-  public handleError(error: HttpErrorResponse | any) {
-    if (error.status === 401) {
-      return this.authService.refreshTokens();
-    } else {
+  public handleError(error: HttpErrorResponse) {
+    if (error && error.error) {
+
+      if (error.status === 401) {
+        return this.authService.refreshTokens();
+      }
+
       this.customSnackbarService.open(error.error.error.message, 'error');
       return throwError(error);
     }

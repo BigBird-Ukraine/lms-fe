@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost',
-  authPort: 3001,
+  authPort: 3000,
   questionPort: 3000,
   adminPort: 3002,
   apiVersion: 'api',
