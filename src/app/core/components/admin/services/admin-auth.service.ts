@@ -29,7 +29,7 @@ export class AdminAuthService {
 
   authAdmin(authInfo: Partial<UserModel>): Observable<any> {
     return this.httpClient
-      .post(authApiUrls.authAdmin, authInfo)
+      .post(`${authApiUrls.authAdmin}`, authInfo)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           const {accessToken, refreshToken} = response.data as ITokensModel;
@@ -43,7 +43,7 @@ export class AdminAuthService {
   }
 
   getAdminInfo(): Observable<AdminInfo> {
-    return this.httpClient.get<AdminInfo>(authApiUrls.getAdminInfo);
+    return this.httpClient.get<AdminInfo>(`${authApiUrls.getAdminInfo}`);
   }
 
   logout(): Observable<any> {
