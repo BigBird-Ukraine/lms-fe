@@ -27,10 +27,12 @@ import {CreateGroupComponent} from './shared/components/templates/create-group/c
 import {MatCardModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material';
 import {FilterPipe} from './shared/pipe/filter.pipe';
+import {CourseLayoutComponent} from './shared/components/templates/course-layout/course-layout.component';
 
 @NgModule({
   entryComponents: [
     CreateGroupComponent,
+    CourseLayoutComponent
   ],
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import {FilterPipe} from './shared/pipe/filter.pipe';
     HeaderComponent,
     AdminLayoutComponent,
     CreateGroupComponent,
-    FilterPipe
+    FilterPipe,
+    CourseLayoutComponent
   ],
   imports: [
     BrowserModule,

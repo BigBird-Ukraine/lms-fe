@@ -9,6 +9,9 @@ import {AdminAuthService} from './services/admin-auth.service';
 @Injectable()
 export class AdminInterceptor implements HttpInterceptor {
 
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   constructor(public authService: AdminAuthService, private router: Router) {
   }
 
@@ -38,8 +41,6 @@ export class AdminInterceptor implements HttpInterceptor {
     return request.clone({setHeaders: {Authorization: token}});
   }
 
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
