@@ -1,40 +1,47 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {commonAdminPath, commonAuthPath} from '../../../shared/api';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {UserService} from '../user';
 import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-
-import {commonAdminPath} from '../../../../shared/api';
-import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
-import {ITokensModel, UserModel} from '../../../interface';
-import {AdminInfo} from '../interfaces';
-import {config} from '../../../../shared/config';
+import {ISuccessHttpResponse} from '../../../shared/models/interfaces';
+import {ITokensModel, UserModel} from '../../interface';
 
 const authApiUrls = {
   authAdmin: commonAdminPath + '/auth',
   logoutAdmin: commonAdminPath + '/auth/logout',
-  refreshTokens: commonAdminPath + '/auth/refresh',
-  getAdminInfo: commonAdminPath + '/users/getInfo'
+  refreshTokens: commonAdminPath + '/auth/refresh'
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthService {
+export class AuthAdminService {
   private readonly accessTokenKey = 'ACCESS_TOKEN';
   private readonly refreshTokenKey = 'REFRESH_TOKEN';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private userService: UserService
+  ) {
   }
 
+  refreshTokens(): Observable<any> {
+    const savedRefreshToken = this.getRefreshToken();
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: savedRefreshToken
+      })
+    };
 
-  authAdmin(authInfo: Partial<UserModel>): Observable<any> {
     return this.httpClient
-      .post(`${authApiUrls.authAdmin}`, authInfo)
+      .post(authApiUrls.refreshTokens, '', options)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
-          const {accessToken, refreshToken} = response.data as ITokensModel;
+          const {accessToken, refreshToken} = response.data;
           this.setTokens(accessToken, refreshToken);
-
         }),
         catchError((err: any) => {
           return throwError(err);
@@ -42,33 +49,42 @@ export class AdminAuthService {
       );
   }
 
-  getAdminInfo(): Observable<AdminInfo> {
-    return this.httpClient.get<AdminInfo>(`${authApiUrls.getAdminInfo}`);
+  authAdmin(authInfo: Partial<UserModel>): Observable<any> {
+    return this.httpClient
+      .post(authApiUrls.authAdmin, authInfo)
+      .pipe(
+        tap((response: ISuccessHttpResponse) => {
+          const {accessToken, refreshToken} = response.data as ITokensModel;
+
+          this.setTokens(accessToken, refreshToken);
+          this.userService.getUserInfoByToken(accessToken);
+
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
   }
 
   logout(): Observable<any> {
 
-        return this.httpClient
-      .post(authApiUrls.logoutAdmin, null)
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.getAccessToken()
+      })
+    };
+
+    return this.httpClient
+      .post(authApiUrls.logoutAdmin, null, options)
       .pipe(
         tap(() => {
           this.deleteTokens();
+          this.userService.userInfo.next({});
         }),
         catchError((err: any) => {
           return throwError(err);
         })
       );
-  }
-
-  refreshToken(): Observable<any> {
-    return this.httpClient.post(`${config.adminUrl}/api/auth/refresh`, {Authorization: this.getRefreshToken()}
-    ).pipe(
-      tap((response: ISuccessHttpResponse) => {
-        const {accessToken, refreshToken} = response.data as ITokensModel;
-        this.setTokens(accessToken, refreshToken);
-
-      }),
-    );
   }
 
   public isAuthenticated(): boolean {
@@ -92,11 +108,11 @@ export class AdminAuthService {
     return localStorage.getItem(this.accessTokenKey);
   }
 
-  getRefreshToken(): string {
+  private getRefreshToken(): string {
     return localStorage.getItem(this.refreshTokenKey);
   }
 
-  setTokens(accessToken: string, refreshToken: string): void {
+  private setTokens(accessToken: string, refreshToken: string): void {
     this.setAccessToken(accessToken);
     this.setRefreshToken(refreshToken);
   }

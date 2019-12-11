@@ -11,7 +11,6 @@ import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AdminInterceptor} from './admin.interceptor';
-import { CoursesPageComponent } from './courses-page/courses-page.component';
 
 
 @NgModule({
@@ -21,8 +20,7 @@ import { CoursesPageComponent } from './courses-page/courses-page.component';
     StatisticsPageComponent,
     UsersPageComponent,
     GroupsPageComponent,
-    QuestionsPageComponent,
-    CoursesPageComponent
+    QuestionsPageComponent
   ],
   imports: [
     CommonModule,
