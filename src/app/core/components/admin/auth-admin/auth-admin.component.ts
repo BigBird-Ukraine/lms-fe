@@ -39,7 +39,10 @@ export class AuthAdminComponent implements OnInit {
     }
     this.route.queryParams.subscribe((params: Params) => {
       if (params['accessDenied']) {
-        this.customSnackbarService.open('Спочатку авторизуйтесь');
+        this.customSnackbarService.open('Спочатку авторизуйтесь', 'Ok');
+      }
+      if (params['sessionFiled']) {
+        this.customSnackbarService.open('Сесія закінчилась', 'Ok');
       }
     });
 

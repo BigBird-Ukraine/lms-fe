@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {Router} from '@angular/router';
 import {catchError, tap} from 'rxjs/operators';
 
 import {commonAdminPath} from '../../../../shared/api';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 import {ITokensModel, UserModel} from '../../../interface';
 import {AdminInfo} from '../interfaces';
+import {config} from '../../../../shared/config';
 
 const authApiUrls = {
   authAdmin: commonAdminPath + '/auth',
   logoutAdmin: commonAdminPath + '/auth/logout',
   refreshTokens: commonAdminPath + '/auth/refresh',
-  getAdminInfo: commonAdminPath + '/admin/getInfo'
+  getAdminInfo: commonAdminPath + '/users/getInfo'
 };
 
 @Injectable({
@@ -23,12 +23,8 @@ export class AdminAuthService {
   private readonly accessTokenKey = 'ACCESS_TOKEN';
   private readonly refreshTokenKey = 'REFRESH_TOKEN';
 
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-  ) {
+  constructor(private httpClient: HttpClient) {
   }
-
 
 
   authAdmin(authInfo: Partial<UserModel>): Observable<any> {
@@ -52,14 +48,8 @@ export class AdminAuthService {
 
   logout(): Observable<any> {
 
-    const options = {
-      headers: new HttpHeaders({
-        Authorization: this.getAccessToken()
-      })
-    };
-
-    return this.httpClient
-      .post(authApiUrls.logoutAdmin, null, options)
+        return this.httpClient
+      .post(authApiUrls.logoutAdmin, null)
       .pipe(
         tap(() => {
           this.deleteTokens();
@@ -68,6 +58,17 @@ export class AdminAuthService {
           return throwError(err);
         })
       );
+  }
+
+  refreshToken(): Observable<any> {
+    return this.httpClient.post(`${config.adminUrl}/api/auth/refresh`, {Authorization: this.getRefreshToken()}
+    ).pipe(
+      tap((response: ISuccessHttpResponse) => {
+        const {accessToken, refreshToken} = response.data as ITokensModel;
+        this.setTokens(accessToken, refreshToken);
+
+      }),
+    );
   }
 
   public isAuthenticated(): boolean {
@@ -90,6 +91,7 @@ export class AdminAuthService {
   public getAccessToken(): string {
     return localStorage.getItem(this.accessTokenKey);
   }
+
   getRefreshToken(): string {
     return localStorage.getItem(this.refreshTokenKey);
   }

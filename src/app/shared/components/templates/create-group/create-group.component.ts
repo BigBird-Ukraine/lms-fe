@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CitiesEnum} from '../../../enums';
+import {AdminGroupsService} from '../../../../core/components/admin/services/admin-groups.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-create-group',
@@ -14,7 +16,8 @@ export class CreateGroupComponent implements OnInit {
     {name: 'Київ', value: CitiesEnum.KYIV}
   ];
 
-  constructor() {
+  constructor(private groupsService: AdminGroupsService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -25,6 +28,9 @@ export class CreateGroupComponent implements OnInit {
   }
 
   save() {
+    this.groupsService.save(this.form.value).subscribe(() => {
+      this.dialog.closeAll();
 
+    });
   }
 }
