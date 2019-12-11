@@ -12,7 +12,7 @@ export class AdminGroupsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  save(): Observable<GroupModel> {
-    return this.httpClient.post<GroupModel>(`${config.adminUrl}/g`)
+  save(groupModel: GroupModel): Observable<GroupModel> {
+    return this.httpClient.post<GroupModel>(`${config.adminUrl}/api/groups`, groupModel);
   }
 }
