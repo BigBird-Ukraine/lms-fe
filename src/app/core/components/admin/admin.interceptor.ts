@@ -24,16 +24,15 @@ export class AdminInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
       if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(request, next);
-      } else {
-        if (error.status === 403) {
-          this.router.navigate(['admin/login'], {
-            queryParams: {
-              sessionFiled: true
-            }
-          });
-        }
-        return throwError(error);
       }
+      if (error.status === 403) {
+        this.router.navigate(['admin/login'], {
+          queryParams: {
+            sessionFiled: true
+          }
+        });
+      }
+      return throwError(error);
     }));
   }
 
@@ -54,14 +53,13 @@ export class AdminInterceptor implements HttpInterceptor {
           return next.handle(this.addToken(request, token.data.accessToken));
         }));
 
-    } else {
-      return this.refreshTokenSubject.pipe(
-        filter(token => token != null),
-        take(1),
-        switchMap(jwt => {
-          return next.handle(this.addToken(request, jwt));
-        }));
     }
+    return this.refreshTokenSubject.pipe(
+      filter(token => token != null),
+      take(1),
+      switchMap(jwt => {
+        return next.handle(this.addToken(request, jwt));
+      }));
   }
 }
 

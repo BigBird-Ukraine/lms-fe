@@ -61,7 +61,7 @@ export class AdminAuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.httpClient.post(`${config.adminUrl}/api/auth/refresh`, {Authorization: this.getRefreshToken()}
+    return this.httpClient.post(authApiUrls.refreshTokens, {Authorization: this.getRefreshToken()}
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;
