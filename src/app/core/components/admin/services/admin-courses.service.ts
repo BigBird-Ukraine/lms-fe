@@ -14,7 +14,7 @@ export class AdminCoursesService {
   }
 
   addCourse(course): Observable<ICourse> {
-    return this.http.post<ICourse>(`${config.adminUrl}/courses`, course);
+    return this.http.post<ICourse>(`${config.apiAdminUrl}/courses`, course);
   }
 
 }

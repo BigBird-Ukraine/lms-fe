@@ -9,6 +9,7 @@ export const environment = {
   questionPort: 3000,
   adminPort: 3002,
   apiVersion: 'api',
+  apiAdminVersion: 'api/admin',
   adminEmail: 'admin@somemail.com',
   infoEmail: 'info@somemail.com',
 };

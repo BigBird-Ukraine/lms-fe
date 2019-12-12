@@ -10,5 +10,6 @@ export const config = {
   infoEmail: environment.infoEmail,
   questionUrl: `${environment.apiUrl}:${environment.questionPort}`,
   adminUrl: `${environment.apiUrl}:${environment.adminPort}`,
-  authUrl: `${environment.apiUrl}:${environment.authPort}`
+  authUrl: `${environment.apiUrl}:${environment.authPort}`,
+  apiAdminUrl: `${environment.apiUrl}:${environment.adminPort}/${environment.apiAdminVersion}`,
 };
