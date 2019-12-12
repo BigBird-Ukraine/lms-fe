@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 
 import {AdminInfo} from '../interfaces';
 import {AdminAuthService} from '../services/admin-auth.service';
-import {ErrorService} from '../../../../shared/services';
 
 @Component({
   selector: 'app-main-admin',
@@ -22,7 +21,6 @@ export class MainAdminComponent implements OnInit {
   adminInfo$: Observable<AdminInfo>;
 
   constructor(private authAdminService: AdminAuthService,
-              private errorService: ErrorService,
               private router: Router) {
   }
 
@@ -33,8 +31,7 @@ export class MainAdminComponent implements OnInit {
   logout() {
     this.authAdminService.logout().subscribe(() => {
         this.router.navigate(['admin']);
-      },
-      error => this.errorService.handleError(error)
+      }
     );
   }
 }

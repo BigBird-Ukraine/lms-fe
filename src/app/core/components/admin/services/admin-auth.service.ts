@@ -7,7 +7,6 @@ import {commonAdminPath} from '../../../../shared/api';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 import {ITokensModel, UserModel} from '../../../interface';
 import {AdminInfo} from '../interfaces';
-import {config} from '../../../../shared/config';
 
 const authApiUrls = {
   authAdmin: commonAdminPath + '/auth',
@@ -47,7 +46,6 @@ export class AdminAuthService {
   }
 
   logout(): Observable<any> {
-
         return this.httpClient
       .post(authApiUrls.logoutAdmin, null)
       .pipe(

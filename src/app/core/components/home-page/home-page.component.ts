@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {catchError} from 'rxjs/operators';
 
 import {RegistrationComponent} from '../user/registration/registration.component';
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService} from '../../services';
-import {ErrorService} from '../../../shared';
 import {UserService} from '../../services';
 import {UserRoleEnum} from '../../enums';
 
@@ -23,19 +21,18 @@ export class HomePageComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private authService: AuthService,
-              private userService: UserService,
-              private errorService: ErrorService
+              private userService: UserService
   ) {
   }
 
   ngOnInit() {
 
     this.userService.getUserInfoByToken(this.token)
-      .pipe(
-        catchError((err) =>
-          this.errorService.handleError(err)
-        )
-      )
+      // .pipe(
+      //   catchError((err) =>
+      //     this.errorService.handleError(err)
+      //   )
+      // )
       .subscribe(() => {
         if (this.userInfo.subscribe()) {
           this.userInfo.subscribe(user => {
@@ -63,10 +60,7 @@ export class HomePageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      },
-      error => this.errorService.handleError(error)
-    );
+    this.authService.logout().subscribe();
   }
 
 }

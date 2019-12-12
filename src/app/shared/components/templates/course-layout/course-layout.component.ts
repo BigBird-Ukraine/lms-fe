@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
 import {AdminHelperService} from '../../../services/admin-helper.service';
-import {CustomSnackbarService, ErrorService} from '../../../services';
+import {CustomSnackbarService} from '../../../services';
 import {AdminCoursesService} from '../../../../core/components/admin/services/admin-courses.service';
 import {ICourse, IModule} from '../../../../core/components/admin/interfaces';
 
@@ -20,7 +20,6 @@ export class CourseLayoutComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private adminHelper: AdminHelperService,
-              private errorService: ErrorService,
               private adminCoursesService: AdminCoursesService,
               private customSnackbarService: CustomSnackbarService,
               private dialog: MatDialog) {
@@ -47,8 +46,7 @@ export class CourseLayoutComponent implements OnInit {
     this.adminCoursesService.addCourse(courseData).subscribe(() => {
         this.customSnackbarService.open('Курс додано', '');
         this.dialog.closeAll();
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 
   newModule(module) {
@@ -61,7 +59,6 @@ export class CourseLayoutComponent implements OnInit {
   }
 
   getModules() {
-    this.adminHelper.getModules().subscribe((modules: IModule[]) => this.modulesForAutocomplete = modules,
-      error => this.errorService.handleError(error));
+    this.adminHelper.getModules().subscribe((modules: IModule[]) => this.modulesForAutocomplete = modules);
   }
 }

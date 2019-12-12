@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
-import {CustomSnackbarService, ErrorService} from '../../../../shared/services';
+import {CustomSnackbarService} from '../../../../shared/services';
 import {AdminAuthService} from '../services/admin-auth.service';
 import {AuthService} from '../../../services/auth';
 
@@ -19,7 +19,6 @@ export class AuthAdminComponent implements OnInit {
               private authAdminService: AdminAuthService,
               private authService: AuthService,
               private customSnackbarService: CustomSnackbarService,
-              private errorService: ErrorService,
               private router: Router,
               private route: ActivatedRoute) {
   }
@@ -27,22 +26,20 @@ export class AuthAdminComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
       this.authService.logout().subscribe(() => {
-        },
-        error => this.errorService.handleError(error)
+        }
       );
     }
 
     if (this.authAdminService.isAuthenticated()) {
       this.authAdminService.logout().subscribe(() => {
-        },
-        error => this.errorService.handleError(error)
+        }
       );
     }
     this.route.queryParams.subscribe((params: Params) => {
-      if (params['accessDenied']) {
+      if (params.accessDenied) {
         this.customSnackbarService.open('Спочатку авторизуйтесь', 'Ok');
       }
-      if (params['sessionFiled']) {
+      if (params.sessionFiled) {
         this.customSnackbarService.open('Сесія закінчилась', 'Ok');
       }
     });
@@ -66,7 +63,6 @@ export class AuthAdminComponent implements OnInit {
     this.authAdminService.authAdmin(this.authForm.value).subscribe(() => {
         this.customSnackbarService.open('Логін успішний', 'success');
         this.router.navigate(['/adminPanel/statistics']);
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 }

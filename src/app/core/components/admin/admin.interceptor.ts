@@ -1,29 +1,43 @@
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 import {AdminAuthService} from './services/admin-auth.service';
+import {config} from '../../../shared/config';
+import {AuthService} from '../../services/auth';
+import {CustomSnackbarService} from '../../../shared/services';
 
 @Injectable()
 export class AdminInterceptor implements HttpInterceptor {
 
   private isRefreshing = false;
+  private authService: any;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(public authService: AdminAuthService, private router: Router) {
+  constructor(public adminAuthService: AdminAuthService,
+              public userAuthService: AuthService,
+              private customSnackbarService: CustomSnackbarService,
+              private router: Router) {
   }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    if (request.url.includes(`${config.adminPort}`)) {
+      this.authService = this.adminAuthService;
+    } else {
+      this.authService = this.userAuthService;
+    }
     if (this.authService.getAccessToken()) {
       request = this.addToken(request, this.authService.getAccessToken());
     }
 
     return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
-        return this.handle401Error(request, next);
+      if (error && error.error) {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return this.handle401Error(request, next);
+        }
+        this.customSnackbarService.open(error.error.error.message, 'error');
       }
       if (error.status === 403) {
         this.router.navigate(['admin/login'], {

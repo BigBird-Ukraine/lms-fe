@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
 import {AuthService, UserService} from '../../../services';
-import {CustomSnackbarService, ErrorService} from '../../../../shared';
+import {CustomSnackbarService} from '../../../../shared';
 
 @Component({
   selector: 'app-auth-user',
@@ -19,7 +19,6 @@ export class AuthUserComponent implements OnInit {
               private customSnackbarService: CustomSnackbarService,
               private authService: AuthService,
               private userService: UserService,
-              private errorService: ErrorService,
               private dialog: MatDialog) {
   }
 
@@ -43,8 +42,7 @@ export class AuthUserComponent implements OnInit {
     this.authService.authUser(this.authForm.value).subscribe(() => {
           this.dialog.closeAll();
           this.customSnackbarService.open('Логін успішний', 'success');
-        },
-        error => this.errorService.handleError(error));
+        });
     }
 
 }
