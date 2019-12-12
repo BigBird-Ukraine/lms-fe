@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminAuthService} from '../services/admin-auth.service';
-import {ErrorService} from '../../../../shared/services';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+
 import {AdminInfo} from '../interfaces';
+import {AdminAuthService} from '../services/admin-auth.service';
+import {ErrorService} from '../../../../shared/services';
 
 @Component({
   selector: 'app-main-admin',

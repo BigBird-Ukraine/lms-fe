@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material';
+
 import {AdminHelperService} from '../../../services/admin-helper.service';
 import {CustomSnackbarService, ErrorService} from '../../../services';
 import {AdminCoursesService} from '../../../../core/components/admin/services/admin-courses.service';
-import {ICourse} from '../../../../core/components/admin/interfaces';
-import {MatDialog} from '@angular/material';
+import {ICourse, IModule} from '../../../../core/components/admin/interfaces';
 
 @Component({
   selector: 'app-course-layout',
@@ -14,8 +15,8 @@ import {MatDialog} from '@angular/material';
 export class CourseLayoutComponent implements OnInit {
 
   courseForm: FormGroup;
-  modules: any[] = [];
-  modulesForAutocomplete: any[] = [];
+  modules: IModule[] = [];
+  modulesForAutocomplete: IModule[] = [];
 
   constructor(private fb: FormBuilder,
               private adminHelper: AdminHelperService,
@@ -42,7 +43,6 @@ export class CourseLayoutComponent implements OnInit {
     this.courseForm.value.modules_list = this.modules;
 
     const courseData: ICourse = this.courseForm.value;
-    console.log(courseData);
 
     this.adminCoursesService.addCourse(courseData).subscribe(() => {
         this.customSnackbarService.open('Курс додано', '');
@@ -54,14 +54,14 @@ export class CourseLayoutComponent implements OnInit {
   newModule(module) {
     const text = module.target.value;
 
-    if (text.length > 0) {
+    if (text.length) {
       this.modules.push(text);
     }
     module.target.value = '';
   }
 
   getModules() {
-    this.adminHelper.getModules().subscribe((modules: any[]) => this.modulesForAutocomplete = modules,
+    this.adminHelper.getModules().subscribe((modules: IModule[]) => this.modulesForAutocomplete = modules,
       error => this.errorService.handleError(error));
   }
 }

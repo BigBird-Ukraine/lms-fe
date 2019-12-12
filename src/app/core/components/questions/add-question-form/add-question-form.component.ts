@@ -34,9 +34,7 @@ export class AddQuestionFormComponent implements OnInit {
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
-    {level: LevelEnum.EASY_PLUS},
     {level: LevelEnum.MEDIUM},
-    {level: LevelEnum.MEDIUM_PLUS},
     {level: LevelEnum.HARD}];
 
   private isAdded: boolean;
