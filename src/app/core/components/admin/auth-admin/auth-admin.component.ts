@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+
 import {CustomSnackbarService, ErrorService} from '../../../../shared/services';
 import {AdminAuthService} from '../services/admin-auth.service';
 import {AuthService} from '../../../services/auth';
-import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth-admin',

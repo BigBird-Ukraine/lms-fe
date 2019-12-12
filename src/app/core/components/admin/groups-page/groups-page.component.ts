@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
+
 import {CreateGroupComponent} from '../../../../shared/components/templates/create-group/create-group.component';
 
 @Component({

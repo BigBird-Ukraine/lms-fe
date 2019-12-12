@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
+
 import {CourseLayoutComponent} from '../../../../shared/components/templates/course-layout/course-layout.component';
 
 @Component({
