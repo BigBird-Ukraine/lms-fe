@@ -27,11 +27,6 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
 
     this.userService.getUserInfoByToken(this.token)
-      // .pipe(
-      //   catchError((err) =>
-      //     this.errorService.handleError(err)
-      //   )
-      // )
       .subscribe(() => {
         if (this.userInfo.subscribe()) {
           this.userInfo.subscribe(user => {

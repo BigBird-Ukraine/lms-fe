@@ -16,7 +16,9 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/users', name: 'Користувачі'},
     {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/questions', name: 'Питання'},
-    {url: '/adminPanel/courses', name: 'Курси'}
+    {url: '/adminPanel/courses', name: 'Курси'},
+    {url: '/adminPanel/modules', name: 'Модулі'}
+
   ];
   adminInfo$: Observable<AdminInfo>;
 

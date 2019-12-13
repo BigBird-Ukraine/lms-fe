@@ -6,9 +6,13 @@
         (ngSubmit)="addCourse()"
   >
     <div class="form">
+
       <mat-form-field class="example-full-width">
         <mat-label>Назва курсу</mat-label>
-        <input type="text" matInput formControlName="label">
+        <input type="text" matInput
+               formControlName="label"
+               required>
+
         <mat-error *ngIf="courseForm.get('label').hasError('required')">
           Вкажіть назву курсу
         </mat-error>
@@ -27,8 +31,10 @@
                formGroupName="modules_list"
                (keyup.enter)="newModule($event)"
                [matAutocomplete]="autoModule"
+               required
                #searchModule
         >
+
         <mat-autocomplete #autoModule="matAutocomplete">
           <mat-option
             *ngFor="let module of modulesForAutocomplete |
@@ -36,6 +42,7 @@
             [value]="module">
             {{module}}
           </mat-option>
+
         </mat-autocomplete>
       </mat-form-field>
 
@@ -47,11 +54,13 @@
       </div>
 
     </div>
+
     <button mat-raised-button
             color="primary"
             type="submit"
             [disabled]="courseForm.invalid || !modules.length"
     >Створити
     </button>
+
   </form>
 </mat-dialog-content>
