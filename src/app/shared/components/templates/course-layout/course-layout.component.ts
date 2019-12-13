@@ -14,8 +14,8 @@ import {ICourse, IModule} from '../../../../core/components/admin/interfaces';
 export class CourseLayoutComponent implements OnInit {
 
   courseForm: FormGroup;
-  modules: IModule[] = [];
-  modulesForAutocomplete: IModule[] = [];
+  modules: string[] = [];
+  modulesForAutocomplete: string[] = [];
 
   constructor(private fb: FormBuilder,
               private adminHelper: AdminHelperService,
@@ -43,9 +43,9 @@ export class CourseLayoutComponent implements OnInit {
     const courseData: ICourse = this.courseForm.value;
 
     this.adminCoursesService.addCourse(courseData).subscribe(() => {
-        this.customSnackbarService.open('Курс додано', '');
-        this.dialog.closeAll();
-      });
+      this.customSnackbarService.open('Курс додано', '');
+      this.dialog.closeAll();
+    });
   }
 
   newModule(module) {
@@ -58,6 +58,8 @@ export class CourseLayoutComponent implements OnInit {
   }
 
   getModules() {
-    this.adminHelper.getModules().subscribe((modules: IModule[]) => this.modulesForAutocomplete = modules);
+    this.adminHelper.getModules().subscribe((modules: IModule[]) => {
+      this.modulesForAutocomplete = modules.map(module => module.label);
+    });
   }
 }

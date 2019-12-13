@@ -11,6 +11,7 @@
         <input type="text" matInput
                placeholder="Введіть Ваше ім'я"
                formControlName="name"
+               required
         >
         <mat-error *ngIf="registrationForm.get('name').hasError('required')">
           Введіть, будь ласка, ім'я
@@ -27,6 +28,7 @@
         <input type="text" matInput
                placeholder="Введіть Ваше прізвище"
                formControlName="surname"
+               required
         >
         <mat-error *ngIf="registrationForm.get('surname').hasError('required')">
           Введіть, будь ласка, прізвище
@@ -43,6 +45,7 @@
         <input type="email" matInput
                placeholder="Введіть Ваш email"
                formControlName="email"
+               required
         >
         <mat-error *ngIf="registrationForm.get('email').hasError('required')">
           Введіть, будь ласка, email
@@ -59,14 +62,11 @@
         vpn_key
       </mat-icon>
       <mat-form-field>
-        <!--          <input type="password" matInput-->
-        <!--                 placeholder="Пароль"-->
-        <!--                 formControlName="password"-->
-        <!--          >-->
-        <input matInput placeholder="Пароль"
+        <input matInput
                [type]="hide ? 'password' : 'text'"
                placeholder="Пароль"
                formControlName="password"
+               required
         >
         <button
           mat-icon-button
@@ -103,15 +103,12 @@
         vpn_key
       </mat-icon>
       <mat-form-field>
-        <!--          <input type="password" matInput-->
-        <!--                 placeholder="Підтвердження паролю"-->
-        <!--                 formControlName="confirmPassword"-->
-        <!--          >-->
         <input
           matInput
-          placeholder="Enter your password"
+          placeholder="Підтвердження паролю"
           [type]="hide2 ? 'password' : 'text'"
-          formControlName="confirmPassword">
+          formControlName="confirmPassword"
+          required>
         <button
           type="button"
           mat-icon-button
@@ -129,9 +126,6 @@
         >
           Введіть пароль ще раз для підтвердження
         </mat-error>
-        <!--          <mat-error *ngIf="registrationForm.errors?.passwordsMismatch && (registrationForm.touched || registrationForm.dirty)">-->
-        <!--            Паролі не співпадають, спробуйте ще раз-->
-        <!--          </mat-error>-->
       </mat-form-field>
     </div>
 

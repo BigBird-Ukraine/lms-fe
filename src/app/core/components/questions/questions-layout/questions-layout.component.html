@@ -6,11 +6,6 @@
 
     <mat-card-content>
       <table>
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th colspan="2" style="border: 1px solid black; padding: 5px">Answer</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
 
         <tbody class="question_table" *ngFor="let item of questions; let i = index">
         <mat-card class="question">
@@ -24,19 +19,14 @@
             </span>
           </td>
         </tr>
-        <tr *ngFor="let a of item.answers let i = index">
+        <tr *ngFor="let a of item.answers">
           <td >
-<!--            <span>-->
-<!--                {{i + 1}}-->
-<!--             </span>-->
             <mat-checkbox>
              <span>
                 {{a.value}}
              </span>
             </mat-checkbox>
-<!--            <span>-->
-<!--                {{a.correct}}-->
-<!--             </span>-->
+
           </td>
         </mat-card>
         </tbody>

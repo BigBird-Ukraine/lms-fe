@@ -19,7 +19,7 @@ export class CustomSnackbarService {
     private zone: NgZone) {
   }
 
-  public open(message, action = 'success', duration = 4000) {
+  public open(message, action = 'ok', duration = 4000) {
     this.zone.run(() => {
       const config = new MatSnackBarConfig();
       config.verticalPosition = this.verticalPosition;

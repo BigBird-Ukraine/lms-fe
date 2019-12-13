@@ -1,0 +1,87 @@
+<h2 mat-dialog-title class="mat_dialog_title">Створити модуль</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="moduleForm"
+        (ngSubmit)="addModule()"
+  >
+    <div class="form">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Назва модуля</mat-label>
+        <input type="text" matInput
+               formControlName="label"
+               required>
+
+        <mat-error *ngIf="moduleForm.get('label').hasError('required')">
+          Вкажіть назву модуля
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Опис модуля</mat-label>
+        <textarea type="text" matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Уроки модулю"
+               formGroupName="lessons_list"
+               (keyup.enter)="newLesson($event)"
+               [matAutocomplete]="autoLessons"
+               required
+               #searchLessons
+        >
+
+        <mat-autocomplete #autoLessons="matAutocomplete">
+          <mat-option
+            *ngFor="let lesson of lessonsForAutocomplete |
+          filter: searchLessons.value"
+            [value]="lesson">
+            {{lesson}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <span *ngFor="let lesson of lessons"
+              class="block">
+          {{lesson}}
+        </span>
+      </div>
+
+      <mat-form-field class="example-full-width">
+        <input matInput required
+               placeholder="Вкажіть теги "
+               formGroupName="tag_list"
+               (keyup.enter)="newTag($event)"
+               [matAutocomplete]="autoTag"
+               #searchTags
+        >
+        <mat-autocomplete #autoTag="matAutocomplete">
+          <mat-option *ngFor="let tag of tagsForAutocomplete | filter:
+           searchTags.value"
+                      [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <span *ngFor="let tag of tags"
+              class="block">
+          {{tag}}
+        </span>
+      </div>
+
+    </div>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="moduleForm.invalid || !lessons.length"
+    >Створити
+    </button>
+
+  </form>
+</mat-dialog-content>

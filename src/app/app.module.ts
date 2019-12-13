@@ -22,14 +22,14 @@ import {FooterComponent} from './shared/components/footer/footer.component';
 import {HeaderComponent} from './shared/components/header/header.component';
 import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layout.component';
 import {AdminModule} from './core/components/admin/admin.module';
-import {CreateGroupComponent} from './shared/components/templates/create-group/create-group.component';
-import {FilterPipe} from './shared/pipe/filter.pipe';
-import {CourseLayoutComponent} from './shared/components/templates/course-layout/course-layout.component';
+import {CreateGroupComponent, ModuleLayoutComponent, CourseLayoutComponent} from './shared/components/templates';
+import {FilterPipe} from './shared/pipe';
 
 @NgModule({
   entryComponents: [
     CreateGroupComponent,
-    CourseLayoutComponent
+    CourseLayoutComponent,
+    ModuleLayoutComponent
   ],
   declarations: [
     AppComponent,
@@ -41,7 +41,8 @@ import {CourseLayoutComponent} from './shared/components/templates/course-layout
     AdminLayoutComponent,
     CreateGroupComponent,
     FilterPipe,
-    CourseLayoutComponent
+    CourseLayoutComponent,
+    ModuleLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -60,12 +61,7 @@ import {CourseLayoutComponent} from './shared/components/templates/course-layout
   bootstrap: [AppComponent],
   providers: [
     MatSnackBarContainer,
-    CustomSnackbarService,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   multi: true,
-    //   useClass: TokenInterceptor
-    // }
+    CustomSnackbarService
   ],
 })
 
