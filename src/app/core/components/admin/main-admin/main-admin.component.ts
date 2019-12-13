@@ -14,8 +14,8 @@ export class MainAdminComponent implements OnInit {
   links = [
     {url: '/adminPanel/statistics', name: 'Статистика'},
     {url: '/adminPanel/users', name: 'Користувачі'},
-    {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/questions', name: 'Питання'},
+    {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/courses', name: 'Курси'},
     {url: '/adminPanel/modules', name: 'Модулі'}
 
