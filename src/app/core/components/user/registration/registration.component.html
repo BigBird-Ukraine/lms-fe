@@ -53,95 +53,94 @@
       </mat-form-field>
     </div>
 
-<!--    TODO -->
-      <div class="example-full-width pass">
-        <mat-icon aria-hidden="false" class="icon">
-          vpn_key
-        </mat-icon>
-        <mat-form-field>
-<!--          <input type="password" matInput-->
-<!--                 placeholder="Пароль"-->
-<!--                 formControlName="password"-->
-<!--          >-->
-          <input matInput placeholder="Enter your password"
-                 [type]="hide ? 'password' : 'text'"
-                 placeholder="Пароль"
-                 formControlName="password"
-          >
-          <button
-            mat-icon-button
-            matSuffix
-            type="button"
-            (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
-          >
-            <mat-icon>
-              {{hide ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-          </button>
-          <mat-error
-            *ngIf="registrationForm.get('password').hasError('required')"
-          >
-            Введіть, будь ласка, пароль
-          </mat-error>
-          <mat-error
-            *ngIf="registrationForm.get('password').hasError('minlength')"
-          >
-            Пароль має містити щонайменше 8 символів
-          </mat-error>
-          <mat-error
-            *ngIf="registrationForm.get('password').hasError('pattern')"
-          >
-            Пароль має складатися з малих літер, великих літер, цифр та спеціальних символів
-          </mat-error>
-        </mat-form-field>
-      </div>
+    <!--    TODO -->
+    <div class="example-full-width pass">
+      <mat-icon aria-hidden="false" class="icon">
+        vpn_key
+      </mat-icon>
+      <mat-form-field>
+        <!--          <input type="password" matInput-->
+        <!--                 placeholder="Пароль"-->
+        <!--                 formControlName="password"-->
+        <!--          >-->
+        <input matInput placeholder="Пароль"
+               [type]="hide ? 'password' : 'text'"
+               placeholder="Пароль"
+               formControlName="password"
+        >
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>
+            {{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </button>
+        <mat-error
+          *ngIf="registrationForm.get('password').hasError('required')"
+        >
+          Введіть, будь ласка, пароль
+        </mat-error>
+        <mat-error
+          *ngIf="registrationForm.get('password').hasError('minlength')"
+        >
+          Пароль має містити щонайменше 8 символів
+        </mat-error>
+        <mat-error
+          *ngIf="registrationForm.get('password').hasError('pattern')"
+        >
+          Пароль має складатися з малих літер, великих літер, цифр та спеціальних символів
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-      <div class="example-full-width">
-        <mat-icon aria-hidden="false" class="icon">
-          vpn_key
-        </mat-icon>
-        <mat-form-field>
-<!--          <input type="password" matInput-->
-<!--                 placeholder="Підтвердження паролю"-->
-<!--                 formControlName="confirmPassword"-->
-<!--          >-->
-          <input
-            matInput
-            placeholder="Enter your password"
-            [type]="hide2 ? 'password' : 'text'"
-            confirmPassword="password"
-          >
-          <button
-            type="button"
-            mat-icon-button
-            matSuffix
-            (click)="hide2 = !hide2"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide2"
-          >
-            <mat-icon>
-              {{hide2 ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-          </button>
-          <mat-error
-            *ngIf="registrationForm.get('confirmPassword').hasError('required')"
-          >
-            Введіть пароль ще раз для підтвердження
-          </mat-error>
-<!--          <mat-error *ngIf="registrationForm.errors?.passwordsMismatch && (registrationForm.touched || registrationForm.dirty)">-->
-<!--            Паролі не співпадають, спробуйте ще раз-->
-<!--          </mat-error>-->
-        </mat-form-field>
-      </div>
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false" class="icon">
+        vpn_key
+      </mat-icon>
+      <mat-form-field>
+        <!--          <input type="password" matInput-->
+        <!--                 placeholder="Підтвердження паролю"-->
+        <!--                 formControlName="confirmPassword"-->
+        <!--          >-->
+        <input
+          matInput
+          placeholder="Enter your password"
+          [type]="hide2 ? 'password' : 'text'"
+          formControlName="confirmPassword">
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hide2 = !hide2"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide2"
+        >
+          <mat-icon>
+            {{hide2 ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+        </button>
+        <mat-error
+          *ngIf="registrationForm.get('confirmPassword').hasError('required')"
+        >
+          Введіть пароль ще раз для підтвердження
+        </mat-error>
+        <!--          <mat-error *ngIf="registrationForm.errors?.passwordsMismatch && (registrationForm.touched || registrationForm.dirty)">-->
+        <!--            Паролі не співпадають, спробуйте ще раз-->
+        <!--          </mat-error>-->
+      </mat-form-field>
+    </div>
 
-<!--    <button mat-raised-button-->
-<!--            color="primary"-->
-<!--            type="submit"-->
-<!--            [disabled]="registrationForm.invalid">-->
-<!--      Прийняти-->
-<!--    </button>-->
+    <!--    <button mat-raised-button-->
+    <!--            color="primary"-->
+    <!--            type="submit"-->
+    <!--            [disabled]="registrationForm.invalid">-->
+    <!--      Прийняти-->
+    <!--    </button>-->
 
     <button mat-raised-button
             color="primary"

@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 
 import {QuestionsService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
-import {ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-questions-layout',
@@ -15,8 +14,7 @@ export class QuestionsLayoutComponent implements OnInit {
   questions: QuestionModel[];
 
   constructor(private questionsService: QuestionsService,
-              private activatedRoute: ActivatedRoute,
-              private errorService: ErrorService
+              private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -29,7 +27,6 @@ export class QuestionsLayoutComponent implements OnInit {
         this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
           this.questions = questions.data.questions;
         });
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 }

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import { QuestionData, QuestionModel} from '../../interface';
 import {AuthService} from '../auth';
-import {ISuccessHttpResponse, commonQuestionPath} from '../../../shared';
+import {ISuccessHttpResponse, commonAuthPath} from '../../../shared';
 
 
 @Injectable({
@@ -23,7 +23,7 @@ export class QuestionsService {
       })
     };
 
-    return this.http.post<QuestionModel>(`${commonQuestionPath}/questions`, question, options);
+    return this.http.post<QuestionModel>(`${commonAuthPath}/questions`, question, options);
   }
 
   getMyQuestions(): Observable<ISuccessHttpResponse> {
@@ -34,26 +34,25 @@ export class QuestionsService {
     };
 // todo query params in options
     return this.http
-      .get<ISuccessHttpResponse>(`${commonQuestionPath}/questions/my`, options);
+      .get<ISuccessHttpResponse>(`${commonAuthPath}/questions/my`, options);
   }
 
   getAllQuestion(): Observable<QuestionData> {
-    // return this.http.get<QuestionData>(`${commonQuestionPath}/questions`);
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.get<QuestionData>(`${commonQuestionPath}/questions`, options);
+    return this.http.get<QuestionData>(`${commonAuthPath}/questions`, options);
   }
 
   getProductById(id): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${commonQuestionPath}/questions/${id}`);
+    return this.http.get<QuestionData>(`${commonAuthPath}/questions/${id}`);
   }
 
   findQuestionByParams(params): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${commonQuestionPath}/questions`, {
+    return this.http.get<QuestionData>(`${commonAuthPath}/questions`, {
       params: new HttpParams({
         fromObject: params
       })
@@ -67,7 +66,7 @@ export class QuestionsService {
       })
     };
 
-    return this.http.delete<QuestionData>(`${commonQuestionPath}/questions/${id}`, options);
+    return this.http.delete<QuestionData>(`${commonAuthPath}/questions/${id}`, options);
   }
 
 }

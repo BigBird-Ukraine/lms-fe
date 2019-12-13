@@ -1,0 +1,57 @@
+<h2 mat-dialog-title class="mat_dialog_title">Створити курс</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="courseForm"
+        (ngSubmit)="addCourse()"
+  >
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Назва курсу</mat-label>
+        <input type="text" matInput formControlName="label">
+        <mat-error *ngIf="courseForm.get('label').hasError('required')">
+          Вкажіть назву курсу
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Опис курсу</mat-label>
+        <textarea type="text" matInput formControlName="description"></textarea>
+        <mat-error *ngIf="courseForm.get('description').hasError('required')">
+          Додайте опис курсу
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Модулі курсу"
+               formGroupName="modules_list"
+               (keyup.enter)="newModule($event)"
+               [matAutocomplete]="autoModule"
+               #searchModule
+        >
+        <mat-autocomplete #autoModule="matAutocomplete">
+          <mat-option
+            *ngFor="let module of modulesForAutocomplete |
+          filter: searchModule.value"
+            [value]="module">
+            {{module}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <span *ngFor="let module of modules"
+              class="block">
+          {{module}}
+        </span>
+      </div>
+
+    </div>
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="courseForm.invalid || !modules.length"
+    >Створити
+    </button>
+  </form>
+</mat-dialog-content>

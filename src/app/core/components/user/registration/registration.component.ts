@@ -6,8 +6,7 @@ import {matchPassword} from '../../../validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
-import {AuthUserComponent} from '../auth-user/auth-user.component';
-import {CustomSnackbarService, ErrorService} from '../../../../shared';
+import {CustomSnackbarService} from '../../../../shared';
 
 @Component({
   selector: 'app-registration',
@@ -23,8 +22,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private customSnackbarService: CustomSnackbarService,
               private fb: FormBuilder,
-              private userService: UserService,
-              private errorService: ErrorService
+              private userService: UserService
   ) {
   }
 
@@ -73,8 +71,7 @@ export class RegistrationComponent implements OnInit {
     this.userService.createUser(user).subscribe(() => {
       this.customSnackbarService.open('Реєстрація успішна', 'success');
       this.dialog.closeAll();
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 }
 
