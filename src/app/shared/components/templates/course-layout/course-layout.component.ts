@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
-import {AdminHelperService} from '../../../services/admin-helper.service';
-import {CustomSnackbarService} from '../../../services';
-import {AdminCoursesService} from '../../../../core/components/admin/services/admin-courses.service';
+import {AdminHelperService, CustomSnackbarService} from '../../../services';
+import {AdminCoursesService} from '../../../../core/components/admin/services';
 import {ICourse, IModule} from '../../../../core/components/admin/interfaces';
 
 @Component({

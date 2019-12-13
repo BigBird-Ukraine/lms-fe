@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 
 import {CustomSnackbarService} from '../../../../shared/services';
-import {AdminAuthService} from '../services/admin-auth.service';
+import {AdminAuthService} from '../services';
 import {AuthService} from '../../../services/auth';
 
 @Component({

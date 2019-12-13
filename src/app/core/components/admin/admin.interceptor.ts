@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
-import {AdminAuthService} from './services/admin-auth.service';
+import {AdminAuthService} from './services';
 import {config} from '../../../shared/config';
 import {AuthService} from '../../services/auth';
 import {CustomSnackbarService} from '../../../shared/services';

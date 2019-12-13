@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 
 import {AdminInfo} from '../interfaces';
-import {AdminAuthService} from '../services/admin-auth.service';
+import {AdminAuthService} from '../services';
 
 @Component({
   selector: 'app-main-admin',

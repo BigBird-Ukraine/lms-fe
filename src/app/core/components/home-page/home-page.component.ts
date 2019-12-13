@@ -3,8 +3,7 @@ import {MatDialog} from '@angular/material';
 
 import {RegistrationComponent} from '../user/registration/registration.component';
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
-import {AuthService} from '../../services';
-import {UserService} from '../../services';
+import {AuthService, UserService} from '../../services';
 import {UserRoleEnum} from '../../enums';
 
 @Component({

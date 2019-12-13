@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+
 import {MainAdminComponent} from './main-admin/main-admin.component';
 import {StatisticsPageComponent} from './statistics-page/statistics-page.component';
 import {AuthAdminGuard} from './authAdmin.guard';

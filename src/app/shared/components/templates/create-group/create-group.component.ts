@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
 import {CitiesEnum} from '../../../enums';
-import {AdminGroupsService} from '../../../../core/components/admin/services/admin-groups.service';
+import {AdminGroupsService} from '../../../../core/components/admin/services';
 
 @Component({
   selector: 'app-create-group',
