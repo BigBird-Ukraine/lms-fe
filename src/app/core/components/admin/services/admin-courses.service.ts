@@ -17,4 +17,8 @@ export class AdminCoursesService {
     return this.http.post<ICourse>(`${config.apiAdminUrl}/courses`, course);
   }
 
+  getAllCourses(): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(`${config.apiAdminUrl}/courses`);
+  }
+
 }

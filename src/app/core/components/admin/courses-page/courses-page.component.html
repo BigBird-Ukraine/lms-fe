@@ -1,6 +1,25 @@
-<button mat-raised-button
-        color="primary"
-        type="button"
-        (click)="openForm()"
->Додати курс
-</button>
+<div>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="openForm()"
+  >Додати курс
+  </button>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="allCourses()"
+  >Всі курси
+  </button>
+
+  <div *ngIf="showAllCourses">
+
+
+
+  </div>
+
+</div>
+
+
