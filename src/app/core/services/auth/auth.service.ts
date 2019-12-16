@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.httpClient.post(authApiUrls.refreshTokens, {Authorization: this.getRefreshToken()}
+    return this.httpClient.post(authApiUrls.refreshTokens, null
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;
