@@ -16,7 +16,30 @@
 
   <div *ngIf="showAllCourses">
 
+    <mat-list>
+      <mat-list-item *ngFor="let course of coursesList; let i = index">
 
+        <span>{{i + 1 }}.</span>{{course.label}}
+        <button class="info_btn"
+                type="button"
+                (click)="showInfo()">
+          ?
+        </button>
+        <br>
+
+        <div *ngIf="showFullInfo">
+
+          <mat-list>
+            <mat-list-item>
+              <p>Опис: {{course.description}}</p>
+            </mat-list-item>
+          </mat-list>
+
+        </div>
+
+
+      </mat-list-item>
+    </mat-list>
 
   </div>
 

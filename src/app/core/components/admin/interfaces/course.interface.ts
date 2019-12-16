@@ -4,3 +4,7 @@ export interface ICourse {
   description: string;
   modulesList: string[];
 }
+
+export interface IFullCourse {
+  data: ICourse[];
+}

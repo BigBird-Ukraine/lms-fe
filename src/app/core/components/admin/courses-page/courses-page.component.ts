@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 
 import {CourseLayoutComponent} from '../../../../shared/components/templates';
-import {ICourse} from '../interfaces';
-import {AdminHelperService} from '../../../../shared/services';
+import {ICourse, IFullCourse} from '../interfaces';
 import {AdminCoursesService} from '../services';
 
 @Component({
@@ -15,14 +14,18 @@ export class CoursesPageComponent implements OnInit {
 
   showAllCourses = false;
   coursesList: ICourse[] = [];
+  showFullInfo = false;
 
   constructor(private dialog: MatDialog,
               private adminCoursesService: AdminCoursesService) {
   }
 
   ngOnInit() {
-    this.adminCoursesService.getAllCourses().subscribe((courses: ICourse[]) =>
-    this.coursesList = courses);
+    this.adminCoursesService.getAllCourses().subscribe((courses: IFullCourse) => {
+      this.coursesList = courses.data;
+      console.log(this.coursesList);
+    }
+);
   }
 
   openForm() {
@@ -31,5 +34,9 @@ export class CoursesPageComponent implements OnInit {
 
   allCourses() {
     this.showAllCourses = !this.showAllCourses;
+  }
+
+  showInfo() {
+    this.showFullInfo = !this.showFullInfo;
   }
 }

@@ -13,6 +13,7 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
 import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
+import {MatListModule} from '@angular/material';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ModulePageComponent } from './module-page/module-page.component';
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule
+    FormModule,
+    MatListModule
   ],
   providers: [
     {
