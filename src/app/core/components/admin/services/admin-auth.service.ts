@@ -59,7 +59,7 @@ export class AdminAuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.httpClient.post(authApiUrls.refreshTokens, {Authorization: this.getRefreshToken()}
+    return this.httpClient.post(authApiUrls.refreshTokens, null
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;
@@ -73,7 +73,7 @@ export class AdminAuthService {
     return !!this.getAccessToken();
   }
 
-  private deleteTokens(): void {
+  public deleteTokens(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
   }
@@ -90,11 +90,11 @@ export class AdminAuthService {
     return localStorage.getItem(this.accessTokenKey);
   }
 
-  getRefreshToken(): string {
+  public getRefreshToken(): string {
     return localStorage.getItem(this.refreshTokenKey);
   }
 
-  setTokens(accessToken: string, refreshToken: string): void {
+  public setTokens(accessToken: string, refreshToken: string): void {
     this.setAccessToken(accessToken);
     this.setRefreshToken(refreshToken);
   }

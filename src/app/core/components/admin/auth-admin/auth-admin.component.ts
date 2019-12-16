@@ -24,16 +24,8 @@ export class AuthAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.authService.logout().subscribe(() => {
-        }
-      );
-    }
-
     if (this.authAdminService.isAuthenticated()) {
-      this.authAdminService.logout().subscribe(() => {
-        }
-      );
+      this.authAdminService.deleteTokens();
     }
     this.route.queryParams.subscribe((params: Params) => {
       if (params.accessDenied) {
@@ -61,8 +53,8 @@ export class AuthAdminComponent implements OnInit {
 
   login() {
     this.authAdminService.authAdmin(this.authForm.value).subscribe(() => {
-        this.customSnackbarService.open('Логін успішний', 'success');
-        this.router.navigate(['/adminPanel/statistics']);
-      });
+      this.customSnackbarService.open('Логін успішний', 'success');
+      this.router.navigate(['/adminPanel/statistics']);
+    });
   }
 }

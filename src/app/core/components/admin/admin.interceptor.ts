@@ -8,6 +8,7 @@ import {AdminAuthService} from './services';
 import {config} from '../../../shared/config';
 import {AuthService} from '../../services/auth';
 import {CustomSnackbarService} from '../../../shared/services';
+import {MatDialog} from '@angular/material';
 
 @Injectable()
 export class AdminInterceptor implements HttpInterceptor {
@@ -19,6 +20,7 @@ export class AdminInterceptor implements HttpInterceptor {
   constructor(public adminAuthService: AdminAuthService,
               public userAuthService: AuthService,
               private customSnackbarService: CustomSnackbarService,
+              private dialog: MatDialog,
               private router: Router) {
   }
 
@@ -28,9 +30,15 @@ export class AdminInterceptor implements HttpInterceptor {
     } else {
       this.authService = this.userAuthService;
     }
-    if (this.authService.getAccessToken()) {
+
+    if (this.isRefreshing) {
+      request = this.addToken(request, this.authService.getRefreshToken());
+    } else if (this.authService.getAccessToken()) {
       request = this.addToken(request, this.authService.getAccessToken());
+    } else {
+      return next.handle(request);
     }
+
 
     return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
       if (error && error.error) {
@@ -40,6 +48,8 @@ export class AdminInterceptor implements HttpInterceptor {
         this.customSnackbarService.open(error.error.error.message, 'error');
       }
       if (error.status === 403) {
+        this.isRefreshing = false;
+        this.dialog.closeAll();
         this.router.navigate(['admin/login'], {
           queryParams: {
             sessionFiled: true
@@ -76,5 +86,3 @@ export class AdminInterceptor implements HttpInterceptor {
       }));
   }
 }
-
-
