@@ -1,10 +1,10 @@
+import {MatDialog} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 
 import {QuestionModel} from '../../../interface';
 import {QuestionsService} from '../../../services';
 import {ISuccessHttpResponse} from '../../../../shared';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-my-questions',
