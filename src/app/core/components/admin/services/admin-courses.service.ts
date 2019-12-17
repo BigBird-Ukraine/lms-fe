@@ -21,4 +21,7 @@ export class AdminCoursesService {
     return this.http.get<IFullCourse>(`${config.apiAdminUrl}/courses`);
   }
 
+  deleteCourse(id): Observable<ICourse> {
+    return this.http.delete<ICourse>(`${config.apiAdminUrl}/courses/${id}`);
+  }
 }

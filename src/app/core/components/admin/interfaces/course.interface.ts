@@ -1,5 +1,5 @@
 export interface ICourse {
-  id?: string;
+  _id?: string;
   label: string;
   description: string;
   modulesList: string[];
