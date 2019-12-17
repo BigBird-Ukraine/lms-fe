@@ -23,7 +23,6 @@ export class CoursesPageComponent implements OnInit {
   ngOnInit() {
     this.adminCoursesService.getAllCourses().subscribe((courses: IFullCourse) => {
       this.coursesList = courses.data;
-      console.log(this.coursesList);
     }
 );
   }
