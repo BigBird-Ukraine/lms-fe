@@ -1,5 +1,6 @@
 export interface AdminInfo {
-  _id: number;
+  data: {
+    _id: number
   email: string;
   name: string;
   surname: string;
@@ -8,5 +9,6 @@ export interface AdminInfo {
   photo_path?: string;
   group?: {
     label: string
+  }
   };
 }

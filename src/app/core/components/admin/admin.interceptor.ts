@@ -3,12 +3,12 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
 
 import {AdminAuthService} from './services';
 import {config} from '../../../shared/config';
 import {AuthService} from '../../services/auth';
 import {CustomSnackbarService} from '../../../shared/services';
-import {MatDialog} from '@angular/material';
 
 @Injectable()
 export class AdminInterceptor implements HttpInterceptor {
