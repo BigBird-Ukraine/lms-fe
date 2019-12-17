@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {MatListModule} from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -12,7 +13,7 @@ import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
 import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
-import { ModulePageComponent } from './module-page/module-page.component';
+import {ModulePageComponent} from './module-page/module-page.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ModulePageComponent } from './module-page/module-page.component';
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule
+    FormModule,
+    MatListModule
   ],
   providers: [
     {
