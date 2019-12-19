@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {CourseLayoutComponent} from '../../../../shared/components/templates';
 import {ICourse, IFullCourse} from '../interfaces';
 import {AdminCoursesService} from '../services';
+import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 
 @Component({
   selector: 'app-courses-page',
@@ -15,6 +16,7 @@ export class CoursesPageComponent implements OnInit {
   showAllCourses = false;
   coursesList: ICourse[] = [];
   showFullInfo = false;
+  courseId = '';
 
   constructor(private dialog: MatDialog,
               private adminCoursesService: AdminCoursesService) {
@@ -23,8 +25,7 @@ export class CoursesPageComponent implements OnInit {
   ngOnInit() {
     this.adminCoursesService.getAllCourses().subscribe((courses: IFullCourse) => {
       this.coursesList = courses.data;
-    }
-);
+    });
   }
 
   openForm() {
@@ -35,7 +36,22 @@ export class CoursesPageComponent implements OnInit {
     this.showAllCourses = !this.showAllCourses;
   }
 
-  showInfo() {
+  showInfo(id) {
+    this.courseId = id;
     this.showFullInfo = !this.showFullInfo;
+  }
+
+  deleteCourse(id) {
+    const confirm = this.dialog.open(ConfirmLayoutComponent);
+
+    confirm.afterClosed().subscribe((result) => {
+        if (result) {
+          this.adminCoursesService.deleteCourse(id).subscribe(() => {
+            const i = this.coursesList.findIndex(course => course._id === id);
+            this.coursesList.splice(i, 1);
+          });
+        }
+      }
+    );
   }
 }

@@ -19,24 +19,24 @@
     <mat-list>
       <mat-list-item *ngFor="let course of coursesList; let i = index">
 
-        <span>{{i + 1 }}.</span>{{course.label}}
-        <button class="info_btn"
-                type="button"
-                (click)="showInfo()">
+        <p matLine>{{i + 1 }}. {{course.label}}
+          <button class="info_btn"
+                  type="button"
+                  (click)="showInfo(course._id)">
           ?
         </button>
-        <br>
 
-        <div *ngIf="showFullInfo">
+          <button mat-button
+                  class="del_btn"
+                  type="button"
+                  (click)="deleteCourse(course._id)">
+          Видалити
+        </button>
+        </p>
 
-          <mat-list>
-            <mat-list-item>
-              <p>Опис: {{course.description}}</p>
-            </mat-list-item>
-          </mat-list>
+        <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>
 
-        </div>
-
+        <mat-divider></mat-divider>
 
       </mat-list-item>
     </mat-list>

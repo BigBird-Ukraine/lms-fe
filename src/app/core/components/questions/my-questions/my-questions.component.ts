@@ -1,8 +1,10 @@
+import {MatDialog} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 
 import {QuestionModel} from '../../../interface';
 import {QuestionsService} from '../../../services';
 import {ISuccessHttpResponse} from '../../../../shared';
+import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 
 @Component({
   selector: 'app-my-questions',
@@ -11,7 +13,8 @@ import {ISuccessHttpResponse} from '../../../../shared';
 })
 export class MyQuestionsComponent implements OnInit {
 
-  constructor(private questionService: QuestionsService
+  constructor(private questionService: QuestionsService,
+              private dialog: MatDialog
   ) {
   }
 
@@ -24,10 +27,16 @@ export class MyQuestionsComponent implements OnInit {
   }
 
   deleteQuestion(id: string) {
-    this.questionService.deleteQuestionById(id).subscribe(() => {
-      this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
-        this.questions = data.data.questions;
-      });
+    const confirm = this.dialog.open(ConfirmLayoutComponent);
+
+    confirm.afterClosed().subscribe((result) => {
+      if (result) {
+        this.questionService.deleteQuestionById(id).subscribe(() => {
+          this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
+            this.questions = data.data.questions;
+          });
+        });
+      }
     });
   }
 }
