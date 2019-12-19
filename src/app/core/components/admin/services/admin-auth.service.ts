@@ -6,7 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {commonAdminPath} from '../../../../shared/api';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 import {ITokensModel, UserModel} from '../../../interface';
-import {AdminInfo} from '../interfaces';
+import {IUser} from '../interfaces';
 
 const authApiUrls = {
   authAdmin: commonAdminPath + '/auth',
@@ -41,8 +41,8 @@ export class AdminAuthService {
       );
   }
 
-  getAdminInfo(): Observable<AdminInfo> {
-    return this.httpClient.get<AdminInfo>(`${authApiUrls.getAdminInfo}`);
+  getAdminInfo(): Observable<IUser> {
+    return this.httpClient.get<IUser>(`${authApiUrls.getAdminInfo}`);
   }
 
   logout(): Observable<any> {

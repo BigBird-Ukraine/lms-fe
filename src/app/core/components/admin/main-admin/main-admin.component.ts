@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {AdminInfo} from '../interfaces';
 import {AdminAuthService} from '../services';
+import {IUser} from '../interfaces';
 
 @Component({
   selector: 'app-main-admin',
@@ -20,7 +20,7 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/modules', name: 'Модулі'}
 
   ];
-  adminInfo$: Observable<AdminInfo>;
+  adminInfo$: Observable<IUser>;
 
   constructor(private authAdminService: AdminAuthService,
               private router: Router) {

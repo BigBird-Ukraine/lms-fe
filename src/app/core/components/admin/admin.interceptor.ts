@@ -31,9 +31,11 @@ export class AdminInterceptor implements HttpInterceptor {
       this.authService = this.userAuthService;
     }
 
+    const isAuthenticated: boolean = this.authService.isAuthenticated();
+
     if (this.isRefreshing) {
       request = this.addToken(request, this.authService.getRefreshToken());
-    } else if (this.authService.getAccessToken()) {
+    } else if (isAuthenticated) {
       request = this.addToken(request, this.authService.getAccessToken());
     } else {
       return next.handle(request);
