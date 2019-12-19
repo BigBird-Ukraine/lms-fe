@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 import {RegistrationComponent} from '../user/registration/registration.component';
 import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService, UserService} from '../../services';
-import {UserRoleEnum} from '../../enums';
+import {UserRolesEnum} from '../../../shared/enums';
 
 @Component({
   selector: 'app-home-page',
@@ -31,7 +31,7 @@ export class HomePageComponent implements OnInit {
         if (this.userInfo.subscribe()) {
           this.userInfo.subscribe(user => {
             this.userName = user.name;
-            this.isStudent = user.role_id === UserRoleEnum.STUDENT;
+            this.isStudent = user.role_id === UserRolesEnum.STUDENT;
           });
         }
         // else {

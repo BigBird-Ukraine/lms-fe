@@ -5,7 +5,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatDialogModule, MatIconModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonToggleModule,
+  MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatToolbarModule
+} from '@angular/material';
 
 const Materials = [
   MatFormFieldModule,
@@ -17,7 +26,11 @@ const Materials = [
   MatDialogModule,
   MatIconModule,
   MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatExpansionModule,
+  MatCardModule,
+  MatSlideToggleModule,
+  MatButtonToggleModule,
 ];
 
 @NgModule({
