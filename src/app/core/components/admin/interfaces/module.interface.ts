@@ -4,5 +4,10 @@ export interface IModule {
   label: string;
   lessons: string[];
   description?: string;
+  _id?: string;
   tags?: Tags[];
+}
+
+export interface IFullModule {
+  data: IModule[];
 }
