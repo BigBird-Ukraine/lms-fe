@@ -13,9 +13,8 @@
           </mat-button-toggle-group>
         </div>
         <div class="blockAndDelete">
-          <span>Заблокувати</span>
-          <mat-slide-toggle color="primary" [checked]="user.status_id === isBlocked"
-                            (change)="changeStatus(user)"></mat-slide-toggle>
+          <button mat-raised-button color="warn" [hidden]="user.status_id === isBlocked" (click)="blockUser(user)">Заблокувати</button>
+          <button mat-raised-button color="primary" [hidden]="user.status_id !== isBlocked" (click)="unBlockUser(user)">Розблокувати</button>
           <button mat-icon-button class="icon" (click)="delete(user)">
             <mat-icon color="primary">delete</mat-icon>
           </button>

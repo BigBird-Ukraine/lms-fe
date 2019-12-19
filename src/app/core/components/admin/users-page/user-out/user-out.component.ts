@@ -31,21 +31,27 @@ export class UserOutComponent implements OnInit {
   }
 
 
-  changeStatus(user: IUser): void {
+  blockUser(user: IUser): void {
     const index: number = this.users.data.indexOf(user);
-    if (user.status_id === UserStatusEnum.ACTIVE || user.status_id === UserStatusEnum.BLOCKED) {
-      if (user.status_id === UserStatusEnum.ACTIVE) {
-        this.adminUsersService.blockUser(user._id).subscribe(() => {
-          this.snackbarService.open('Користувача заблоковано');
-          this.users.data[index].status_id = UserStatusEnum.BLOCKED;
-        });
-      } else {
-        this.adminUsersService.unBlockUser(user._id).subscribe(() => {
-          this.snackbarService.open('Користувача розблоковано');
-          this.users.data[index].status_id = UserStatusEnum.ACTIVE;
-        });
-      }
-      this.users.data[index].updated_at = this.updatedAt;
+
+    if (user.status_id === UserStatusEnum.ACTIVE) {
+      this.adminUsersService.blockUser(user._id).subscribe(() => {
+        this.snackbarService.open('Користувача заблоковано');
+        this.users.data[index].status_id = UserStatusEnum.BLOCKED;
+        this.users.data[index].updated_at = this.updatedAt;
+      });
+    }
+  }
+
+  unBlockUser(user: IUser): void {
+    const index: number = this.users.data.indexOf(user);
+
+    if (user.status_id === UserStatusEnum.BLOCKED) {
+      this.adminUsersService.unBlockUser(user._id).subscribe(() => {
+        this.snackbarService.open('Користувача розблоковано');
+        this.users.data[index].status_id = UserStatusEnum.ACTIVE;
+        this.users.data[index].updated_at = this.updatedAt;
+      });
     }
   }
 
