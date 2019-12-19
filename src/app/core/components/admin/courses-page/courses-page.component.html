@@ -1,6 +1,48 @@
-<button mat-raised-button
-        color="primary"
-        type="button"
-        (click)="openForm()"
->Додати курс
-</button>
+<div>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="openForm()"
+  >Додати курс
+  </button>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="allCourses()"
+  >Всі курси
+  </button>
+
+  <div *ngIf="showAllCourses">
+
+    <mat-list>
+      <mat-list-item *ngFor="let course of coursesList; let i = index">
+
+        <p matLine>{{i + 1 }}. {{course.label}}
+          <button class="info_btn"
+                  type="button"
+                  (click)="showInfo(course._id)">
+          ?
+        </button>
+
+          <button mat-button
+                  class="del_btn"
+                  type="button"
+                  (click)="deleteCourse(course._id)">
+          Видалити
+        </button>
+        </p>
+
+        <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>
+
+        <mat-divider></mat-divider>
+
+      </mat-list-item>
+    </mat-list>
+
+  </div>
+
+</div>
+
+

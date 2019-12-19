@@ -1,3 +1,22 @@
 button {
   margin: 20px;
 }
+
+.info_btn {
+  margin: 5px;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+}
+
+.del_btn {
+  margin: 5px;
+}
+
+matLine {
+  margin: 10px;
+}

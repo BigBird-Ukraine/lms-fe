@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 
 import {AdminHelperService, CustomSnackbarService} from '../../../services';
 import {AdminCoursesService} from '../../../../core/components/admin/services';
-import {ICourse, IModule} from '../../../../core/components/admin/interfaces';
+import {ICourse, IFullModule, IModule} from '../../../../core/components/admin/interfaces';
 
 @Component({
   selector: 'app-course-layout',
@@ -15,7 +15,8 @@ export class CourseLayoutComponent implements OnInit {
 
   courseForm: FormGroup;
   modules: string[] = [];
-  modulesForAutocomplete: string[] = [];
+  modulesId: string[] = [];
+  modulesForAutocomplete: IModule[] = [];
 
   constructor(private fb: FormBuilder,
               private adminHelper: AdminHelperService,
@@ -38,7 +39,7 @@ export class CourseLayoutComponent implements OnInit {
   }
 
   addCourse() {
-    this.courseForm.value.modules_list = this.modules;
+    this.courseForm.value.modules_list = this.modulesId;
 
     const courseData: ICourse = this.courseForm.value;
 
@@ -53,13 +54,16 @@ export class CourseLayoutComponent implements OnInit {
 
     if (text.length) {
       this.modules.push(text);
+
+      const checkedModule = this.modulesForAutocomplete.find(mod => text === mod.label);
+      this.modulesId.push(checkedModule._id);
     }
     module.target.value = '';
   }
 
   getModules() {
-    this.adminHelper.getModules().subscribe((modules: IModule[]) => {
-      this.modulesForAutocomplete = modules.map(module => module.label);
+    this.adminHelper.getModules().subscribe((modules: IFullModule) => {
+      this.modulesForAutocomplete = modules.data;
     });
   }
 }

@@ -39,8 +39,8 @@
           <mat-option
             *ngFor="let module of modulesForAutocomplete |
           filter: searchModule.value"
-            [value]="module">
-            {{module}}
+            [value]="module.label">
+            {{module.label}}
           </mat-option>
 
         </mat-autocomplete>

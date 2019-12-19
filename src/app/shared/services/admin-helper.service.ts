@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {config} from '../config';
-import {IModule, ILesson} from '../../core/components/admin/interfaces';
+import {IModule, ILesson, IFullModule} from '../../core/components/admin/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class AdminHelperService {
   constructor(private http: HttpClient) {
   }
 
-  getModules(): Observable<IModule[]> {
-    return this.http.get<IModule[]>(`${config.apiAdminUrl}/modules`);
+  getModules(): Observable<IFullModule> {
+    return this.http.get<IFullModule>(`${config.apiAdminUrl}/modules`);
   }
 
   getLessons(): Observable<ILesson[]> {
