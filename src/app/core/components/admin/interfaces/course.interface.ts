@@ -5,6 +5,12 @@ export interface ICourse {
   modulesList: string[];
 }
 
+
+
 export interface IFullCourse {
-  data: ICourse[];
+  data: {
+    courses: ICourse[]
+  };
+  count: number;
+  pageCount: number;
 }
