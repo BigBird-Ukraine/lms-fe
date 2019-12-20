@@ -16,7 +16,8 @@ export class CourseLayoutComponent implements OnInit {
   courseForm: FormGroup;
   modules: string[] = [];
   modulesId: string[] = [];
-  modulesForAutocomplete: IModule[] = [];
+  modulesForAutocomplete: string[] = [];
+  modulesInfo: IModule[] = [];
 
   constructor(private fb: FormBuilder,
               private adminHelper: AdminHelperService,
@@ -52,18 +53,30 @@ export class CourseLayoutComponent implements OnInit {
   newModule(module) {
     const text = module.target.value;
 
-    if (text.length) {
+    if (text.length && this.modulesForAutocomplete.includes(text)) {
       this.modules.push(text);
 
-      const checkedModule = this.modulesForAutocomplete.find(mod => text === mod.label);
+      const checkedModule = this.modulesInfo.find(mod => text === mod.label);
       this.modulesId.push(checkedModule._id);
+    } else {
+      this.customSnackbarService.open('Виберіть модуль зі списку');
     }
     module.target.value = '';
   }
 
+  delModule(module) {
+    const moduleIndex = this.modules.findIndex(mod => module === mod);
+    const findModule = this.modulesInfo.find(mod => module === mod.label);
+    const findIDIndex = this.modulesId.findIndex(id => id = findModule._id);
+
+    this.modules.splice(moduleIndex, 1);
+    this.modulesId.splice(findIDIndex, 1);
+  }
+
   getModules() {
     this.adminHelper.getModules().subscribe((modules: IFullModule) => {
-      this.modulesForAutocomplete = modules.data;
+      this.modulesInfo = modules.data;
+      this.modulesForAutocomplete = modules.data.map(moduleInfo => moduleInfo.label);
     });
   }
 }

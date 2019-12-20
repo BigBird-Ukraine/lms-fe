@@ -18,13 +18,14 @@ export class CoursesPageComponent implements OnInit {
 
   showAllCourses = false;
   coursesList: ICourse[] = [];
-  filterCoursesList: ICourse[] = [];
+  coursesForAutocomplete: string[] = [];
   showFullInfo = false;
   courseId = '';
   filterCoursesForm: FormGroup;
-  modulesForAutocomplete: IModule[] = [];
+  modulesForAutocomplete: string[] = [];
   modules: string[] = [];
   modulesId: string[] = [];
+  modulesData: IModule[] = [];
 
   constructor(private dialog: MatDialog,
               private adminCoursesService: AdminCoursesService,
@@ -51,12 +52,14 @@ export class CoursesPageComponent implements OnInit {
   getAllCourses() {
     this.adminCoursesService.getAllCourses().subscribe((courses: IFullCourse) => {
       this.coursesList = courses.data.courses;
+      this.coursesForAutocomplete = courses.data.courses.map(coursesInfo => coursesInfo.label);
     });
   }
 
   getModules() {
     this.adminHelper.getModules().subscribe((modules: IFullModule) => {
-      this.modulesForAutocomplete = modules.data;
+      this.modulesData = modules.data;
+      this.modulesForAutocomplete = modules.data.map(modulesInfo => modulesInfo.label);
     });
   }
 
@@ -66,12 +69,19 @@ export class CoursesPageComponent implements OnInit {
     if (text.length) {
       this.modules.push(text);
 
-      const checkedModule = this.modulesForAutocomplete.find(mod => text === mod.label);
+      const checkedModule = this.modulesData.find(mod => text === mod.label);
       this.modulesId.push(checkedModule._id);
     }
-
-    this.filterCoursesForm.value.modules_list = this.modulesId;
     module.target.value = '';
+  }
+
+  delModule(module) {
+    const moduleIndex = this.modules.findIndex(mod => module === mod);
+    const findModule = this.modulesData.find(mod => module === mod.label);
+    const findIDIndex = this.modulesId.findIndex(id => id = findModule._id);
+
+    this.modules.splice(moduleIndex, 1);
+    this.modulesId.splice(findIDIndex, 1);
   }
 
   openForm() {
@@ -102,6 +112,8 @@ export class CoursesPageComponent implements OnInit {
   }
 
   showFiltered() {
+    this.filterCoursesForm.value.modules_list = this.modulesId;
+
     const keys = Object.keys(this.filterCoursesForm.value);
 
     keys.forEach(key => {
@@ -118,8 +130,13 @@ export class CoursesPageComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params: object) => {
       this.adminCoursesService.findCourseByParams(params).subscribe((course: IFullCourse) => {
-        this.filterCoursesList = course.data.courses;
+        if (course.data.courses) {
+          this.coursesList = course.data.courses;
+        } else {
+          this.coursesList = [];
+        }
       });
     });
   }
+
 }

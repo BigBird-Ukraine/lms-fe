@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {matchPassword} from '../../../validators';
+import {matchPassword} from '../../../../shared/validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
 import {regExp} from '../../../constans';

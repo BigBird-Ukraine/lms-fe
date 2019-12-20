@@ -29,9 +29,10 @@
                [matAutocomplete]="autoCourse"
                #searchCourse
         >
-        <mat-autocomplete #autoCourse="matAutocomplete">
-          <mat-option *ngFor="let course of coursesList | filter: searchCourse.value" [value]="course.label">
-            {{course.label}}
+        <mat-autocomplete autoActiveFirstOption
+                          #autoCourse="matAutocomplete">
+          <mat-option *ngFor="let course of coursesForAutocomplete | filter: searchCourse.value" [value]="course">
+            {{course}}
           </mat-option>
         </mat-autocomplete>
 
@@ -46,22 +47,29 @@
                  #searchModule
           >
 
-          <mat-autocomplete #autoModule="matAutocomplete">
+          <mat-autocomplete autoActiveFirstOption
+                            #autoModule="matAutocomplete">
             <mat-option
               *ngFor="let module of modulesForAutocomplete |
           filter: searchModule.value"
-              [value]="module.label">
-              {{module.label}}
+              [value]="module">
+              {{module}}
             </mat-option>
 
           </mat-autocomplete>
         </mat-form-field>
 
         <div class="blocks">
-        <span *ngFor="let module of modules"
-              class="block">
-          {{module}}
-        </span>
+          <div *ngFor="let module of modules"
+               class="block">
+            {{module}}
+            <button class="mini_btn"
+                    type="button"
+                    (click)="delModule(module)">
+              &times;
+            </button>
+          </div>
+
         </div>
       </div>
 
@@ -73,11 +81,11 @@
 
     </form>
 
-    <mat-list *ngIf="!filterCoursesList.length">
-      <mat-list-item *ngFor="let course of coursesList; let i = index">
+    <ol *ngIf="coursesList.length; else noCourses">
+      <li *ngFor="let course of coursesList; let i = index">
 
-        <p matLine>{{i + 1 }}. {{course.label}}
-          <button class="info_btn"
+        <p>{{i + 1}}. {{course.label}}
+          <button class="mini_btn info"
                   type="button"
                   (click)="showInfo(course._id)">
             ?
@@ -91,37 +99,22 @@
           </button>
         </p>
 
-        <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>
-
+        <div *ngIf="showFullInfo && courseId === course._id">
+          <b>Опис:</b> {{course.description}}<br>
+          <b>Список модулів:</b>
+          <ul>
+            <li *ngFor="let module of modulesData">
+              {{module.label}}
+            </li>
+          </ul>
+        </div>
         <mat-divider></mat-divider>
+      </li>
+    </ol>
 
-      </mat-list-item>
-    </mat-list>
-
-    <mat-list *ngIf="filterCoursesList.length">
-      <mat-list-item *ngFor="let course of filterCoursesList; let i = index">
-
-        <p matLine>{{i + 1 }}. {{course.label}}
-          <button class="info_btn"
-                  type="button"
-                  (click)="showInfo(course._id)">
-            ?
-          </button>
-
-          <button mat-button
-                  class="del_btn"
-                  type="button"
-                  (click)="deleteCourse(course._id)">
-            Видалити
-          </button>
-        </p>
-
-        <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>
-
-        <mat-divider></mat-divider>
-
-      </mat-list-item>
-    </mat-list>
+    <ng-template #noCourses>
+      <mat-card>У вас поки що немає такого курсу</mat-card>
+    </ng-template>
 
   </div>
 
