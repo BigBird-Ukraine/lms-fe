@@ -24,7 +24,7 @@ import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layou
 import {AdminModule} from './core/components/admin/admin.module';
 import {CreateGroupComponent, ModuleLayoutComponent, CourseLayoutComponent} from './shared/components/templates';
 import {FilterPipe} from './shared/pipe';
-import { ConfirmLayoutComponent } from './shared/components/confirm-layout/confirm-layout.component';
+import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
 
 @NgModule({
   entryComponents: [

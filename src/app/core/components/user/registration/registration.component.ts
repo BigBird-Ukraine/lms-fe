@@ -71,7 +71,8 @@ export class RegistrationComponent implements OnInit {
     this.userService.createUser(user).subscribe(() => {
       this.customSnackbarService.open('Реєстрація успішна', 'success');
       this.dialog.closeAll();
-      });
+      },
+      () => this.customSnackbarService.open('Не вдала спроба', ''));
   }
 }
 

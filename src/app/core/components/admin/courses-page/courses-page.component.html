@@ -16,6 +16,61 @@
 
   <div *ngIf="showAllCourses">
 
+    <form [formGroup]="filterCoursesForm"
+          (ngSubmit)="showFiltered()"
+          (keydown.enter)="$event.preventDefault()">
+
+      <mat-form-field>
+
+        <input type="text"
+               placeholder="Назва курсу"
+               matInput
+               formControlName="label"
+               [matAutocomplete]="autoCourse"
+               #searchCourse
+        >
+        <mat-autocomplete #autoCourse="matAutocomplete">
+          <mat-option *ngFor="let course of coursesList | filter: searchCourse.value" [value]="course.label">
+            {{course.label}}
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Модулі"
+               formGroupName="modules_list"
+               (keyup.enter)="newModule($event)"
+               [matAutocomplete]="autoModule"
+               #searchModule
+        >
+
+        <mat-autocomplete #autoModule="matAutocomplete">
+          <mat-option
+            *ngFor="let module of modulesForAutocomplete |
+          filter: searchModule.value"
+            [value]="module.label">
+            {{module.label}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <span *ngFor="let module of modules"
+              class="block">
+          {{module}}
+        </span>
+      </div>
+
+      <button type="submit"
+              mat-raised-button
+      >
+        Шукати
+      </button>
+
+    </form>
+
     <mat-list>
       <mat-list-item *ngFor="let course of coursesList; let i = index">
 
@@ -23,15 +78,15 @@
           <button class="info_btn"
                   type="button"
                   (click)="showInfo(course._id)">
-          ?
-        </button>
+            ?
+          </button>
 
           <button mat-button
                   class="del_btn"
                   type="button"
                   (click)="deleteCourse(course._id)">
-          Видалити
-        </button>
+            Видалити
+          </button>
         </p>
 
         <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>

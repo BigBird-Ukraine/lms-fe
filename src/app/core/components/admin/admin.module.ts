@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {MatListModule} from '@angular/material';
+import {MatAutocompleteModule, MatListModule} from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -14,6 +14,8 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
 import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
+import { FilterCoursesComponent } from './courses-page/filter-courses/filter-courses.component';
+import {FilterPipe} from './filter.pipe';
 
 
 @NgModule({
@@ -25,14 +27,17 @@ import {ModulePageComponent} from './module-page/module-page.component';
     GroupsPageComponent,
     QuestionsPageComponent,
     CoursesPageComponent,
-    ModulePageComponent
+    ModulePageComponent,
+    FilterCoursesComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     FormModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule
   ],
   providers: [
     {
