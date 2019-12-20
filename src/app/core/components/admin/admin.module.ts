@@ -13,7 +13,8 @@ import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
 import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
-import {ModulePageComponent} from './module-page/module-page.component';
+import { ModulePageComponent } from './module-page/module-page.component';
+import { UserOutComponent } from './users-page/user-out/user-out.component';
 import { FilterCoursesComponent } from './courses-page/filter-courses/filter-courses.component';
 import {FilterPipe} from './filter.pipe';
 
@@ -30,6 +31,7 @@ import {FilterPipe} from './filter.pipe';
     ModulePageComponent,
     FilterCoursesComponent,
     FilterPipe
+    UserOutComponent,
   ],
   imports: [
     CommonModule,

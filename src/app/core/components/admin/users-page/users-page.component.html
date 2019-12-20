@@ -1,0 +1,7 @@
+<div class="buttons">
+  <button mat-raised-button color="primary" routerLinkActive="active"
+          *ngFor="let button of buttons" routerLink="{{button.routerLink}}" (click)="getUserByRole(button.role)">{{button.name}}</button>
+  <button mat-raised-button color="primary" routerLinkActive="active" routerLink="all" (click)="getAll()">Всі</button>
+  <button mat-raised-button color="primary">Створити</button>
+</div>
+<app-user-out [users]="getUsers"></app-user-out>
