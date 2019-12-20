@@ -15,6 +15,7 @@ import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import { ModulePageComponent } from './module-page/module-page.component';
 import { UserOutComponent } from './users-page/user-out/user-out.component';
+import { UpdateUserComponent } from './users-page/update-user/update-user.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { UserOutComponent } from './users-page/user-out/user-out.component';
     CoursesPageComponent,
     ModulePageComponent,
     UserOutComponent,
+    UpdateUserComponent,
   ],
   imports: [
     CommonModule,
