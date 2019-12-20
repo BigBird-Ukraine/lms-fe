@@ -7,7 +7,6 @@ import {AdminCoursesService} from '../services';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AdminHelperService} from '../../../../shared/services';
-import {QuestionData} from '../../../interface';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -71,7 +70,7 @@ export class CoursesPageComponent implements OnInit {
       this.modulesId.push(checkedModule._id);
     }
 
-    this.filterCoursesForm.value. modules_list = this.modulesId;
+    this.filterCoursesForm.value.modules_list = this.modulesId;
     module.target.value = '';
   }
 
@@ -104,6 +103,7 @@ export class CoursesPageComponent implements OnInit {
 
   showFiltered() {
     const keys = Object.keys(this.filterCoursesForm.value);
+
     keys.forEach(key => {
       if (!this.filterCoursesForm.value[key]) {
         delete this.filterCoursesForm.value[key];
@@ -119,9 +119,7 @@ export class CoursesPageComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: object) => {
       this.adminCoursesService.findCourseByParams(params).subscribe((course: IFullCourse) => {
         this.filterCoursesList = course.data.courses;
-        console.log(this.filterCoursesList);
       });
     });
-
   }
 }
