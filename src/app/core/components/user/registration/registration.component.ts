@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {matchPassword} from '../../../validators';
+import {matchPassword} from '../../../../shared/validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
 import {regExp} from '../../../constans';
@@ -71,7 +71,8 @@ export class RegistrationComponent implements OnInit {
     this.userService.createUser(user).subscribe(() => {
       this.customSnackbarService.open('Реєстрація успішна', 'success');
       this.dialog.closeAll();
-      });
+      },
+      () => this.customSnackbarService.open('Не вдала спроба', ''));
   }
 }
 

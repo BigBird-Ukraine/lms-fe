@@ -2,9 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 
 import {CourseLayoutComponent} from '../../../../shared/components/templates';
-import {ICourse, IFullCourse} from '../interfaces';
+import {ICourse, IFullCourse, IFullModule, IModule} from '../interfaces';
 import {AdminCoursesService} from '../services';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AdminHelperService} from '../../../../shared/services';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-courses-page',
@@ -15,17 +18,70 @@ export class CoursesPageComponent implements OnInit {
 
   showAllCourses = false;
   coursesList: ICourse[] = [];
+  coursesForAutocomplete: string[] = [];
   showFullInfo = false;
   courseId = '';
+  filterCoursesForm: FormGroup;
+  modulesForAutocomplete: string[] = [];
+  modules: string[] = [];
+  modulesId: string[] = [];
+  modulesData: IModule[] = [];
 
   constructor(private dialog: MatDialog,
-              private adminCoursesService: AdminCoursesService) {
+              private adminCoursesService: AdminCoursesService,
+              private fb: FormBuilder,
+              private adminHelper: AdminHelperService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
+    this.getAllCourses();
+    this.form();
+    this.getModules();
+  }
+
+  form() {
+    this.filterCoursesForm = this.fb.group({
+      label: this.fb.control(''),
+      modules_list: this.fb.array([])
+    });
+  }
+
+  getAllCourses() {
     this.adminCoursesService.getAllCourses().subscribe((courses: IFullCourse) => {
       this.coursesList = courses.data.courses;
+      this.coursesForAutocomplete = courses.data.courses.map(coursesInfo => coursesInfo.label);
     });
+  }
+
+  getModules() {
+    this.adminHelper.getModules().subscribe((modules: IFullModule) => {
+      this.modulesData = modules.data;
+      this.modulesForAutocomplete = modules.data.map(modulesInfo => modulesInfo.label);
+    });
+  }
+
+  newModule(module) {
+    const text = module.target.value;
+
+    if (text.length) {
+      this.modules.push(text);
+
+      const checkedModule = this.modulesData.find(mod => text === mod.label);
+      this.modulesId.push(checkedModule._id);
+    }
+    module.target.value = '';
+  }
+
+  delModule(module) {
+    const moduleIndex = this.modules.findIndex(mod => module === mod);
+    const findModule = this.modulesData.find(mod => module === mod.label);
+    const findIDIndex = this.modulesId.findIndex(id => id = findModule._id);
+
+    this.modules.splice(moduleIndex, 1);
+    this.modulesId.splice(findIDIndex, 1);
   }
 
   openForm() {
@@ -54,4 +110,33 @@ export class CoursesPageComponent implements OnInit {
       }
     );
   }
+
+  showFiltered() {
+    this.filterCoursesForm.value.modules_list = this.modulesId;
+
+    const keys = Object.keys(this.filterCoursesForm.value);
+
+    keys.forEach(key => {
+      if (!this.filterCoursesForm.value[key]) {
+        delete this.filterCoursesForm.value[key];
+      }
+    });
+
+    this.router.navigate(['/adminPanel/courses'], {
+      queryParams: {
+        ...this.filterCoursesForm.value
+      }
+    });
+
+    this.activatedRoute.queryParams.subscribe((params: object) => {
+      this.adminCoursesService.findCourseByParams(params).subscribe((course: IFullCourse) => {
+        if (course.data.courses) {
+          this.coursesList = course.data.courses;
+        } else {
+          this.coursesList = [];
+        }
+      });
+    });
+  }
+
 }

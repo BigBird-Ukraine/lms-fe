@@ -42,7 +42,9 @@ export class AuthUserComponent implements OnInit {
     this.authService.authUser(this.authForm.value).subscribe(() => {
           this.dialog.closeAll();
           this.customSnackbarService.open('Логін успішний', 'success');
-        });
+        }, () => {
+      this.customSnackbarService.open('Юзера не знайдено', '');
+    });
     }
 
 }

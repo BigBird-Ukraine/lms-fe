@@ -39,18 +39,23 @@
           <mat-option
             *ngFor="let module of modulesForAutocomplete |
           filter: searchModule.value"
-            [value]="module.label">
-            {{module.label}}
+            [value]="module">
+            {{module}}
           </mat-option>
 
         </mat-autocomplete>
       </mat-form-field>
 
       <div class="blocks">
-        <span *ngFor="let module of modules"
-              class="block">
+        <div *ngFor="let module of modules"
+             class="block">
           {{module}}
-        </span>
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delModule(module)">&times;
+          </button>
+        </div>
+
       </div>
 
     </div>

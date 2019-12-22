@@ -16,30 +16,105 @@
 
   <div *ngIf="showAllCourses">
 
-    <mat-list>
-      <mat-list-item *ngFor="let course of coursesList; let i = index">
+    <form [formGroup]="filterCoursesForm"
+          (ngSubmit)="showFiltered()"
+          (keydown.enter)="$event.preventDefault()">
 
-        <p matLine>{{i + 1 }}. {{course.label}}
-          <button class="info_btn"
+      <mat-form-field>
+
+        <input type="text"
+               placeholder="Назва курсу"
+               matInput
+               formControlName="label"
+               [matAutocomplete]="autoCourse"
+               #searchCourse
+        >
+        <mat-autocomplete autoActiveFirstOption
+                          #autoCourse="matAutocomplete">
+          <mat-option *ngFor="let course of coursesForAutocomplete | filter: searchCourse.value" [value]="course">
+            {{course}}
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
+
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Модулі"
+                 formGroupName="modules_list"
+                 (keyup.enter)="newModule($event)"
+                 [matAutocomplete]="autoModule"
+                 #searchModule
+          >
+
+          <mat-autocomplete autoActiveFirstOption
+                            #autoModule="matAutocomplete">
+            <mat-option
+              *ngFor="let module of modulesForAutocomplete |
+          filter: searchModule.value"
+              [value]="module">
+              {{module}}
+            </mat-option>
+
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="blocks">
+          <div *ngFor="let module of modules"
+               class="block">
+            {{module}}
+            <button class="mini_btn"
+                    type="button"
+                    (click)="delModule(module)">
+              &times;
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="submit"
+              mat-raised-button
+      >
+        Шукати
+      </button>
+
+    </form>
+
+    <ol *ngIf="coursesList.length; else noCourses">
+      <li *ngFor="let course of coursesList; let i = index">
+
+        <p>{{i + 1}}. {{course.label}}
+          <button class="mini_btn info"
                   type="button"
                   (click)="showInfo(course._id)">
-          ?
-        </button>
+            ?
+          </button>
 
           <button mat-button
                   class="del_btn"
                   type="button"
                   (click)="deleteCourse(course._id)">
-          Видалити
-        </button>
+            Видалити
+          </button>
         </p>
 
-        <p matLine *ngIf="showFullInfo && courseId === course._id">Опис: {{course.description}}</p>
-
+        <div *ngIf="showFullInfo && courseId === course._id">
+          <b>Опис:</b> {{course.description}}<br>
+          <b>Список модулів:</b>
+          <ul>
+            <li *ngFor="let module of modulesData">
+              {{module.label}}
+            </li>
+          </ul>
+        </div>
         <mat-divider></mat-divider>
+      </li>
+    </ol>
 
-      </mat-list-item>
-    </mat-list>
+    <ng-template #noCourses>
+      <mat-card>У вас поки що немає такого курсу</mat-card>
+    </ng-template>
 
   </div>
 

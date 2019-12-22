@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {ICourse, IFullCourse} from '../interfaces';
 import {config} from '../../../../shared/config';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,13 @@ export class AdminCoursesService {
 
   deleteCourse(id): Observable<ICourse> {
     return this.http.delete<ICourse>(`${config.apiAdminUrl}/courses/${id}`);
+  }
+
+  findCourseByParams(params): Observable<IFullCourse> {
+    return this.http.get<IFullCourse>(`${config.apiAdminUrl}/courses`, {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
   }
 }
