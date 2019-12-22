@@ -6,11 +6,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {
+  MatAutocompleteModule,
   MatButtonToggleModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
   MatIconModule,
+  MatListModule,
+  MatNativeDateModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatToolbarModule
@@ -31,6 +35,11 @@ const Materials = [
   MatCardModule,
   MatSlideToggleModule,
   MatButtonToggleModule,
+  MatNativeDateModule,
+  MatAutocompleteModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatListModule
 ];
 
 @NgModule({

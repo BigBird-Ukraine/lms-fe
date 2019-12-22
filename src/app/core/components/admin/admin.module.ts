@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {MatListModule} from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -35,8 +34,7 @@ import { UpdateUserComponent } from './users-page/update-user/update-user.compon
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule,
-    MatListModule
+    FormModule
   ],
   providers: [
     {

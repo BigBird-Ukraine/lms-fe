@@ -6,8 +6,7 @@ import {
   MatSnackBarContainer,
   MatSnackBarModule
 } from '@angular/material/snack-bar';
-import {MatCardModule} from '@angular/material';
-import {MatAutocompleteModule} from '@angular/material';
+import {FlexModule} from '@angular/flex-layout';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -57,10 +56,9 @@ import {UpdateUserComponent} from './core/components/admin/users-page/update-use
     QuestionModule,
     HttpClientModule,
     UserModule,
-    MatSnackBarModule,
     AdminModule,
-    MatAutocompleteModule,
-    MatCardModule
+    MatSnackBarModule,
+    FlexModule
   ],
   exports: [],
   bootstrap: [AppComponent],
