@@ -15,8 +15,8 @@ import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
+import {UpdateUserComponent} from './users-page/update-user/update-user.component';
 import {FilterPipe} from './filter.pipe';
-
 
 @NgModule({
   declarations: [
@@ -30,12 +30,13 @@ import {FilterPipe} from './filter.pipe';
     ModulePageComponent,
     FilterPipe,
     UserOutComponent,
+    UpdateUserComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule,
+    FormModule
     MatListModule,
     MatAutocompleteModule
   ],

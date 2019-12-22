@@ -1,20 +1,21 @@
 <div *ngIf="users">
   <mat-accordion *ngFor="let user of users.data">
-    <mat-expansion-panel >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{user.surname}} {{user.name}}
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-toolbar class="tools">
-        <div class="changeRole">
-          <mat-button-toggle-group [value]="user.role_id"  appearance="legacy" name="rol" *ngFor="let role of roles">
-            <mat-button-toggle [value]="role.value" (change)="changeRole(user, $event)">{{role.name}}</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
+        <button (click)="openEditForm(user)"> UPDATE</button>
+
         <div class="blockAndDelete">
-          <button mat-raised-button color="warn" [hidden]="user.status_id === isBlocked" (click)="blockUser(user)">Заблокувати</button>
-          <button mat-raised-button color="primary" [hidden]="user.status_id !== isBlocked" (click)="unBlockUser(user)">Розблокувати</button>
+          <button mat-raised-button color="warn" [hidden]="user.status_id === isBlocked" (click)="blockUser(user)">
+            Заблокувати
+          </button>
+          <button mat-raised-button color="primary" [hidden]="user.status_id !== isBlocked" (click)="unBlockUser(user)">
+            Розблокувати
+          </button>
           <button mat-icon-button class="icon" (click)="delete(user)">
             <mat-icon color="primary">delete</mat-icon>
           </button>

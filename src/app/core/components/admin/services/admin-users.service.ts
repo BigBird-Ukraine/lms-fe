@@ -23,18 +23,24 @@ export class AdminUsersService {
   }
 
   blockUser(id: string): Observable<string> {
-    return this.httpClient.patch<string>(this.urlUsers + `/${id}/block`, null);
+    return this.httpClient.post<string>(this.urlUsers + `/${id}/block`, null);
   }
 
   unBlockUser(id: string): Observable<string> {
-    return this.httpClient.patch<string>(this.urlUsers + `/${id}/unBlock`, null);
+    return this.httpClient.post<string>(this.urlUsers + `/${id}/unblock`, null);
   }
 
   deleteUser(id: string): Observable<string> {
     return this.httpClient.delete<string>(this.urlUsers + `/${id}`);
   }
 
-  changeRole(id: string, role: number): Observable<string> {
-    return this.httpClient.patch<string>(this.urlUsers + `/${id}?role=${role}`, null);
+  makeTeacher(id: string): Observable<string> {
+    return this.httpClient.post<string>(this.urlUsers + `/${id}/teacher`, null);
+  }
+  makeAdmin(id: string): Observable<string> {
+    return this.httpClient.post<string>(this.urlUsers + `/${id}/admin`, null);
+  }
+  makeStudent(id: string): Observable<string> {
+    return this.httpClient.post<string>(this.urlUsers + `/${id}/student`, null);
   }
 }
