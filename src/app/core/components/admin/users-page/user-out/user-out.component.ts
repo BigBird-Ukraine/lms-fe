@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
 
 import {IUser, IUserModel} from '../../interfaces';
-import {UserRolesEnum, UserStatusEnum} from '../../../../../shared/enums';
-import {AdminUsersService} from '../../services';
+import {UserStatusEnum} from '../../../../../shared/enums';
 import {CustomSnackbarService} from '../../../../../shared/services';
+import {AdminUsersService} from '../../services';
+import {UpdateUserComponent} from '../update-user/update-user.component';
 
 @Component({
   selector: 'app-user-out',
@@ -14,17 +15,12 @@ import {CustomSnackbarService} from '../../../../../shared/services';
 export class UserOutComponent implements OnInit {
   @Input() users: IUserModel;
   isBlocked = UserStatusEnum.BLOCKED;
-  roles = [
-    {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
-    {name: 'Вчитель', value: UserRolesEnum.TEACHER},
-    {name: 'Студент', value: UserRolesEnum.STUDENT}
-  ];
-  urlOfAll = '/adminPanel/users/all';
+
   updatedAt: string = new Date().toString();
 
   constructor(private adminUsersService: AdminUsersService,
-              private snackbarService: CustomSnackbarService,
-              private router: Router) {
+              private dialog: MatDialog,
+              private snackbarService: CustomSnackbarService) {
   }
 
   ngOnInit() {
@@ -64,23 +60,11 @@ export class UserOutComponent implements OnInit {
 
   }
 
-  changeRole(user: IUser, role) {
-    const index: number = this.users.data.indexOf(user);
-    const roleId: number = role.value;
-    this.adminUsersService.changeRole(user._id, role.value).subscribe(() => {
-      this.roles.forEach(value => {
-
-        if (value.value === roleId) {
-          this.snackbarService.open(`Роль змнінено на "${value.name}"`);
-        }
-
-      });
-      this.users.data[index].role_id = roleId;
-
-      if (this.router.url !== this.urlOfAll) {
-        this.users.data.splice(index, 1);
-      } else {
-        this.users.data[index].updated_at = this.updatedAt;
+  openEditForm(user: IUser) {
+    this.dialog.open(UpdateUserComponent, {
+      data: {
+        user,
+        users: this.users
       }
     });
   }
