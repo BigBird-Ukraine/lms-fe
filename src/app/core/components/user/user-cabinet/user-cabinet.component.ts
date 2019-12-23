@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
 import {IUserSubjectModel} from '../../../interface';
+import {MatDialog} from '@angular/material';
+import {EditUserComponent} from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user-cabinet',
@@ -15,7 +17,8 @@ export class UserCabinetComponent implements OnInit {
   userInfo = this.userService.userInfo;
 
   constructor(private userService: UserService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -30,6 +33,6 @@ export class UserCabinetComponent implements OnInit {
   }
 
   openEditing() {
-
+    this.dialog.open(EditUserComponent);
   }
 }

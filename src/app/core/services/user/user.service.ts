@@ -20,6 +20,10 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
   }
 
+  updateUser(user): Observable<UserModel> {
+    return this.http.patch<UserModel>(`${commonAuthPath}/users`, user);
+  }
+
   getUserInfoByToken(accessToken: string): Observable<any> {
     const options = {
       headers: new HttpHeaders({
