@@ -56,6 +56,13 @@
   <button mat-raised-button
           color="primary"
           type="button"
+          [routerLink]="['/user', userId]"
+          *ngIf="userName"
+  > Мій кабінет </button>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
           (click)="logout()"
           *ngIf="userName"
   > Вийти </button>

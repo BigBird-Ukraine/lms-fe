@@ -61,7 +61,7 @@ import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm
     AdminModule,
     MatSnackBarModule,
     AdminModule,
-    FlexModule
+    FlexModule,
     MatAutocompleteModule,
     MatCardModule
   ],

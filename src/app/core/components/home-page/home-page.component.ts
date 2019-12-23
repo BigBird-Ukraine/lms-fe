@@ -14,6 +14,7 @@ import {UserRolesEnum} from '../../../shared/enums';
 export class HomePageComponent implements OnInit {
 
   userName = '';
+  userId: string;
   isStudent: boolean;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
@@ -31,6 +32,7 @@ export class HomePageComponent implements OnInit {
         if (this.userInfo.subscribe()) {
           this.userInfo.subscribe(user => {
             this.userName = user.name;
+            this.userId = user._id;
             this.isStudent = user.role_id === UserRolesEnum.STUDENT;
           });
         }

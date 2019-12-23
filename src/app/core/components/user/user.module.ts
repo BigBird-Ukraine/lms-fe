@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
@@ -11,13 +11,15 @@ import {
 
 import {RegistrationComponent} from './registration/registration.component';
 import {UserRoutingModule} from './user-routing.module';
-import { AuthUserComponent } from './auth-user/auth-user.component';
+import {AuthUserComponent} from './auth-user/auth-user.component';
+import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
 
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     AuthUserComponent,
+    UserCabinetComponent,
   ],
   imports: [
     CommonModule,
@@ -28,10 +30,12 @@ import { AuthUserComponent } from './auth-user/auth-user.component';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   exports: [
     UserRoutingModule,
     MatDialogModule,
   ]
 })
-export class UserModule { }
+export class UserModule {
+}
