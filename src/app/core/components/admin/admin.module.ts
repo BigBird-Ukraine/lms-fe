@@ -36,7 +36,7 @@ import {FilterPipe} from './filter.pipe';
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule
+    FormModule,
     MatListModule,
     MatAutocompleteModule
   ],
