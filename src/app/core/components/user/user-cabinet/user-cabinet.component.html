@@ -3,9 +3,17 @@
   <h1>Мій Кабінет</h1>
   <hr>
 
-  <mat-card>
+  <mat-card *ngIf="user">
     <p>Ім'я: {{user.name}}</p>
     <p>Прізвище: {{user.surname}}</p>
+
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="openEditing()">
+      <mat-icon aria-hidden="false">create</mat-icon>
+      Редагувати
+    </button>
   </mat-card>
 
 </div>

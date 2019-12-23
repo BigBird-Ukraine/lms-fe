@@ -28,4 +28,8 @@ export class UserCabinetComponent implements OnInit {
         }
       });
   }
+
+  openEditing() {
+
+  }
 }
