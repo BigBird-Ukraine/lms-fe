@@ -27,6 +27,7 @@ import {CreateGroupComponent, ModuleLayoutComponent, CourseLayoutComponent} from
 import {FilterPipe} from './shared/pipe';
 import {UpdateUserComponent} from './core/components/admin/users-page/update-user/update-user.component';
 import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
+import {UpdateProfileComponent} from "./core/components/admin/update-profile/update-profile.component";
 
 @NgModule({
   entryComponents: [
@@ -34,7 +35,8 @@ import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm
     CourseLayoutComponent,
     ModuleLayoutComponent,
     ConfirmLayoutComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    UpdateProfileComponent
   ],
   declarations: [
     AppComponent,

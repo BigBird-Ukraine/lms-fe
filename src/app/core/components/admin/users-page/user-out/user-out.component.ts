@@ -6,6 +6,7 @@ import {UserStatusEnum} from '../../../../../shared/enums';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {AdminUsersService} from '../../services';
 import {UpdateUserComponent} from '../update-user/update-user.component';
+import {UpdateProfileComponent} from "../../update-profile/update-profile.component";
 
 @Component({
   selector: 'app-user-out',
@@ -68,4 +69,11 @@ export class UserOutComponent implements OnInit {
       }
     });
   }
+
+  updateProfile(user: IUser) {
+    this.dialog.open(UpdateProfileComponent, {
+      data: user
+    })
+  }
+
 }

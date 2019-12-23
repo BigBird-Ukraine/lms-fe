@@ -43,4 +43,8 @@ export class AdminUsersService {
   makeStudent(id: string): Observable<string> {
     return this.httpClient.post<string>(this.urlUsers + `/${id}/student`, null);
   }
+
+  updateProfile(id: string, value: any): Observable<string> {
+    return this.httpClient.patch<string>(this.urlUsers + `/${id}`, value)
+  }
 }

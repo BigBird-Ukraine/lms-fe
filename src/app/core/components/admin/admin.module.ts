@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatAutocompleteModule, MatListModule} from '@angular/material';
+import {MatMenuModule} from "@angular/material/menu";
+import {FlexModule} from "@angular/flex-layout";
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -17,6 +19,7 @@ import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
 import {UpdateUserComponent} from './users-page/update-user/update-user.component';
 import {FilterPipe} from './filter.pipe';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {FilterPipe} from './filter.pipe';
     FilterPipe,
     UserOutComponent,
     UpdateUserComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,9 @@ import {FilterPipe} from './filter.pipe';
     MaterialModule,
     FormModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule,
+    FlexModule
   ],
   providers: [
     {
