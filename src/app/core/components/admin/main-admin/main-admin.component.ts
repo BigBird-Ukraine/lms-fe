@@ -43,7 +43,7 @@ export class MainAdminComponent implements OnInit {
 
   updateProfile(user: IUser) {
     this.dialog.open(UpdateProfileComponent, {
-      data: user
+      data: {user:user}
     }).afterClosed().subscribe(()=>{
       this.ngOnInit()
     })

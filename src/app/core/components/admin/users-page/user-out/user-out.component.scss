@@ -22,12 +22,20 @@ span{
 }
 
 mat-expansion-panel:hover{
-  border: 1px solid gray;
+  border: 1px solid #673ab7;
 }
 
 .icon{
   top:  -60px;
   right: 20px;
+}
+
+.role_name{
+  color: #673ab7;
+}
+.role_name:hover{
+  cursor: grab;
+  color: red;
 }
 
 

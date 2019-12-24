@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 
 import {IUser, IUserModel} from '../../interfaces';
-import {UserStatusEnum} from '../../../../../shared/enums';
+import {UserRolesEnum, UserStatusEnum} from '../../../../../shared/enums';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {AdminUsersService} from '../../services';
 import {UpdateUserComponent} from '../update-user/update-user.component';
@@ -16,6 +16,11 @@ import {UpdateProfileComponent} from "../../update-profile/update-profile.compon
 export class UserOutComponent implements OnInit {
   @Input() users: IUserModel;
   isBlocked = UserStatusEnum.BLOCKED;
+  roles = [
+    {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
+    {name: 'Вчитель', value: UserRolesEnum.TEACHER},
+    {name: 'Студент', value: UserRolesEnum.STUDENT}
+  ];
 
   updatedAt: string = new Date().toString();
 
@@ -63,17 +68,26 @@ export class UserOutComponent implements OnInit {
 
   openEditForm(user: IUser) {
     this.dialog.open(UpdateUserComponent, {
-      data: {
-        user,
-        users: this.users
-      }
+      data: user
+    }).afterClosed().subscribe((role:UserRolesEnum) => {
+      const index: number = this.users.data.indexOf(user);
+      this.users.data[index].role_id = role;
     });
   }
 
   updateProfile(user: IUser) {
     this.dialog.open(UpdateProfileComponent, {
-      data: user
+      data: {user: user}
+    }).afterClosed().subscribe((value: IUser) => {
+      if (value) {
+        const index: number = this.users.data.indexOf(user);
+        this.users.data[index] = value;
+      }
     })
+  }
+
+  private getNameOfRole(role: UserRolesEnum): string {
+    return this.roles[role - 1].name;
   }
 
 }

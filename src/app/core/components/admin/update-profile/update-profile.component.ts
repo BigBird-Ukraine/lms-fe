@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {AdminUsersService} from "../services";
@@ -14,13 +14,16 @@ import {regExp} from "../../../constans";
 })
 export class UpdateProfileComponent implements OnInit {
   form: FormGroup;
-
+  private user: IUser;
   constructor(
     private usersService: AdminUsersService,
     private dialog: MatDialog,
     private customSnackbarService: CustomSnackbarService,
-    @Inject(MAT_DIALOG_DATA) public user: IUser
+    public dialogRef: MatDialogRef<UpdateProfileComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+
   ) {
+    this.user = this.data.user
   }
 
   ngOnInit() {
@@ -34,9 +37,9 @@ export class UpdateProfileComponent implements OnInit {
 
 
   update() {
-    this.usersService.updateProfile(this.user._id, this.form.value).subscribe(() => {
+    this.usersService.updateProfile(this.data.user._id, this.form.value).subscribe((value) => {
       this.customSnackbarService.open('Данні оновлено');
-      this.dialog.closeAll();
+      this.dialogRef.close(value)
     });
 
   }
