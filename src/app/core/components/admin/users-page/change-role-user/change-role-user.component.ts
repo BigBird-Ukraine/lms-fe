@@ -10,11 +10,11 @@ import {AdminUsersService} from '../../services';
 import {CustomSnackbarService} from "../../../../../shared/services";
 
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  selector: 'change-role-user',
+  templateUrl: './change-role-user.component.html',
+  styleUrls: ['./change-role-user.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class ChangeRoleUserComponent implements OnInit {
 
   roles = [
     {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
@@ -24,7 +24,7 @@ export class UpdateUserComponent implements OnInit {
 
   constructor(
     private adminUsersService: AdminUsersService,
-    public dialogRef: MatDialogRef<UpdateUserComponent>,
+    public dialogRef: MatDialogRef<ChangeRoleUserComponent>,
     private snackbarService:CustomSnackbarService,
     @Inject(MAT_DIALOG_DATA) public user: IUser,
   ) {

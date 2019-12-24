@@ -5,8 +5,9 @@ import {IUser, IUserModel} from '../../interfaces';
 import {UserRolesEnum, UserStatusEnum} from '../../../../../shared/enums';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {AdminUsersService} from '../../services';
-import {UpdateUserComponent} from '../update-user/update-user.component';
-import {UpdateProfileComponent} from "../../update-profile/update-profile.component";
+import {ChangeRoleUserComponent} from '../change-role-user/change-role-user.component';
+import {UpdateProfileComponent} from "../update-profile/update-profile.component";
+import {DeleteUserComponent} from "../delete-user/delete-user.component";
 
 @Component({
   selector: 'app-user-out',
@@ -58,18 +59,25 @@ export class UserOutComponent implements OnInit {
   }
 
   delete(user: IUser): void {
-    const index: number = this.users.data.indexOf(user);
-    this.adminUsersService.deleteUser(user._id).subscribe(() => {
-      this.snackbarService.open('Користувач видалений');
-      this.users.data.splice(index, 1);
-    });
+    this.dialog.open(DeleteUserComponent, {
+      data: user
+    }).afterClosed().subscribe(value => {
+
+      if (value) {
+        const index: number = this.users.data.indexOf(user);
+        this.adminUsersService.deleteUser(user._id).subscribe(() => {
+          this.snackbarService.open('Користувач видалений');
+          this.users.data.splice(index, 1);
+        });
+      }
+    })
 
   }
 
   openEditForm(user: IUser) {
-    this.dialog.open(UpdateUserComponent, {
+    this.dialog.open(ChangeRoleUserComponent, {
       data: user
-    }).afterClosed().subscribe((role:UserRolesEnum) => {
+    }).afterClosed().subscribe((role: UserRolesEnum) => {
       const index: number = this.users.data.indexOf(user);
       this.users.data[index].role_id = role;
     });

@@ -17,9 +17,10 @@ import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
-import {UpdateUserComponent} from './users-page/update-user/update-user.component';
+import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role-user.component';
 import {FilterPipe} from './filter.pipe';
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { UpdateProfileComponent } from './users-page/update-profile/update-profile.component';
+import { DeleteUserComponent } from './users-page/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,9 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     ModulePageComponent,
     FilterPipe,
     UserOutComponent,
-    UpdateUserComponent,
+    ChangeRoleUserComponent,
     UpdateProfileComponent,
+    DeleteUserComponent,
   ],
   imports: [
     CommonModule,

@@ -2,10 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
-import {AdminUsersService} from "../services";
-import {CustomSnackbarService} from "../../../../shared/services";
-import {IUser} from "../interfaces";
-import {regExp} from "../../../constans";
+import {AdminUsersService} from "../../services";
+import {CustomSnackbarService} from "../../../../../shared/services";
+import {IUser} from "../../interfaces";
+import {regExp} from "../../../../constans";
 
 @Component({
   selector: 'app-update-profile',
