@@ -78,8 +78,11 @@ export class UserOutComponent implements OnInit {
     this.dialog.open(ChangeRoleUserComponent, {
       data: user
     }).afterClosed().subscribe((role: UserRolesEnum) => {
-      const index: number = this.users.data.indexOf(user);
-      this.users.data[index].role_id = role;
+
+      if (role) {
+        const index: number = this.users.data.indexOf(user);
+        this.users.data[index].role_id = role;
+      }
     });
   }
 
@@ -97,5 +100,4 @@ export class UserOutComponent implements OnInit {
   private getNameOfRole(role: UserRolesEnum): string {
     return this.roles[role - 1].name;
   }
-
 }
