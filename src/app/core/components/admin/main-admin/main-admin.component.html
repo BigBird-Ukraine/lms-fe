@@ -1,8 +1,11 @@
-<div *ngIf="adminInfo$ |async as adminInfo">
+<div *ngIf="adminInfo">
   <mat-toolbar color="primary" class="nav">
     <div><a mat-button routerLink="/adminPanel/statistics"><h1>Адмінка</h1></a></div>
     <div class="email">
-      <a mat-button>{{adminInfo.data.email}}</a>
+      <button mat-button [matMenuTriggerFor]="menu">{{adminInfo.email}}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="updateProfile(adminInfo)">Редагувати</button>
+      </mat-menu>
     </div>
   </mat-toolbar>
   <mat-sidenav-container class="example-container">

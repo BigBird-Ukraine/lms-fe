@@ -1,30 +1,32 @@
 import {Component, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Inject} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 
 
 import {IUser} from '../../interfaces';
 import {UserRolesEnum} from '../../../../../shared/enums';
 import {AdminUsersService} from '../../services';
+import {CustomSnackbarService} from "../../../../../shared/services";
 
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  selector: 'change-role-user',
+  templateUrl: './change-role-user.component.html',
+  styleUrls: ['./change-role-user.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class ChangeRoleUserComponent implements OnInit {
 
   roles = [
     {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
     {name: 'Вчитель', value: UserRolesEnum.TEACHER},
     {name: 'Студент', value: UserRolesEnum.STUDENT}
   ];
-  urlOfAll = '/adminPanel/users/all';
 
   constructor(
     private adminUsersService: AdminUsersService,
+    public dialogRef: MatDialogRef<ChangeRoleUserComponent>,
+    private snackbarService:CustomSnackbarService,
     @Inject(MAT_DIALOG_DATA) public user: IUser,
-    @Inject(MAT_DIALOG_DATA) public users: any
   ) {
   }
 
@@ -33,10 +35,6 @@ export class UpdateUserComponent implements OnInit {
 
 
   changeRole(user: IUser, role, roleId: number) {
-    // const index: number = this.users.data.indexOf(user);
-    // const roleId: number = role.value;
-
-
     if (roleId === UserRolesEnum.ADMIN) {
       this.adminUsersService.makeAdmin(user._id).subscribe(() => {
       });
@@ -51,21 +49,7 @@ export class UpdateUserComponent implements OnInit {
       this.adminUsersService.makeTeacher(user._id).subscribe(() => {
       });
     }
-    // this.adminUsersService.changeRole(user._id, role.value).subscribe(() => {
-    //   this.roles.forEach(value => {
-    //
-    //     if (value.value === roleId) {
-    //       this.snackbarService.open(`Роль змнінено на "${value.name}"`);
-    //     }
-    //
-    //   });
-    //   this.users.data[index].role_id = roleId;
-    //
-    //   if (this.router.url !== this.urlOfAll) {
-    //     this.users.data.splice(index, 1);
-    //   } else {
-    //     this.users.data[index].updated_at = this.updatedAt;
-    //   }
-    // });
+    this.snackbarService.open('Роль змінено!!!');
+    this.dialogRef.close(roleId);
   }
 }

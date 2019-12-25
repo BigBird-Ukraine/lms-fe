@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {MatDialog} from "@angular/material/dialog";
 
 import {AdminAuthService} from '../services';
 import {IUser} from '../interfaces';
+import {UpdateProfileComponent} from "../users-page/update-profile/update-profile.component";
 
 @Component({
   selector: 'app-main-admin',
@@ -20,14 +21,17 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/modules', name: 'Модулі'}
 
   ];
-  adminInfo$: Observable<IUser>;
+  adminInfo: IUser;
 
   constructor(private authAdminService: AdminAuthService,
+              private dialog: MatDialog,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.adminInfo$ = this.authAdminService.getAdminInfo();
+    this.authAdminService.getAdminInfo().subscribe(value => {
+      this.adminInfo = value.data
+    });
   }
 
   logout() {
@@ -36,4 +40,13 @@ export class MainAdminComponent implements OnInit {
       }
     );
   }
+
+  updateProfile(user: IUser) {
+    this.dialog.open(UpdateProfileComponent, {
+      data: {user:user}
+    }).afterClosed().subscribe(()=>{
+      this.ngOnInit()
+    })
+  }
 }
+
