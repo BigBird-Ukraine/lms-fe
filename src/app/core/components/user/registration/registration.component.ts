@@ -44,16 +44,28 @@ export class RegistrationComponent implements OnInit {
           Validators.required,
           Validators.email
         ]),
+        phone_number: this.fb.control(null, [
+          Validators.required,
+          Validators.pattern(regExp.phone)
+        ]),
         password: this.fb.control(null, [
           Validators.required,
           Validators.pattern(regExp.passwordRegexp),
           Validators.minLength(8)
         ]),
         confirmPassword: this.fb.control(null,
-          [Validators.required])
+          [Validators.required]),
+        photo_path: ''
       },
       {validators: matchPassword}
     );
+  }
+
+  fileChange(photo) {
+    if (photo.target.files.length > 0) {
+      const file = photo.target.files[0];
+      this.registrationForm.get('photo_path').setValue(file);
+    }
   }
 
   newUser() {
@@ -61,18 +73,21 @@ export class RegistrationComponent implements OnInit {
       name: this.registrationForm.value.name,
       surname: this.registrationForm.value.surname,
       email: this.registrationForm.value.email,
-      password: this.registrationForm.value.password
+      phone_number: this.registrationForm.value.phone_number,
+      password: this.registrationForm.value.password,
+      // photo_path: this.registrationForm.value.photo_path
     };
     this.createUser(data);
   }
 
   createUser(user: UserModel) {
-    // todo navigate to login or show success message. Like on question form
     this.userService.createUser(user).subscribe(() => {
-      this.customSnackbarService.open('Реєстрація успішна', 'success');
-      this.dialog.closeAll();
+        this.customSnackbarService.open('Реєстрація успішна', 'success');
+        this.dialog.closeAll();
       },
       () => this.customSnackbarService.open('Не вдала спроба', ''));
+
+    console.log(this.registrationForm.value.photo_path);
   }
 }
 
