@@ -1,20 +1,26 @@
 <div *ngIf="users">
-  <mat-accordion *ngFor="let user of users.data">
-    <mat-expansion-panel>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let user of users.data">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{user.surname}} {{user.name}}
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-toolbar class="tools">
-        <button (click)="openEditForm(user)"> UPDATE</button>
-
+        <span *ngIf="user.status_id === isBlocked">{{getNameOfRole(user.role_id)}}</span>
+        <span class="role_name" (click)="openEditForm(user)" *ngIf="user.status_id !== isBlocked">{{getNameOfRole(user.role_id)}}</span>
         <div class="blockAndDelete">
           <button mat-raised-button color="warn" [hidden]="user.status_id === isBlocked" (click)="blockUser(user)">
             Заблокувати
           </button>
           <button mat-raised-button color="primary" [hidden]="user.status_id !== isBlocked" (click)="unBlockUser(user)">
             Розблокувати
+          </button>
+          <button mat-icon-button class="icon" (click)="updateProfile(user)" [hidden]="user.status_id === isBlocked">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+          <button mat-icon-button class="icon" [hidden]="user.status_id !== isBlocked" disabled>
+            <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button class="icon" (click)="delete(user)">
             <mat-icon color="primary">delete</mat-icon>

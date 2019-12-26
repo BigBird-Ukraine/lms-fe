@@ -18,10 +18,10 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsPageComponent},
       {
         path: 'users', component: UsersPageComponent, children: [
-          {path: '', redirectTo: 'admins', pathMatch: 'full'},
-          {path: 'admins', component: UserOutComponent},
-          {path: 'teachers', component: UserOutComponent},
-          {path: 'students', component: UserOutComponent},
+          {path: '', redirectTo: 'all', pathMatch: 'full'},
+          // {path: 'admins', component: UserOutComponent},
+          // {path: 'teachers', component: UserOutComponent},
+          // {path: 'students', component: UserOutComponent},
           {path: 'all', component: UserOutComponent},
 
         ]

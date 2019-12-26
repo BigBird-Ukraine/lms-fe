@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatAutocompleteModule, MatListModule} from '@angular/material';
+import {MatMenuModule} from "@angular/material/menu";
+import {FlexModule} from "@angular/flex-layout";
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -15,8 +17,10 @@ import {AdminInterceptor} from './admin.interceptor';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
-import {UpdateUserComponent} from './users-page/update-user/update-user.component';
+import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role-user.component';
 import {FilterPipe} from './filter.pipe';
+import { UpdateProfileComponent } from './users-page/update-profile/update-profile.component';
+import { DeleteUserComponent } from './users-page/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import {FilterPipe} from './filter.pipe';
     ModulePageComponent,
     FilterPipe,
     UserOutComponent,
-    UpdateUserComponent,
+    ChangeRoleUserComponent,
+    UpdateProfileComponent,
+    DeleteUserComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,9 @@ import {FilterPipe} from './filter.pipe';
     MaterialModule,
     FormModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatMenuModule,
+    FlexModule
   ],
   providers: [
     {
