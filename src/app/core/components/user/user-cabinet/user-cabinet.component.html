@@ -3,17 +3,31 @@
   <h1>Мій Кабінет</h1>
   <hr>
 
-  <mat-card *ngIf="user">
-    <p>Ім'я: {{user.name}}</p>
-    <p>Прізвище: {{user.surname}}</p>
+  <mat-card *ngIf="user" class="userInfoBlock">
 
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            (click)="openEditing()">
-      <mat-icon aria-hidden="false">create</mat-icon>
-      Редагувати
-    </button>
+    <div class="avatarBlock">
+      <div class="avatar"></div>
+    </div>
+
+    <div class="mainInfoBlock">
+
+      <div class="info">
+        <p>Ім'я: {{user.name}}</p>
+        <p>Прізвище: {{user.surname}}</p>
+        <p>email:</p>
+        <p>Номер телефону: </p>
+      </div>
+
+      <button mat-raised-button
+              color="primary"
+              type="button"
+              (click)="openEditing()">
+        <mat-icon aria-hidden="false">create</mat-icon>
+        Редагувати
+      </button>
+    </div>
+
+
   </mat-card>
 
 </div>

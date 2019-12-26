@@ -1,0 +1,24 @@
+.userInfoBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.avatarBlock {
+  width: 20%
+}
+
+.mainInfoBlock {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar {
+  background-color: #673ab7;
+  width: 130px;
+  height: 180px;
+}
+
+button {
+  height: 40px;
+}
