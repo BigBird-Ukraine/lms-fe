@@ -20,8 +20,8 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
   }
 
-  updateUser(user): Observable<UserModel> {
-    return this.http.patch<UserModel>(`${commonAuthPath}/users`, user);
+  updateUser(user): Observable<object> {
+    return this.http.patch<object>(`${commonAuthPath}/users`, user);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {

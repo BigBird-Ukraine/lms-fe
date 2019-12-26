@@ -5,31 +5,6 @@
         (ngSubmit)="editUser()"
   >
 
-    <div class="example-full-width">
-      <mat-icon aria-hidden="false" class="icon">person_outline</mat-icon>
-      <mat-form-field>
-        <input type="text" matInput
-               placeholder="Змінити ім'я"
-               formControlName="name"
-        >
-        <mat-error *ngIf="editForm.get('name').hasError('pattern')">
-          Ім'я введено некоректно
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="example-full-width">
-      <mat-icon aria-hidden="false" class="icon">person</mat-icon>
-      <mat-form-field>
-        <input type="text" matInput
-               placeholder="Змінити прізвище"
-               formControlName="surname"
-        >
-        <mat-error *ngIf="editForm.get('surname').hasError('pattern')">
-          Прізвище введено некоректно
-        </mat-error>
-      </mat-form-field>
-    </div>
 
     <div class="example-full-width">
       <mat-icon aria-hidden="false" class="icon">email</mat-icon>
@@ -45,68 +20,30 @@
       </mat-form-field>
     </div>
 
-    <div class="example-full-width pass">
-      <mat-icon aria-hidden="false" class="icon">
-        vpn_key
-      </mat-icon>
-      <mat-form-field>
-        <input matInput
-               [type]="hide ? 'password' : 'text'"
-               placeholder="Змінити пароль"
-               formControlName="password"
-        >
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="hide = !hide"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide"
-        >
-          <mat-icon>
-            {{hide ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-        </button>
-
-        <mat-error
-          *ngIf="editForm.get('password').hasError('minlength')"
-        >
-          Пароль має містити щонайменше 8 символів
-        </mat-error>
-        <mat-error
-          *ngIf="editForm.get('password').hasError('pattern')"
-        >
-          Пароль має складатися з малих літер, великих літер, цифр та спеціальних символів
-        </mat-error>
-      </mat-form-field>
-    </div>
 
     <div class="example-full-width">
-      <mat-icon aria-hidden="false" class="icon">
-        vpn_key
-      </mat-icon>
+      <mat-icon aria-hidden="false" class="icon">phone_android</mat-icon>
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Підтвердження паролю"
-          [type]="hide2 ? 'password' : 'text'"
-          formControlName="confirmPassword"
-          >
-        <button
-          type="button"
-          mat-icon-button
-          matSuffix
-          (click)="hide2 = !hide2"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide2"
-        >
-          <mat-icon>
-            {{hide2 ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-        </button>
-
+        <span matPrefix>+38 &nbsp;</span>
+        <input matInput type="text"
+               formControlName="phone_number">
+        <mat-error *ngIf="editForm.get('phone_number').hasError('pattern')">
+          Номер телефону введено некоректно
+        </mat-error>
       </mat-form-field>
     </div>
+
+
+    <div class="example-full-width" style="margin: 5px 0 20px">
+      <p>
+      <mat-icon aria-hidden="false" class="icon">photo</mat-icon>
+        Оновити фото:
+      </p>
+      <input type="file"
+             (change)="fileChange($event)"
+      >
+    </div>
+
 
     <button mat-raised-button
             color="primary"
