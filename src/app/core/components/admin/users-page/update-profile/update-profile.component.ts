@@ -23,7 +23,7 @@ export class UpdateProfileComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
 
   ) {
-    this.user = this.data.user
+    this.user = this.data.user;
   }
 
   ngOnInit() {

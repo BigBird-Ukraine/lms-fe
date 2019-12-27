@@ -5,6 +5,8 @@ import {AuthService} from '../../../services/auth';
 import {IUserSubjectModel} from '../../../interface';
 import {MatDialog} from '@angular/material';
 import {EditUserComponent} from '../edit-user/edit-user.component';
+import {UpdateProfileComponent} from '../../admin/users-page/update-profile/update-profile.component';
+import {IUser} from '../../admin/interfaces';
 
 @Component({
   selector: 'app-user-cabinet',
@@ -33,6 +35,12 @@ export class UserCabinetComponent implements OnInit {
   }
 
   openEditing() {
-    this.dialog.open(EditUserComponent);
+    this.dialog.open(EditUserComponent, {
+      data: {user: this.user}
+    }).afterClosed().subscribe(value => {
+      if (value) {
+        this.user = value;
+      }
+    });
   }
 }
