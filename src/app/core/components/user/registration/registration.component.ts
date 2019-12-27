@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {matchPassword} from '../../../../shared/validators';
 import {UserModel} from '../../../interface';
 import {UserService} from '../../../services';
-import {regExp} from '../../../constans';
+import {fileConfigs, regExp} from '../../../constans';
 import {CustomSnackbarService} from '../../../../shared';
 
 @Component({
@@ -64,19 +64,14 @@ export class RegistrationComponent implements OnInit {
     if (photo.target.files.length > 0) {
       const file = photo.target.files[0];
 
-      if (file.type === 'image/gif' ||
-        file.type === 'image/jpeg' ||
-        file.type === 'image/pjpeg' ||
-        file.type === 'image/png' ||
-        file.type === 'image/webp') {
-        if (file.size < 5 * 1024 * 1024) {
-          this.registrationForm.get('photo_path').setValue(file);
-        } else {
-          this.customSnackbarService.open('Завантажте менше фото');
-        }
-      } else {
+      if (!fileConfigs.PHOTO_MIMETYPES.includes(file.type)) {
         this.customSnackbarService.open('Дозволені формати: gif, jpeg, pjpeg, png, webp');
       }
+
+      if (file.size > fileConfigs.MAX_PHOTO_SIZE) {
+        this.customSnackbarService.open('Розмір фото перевищено');
+      }
+      this.registrationForm.get('photo_path').setValue(file);
     }
   }
 
@@ -98,8 +93,6 @@ export class RegistrationComponent implements OnInit {
         this.dialog.closeAll();
       },
       () => this.customSnackbarService.open('Не вдала спроба', ''));
-
-    console.log(this.registrationForm.value.photo_path);
   }
 }
 
