@@ -56,7 +56,18 @@
       </mat-form-field>
     </div>
 
-    <!--    TODO -->
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false" class="icon">phone_android</mat-icon>
+      <mat-form-field>
+        <span matPrefix>+38 &nbsp;</span>
+        <input matInput type="text"
+               formControlName="phone_number">
+        <mat-error *ngIf="registrationForm.get('phone_number').hasError('pattern')">
+          Номер телефону введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <div class="example-full-width pass">
       <mat-icon aria-hidden="false" class="icon">
         vpn_key
@@ -127,6 +138,13 @@
           Введіть пароль ще раз для підтвердження
         </mat-error>
       </mat-form-field>
+    </div>
+
+    <div class="example-full-width" style="margin: 30px">
+      <mat-icon aria-hidden="false" class="icon">insert_photo</mat-icon>
+      <input type="file"
+             (change)="fileChange($event)"
+      >
     </div>
 
     <!--    <button mat-raised-button-->
