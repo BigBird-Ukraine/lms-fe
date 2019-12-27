@@ -64,16 +64,19 @@ export class RegistrationComponent implements OnInit {
     if (photo.target.files.length > 0) {
       const file = photo.target.files[0];
 
-      if ((file.type === 'image/gif' ||
+      if (file.type === 'image/gif' ||
         file.type === 'image/jpeg' ||
         file.type === 'image/pjpeg' ||
         file.type === 'image/png' ||
-        file.type === 'image/webp') &&
-        file.size < 5 * 1024 * 1024) {
-        this.registrationForm.get('photo_path').setValue(file);
+        file.type === 'image/webp') {
+        if (file.size < 5 * 1024 * 1024) {
+          this.registrationForm.get('photo_path').setValue(file);
+        }
+        this.customSnackbarService.open('Завантажте менше фото');
+      }
+      this.customSnackbarService.open('Дозволені формати: gif, jpeg, pjpeg, png, webp');
       }
     }
-  }
 
   newUser() {
     const data: UserModel = {
