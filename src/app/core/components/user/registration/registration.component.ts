@@ -44,9 +44,9 @@ export class RegistrationComponent implements OnInit {
           Validators.required,
           Validators.email
         ]),
-        // phone_number: this.fb.control(null, [
-        //   Validators.pattern(regExp.phone)
-        // ]),
+        phone_number: this.fb.control(null, [
+          Validators.pattern(regExp.phone)
+        ]),
         password: this.fb.control(null, [
           Validators.required,
           Validators.pattern(regExp.passwordRegexp),
@@ -83,7 +83,7 @@ export class RegistrationComponent implements OnInit {
       name: this.registrationForm.value.name,
       surname: this.registrationForm.value.surname,
       email: this.registrationForm.value.email,
-      // phone_number: this.registrationForm.value.phone_number,
+      phone_number: this.registrationForm.value.phone_number,
       password: this.registrationForm.value.password,
       photo_path: this.registrationForm.value.photo_path
     };
