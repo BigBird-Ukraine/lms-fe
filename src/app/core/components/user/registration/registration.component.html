@@ -65,9 +65,6 @@
         <span matPrefix>+38 &nbsp;</span>
         <input matInput type="text"
                formControlName="phone_number">
-        <mat-error *ngIf="registrationForm.get('phone_number').hasError('required')">
-          Введіть, будь ласка, номер телефону
-        </mat-error>
         <mat-error *ngIf="registrationForm.get('phone_number').hasError('pattern')">
           Номер телефону введено некоректно
         </mat-error>
