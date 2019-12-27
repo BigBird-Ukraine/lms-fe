@@ -71,12 +71,14 @@ export class RegistrationComponent implements OnInit {
         file.type === 'image/webp') {
         if (file.size < 5 * 1024 * 1024) {
           this.registrationForm.get('photo_path').setValue(file);
+        } else {
+          this.customSnackbarService.open('Завантажте менше фото');
         }
-        this.customSnackbarService.open('Завантажте менше фото');
-      }
-      this.customSnackbarService.open('Дозволені формати: gif, jpeg, pjpeg, png, webp');
+      } else {
+        this.customSnackbarService.open('Дозволені формати: gif, jpeg, pjpeg, png, webp');
       }
     }
+  }
 
   newUser() {
     const data: UserModel = {
