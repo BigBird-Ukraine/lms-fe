@@ -75,7 +75,7 @@ export class RegistrationComponent implements OnInit {
       email: this.registrationForm.value.email,
       phone_number: this.registrationForm.value.phone_number,
       password: this.registrationForm.value.password,
-      // photo_path: this.registrationForm.value.photo_path
+      photo_path: this.registrationForm.value.photo_path
     };
     this.createUser(data);
   }
