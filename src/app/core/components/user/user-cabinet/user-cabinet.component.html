@@ -6,7 +6,9 @@
   <mat-card *ngIf="user" class="userInfoBlock">
 
     <div class="avatarBlock">
-      <div class="avatar"></div>
+      <div class="avatar">
+        <img [src]="userPhoto">
+      </div>
     </div>
 
     <div class="mainInfoBlock">

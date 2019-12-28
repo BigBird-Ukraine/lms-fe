@@ -18,8 +18,9 @@ export class UserCabinetComponent implements OnInit {
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
 
-  userMail: string;
-  userPhone: string;
+  userMail: string; // should takes from subject
+  userPhone: string; // should takes from subject
+  userPhoto: string; // should takes from subject
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -42,9 +43,9 @@ export class UserCabinetComponent implements OnInit {
       data: {user: this.user}
     }).afterClosed().subscribe((value) => {
       if (value) {
-        this.user = value.data;
         this.userMail = value.data.email;
         this.userPhone = value.data.phone_number;
+        this.userPhoto = value.data.photo_path;
       }
     });
   }

@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
     this.editForm = this.fb.group({
         email: this.fb.control(null, [Validators.email]),
         phone_number: this.fb.control(null, [Validators.pattern(regExp.phone)]),
-        // photo_path: ''
+        photo_path: ''
       },
     );
   }

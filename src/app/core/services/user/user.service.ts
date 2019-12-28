@@ -34,7 +34,7 @@ export class UserService {
     const formData: FormData = new FormData();
     const {...body} = user;
 
-    // formData.append('files', user.photo_path);
+    formData.append('files', user.photo_path);
 
     const strings = Object.keys(body);
     strings.forEach(key => {
