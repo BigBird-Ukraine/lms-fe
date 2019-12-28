@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
   userName = '';
   userId: string;
   isStudent: boolean;
+  isTeacher: boolean;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
 
@@ -34,6 +35,7 @@ export class HomePageComponent implements OnInit {
             this.userName = user.name;
             this.userId = user._id;
             this.isStudent = user.role_id === UserRolesEnum.STUDENT;
+            this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
           });
         }
         // else {
@@ -58,5 +60,5 @@ export class HomePageComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe();
   }
-
 }
+
