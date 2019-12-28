@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
-import {IUserSubjectModel} from '../../../interface';
+import {IUserSubjectModel, UserModel} from '../../../interface';
 import {MatDialog} from '@angular/material';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {UpdateProfileComponent} from '../../admin/users-page/update-profile/update-profile.component';
@@ -17,6 +17,9 @@ export class UserCabinetComponent implements OnInit {
   user: Partial<IUserSubjectModel>;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
+
+  userMail: string;
+  userPhone: string;
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -37,9 +40,11 @@ export class UserCabinetComponent implements OnInit {
   openEditing() {
     this.dialog.open(EditUserComponent, {
       data: {user: this.user}
-    }).afterClosed().subscribe(value => {
+    }).afterClosed().subscribe((value) => {
       if (value) {
-        this.user = value;
+        this.user = value.data;
+        this.userMail = value.data.email;
+        this.userPhone = value.data.phone_number;
       }
     });
   }

@@ -21,28 +21,28 @@
     </div>
 
 
-<!--    <div class="example-full-width">-->
-<!--      <mat-icon aria-hidden="false" class="icon">phone_android</mat-icon>-->
-<!--      <mat-form-field>-->
-<!--        <span matPrefix>+38 &nbsp;</span>-->
-<!--        <input matInput type="text"-->
-<!--               formControlName="phone_number">-->
-<!--        <mat-error *ngIf="editForm.get('phone_number').hasError('pattern')">-->
-<!--          Номер телефону введено некоректно-->
-<!--        </mat-error>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-
-    <div class="example-full-width" style="margin: 5px 0 20px">
-      <p>
-      <mat-icon aria-hidden="false" class="icon">photo</mat-icon>
-        Оновити фото:
-      </p>
-      <input type="file"
-             (change)="fileChange($event)"
-      >
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false" class="icon">phone_android</mat-icon>
+      <mat-form-field>
+        <span matPrefix>+38 &nbsp;</span>
+        <input matInput type="text"
+               formControlName="phone_number">
+        <mat-error *ngIf="editForm.get('phone_number').hasError('pattern')">
+          Номер телефону введено некоректно
+        </mat-error>
+      </mat-form-field>
     </div>
+
+
+<!--    <div class="example-full-width" style="margin: 5px 0 20px">-->
+<!--      <p>-->
+<!--      <mat-icon aria-hidden="false" class="icon">photo</mat-icon>-->
+<!--        Оновити фото:-->
+<!--      </p>-->
+<!--      <input type="file"-->
+<!--             (change)="fileChange($event)"-->
+<!--      >-->
+<!--    </div>-->
 
 
     <button mat-raised-button
