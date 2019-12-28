@@ -23,12 +23,21 @@
           *ngIf="!isStudent && userName"
   >Мої питання
 
-  </button>  <button mat-raised-button
+  </button>
+  <button mat-raised-button
           color="primary"
           type="button"
           [routerLink]="['/tests/my']"
           *ngIf="isStudent && userName"
   >Мої тести
+  </button>
+
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          [routerLink]="['/lessons']"
+          *ngIf="userName"
+  >Уроки
   </button>
 
   <button mat-raised-button
@@ -44,26 +53,30 @@
           type="button"
           (click)="openRegForm()"
           *ngIf="!userName"
-  > Зареєструватися </button>
+  > Зареєструватися
+  </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="openLogForm()"
           *ngIf="!userName"
-  > Увійти </button>
+  > Увійти
+  </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           [routerLink]="['/user', userId]"
           *ngIf="userName"
-  > Мій кабінет </button>
+  > Мій кабінет
+  </button>
 
   <button mat-raised-button
           color="primary"
           type="button"
           (click)="logout()"
           *ngIf="userName"
-  > Вийти </button>
+  > Вийти
+  </button>
 </div>
