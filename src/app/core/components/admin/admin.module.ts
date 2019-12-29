@@ -21,6 +21,9 @@ import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role
 import {FilterPipe} from './filter.pipe';
 import { UpdateProfileComponent } from './users-page/update-profile/update-profile.component';
 import { DeleteUserComponent } from './users-page/delete-user/delete-user.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {LoaderComponent} from "../../../shared/components/loader/loader.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { DeleteUserComponent } from './users-page/delete-user/delete-user.compon
     ChangeRoleUserComponent,
     UpdateProfileComponent,
     DeleteUserComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,9 @@ import { DeleteUserComponent } from './users-page/delete-user/delete-user.compon
     MatListModule,
     MatAutocompleteModule,
     MatMenuModule,
-    FlexModule
+    FlexModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

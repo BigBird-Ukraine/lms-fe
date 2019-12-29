@@ -14,15 +14,19 @@ import {UserOutComponent} from './users-page/user-out/user-out.component';
 
 const routes: Routes = [
   {
-    path: 'adminPanel', component: MainAdminComponent, canActivate: [AuthAdminGuard], canActivateChild: [AuthAdminGuard], children: [
+    path: 'adminPanel',
+    component: MainAdminComponent,
+    canActivate: [AuthAdminGuard],
+    canActivateChild: [AuthAdminGuard],
+    children: [
       {path: 'statistics', component: StatisticsPageComponent},
       {
         path: 'users', component: UsersPageComponent, children: [
-          {path: '', redirectTo: 'all', pathMatch: 'full'},
+          // {path: '', redirectTo: 'all', pathMatch: 'full'},
           // {path: 'admins', component: UserOutComponent},
           // {path: 'teachers', component: UserOutComponent},
           // {path: 'students', component: UserOutComponent},
-          {path: 'all', component: UserOutComponent},
+          {path: '', component: UserOutComponent},
 
         ]
       },

@@ -35,6 +35,7 @@ import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
   exports: [
     UserRoutingModule,
     MatDialogModule,
+    RegistrationComponent,
   ]
 })
 export class UserModule {
