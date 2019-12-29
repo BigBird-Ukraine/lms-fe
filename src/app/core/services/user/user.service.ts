@@ -17,7 +17,17 @@ export class UserService {
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
 
   createUser(user): Observable<UserModel> {
-    return this.http.post<UserModel>(`${commonAuthPath}/users`, user);
+    const formData: FormData = new FormData();
+    const {photo_path, ...body} = user;
+
+    formData.append('files', user.photo_path);
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.http.post<UserModel>(`${commonAuthPath}/users`, formData);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {
