@@ -5,7 +5,5 @@ export interface IUserSubjectModel {
   status_id: number;
   _id?: string;
   photo_path?: string;
-  group?: {
-    label: string
-  };
+  groups_id?: [string];
 }
