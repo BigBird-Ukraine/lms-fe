@@ -42,8 +42,8 @@ export class EditUserComponent implements OnInit {
   }
 
   fileChange(photo) {
-    if (photo.target.files.length > 0) {
-      const file = photo.target.files[0];
+    if (photo.target.files.length) {
+      const [file] = photo.target.files;
 
       if (!fileConfigs.PHOTO_MIMETYPES.includes(file.type)) {
         this.customSnackbarService.open('Дозволені формати: gif, jpeg, pjpeg, png, webp');
@@ -59,6 +59,7 @@ export class EditUserComponent implements OnInit {
   editUser() {
     const data: IUserEdit = this.editForm.value;
     const id: string = this.data.user._id;
+
     this.updateUser(id, data);
   }
 

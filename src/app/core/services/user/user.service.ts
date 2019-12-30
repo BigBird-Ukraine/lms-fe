@@ -32,12 +32,15 @@ export class UserService {
 
   updateUser(id, user): Observable<UserModel> {
     const formData: FormData = new FormData();
-    const {...body} = user;
+    const {photo_path, ...body} = user;
 
-    formData.append('files', user.photo_path);
+    formData.append('files', photo_path);
 
     const strings = Object.keys(body);
     strings.forEach(key => {
+      if (!body[key]) {
+        delete body[key];
+      }
       formData.append(key, body[key]);
     });
 
