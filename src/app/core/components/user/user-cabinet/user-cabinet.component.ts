@@ -5,6 +5,7 @@ import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
 import {IUserSubjectModel} from '../../../interface';
 import {EditUserComponent} from '../edit-user/edit-user.component';
+import {config} from '../../../../shared/config';
 
 @Component({
   selector: 'app-user-cabinet',
@@ -15,6 +16,7 @@ export class UserCabinetComponent implements OnInit {
   user: Partial<IUserSubjectModel>;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
+  path = config.authUrl;
 
   userMail: string; // should takes from subject
   userPhone: string; // should takes from subject
