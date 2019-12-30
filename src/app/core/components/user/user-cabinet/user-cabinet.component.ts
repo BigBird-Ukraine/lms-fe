@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
-import {IUserSubjectModel} from '../../../interface';
+import {IUser, IUserSubjectModel} from '../../../interface';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {config} from '../../../../shared/config';
 
@@ -41,7 +41,7 @@ export class UserCabinetComponent implements OnInit {
   openEditing() {
     this.dialog.open(EditUserComponent, {
       data: {user: this.user}
-    }).afterClosed().subscribe((value) => {
+    }).afterClosed().subscribe((value: IUser) => {
       if (value) {
         this.userMail = value.data.email;
         this.userPhone = value.data.phone_number;

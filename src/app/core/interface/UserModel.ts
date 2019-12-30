@@ -8,3 +8,13 @@ export interface UserModel {
   photo_path?: string;
   passed_tests_id?: [string];
 }
+
+export interface IUser {
+  data: UserModel;
+}
+
+export interface IUserEdit {
+  email?: string;
+  phone_number?: string;
+  photo_path?: string;
+}

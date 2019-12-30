@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
 import {AuthService, UserService} from '../../../services';
 import {CustomSnackbarService} from '../../../../shared';
-import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth-user',

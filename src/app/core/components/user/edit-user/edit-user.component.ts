@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material';
 import {CustomSnackbarService} from '../../../../shared/services';
 import {UserService} from '../../../services/user';
 import {fileConfigs, regExp} from '../../../constans';
-import {UserModel} from '../../../interface';
+import {IUserEdit, UserModel} from '../../../interface';
 
 
 @Component({
@@ -57,13 +57,13 @@ export class EditUserComponent implements OnInit {
   }
 
   editUser() {
-    const data = this.editForm.value;
-    const id = this.data.user._id;
+    const data: IUserEdit = this.editForm.value;
+    const id: string = this.data.user._id;
     this.updateUser(id, data);
   }
 
-  updateUser(id, user) {
-    this.userService.updateUser(id, user).subscribe((value) => {
+  updateUser(id: string, user: IUserEdit) {
+    this.userService.updateUser(id, user).subscribe((value: UserModel) => {
         this.customSnackbarService.open('Редагування пройшло успішно', 'success');
         this.dialogRef.close(value);
       },

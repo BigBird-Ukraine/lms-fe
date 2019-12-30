@@ -30,7 +30,7 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, formData);
   }
 
-  updateUser(id, user): Observable<object> {
+  updateUser(id, user): Observable<UserModel> {
     const formData: FormData = new FormData();
     const {...body} = user;
 
@@ -41,7 +41,7 @@ export class UserService {
       formData.append(key, body[key]);
     });
 
-    return this.http.patch<object>(`${commonAuthPath}/users` + `/${id}`, formData);
+    return this.http.patch<UserModel>(`${commonAuthPath}/users` + `/${id}`, formData);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {
