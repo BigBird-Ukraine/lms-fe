@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
-import {IUserSubjectModel, UserModel} from '../../../interface';
-import {MatDialog} from '@angular/material';
+import {IUserSubjectModel} from '../../../interface';
 import {EditUserComponent} from '../edit-user/edit-user.component';
-import {UpdateProfileComponent} from '../../admin/users-page/update-profile/update-profile.component';
-import {IUser} from '../../admin/interfaces';
 
 @Component({
   selector: 'app-user-cabinet',

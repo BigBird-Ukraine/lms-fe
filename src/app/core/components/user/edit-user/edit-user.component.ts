@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatDialog} from '@angular/material';
 
 import {CustomSnackbarService} from '../../../../shared/services';
 import {UserService} from '../../../services/user';
 import {fileConfigs, regExp} from '../../../constans';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {UserModel} from '../../../interface';
 
 
@@ -34,9 +34,9 @@ export class EditUserComponent implements OnInit {
 
   formData() {
     this.editForm = this.fb.group({
-        email: this.fb.control(null, [Validators.email]),
-        phone_number: this.fb.control(null, [Validators.pattern(regExp.phone)]),
-        photo_path: ''
+        email: this.fb.control(this.user.email, [Validators.email]),
+        phone_number: this.fb.control(this.user.phone_number, [Validators.pattern(regExp.phone)]),
+        photo_path: this.user.photo_path
       },
     );
   }
