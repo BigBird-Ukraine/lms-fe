@@ -1,4 +1,11 @@
-import {MatAutocompleteModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonModule, MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -22,7 +29,9 @@ import {FilterPipe} from './filter.pipe';
     MatAutocompleteModule,
     MatButtonModule,
     MatInputModule,
-    CommonModule
+    CommonModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   exports: []
 })
