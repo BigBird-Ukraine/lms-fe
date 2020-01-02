@@ -1,7 +1,52 @@
 <button mat-raised-button
         color="primary"
         type="button"
+        class="nav-btn"
         *ngIf="isTeacher"
         (click)="openForm()"
 >Додати урок
 </button>
+
+<button mat-raised-button
+        color="primary"
+        type="button"
+        class="nav-btn"
+        (click)="allLessons()"
+>Список уроків
+</button>
+
+<div *ngIf="showAllLessons"
+     class="lesson-layout">
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let lesson of lessonsList">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Урок {{lesson.number}}.
+          {{ lesson.label}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="lesson-inner">
+
+        <mat-card class="video">
+        </mat-card>
+
+        <p>{{lesson.description}}</p>
+
+      </div>
+
+      <mat-action-row>
+        <button mat-button
+                color="primary"
+                type="button"
+                (click)="viewLesson(lesson._id)">
+          Почати
+        </button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
