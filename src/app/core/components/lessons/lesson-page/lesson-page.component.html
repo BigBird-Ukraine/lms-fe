@@ -97,6 +97,15 @@
       Шукати
     </button>
 
+    <button mat-raised-button
+            color="primary"
+            type="button"
+            class="nav-btn"
+            *ngIf="isTeacher"
+            (click)="myLessons()"
+    >Мої уроки
+    </button>
+
   </form>
 
   <mat-accordion>
@@ -118,6 +127,14 @@
       </div>
 
       <mat-action-row>
+        <button mat-button
+                color="primary"
+                type="button"
+                *ngIf="isMyLesson"
+                (click)="editLesson(lesson._id)">
+          Редагувати
+        </button>
+
         <button mat-button
                 color="primary"
                 type="button"

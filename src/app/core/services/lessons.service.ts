@@ -42,4 +42,18 @@ export class LessonsService {
       })
     });
   }
+
+  getMyLessons(): Observable<IFullLesson> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<IFullLesson>(`${commonAuthPath}/lessons/my`, options);
+  }
+
+  editLesson(id, lesson): Observable<object> {
+    return this.http.patch<object>(`${commonAuthPath}/lessons` + `${id}`, lesson);
+  }
 }
