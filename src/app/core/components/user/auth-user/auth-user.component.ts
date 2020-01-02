@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
 import {AuthService, UserService} from '../../../services';
 import {CustomSnackbarService} from '../../../../shared';
@@ -19,7 +20,8 @@ export class AuthUserComponent implements OnInit {
               private customSnackbarService: CustomSnackbarService,
               private authService: AuthService,
               private userService: UserService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              public dialogRef: MatDialogRef<AuthUserComponent>) {
   }
 
   ngOnInit() {
@@ -39,9 +41,8 @@ export class AuthUserComponent implements OnInit {
   }
 
   login() {
-    this.authService.authUser(this.authForm.value).subscribe(() => {
-          this.dialog.closeAll();
-          this.userService.userInfo.subscribe();
+    this.authService.authUser(this.authForm.value).subscribe((value) => {
+          this.dialogRef.close(value);
           this.customSnackbarService.open('Логін успішний', 'success');
         }, () => {
       this.customSnackbarService.open('Юзера не знайдено', '');

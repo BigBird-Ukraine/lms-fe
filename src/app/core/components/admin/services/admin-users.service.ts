@@ -46,6 +46,6 @@ export class AdminUsersService {
   }
 
   updateProfile(id: string, value: any): Observable<IUser> {
-    return this.httpClient.patch<IUser>(this.urlUsers + `/${id}`, value)
+    return this.httpClient.patch<IUser>(this.urlUsers + `/${id}`, value);
   }
 }

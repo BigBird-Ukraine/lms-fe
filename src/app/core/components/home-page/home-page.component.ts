@@ -54,8 +54,18 @@ export class HomePageComponent implements OnInit {
   }
 
   openLogForm() {
-    this.dialog.open(AuthUserComponent);
+    this.dialog.open(AuthUserComponent).afterClosed().subscribe(value => {
+      this.userService.getUserInfoByToken(value.data.accessToken)
+        .subscribe(() => {
+          if (this.userInfo.subscribe()) {
+            this.userInfo.subscribe(user => {
+              this.userName = user.name;
+            });
+          }
+        });
+    });
   }
+
 
   logout() {
     this.authService.logout().subscribe();
