@@ -18,6 +18,87 @@
 <div *ngIf="showAllLessons"
      class="lesson-layout">
 
+  <form [formGroup]="filterLessonsForm"
+        (ngSubmit)="showFiltered()"
+        (keydown.enter)="$event.preventDefault()">
+
+    <mat-form-field>
+
+      <input type="text"
+             placeholder="Назва уроку"
+             matInput
+             formControlName="label"
+             [matAutocomplete]="autoLesson"
+             #searchLesson
+      >
+      <mat-autocomplete autoActiveFirstOption
+                        #autoLesson="matAutocomplete">
+        <mat-option *ngFor="let lesson of lessonsForAutocomplete | filter: searchLesson.value" [value]="lesson">
+          {{lesson}}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+    <mat-form-field>
+    <input type="text"
+           placeholder="Номер уроку"
+           matInput
+           formControlName="number"
+           [matAutocomplete]="autoNumber"
+    >
+    <mat-autocomplete autoActiveFirstOption
+                      #autoNumber="matAutocomplete">
+      <mat-option *ngFor="let lesson of lessonsNumberForAutocomplete" [value]="lesson">
+        {{lesson}}
+      </mat-option>
+    </mat-autocomplete>
+
+    </mat-form-field>
+
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Теги"
+               formGroupName="tags"
+               (keyup.enter)="newTag($event)"
+               [matAutocomplete]="autoTag"
+               #searchTag
+        >
+
+        <mat-autocomplete autoActiveFirstOption
+                          #autoTag="matAutocomplete">
+          <mat-option
+            *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
+            [value]="tag">
+            {{tag}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <div *ngFor="let tag of tags"
+             class="block">
+          {{tag}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delTag(tag)">
+            &times;
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="submit"
+            color="primary"
+            mat-raised-button
+    >
+      Шукати
+    </button>
+
+  </form>
+
   <mat-accordion>
     <mat-expansion-panel *ngFor="let lesson of lessonsList">
       <mat-expansion-panel-header>

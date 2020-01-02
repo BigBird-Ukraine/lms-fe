@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {IFullLesson, ILesson} from '../interface';
@@ -33,5 +33,13 @@ export class LessonsService {
     };
 
     return this.http.get<IFullLesson>(`${commonAuthPath}/lessons`, options);
+  }
+
+  getLessonsByParams(params): Observable<IFullLesson> {
+    return this.http.get<IFullLesson>(`${commonAuthPath}/lessons`, {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
   }
 }
