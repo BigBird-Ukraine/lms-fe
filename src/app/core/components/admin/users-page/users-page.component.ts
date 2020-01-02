@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup} from "@angular/forms";
-import {debounceTime, distinctUntilChanged, tap} from "rxjs/operators";
+import {debounceTime, switchMap, take} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 import {AdminUsersService} from '../services';
 import {UserRolesEnum} from "../../../../shared/enums";
@@ -16,10 +17,10 @@ import {IPaginator, IUserModel} from "../interfaces";
 export class UsersPageComponent implements OnInit {
   getUsers: IUserModel;
   form: FormGroup;
-  params: any;
   length: number;
   pageSize: number = 50;
   pageIndex: number = 0;
+  subject = new Subject<any>();
   roles = [
     {name: 'Всі', value: ''},
     {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
@@ -30,18 +31,21 @@ export class UsersPageComponent implements OnInit {
 
   constructor(private adminUsersService: AdminUsersService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute
+  ) {
+    this.subject.pipe(
+      debounceTime(500)
+    ).subscribe(() => this.getFilteredUsers())
   }
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl(null),
-      surname: new FormControl(null),
-      email: new FormControl(null),
-      phone_number: new FormControl(null),
-      role_id: new FormControl(null)
+      name: new FormControl(''),
+      surname: new FormControl(''),
+      email: new FormControl(''),
+      phone_number: new FormControl(''),
+      role_id: new FormControl('')
     });
-
     this.getFilteredUsers();
   }
 
@@ -70,28 +74,18 @@ export class UsersPageComponent implements OnInit {
       }
     });
 
-    this.route.queryParams
-      .subscribe((params: Params) => {
-        this.params = params;
-      });
-
-    setTimeout(() => {
-      this.adminUsersService.getAll(this.params)
-        .subscribe(value => {
-          this.length = value.data.count;
-          this.getUsers = value.data;
-        })
-    }, 200);
+    this.route.queryParams.pipe(
+      switchMap(value => {
+        return this.adminUsersService.getAll(value)
+      }),
+      take(1),
+    ).subscribe(value => {
+      this.length = value.data.count;
+      this.getUsers = value.data
+    })
   }
 
-  inputFilter() {
-    // this.form.statusChanges.pipe(
-    //   debounceTime(1000),
-    //   distinctUntilChanged(),
-    //   tap(() => {
-    //     return this.getFilteredUsers()
-    //   })
-    // ).subscribe()
-    this.getFilteredUsers();
+  reset() {
+    this.ngOnInit();
   }
 }
