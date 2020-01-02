@@ -60,6 +60,7 @@ export class HomePageComponent implements OnInit {
           if (this.userInfo.subscribe()) {
             this.userInfo.subscribe(user => {
               this.userName = user.name;
+              this.isStudent = user.role_id === UserRolesEnum.STUDENT;
             });
           }
         });
