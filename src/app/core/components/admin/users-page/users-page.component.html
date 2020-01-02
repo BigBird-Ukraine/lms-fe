@@ -46,7 +46,7 @@
 
 <app-user-out [data]="getUsers"></app-user-out>
 
-<mat-paginator *ngIf="getUsers.users.length>15"
+<mat-paginator *ngIf="length > 15"
                [length]="length"
                [pageSize]="pageSize"
                [pageIndex]="pageIndex"
