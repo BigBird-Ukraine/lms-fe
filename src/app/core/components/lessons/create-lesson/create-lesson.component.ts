@@ -17,7 +17,7 @@ export class CreateLessonComponent implements OnInit {
   tagsForAutocomplete: Tags[] = [];
   tags: Tags[] = [];
 
-  constructor(private  fb: FormBuilder,
+  constructor(private fb: FormBuilder,
               private infoService: InfoHelperService,
               private lessonService: LessonsService,
               private customSnackbarService: CustomSnackbarService,
@@ -70,8 +70,6 @@ export class CreateLessonComponent implements OnInit {
     this.lessonForm.value.tags = this.tags;
 
     const lessonData: ILesson = this.lessonForm.value;
-
-    console.log(lessonData);
 
     this.lessonService.createLesson(lessonData).subscribe(() => {
       this.customSnackbarService.open('Урок додано', '');

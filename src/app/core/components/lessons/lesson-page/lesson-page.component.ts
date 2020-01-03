@@ -89,7 +89,7 @@ export class LessonPageComponent implements OnInit {
   getLessons() {
     this.lessonService.getAllLessons().subscribe((lessons: IFullLesson) => {
       this.lessonsList = lessons.data.lesson.sort((a, b) => {
-         return (a.number - b.number);
+        return (a.number - b.number);
       });
       this.lessonsForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.label);
       this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
@@ -148,7 +148,10 @@ export class LessonPageComponent implements OnInit {
     });
   }
 
-  editLesson() {
-    this.dialog.open(EditLessonComponent);
+  editLesson(id: string) {
+    this.lesson = this.lessonsList.find(lesson => lesson._id === id);
+    this.dialog.open(EditLessonComponent, {
+      data: {lesson: this.lesson}
+    }).afterClosed().subscribe((value: ILesson) => this.lesson = value);
   }
 }

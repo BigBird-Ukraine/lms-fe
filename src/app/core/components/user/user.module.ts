@@ -13,7 +13,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {UserRoutingModule} from './user-routing.module';
 import {AuthUserComponent} from './auth-user/auth-user.component';
 import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
+import {EditUserComponent} from './edit-user/edit-user.component';
 
 
 @NgModule({

@@ -6,7 +6,7 @@ export interface ILesson {
   label: string;
   description: string;
   video_path: string;
-  tags: Tags;
+  tags: Tags[];
   module_id: string;
   tests?: [string];
   user_id: string;
