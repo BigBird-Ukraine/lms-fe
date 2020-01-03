@@ -15,7 +15,7 @@ import {DeleteUserComponent} from "../delete-user/delete-user.component";
   styleUrls: ['./user-out.component.scss']
 })
 export class UserOutComponent implements OnInit {
-  @Input() users: IUserModel;
+  @Input() data: IUserModel;
   isBlocked = UserStatusEnum.BLOCKED;
   roles = [
     {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
@@ -35,25 +35,25 @@ export class UserOutComponent implements OnInit {
 
 
   blockUser(user: IUser): void {
-    const index: number = this.users.data.indexOf(user);
+    const index: number = this.data.users.indexOf(user);
 
     if (user.status_id === UserStatusEnum.ACTIVE) {
       this.adminUsersService.blockUser(user._id).subscribe(() => {
         this.snackbarService.open('Користувача заблоковано');
-        this.users.data[index].status_id = UserStatusEnum.BLOCKED;
-        this.users.data[index].updated_at = this.updatedAt;
+        this.data.users[index].status_id = UserStatusEnum.BLOCKED;
+        this.data.users[index].updated_at = this.updatedAt;
       });
     }
   }
 
   unBlockUser(user: IUser): void {
-    const index: number = this.users.data.indexOf(user);
+    const index: number = this.data.users.indexOf(user);
 
     if (user.status_id === UserStatusEnum.BLOCKED) {
       this.adminUsersService.unBlockUser(user._id).subscribe(() => {
         this.snackbarService.open('Користувача розблоковано');
-        this.users.data[index].status_id = UserStatusEnum.ACTIVE;
-        this.users.data[index].updated_at = this.updatedAt;
+        this.data.users[index].status_id = UserStatusEnum.ACTIVE;
+        this.data.users[index].updated_at = this.updatedAt;
       });
     }
   }
@@ -64,22 +64,24 @@ export class UserOutComponent implements OnInit {
     }).afterClosed().subscribe(value => {
 
       if (value) {
-        const index: number = this.users.data.indexOf(user);
+        const index: number = this.data.users.indexOf(user);
         this.adminUsersService.deleteUser(user._id).subscribe(() => {
           this.snackbarService.open('Користувач видалений');
-          this.users.data.splice(index, 1);
+          this.data.users.splice(index, 1);
         });
       }
     })
-
   }
 
   openEditForm(user: IUser) {
     this.dialog.open(ChangeRoleUserComponent, {
       data: user
     }).afterClosed().subscribe((role: UserRolesEnum) => {
-      const index: number = this.users.data.indexOf(user);
-      this.users.data[index].role_id = role;
+
+      if (role) {
+        const index: number = this.data.users.indexOf(user);
+        this.data.users[index].role_id = role;
+      }
     });
   }
 
@@ -88,8 +90,8 @@ export class UserOutComponent implements OnInit {
       data: {user: user}
     }).afterClosed().subscribe((value: IUser) => {
       if (value) {
-        const index: number = this.users.data.indexOf(user);
-        this.users.data[index] = value;
+        const index: number = this.data.users.indexOf(user);
+        this.data.users[index] = value;
       }
     })
   }
@@ -97,5 +99,4 @@ export class UserOutComponent implements OnInit {
   private getNameOfRole(role: UserRolesEnum): string {
     return this.roles[role - 1].name;
   }
-
 }

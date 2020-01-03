@@ -37,6 +37,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   exports: [
     UserRoutingModule,
     MatDialogModule,
+    RegistrationComponent,
   ]
 })
 export class UserModule {

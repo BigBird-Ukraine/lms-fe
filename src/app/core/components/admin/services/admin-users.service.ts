@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {commonAdminPath} from '../../../../shared/api';
-import {IUser} from '../interfaces';
+import {IUser, IUserModel} from '../interfaces';
+import {Params} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class AdminUsersService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(): Observable<IUser> {
-    return this.httpClient.get<IUser>(this.urlUsers + '/');
-  }
-
-  getAllByRole(role: number): Observable<IUser> {
-    return this.httpClient.get<IUser>(this.urlUsers + `/all?role=${role}`);
+  getAll(params?): Observable<any> {
+    return this.httpClient.get<any>(this.urlUsers + '/', {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
   }
 
   blockUser(id: string): Observable<string> {
