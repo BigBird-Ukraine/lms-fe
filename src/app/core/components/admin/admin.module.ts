@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatAutocompleteModule, MatListModule} from '@angular/material';
-import {MatMenuModule} from '@angular/material/menu';
-import {FlexModule} from '@angular/flex-layout';
+import {MatMenuModule} from "@angular/material/menu";
+import {FlexModule} from "@angular/flex-layout";
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -21,6 +21,9 @@ import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role
 import {FilterPipe} from './filter.pipe';
 import {UpdateProfileComponent} from './users-page/update-profile/update-profile.component';
 import {DeleteUserComponent} from './users-page/delete-user/delete-user.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {LoaderComponent} from "../../../shared/components/loader/loader.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import {DeleteUserComponent} from './users-page/delete-user/delete-user.componen
     UserOutComponent,
     ChangeRoleUserComponent,
     UpdateProfileComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,9 @@ import {DeleteUserComponent} from './users-page/delete-user/delete-user.componen
     MatListModule,
     MatAutocompleteModule,
     MatMenuModule,
-    FlexModule
+    FlexModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

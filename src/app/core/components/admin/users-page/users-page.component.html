@@ -1,5 +1,58 @@
 <div class="buttons">
-  <button mat-raised-button color="primary" routerLinkActive="active" routerLink="all" (click)="getAll()">Всі</button>
   <button mat-raised-button color="primary">Створити</button>
 </div>
-<app-user-out [users]="getUsers"></app-user-out>
+<mat-toolbar class="filter-container">
+  <mat-card-content>
+    <form [formGroup]="form" (input)="subject.next()">
+      <span>Пошук по: &nbsp;</span>
+      <mat-form-field>
+        <mat-label>Прізвище</mat-label>
+        <input matInput type="text" formControlName="surname">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ім'я</mat-label>
+        <input matInput type="text" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Номер телефону</mat-label>
+        <input matInput type="text" formControlName="phone_number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Роль</mat-label>
+        <mat-select formControlName="role_id" (selectionChange)="getFilteredUsers()">
+          <mat-option *ngFor="let role of roles" [value]="role.value">{{role.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button (click)="reset()">
+        <mat-icon>clear_all</mat-icon>
+      </button>
+
+    </form>
+  </mat-card-content>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[25, 50, 100]"
+                 (page)="getFilteredUsers($event)">
+
+
+  </mat-paginator>
+</mat-toolbar>
+
+<app-user-out [data]="getUsers"></app-user-out>
+
+<mat-paginator *ngIf="length > 15"
+               [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [pageSizeOptions]="[25, 50, 100]"
+               (page)="getFilteredUsers($event)">
+</mat-paginator>

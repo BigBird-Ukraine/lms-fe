@@ -1,6 +1,6 @@
-<div *ngIf="users">
+<div *ngIf="data; else loader">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let user of users.data">
+    <mat-expansion-panel *ngFor="let user of data.users">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{user.surname}} {{user.name}}
@@ -8,7 +8,8 @@
       </mat-expansion-panel-header>
       <mat-toolbar class="tools">
         <span *ngIf="user.status_id === isBlocked">{{getNameOfRole(user.role_id)}}</span>
-        <span class="role_name" (click)="openEditForm(user)" *ngIf="user.status_id !== isBlocked">{{getNameOfRole(user.role_id)}}</span>
+        <span class="role_name" (click)="openEditForm(user)"
+              *ngIf="user.status_id !== isBlocked">{{getNameOfRole(user.role_id)}}</span>
         <div class="blockAndDelete">
           <button mat-raised-button color="warn" [hidden]="user.status_id === isBlocked" (click)="blockUser(user)">
             Заблокувати
@@ -49,3 +50,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
