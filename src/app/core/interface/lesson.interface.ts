@@ -1,10 +1,12 @@
+import {Tags} from './questionModel';
+
 export interface ILesson {
-  number: string | number;
+  number: number;
   _id?: string;
   label: string;
   description: string;
   video_path: string;
-  tags: [string];
+  tags: Tags;
   module_id: string;
   tests?: [string];
   user_id: string;
