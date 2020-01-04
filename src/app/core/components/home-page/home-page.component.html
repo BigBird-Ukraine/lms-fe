@@ -1,82 +1,9 @@
 <div class="home-container">
-  <h1>Home Page</h1>
-  <span *ngIf="userName"
-        class="userName"
-  >
-    Welcome {{userName}}
-  </span>
 
-  <hr>
+  <section class="intro">
 
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/add_questions']"
-          *ngIf="!isStudent && userName"
-  >Додати питання
-  </button>
+    <h1>Home Page</h1>
 
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/questions/my']"
-          *ngIf="!isStudent && userName"
-  >Мої питання
+  </section>
 
-  </button>
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/tests/my']"
-          *ngIf="isStudent && userName"
-  >Мої тести
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/lessons']"
-          *ngIf="userName"
-  >Уроки
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/questions']"
-          *ngIf="userName"
-  >Пройти тест
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          (click)="openRegForm()"
-          *ngIf="!userName"
-  > Зареєструватися
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          (click)="openLogForm()"
-          *ngIf="!userName"
-  > Увійти
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          [routerLink]="['/user', userId]"
-          *ngIf="userName"
-  > Мій кабінет
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          (click)="logout()"
-          *ngIf="userName"
-  > Вийти
-  </button>
 </div>

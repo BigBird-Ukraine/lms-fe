@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
 
-import {RegistrationComponent} from '../user/registration/registration.component';
-import {AuthUserComponent} from '../user/auth-user/auth-user.component';
 import {AuthService, UserService} from '../../services';
-import {UserRolesEnum} from '../../../shared/enums';
 
 @Component({
   selector: 'app-home-page',
@@ -14,14 +10,10 @@ import {UserRolesEnum} from '../../../shared/enums';
 export class HomePageComponent implements OnInit {
 
   userName = '';
-  userId: string;
-  isStudent: boolean;
-  isTeacher: boolean;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
 
-  constructor(private dialog: MatDialog,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
               private userService: UserService
   ) {
   }
@@ -30,46 +22,18 @@ export class HomePageComponent implements OnInit {
 
     this.userService.getUserInfoByToken(this.token)
       .subscribe(() => {
-        if (this.userInfo.subscribe()) {
+        if (this.userInfo.subscribe() && this.authService.isAuthenticated()) {
           this.userInfo.subscribe(user => {
             this.userName = user.name;
-            this.userId = user._id;
-            this.isStudent = user.role_id === UserRolesEnum.STUDENT;
-            this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
           });
         }
         // else {
         //   this.userService.getUserInfoByToken(this.token).subscribe();
         //   this.userInfo.subscribe(user => {
         //     this.userName = user.name;
-        //     this.isStudent = user.role_id === UserRoleEnum.STUDENT;
         //   });
         // }
       });
-
-  }
-
-  openRegForm() {
-    this.dialog.open(RegistrationComponent);
-  }
-
-  openLogForm() {
-    this.dialog.open(AuthUserComponent).afterClosed().subscribe(value => {
-      this.userService.getUserInfoByToken(value.data.accessToken)
-        .subscribe(() => {
-          if (this.userInfo.subscribe()) {
-            this.userInfo.subscribe(user => {
-              this.userName = user.name;
-              this.isStudent = user.role_id === UserRolesEnum.STUDENT;
-            });
-          }
-        });
-    });
-  }
-
-
-  logout() {
-    this.authService.logout().subscribe();
   }
 }
 

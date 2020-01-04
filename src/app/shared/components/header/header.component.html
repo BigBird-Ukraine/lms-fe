@@ -1,5 +1,84 @@
 <div class="header-container">
-  <img src="../../../../assets/images/lms_icon-1.png" alt="LMS LOGO"
-       (click)="redirectToHome()"
-  class="logo">
+
+  <div>
+    <img src="../../../../assets/images/lms_icon-1.png" alt="LMS LOGO"
+         (click)="redirectToHome()"
+         class="logo">
+    <p *ngIf="userName"
+       class="userName"
+    >
+      <mat-icon aria-hidden="false" class="icon">mood</mat-icon>
+      {{userName}}
+    </p>
+  </div>
+
+  <mat-nav-list class="nav">
+
+    <a
+      [matMenuTriggerFor]="menu"
+      *ngIf="userName"
+    >Меню
+    </a>
+
+    <mat-menu #menu="matMenu"
+              xPosition="before">
+
+      <button mat-menu-item
+              [routerLink]="['/user', userId]"
+              *ngIf="userName"
+      >Мій кабінет
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/add_questions']"
+              *ngIf="!isStudent && userName"
+      >Додати питання
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/questions/my']"
+              *ngIf="!isStudent && userName"
+      >Мої питання
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/tests/my']"
+              *ngIf="isStudent && userName"
+      >Мої тести
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/lessons']"
+              *ngIf="userName"
+      >Уроки
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/questions']"
+              *ngIf="userName"
+      >Пройти тест
+      </button>
+
+    </mat-menu>
+
+    <a (click)="openRegForm()"
+       *ngIf="!userName"
+    >Зареєструватися
+    </a>
+
+    <div class="divider"
+         *ngIf="!userName">
+    </div>
+
+    <a (click)="openLogForm()"
+       *ngIf="!userName"
+    >Увійти
+    </a>
+
+    <a (click)="logout()"
+       *ngIf="userName"
+    >Вийти
+    </a>
+
+  </mat-nav-list>
 </div>
