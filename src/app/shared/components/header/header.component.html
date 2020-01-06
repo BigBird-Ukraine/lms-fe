@@ -4,7 +4,7 @@
     <img src="../../../../assets/images/lms_icon-1.png" alt="LMS LOGO"
          (click)="redirectToHome()"
          class="logo">
-    <p *ngIf="userName"
+    <p *ngIf="authService.isAuthenticated()"
        class="userName"
     >
       <mat-icon aria-hidden="false" class="icon">mood</mat-icon>
@@ -16,7 +16,7 @@
 
     <a
       [matMenuTriggerFor]="menu"
-      *ngIf="userName"
+      *ngIf="authService.isAuthenticated()"
     >Меню
     </a>
 
@@ -25,58 +25,58 @@
 
       <button mat-menu-item
               [routerLink]="['/user', userId]"
-              *ngIf="userName"
+              *ngIf="authService.isAuthenticated()"
       >Мій кабінет
       </button>
 
       <button mat-menu-item
               [routerLink]="['/add_questions']"
-              *ngIf="!isStudent && userName"
+              *ngIf="!isStudent && authService.isAuthenticated()"
       >Додати питання
       </button>
 
       <button mat-menu-item
               [routerLink]="['/questions/my']"
-              *ngIf="!isStudent && userName"
+              *ngIf="!isStudent && authService.isAuthenticated()"
       >Мої питання
       </button>
 
       <button mat-menu-item
               [routerLink]="['/tests/my']"
-              *ngIf="isStudent && userName"
+              *ngIf="isStudent && authService.isAuthenticated()"
       >Мої тести
       </button>
 
       <button mat-menu-item
               [routerLink]="['/lessons']"
-              *ngIf="userName"
+              *ngIf="authService.isAuthenticated()"
       >Уроки
       </button>
 
       <button mat-menu-item
               [routerLink]="['/questions']"
-              *ngIf="userName"
+              *ngIf="authService.isAuthenticated()"
       >Пройти тест
       </button>
 
     </mat-menu>
 
     <a (click)="openRegForm()"
-       *ngIf="!userName"
+       *ngIf="!authService.isAuthenticated()"
     >Зареєструватися
     </a>
 
     <div class="divider"
-         *ngIf="!userName">
+         *ngIf="!authService.isAuthenticated()">
     </div>
 
     <a (click)="openLogForm()"
-       *ngIf="!userName"
+       *ngIf="!authService.isAuthenticated()"
     >Увійти
     </a>
 
     <a (click)="logout()"
-       *ngIf="userName"
+       *ngIf="authService.isAuthenticated()"
     >Вийти
     </a>
 

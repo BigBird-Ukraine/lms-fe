@@ -20,20 +20,20 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userService.getUserInfoByToken(this.token)
-      .subscribe(() => {
-        if (this.userInfo.subscribe() && this.authService.isAuthenticated()) {
-          this.userInfo.subscribe(user => {
-            this.userName = user.name;
-          });
-        }
-        // else {
-        //   this.userService.getUserInfoByToken(this.token).subscribe();
-        //   this.userInfo.subscribe(user => {
-        //     this.userName = user.name;
-        //   });
-        // }
-      });
+    // this.userService.getUserInfoByToken(this.token)
+    //   .subscribe(() => {
+    //     if (this.userInfo.subscribe() && this.authService.isAuthenticated()) {
+    //       this.userInfo.subscribe(user => {
+    //         this.userName = user.name;
+    //       });
+    //     }
+    //     // else {
+    //     //   this.userService.getUserInfoByToken(this.token).subscribe();
+    //     //   this.userInfo.subscribe(user => {
+    //     //     this.userName = user.name;
+    //     //   });
+    //     // }
+    //   });
   }
 }
 
