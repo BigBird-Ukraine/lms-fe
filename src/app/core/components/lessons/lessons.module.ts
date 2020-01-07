@@ -4,7 +4,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule, MatSidenavModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
@@ -33,7 +33,8 @@ import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
     MatInputModule,
     CommonModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule
   ],
   exports: []
 })

@@ -1,5 +1,5 @@
 .lesson-layout {
-  margin: 20px auto;
+  margin: 20px;
 }
 
 .video {
@@ -15,7 +15,8 @@
 }
 
 .nav-btn {
-  margin: 20px;
+  margin: 10px;
+  width: 80%;
 }
 
 .mini_btn {
@@ -53,4 +54,19 @@ form {
 button {
   height: max-content;
   margin: auto 0;
+}
+
+.example-container {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px solid gainsboro;
+}
+
+.sidenav {
+  width: 250px;
 }

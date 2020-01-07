@@ -1,150 +1,162 @@
-<button mat-raised-button
-        color="primary"
-        type="button"
-        class="nav-btn"
-        *ngIf="isTeacher"
-        (click)="openForm()"
->Додати урок
-</button>
+<mat-sidenav-container class="example-container">
 
-<button mat-raised-button
-        color="primary"
-        type="button"
-        class="nav-btn"
-        (click)="allLessons()"
->Список уроків
-</button>
-
-<div *ngIf="showAllLessons"
-     class="lesson-layout">
-
-  <form [formGroup]="filterLessonsForm"
-        (ngSubmit)="showFiltered()"
-        (keydown.enter)="$event.preventDefault()">
-
-    <mat-form-field>
-
-      <input type="text"
-             placeholder="Назва уроку"
-             matInput
-             formControlName="label"
-             [matAutocomplete]="autoLesson"
-             #searchLesson
-      >
-      <mat-autocomplete autoActiveFirstOption
-                        #autoLesson="matAutocomplete">
-        <mat-option *ngFor="let lesson of lessonsForAutocomplete | filter: searchLesson.value" [value]="lesson">
-          {{lesson}}
-        </mat-option>
-      </mat-autocomplete>
-
-    </mat-form-field>
-
-    <mat-form-field>
-    <input type="text"
-           placeholder="Номер уроку"
-           matInput
-           formControlName="number"
-           [matAutocomplete]="autoNumber"
-    >
-    <mat-autocomplete autoActiveFirstOption
-                      #autoNumber="matAutocomplete">
-      <mat-option *ngFor="let lesson of lessonsNumberForAutocomplete" [value]="lesson">
-        {{lesson}}
-      </mat-option>
-    </mat-autocomplete>
-
-    </mat-form-field>
-
-    <div>
-      <mat-form-field>
-        <input matInput placeholder="Теги"
-               formGroupName="tags"
-               (keyup.enter)="newTag($event)"
-               [matAutocomplete]="autoTag"
-               #searchTag
-        >
-
-        <mat-autocomplete autoActiveFirstOption
-                          #autoTag="matAutocomplete">
-          <mat-option
-            *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
-            [value]="tag">
-            {{tag}}
-          </mat-option>
-
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <div class="blocks">
-        <div *ngFor="let tag of tags"
-             class="block">
-          {{tag}}
-          <button class="mini_btn"
-                  type="button"
-                  (click)="delTag(tag)">
-            &times;
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <button type="submit"
+  <mat-sidenav class="sidenav" mode="side" opened>
+    <button mat-raised-button
             color="primary"
-            mat-raised-button
-    >
-      Шукати
+            type="button"
+            class="nav-btn"
+            *ngIf="isTeacher"
+            (click)="openForm()"
+    >Додати урок
     </button>
 
     <button mat-raised-button
             color="primary"
             type="button"
             class="nav-btn"
-            *ngIf="isTeacher"
-            (click)="myLessons()"
-    >Мої уроки
+            (click)="allLessons()"
+    >Список уроків
     </button>
+  </mat-sidenav>
 
-  </form>
+  <mat-sidenav-content>
+    <div *ngIf="showAllLessons"
+         class="lesson-layout">
 
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let lesson of lessonsList">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Урок {{lesson.number}}.
-          {{ lesson.label}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+      <form [formGroup]="filterLessonsForm"
+            (ngSubmit)="showFiltered()"
+            (keydown.enter)="$event.preventDefault()">
 
-      <div class="lesson-inner">
+        <mat-form-field>
 
-        <mat-card class="video">
-        </mat-card>
+          <input type="text"
+                 placeholder="Назва уроку"
+                 matInput
+                 formControlName="label"
+                 [matAutocomplete]="autoLesson"
+                 #searchLesson
+          >
+          <mat-autocomplete autoActiveFirstOption
+                            #autoLesson="matAutocomplete">
+            <mat-option *ngFor="let lesson of lessonsForAutocomplete | filter: searchLesson.value" [value]="lesson">
+              {{lesson}}
+            </mat-option>
+          </mat-autocomplete>
 
-        <p>{{lesson.description}}</p>
+        </mat-form-field>
 
-      </div>
+        <mat-form-field>
+          <input type="text"
+                 placeholder="Номер уроку"
+                 matInput
+                 formControlName="number"
+                 [matAutocomplete]="autoNumber"
+          >
+          <mat-autocomplete autoActiveFirstOption
+                            #autoNumber="matAutocomplete">
+            <mat-option *ngFor="let lesson of lessonsNumberForAutocomplete" [value]="lesson">
+              {{lesson}}
+            </mat-option>
+          </mat-autocomplete>
 
-      <mat-action-row>
-        <button mat-button
+        </mat-form-field>
+
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Теги"
+                   formGroupName="tags"
+                   (keyup.enter)="newTag($event)"
+                   [matAutocomplete]="autoTag"
+                   #searchTag
+            >
+
+            <mat-autocomplete autoActiveFirstOption
+                              #autoTag="matAutocomplete">
+              <mat-option
+                *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
+                [value]="tag">
+                {{tag}}
+              </mat-option>
+
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <div class="blocks">
+            <div *ngFor="let tag of tags"
+                 class="block">
+              {{tag}}
+              <button class="mini_btn"
+                      type="button"
+                      (click)="delTag(tag)">
+                &times;
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <button type="submit"
                 color="primary"
-                type="button"
-                *ngIf="isMyLesson"
-                (click)="editLesson(lesson._id)">
-          Редагувати
+                mat-raised-button
+        >
+          Шукати
         </button>
 
-        <button mat-button
+        <button mat-raised-button
                 color="primary"
                 type="button"
-                (click)="viewLesson(lesson._id)">
-          Почати
+                *ngIf="isTeacher"
+                (click)="myLessons()"
+        >Мої уроки
         </button>
-      </mat-action-row>
 
-    </mat-expansion-panel>
-  </mat-accordion>
+      </form>
 
-</div>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let lesson of lessonsList">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Урок {{lesson.number}}.
+              {{ lesson.label}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="lesson-inner">
+
+            <mat-card class="video">
+            </mat-card>
+
+            <p>{{lesson.description}}</p>
+
+          </div>
+
+          <mat-action-row>
+            <button mat-button
+                    color="primary"
+                    type="button"
+                    *ngIf="isMyLesson"
+                    (click)="editLesson(lesson._id)">
+              Редагувати
+            </button>
+
+            <button mat-button
+                    color="primary"
+                    type="button"
+                    (click)="viewLesson(lesson._id)">
+              Почати
+            </button>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+
+
+
 
