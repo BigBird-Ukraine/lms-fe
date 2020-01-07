@@ -19,3 +19,9 @@ export interface IFullLesson {
     pageCount: number;
   };
 }
+
+export interface IEditLesson {
+  data: {
+    updatedLesson: ILesson;
+  }
+}

@@ -105,9 +105,17 @@
         <button mat-raised-button
                 color="primary"
                 type="button"
-                *ngIf="isTeacher"
+                *ngIf="isTeacher && !isMyLesson && !isFiltered"
                 (click)="myLessons()"
         >Мої уроки
+        </button>
+
+        <button mat-raised-button
+                color="primary"
+                type="button"
+                *ngIf="isTeacher && isMyLesson || isFiltered"
+                (click)="getLessons()"
+        >Всі уроки
         </button>
 
       </form>
@@ -117,7 +125,7 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               Урок {{lesson.number}}.
-              {{ lesson.label}}
+              {{lesson.label}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 

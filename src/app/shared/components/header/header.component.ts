@@ -7,6 +7,7 @@ import {UserService} from '../../../core/services/user';
 import {UserRolesEnum} from '../../enums';
 import {RegistrationComponent} from '../../../core/components/user/registration/registration.component';
 import {AuthUserComponent} from '../../../core/components/user/auth-user/auth-user.component';
+import {IUserSubjectModel} from '../../../core/interface';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
     this.userService.getUserInfoByToken(this.token)
       .subscribe(() => {
         if (this.userInfo.subscribe()) {
-          this.userInfo.subscribe(user => {
+          this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
             this.userName = user.name;
             this.userId = user._id;
             this.isStudent = user.role_id === UserRolesEnum.STUDENT;
@@ -52,7 +53,7 @@ export class HeaderComponent implements OnInit {
       this.userService.getUserInfoByToken(value.data.accessToken)
         .subscribe(() => {
           if (this.userInfo.subscribe()) {
-            this.userInfo.subscribe(user => {
+            this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
               this.userName = user.name;
               this.isStudent = user.role_id === UserRolesEnum.STUDENT;
             });

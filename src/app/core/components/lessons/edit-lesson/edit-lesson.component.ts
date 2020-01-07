@@ -74,16 +74,14 @@ export class EditLessonComponent implements OnInit {
   editLesson() {
     // this.editLessonForm.value.tags = this.tags;
     const id: string = this.lesson._id;
-    const lessonData: ILesson = this.editLessonForm.value;
+    const lessonData = this.editLessonForm.value;
 
-    console.log(lessonData);
     const strings = Object.keys(lessonData);
     strings.forEach(key => {
       if (!lessonData[key]) {
         delete lessonData[key];
       }
     });
-    console.log(lessonData);
 
     this.lessonService.editLesson(id, lessonData).subscribe((value) => {
         this.dialogRef.close(value);

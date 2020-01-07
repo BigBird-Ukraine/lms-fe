@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CreateLessonComponent} from '../create-lesson/create-lesson.component';
 import {UserService} from '../../../services/user';
-import {IFullLesson, ILesson, Tags} from '../../../interface';
+import {IEditLesson, IFullLesson, ILesson, Tags} from '../../../interface';
 import {UserRolesEnum} from '../../../../shared/enums';
 import {LessonsService} from '../../../services/lessons.service';
 import {InfoHelperService} from '../../../services/questions';
@@ -30,6 +30,7 @@ export class LessonPageComponent implements OnInit {
   tags: Tags[] = [];
   token = this.authService.getAccessToken();
   isMyLesson = false;
+  isFiltered = false;
 
   constructor(private dialog: MatDialog,
               private userService: UserService,
@@ -76,6 +77,10 @@ export class LessonPageComponent implements OnInit {
     this.lessonService.getMyLessons().subscribe((lessons: IFullLesson) => {
       if (lessons.data.lesson) {
         this.lessonsList = lessons.data.lesson;
+        this.lessonsForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.label);
+        this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
+        let arr = lessons.data.lesson.map((lessonsArr, i, arr2) => lessonsArr.tags.concat());
+        console.log(arr);
       } else {
         this.lessonsList = [];
       }
@@ -87,14 +92,18 @@ export class LessonPageComponent implements OnInit {
   }
 
   getLessons() {
+    this.isMyLesson = false;
+    this.isFiltered = false;
+
     this.lessonService.getAllLessons().subscribe((lessons: IFullLesson) => {
       this.lessonsList = lessons.data.lesson.sort((a, b) => {
         return (a.number - b.number);
       });
       this.lessonsForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.label);
       this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
-
     });
+
+    this.router.navigate(['/lessons']);
   }
 
   getTags() {
@@ -121,6 +130,7 @@ export class LessonPageComponent implements OnInit {
   }
 
   showFiltered() {
+    this.isFiltered = true;
     this.filterLessonsForm.value.tags = this.tags;
 
     const keys = Object.keys(this.filterLessonsForm.value);
@@ -146,12 +156,17 @@ export class LessonPageComponent implements OnInit {
         }
       });
     });
+    this.filterLessonsForm.reset();
+    this.tags = [];
   }
 
   editLesson(id: string) {
     this.lesson = this.lessonsList.find(lesson => lesson._id === id);
     this.dialog.open(EditLessonComponent, {
       data: {lesson: this.lesson}
-    }).afterClosed().subscribe((value: ILesson) => this.lesson = value);
+    }).afterClosed().subscribe((value: IEditLesson) => {
+      const index = this.lessonsList.findIndex(findLesson => findLesson._id === id);
+      this.lessonsList[index] = value.data.updatedLesson;
+    });
   }
 }
