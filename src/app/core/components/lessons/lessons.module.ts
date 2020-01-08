@@ -4,7 +4,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule, MatSidenavModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
@@ -14,12 +14,14 @@ import {LessonPageComponent} from './lesson-page/lesson-page.component';
 import {CreateLessonComponent} from './create-lesson/create-lesson.component';
 import {LessonsRoutingModule} from './lessons-routing.module';
 import {FilterPipe} from './filter.pipe';
+import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
 
 @NgModule({
   declarations: [
     LessonPageComponent,
     CreateLessonComponent,
-    FilterPipe
+    FilterPipe,
+    EditLessonComponent
   ],
   imports: [
     LessonsRoutingModule,
@@ -31,7 +33,8 @@ import {FilterPipe} from './filter.pipe';
     MatInputModule,
     CommonModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule
   ],
   exports: []
 })

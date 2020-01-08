@@ -1,4 +1,4 @@
-<div class="form-container">
+<mat-card class="form-container">
   <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
@@ -123,10 +123,16 @@
     </mat-form-field>
 
     <div class="blocks">
-        <span *ngFor="let tag of tags"
-              class="block">
-          {{tag}}
-        </span>
+      <div *ngFor="let tag of tags"
+           class="block">
+        {{tag}}
+        <button class="mini_btn"
+                type="button"
+                (click)="delTag(tag)">
+          &times;
+        </button>
+      </div>
+
     </div>
 
     <button mat-raised-button
@@ -138,4 +144,4 @@
 
     <h3 *ngIf="isAdded" class="question-added"> Додано успішно! </h3>
   </form>
-</div>
+</mat-card>

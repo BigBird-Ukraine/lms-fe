@@ -6,7 +6,7 @@ import {
   MatSnackBarContainer,
   MatSnackBarModule
 } from '@angular/material/snack-bar';
-import {MatCardModule} from '@angular/material';
+import {_MatMenuDirectivesModule, MatCardModule, MatMenuModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
 import {MatPaginatorIntl} from "@angular/material/paginator";
@@ -74,6 +74,8 @@ import {getUkrainianPaginatorIntl} from "./shared/services/matPaginator.service"
     MatCardModule,
     LessonsModule,
     MatProgressSpinnerModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
   ],
   exports: [],
   bootstrap: [AppComponent],

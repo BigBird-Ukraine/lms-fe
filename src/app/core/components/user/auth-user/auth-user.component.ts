@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
-import {AuthService, UserService} from '../../../services';
+import {AuthService} from '../../../services';
 import {CustomSnackbarService} from '../../../../shared';
 
 @Component({
@@ -19,8 +18,6 @@ export class AuthUserComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private customSnackbarService: CustomSnackbarService,
               private authService: AuthService,
-              private userService: UserService,
-              private dialog: MatDialog,
               public dialogRef: MatDialogRef<AuthUserComponent>) {
   }
 
@@ -42,11 +39,11 @@ export class AuthUserComponent implements OnInit {
 
   login() {
     this.authService.authUser(this.authForm.value).subscribe((value) => {
-          this.dialogRef.close(value);
-          this.customSnackbarService.open('Логін успішний', 'success');
-        }, () => {
+      this.dialogRef.close(value);
+      this.customSnackbarService.open('Логін успішний', 'success');
+    }, () => {
       this.customSnackbarService.open('Юзера не знайдено', '');
     });
-    }
+  }
 
 }

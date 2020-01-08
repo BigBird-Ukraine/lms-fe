@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
-import {IUser, IUserSubjectModel} from '../../../interface';
+import {IUserSubjectModel} from '../../../interface';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {config} from '../../../../shared/config';
 
@@ -18,16 +18,16 @@ export class UserCabinetComponent implements OnInit {
   userInfo = this.userService.userInfo;
   path = config.authUrl;
 
-  userMail: string; // should takes from subject
-  userPhone: string; // should takes from subject
-  userPhoto: string; // should takes from subject
-
   constructor(private userService: UserService,
               private authService: AuthService,
               private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.getInfo();
+  }
+
+  getInfo() {
     this.userService.getUserInfoByToken(this.token)
       .subscribe(() => {
         if (this.userInfo.subscribe()) {
@@ -41,12 +41,8 @@ export class UserCabinetComponent implements OnInit {
   openEditing() {
     this.dialog.open(EditUserComponent, {
       data: {user: this.user}
-    }).afterClosed().subscribe((value: IUser) => {
-      if (value) {
-        this.userMail = value.data.email;
-        this.userPhone = value.data.phone_number;
-        this.userPhoto = value.data.photo_path;
-      }
+    }).afterClosed().subscribe(() => {
+      this.getInfo();
     });
   }
 }
