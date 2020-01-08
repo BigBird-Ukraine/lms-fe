@@ -56,7 +56,6 @@ export class LessonPageComponent implements OnInit {
 
     this.getLessons();
     this.filterForm();
-    this.getTags();
   }
 
   filterForm() {
@@ -73,14 +72,18 @@ export class LessonPageComponent implements OnInit {
 
   myLessons() {
     this.isMyLesson = true;
+    this.tagsForAutocomplete = [];
 
     this.lessonService.getMyLessons().subscribe((lessons: IFullLesson) => {
       if (lessons.data.lesson) {
+
         this.lessonsList = lessons.data.lesson;
         this.lessonsForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.label);
         this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
-        let arr = lessons.data.lesson.map((lessonsArr, i, arr2) => lessonsArr.tags.concat());
-        console.log(arr);
+
+        lessons.data.lesson.forEach(lessonArr => this.tagsForAutocomplete.push(...lessonArr.tags));
+        this.tagsForAutocomplete = [...new Set(this.tagsForAutocomplete)];
+
       } else {
         this.lessonsList = [];
       }
@@ -94,6 +97,7 @@ export class LessonPageComponent implements OnInit {
   getLessons() {
     this.isMyLesson = false;
     this.isFiltered = false;
+    this.getTags();
 
     this.lessonService.getAllLessons().subscribe((lessons: IFullLesson) => {
       this.lessonsList = lessons.data.lesson.sort((a, b) => {

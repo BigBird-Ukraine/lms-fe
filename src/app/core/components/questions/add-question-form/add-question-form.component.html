@@ -123,10 +123,16 @@
     </mat-form-field>
 
     <div class="blocks">
-        <span *ngFor="let tag of tags"
-              class="block">
-          {{tag}}
-        </span>
+      <div *ngFor="let tag of tags"
+           class="block">
+        {{tag}}
+        <button class="mini_btn"
+                type="button"
+                (click)="delTag(tag)">
+          &times;
+        </button>
+      </div>
+
     </div>
 
     <button mat-raised-button
