@@ -21,7 +21,5 @@ export interface IFullLesson {
 }
 
 export interface IEditLesson {
-  data: {
-    updatedLesson: ILesson;
-  }
+  data: ILesson;
 }
