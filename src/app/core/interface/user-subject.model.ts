@@ -1,11 +1,11 @@
 export interface IUserSubjectModel {
   name: string;
   surname: string;
+  email: string;
+  phone_number: string;
   role_id: number;
   status_id: number;
-  id?: string;
+  _id?: string;
   photo_path?: string;
-  group?: {
-    label: string
-  };
+  groups_id?: [string];
 }

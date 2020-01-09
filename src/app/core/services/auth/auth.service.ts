@@ -29,25 +29,15 @@ export class AuthService {
   ) {
   }
 
-  refreshTokens(): Observable<any> {
-    const savedRefreshToken = this.getRefreshToken();
-    const options = {
-      headers: new HttpHeaders({
-        Authorization: savedRefreshToken
-      })
-    };
+  refreshToken(): Observable<any> {
+    return this.httpClient.post(authApiUrls.refreshTokens, null
+    ).pipe(
+      tap((response: ISuccessHttpResponse) => {
+        const {accessToken, refreshToken} = response.data as ITokensModel;
+        this.setTokens(accessToken, refreshToken);
 
-    return this.httpClient
-      .post(authApiUrls.refreshTokens, '', options)
-      .pipe(
-        tap((response: ISuccessHttpResponse) => {
-          const {accessToken, refreshToken} = response.data;
-          this.setTokens(accessToken, refreshToken);
-        }),
-        catchError((err: any) => {
-          return throwError(err);
-        })
-      );
+      }),
+    );
   }
 
   authUser(authInfo: Partial<UserModel>): Observable<any> {

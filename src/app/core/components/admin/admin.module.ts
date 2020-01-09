@@ -1,5 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {MatAutocompleteModule, MatListModule} from '@angular/material';
+import {MatMenuModule} from "@angular/material/menu";
+import {FlexModule} from "@angular/flex-layout";
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -9,7 +13,17 @@ import {StatisticsPageComponent} from './statistics-page/statistics-page.compone
 import {UsersPageComponent} from './users-page/users-page.component';
 import {GroupsPageComponent} from './groups-page/groups-page.component';
 import {QuestionsPageComponent} from './questions-page/questions-page.component';
-
+import {AdminInterceptor} from './admin.interceptor';
+import {CoursesPageComponent} from './courses-page/courses-page.component';
+import {ModulePageComponent} from './module-page/module-page.component';
+import {UserOutComponent} from './users-page/user-out/user-out.component';
+import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role-user.component';
+import {FilterPipe} from './filter.pipe';
+import {UpdateProfileComponent} from './users-page/update-profile/update-profile.component';
+import {DeleteUserComponent} from './users-page/delete-user/delete-user.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {LoaderComponent} from "../../../shared/components/loader/loader.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -18,13 +32,34 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
     StatisticsPageComponent,
     UsersPageComponent,
     GroupsPageComponent,
-    QuestionsPageComponent
+    QuestionsPageComponent,
+    CoursesPageComponent,
+    ModulePageComponent,
+    FilterPipe,
+    UserOutComponent,
+    ChangeRoleUserComponent,
+    UpdateProfileComponent,
+    DeleteUserComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    FormModule
+    FormModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatMenuModule,
+    FlexModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AdminInterceptor
+    }
   ]
 })
 export class AdminModule {

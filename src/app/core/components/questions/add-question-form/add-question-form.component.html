@@ -1,4 +1,4 @@
-<div class="form-container">
+<mat-card class="form-container">
   <h2 class="pageTitle">
     Додайте, будь ласка, своє питання
   </h2>
@@ -10,7 +10,7 @@
 
       <mat-form-field>
         <mat-label>Виберіть предмет</mat-label>
-        <input type="text" matInput formControlName="subject" [matAutocomplete]="autoSubject"
+        <input type="text" matInput required formControlName="subject" [matAutocomplete]="autoSubject"
                #searchSubject>
         <mat-autocomplete #autoSubject="matAutocomplete">
           <mat-option *ngFor="let subject of subjects | filter: searchSubject.value" [value]="subject">
@@ -24,7 +24,8 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Вкажіть групу"
+        <input matInput required
+               placeholder="Вкажіть групу"
                formGroupName="group"
                (keyup.enter)="newGroups($event)"
                [matAutocomplete]="autoGroup"
@@ -59,7 +60,8 @@
 
       <mat-form-field class="example-full-width">
 
-        <input matInput placeholder="Сформулюйте питтаня"
+        <input matInput required
+               placeholder="Сформулюйте питтаня"
                formControlName="question">
         <mat-error *ngIf="questionForm.get('question').hasError('required')">
           Це поле не може бути пустим
@@ -76,7 +78,8 @@
                         formControlName="correct">
           </mat-checkbox>
           <mat-form-field class="example-full-width">
-            <input matInput value=""
+            <input matInput required
+                   value=""
                    (keyup.enter)="addAnswer()"
                    formControlName="value"
                    placeholder="Відповідь {{i + 1}}">
@@ -105,7 +108,8 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Вкажіть теги для питання"
+      <input matInput required
+             placeholder="Вкажіть теги для питання"
              formGroupName="tags"
              (keyup.enter)="newTag($event)"
              [matAutocomplete]="autoTag"
@@ -119,10 +123,16 @@
     </mat-form-field>
 
     <div class="blocks">
-        <span *ngFor="let tag of tags"
-              class="block">
-          {{tag}}
-        </span>
+      <div *ngFor="let tag of tags"
+           class="block">
+        {{tag}}
+        <button class="mini_btn"
+                type="button"
+                (click)="delTag(tag)">
+          &times;
+        </button>
+      </div>
+
     </div>
 
     <button mat-raised-button
@@ -134,4 +144,4 @@
 
     <h3 *ngIf="isAdded" class="question-added"> Додано успішно! </h3>
   </form>
-</div>
+</mat-card>

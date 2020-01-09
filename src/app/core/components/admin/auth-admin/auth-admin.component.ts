@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CustomSnackbarService, ErrorService} from '../../../../shared/services';
-import {AuthAdminService} from '../../../services/auth/auth-admin.service';
-import {AuthService} from '../../../services/auth';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+
+import {CustomSnackbarService} from '../../../../shared/services';
+import {AdminAuthService} from '../services';
+import {AuthService} from '../../../services/auth';
 
 @Component({
   selector: 'app-auth-admin',
@@ -15,31 +16,23 @@ export class AuthAdminComponent implements OnInit {
   hide = true;
 
   constructor(private fb: FormBuilder,
-              private authAdminService: AuthAdminService,
+              private authAdminService: AdminAuthService,
               private authService: AuthService,
               private customSnackbarService: CustomSnackbarService,
-              private errorService: ErrorService,
               private router: Router,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.authService.logout().subscribe(() => {
-        },
-        error => this.errorService.handleError(error)
-      );
-    }
-
     if (this.authAdminService.isAuthenticated()) {
-      this.authAdminService.logout().subscribe(() => {
-        },
-        error => this.errorService.handleError(error)
-      );
+      this.authAdminService.deleteTokens();
     }
     this.route.queryParams.subscribe((params: Params) => {
-      if (params['accessDenied']) {
-        this.customSnackbarService.open('Спочатку авторизуйтесь');
+      if (params.accessDenied) {
+        this.customSnackbarService.open('Спочатку авторизуйтесь', 'Ok');
+      }
+      if (params.sessionFiled) {
+        this.customSnackbarService.open('Сесія закінчилась', 'Ok');
       }
     });
 
@@ -60,9 +53,10 @@ export class AuthAdminComponent implements OnInit {
 
   login() {
     this.authAdminService.authAdmin(this.authForm.value).subscribe(() => {
-        this.customSnackbarService.open('Логін успішний', 'success');
-        this.router.navigate(['/adminPanel/statistics']);
-      },
-      error => this.errorService.handleError(error));
+      this.customSnackbarService.open('Логін успішний');
+      this.router.navigate(['/adminPanel/statistics']);
+    }, () => {
+      this.customSnackbarService.open('Не вірний логін або пароль');
+    });
   }
 }

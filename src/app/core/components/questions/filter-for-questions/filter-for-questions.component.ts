@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {Groups, Level, Subject, Tags} from '../../../interface';
 import {InfoHelperService} from '../../../services';
 import {QuestionFormConsts} from '../../../constans';
-import {ErrorService} from '../../../../shared';
 
 @Component({
   selector: 'app-filter-for-questions',
@@ -25,8 +24,7 @@ export class FilterForQuestionsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private  router: Router,
-              private infoHelperService: InfoHelperService,
-              private errorService: ErrorService
+              private infoHelperService: InfoHelperService
   ) {
   }
 
@@ -46,26 +44,22 @@ export class FilterForQuestionsComponent implements OnInit {
 
   getSubjects() {
     this.infoHelperService.getSubject()
-      .subscribe((subjects: Subject[]) => this.subjects = subjects,
-        error => this.errorService.handleError(error));
+      .subscribe((subjects: Subject[]) => this.subjects = subjects);
   }
 
   getGroups() {
     this.infoHelperService.getGroups()
-      .subscribe((groups: Groups[]) => this.groups = groups,
-        error => this.errorService.handleError(error));
+      .subscribe((groups: Groups[]) => this.groups = groups);
   }
 
   getLevels() {
     this.infoHelperService.getLevel()
-      .subscribe((levels: Level[]) => this.levels = levels,
-        error => this.errorService.handleError(error));
+      .subscribe((levels: Level[]) => this.levels = levels);
   }
 
   getTags() {
     this.infoHelperService.getTags()
-      .subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags,
-        error => this.errorService.handleError(error));
+      .subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
   }
 
   searchTag(tag) {

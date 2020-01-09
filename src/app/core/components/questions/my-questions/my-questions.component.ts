@@ -1,8 +1,10 @@
+import {MatDialog} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
 
 import {QuestionModel} from '../../../interface';
 import {QuestionsService} from '../../../services';
-import {ISuccessHttpResponse, ErrorService} from '../../../../shared';
+import {ISuccessHttpResponse} from '../../../../shared';
+import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 
 @Component({
   selector: 'app-my-questions',
@@ -12,7 +14,7 @@ import {ISuccessHttpResponse, ErrorService} from '../../../../shared';
 export class MyQuestionsComponent implements OnInit {
 
   constructor(private questionService: QuestionsService,
-              private errorService: ErrorService
+              private dialog: MatDialog
   ) {
   }
 
@@ -21,17 +23,20 @@ export class MyQuestionsComponent implements OnInit {
   ngOnInit() {
     this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
       this.questions = data.data.questions;
-    },
-        error => this.errorService.handleError(error));
+    });
   }
 
   deleteQuestion(id: string) {
-    this.questionService.deleteQuestionById(id).subscribe(() => {
-      this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
-        this.questions = data.data.questions;
-      },
-          error => this.errorService.handleError(error));
-    },
-      error => this.errorService.handleError(error));
+    const confirm = this.dialog.open(ConfirmLayoutComponent);
+
+    confirm.afterClosed().subscribe((result) => {
+      if (result) {
+        this.questionService.deleteQuestionById(id).subscribe(() => {
+          this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {
+            this.questions = data.data.questions;
+          });
+        });
+      }
+    });
   }
 }

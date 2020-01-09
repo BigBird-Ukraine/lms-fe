@@ -1,0 +1,44 @@
+.photo{
+  width: 200px;
+  height: 250px;
+  background: rebeccapurple;
+}
+
+.cards{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.panel{
+  display: flex;
+}
+
+.tools{
+  justify-content: space-between;
+}
+
+span{
+  margin-right: 15px;
+}
+
+mat-expansion-panel:hover{
+  border: 1px solid #673ab7;
+}
+
+.icon{
+  top:  -60px;
+  right: 20px;
+}
+
+.role_name{
+  color: #673ab7;
+}
+.role_name:hover{
+  cursor: grab;
+  color: red;
+}
+
+
+
+
+

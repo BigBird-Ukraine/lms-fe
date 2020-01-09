@@ -8,7 +8,8 @@ import {
   Tags,
   Groups
 } from '../../interface';
-import {commonQuestionPath} from '../../../shared';
+
+import {commonAuthPath} from '../../../shared';
 
 @Injectable({
   providedIn: 'root'
@@ -18,18 +19,18 @@ export class InfoHelperService {
   constructor(private http: HttpClient) {}
 
   getSubject(): Observable<Subject[]> {
-    return this.http.get<Subject[]>(`${commonQuestionPath}/helpers/subjects`);
+    return this.http.get<Subject[]>(`${commonAuthPath}/helpers/subjects`);
   }
 
   getLevel(): Observable<Level[]> {
-    return this.http.get<Level[]>(`${commonQuestionPath}/helpers/levels`);
+    return this.http.get<Level[]>(`${commonAuthPath}/helpers/levels`);
   }
 
   getTags(): Observable<Tags[]> {
-    return this.http.get<Tags[]>(`${commonQuestionPath}/helpers/tags`);
+    return this.http.get<Tags[]>(`${commonAuthPath}/helpers/tags`);
   }
 
   getGroups(): Observable<Groups[]> {
-    return this.http.get<Groups[]>(`${commonQuestionPath}/helpers/groups`);
+    return this.http.get<Groups[]>(`${commonAuthPath}/helpers/groups`);
   }
 }

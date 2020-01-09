@@ -11,7 +11,6 @@ import {QuestionsService, InfoHelperService} from '../../../services';
 import {QuestionFormConsts} from '../../../constans';
 import {LevelEnum} from '../../../enums';
 import {QuestionModel, Level, Tags, Groups, Subject} from '../../../interface';
-import {ErrorService} from '../../../../shared';
 
 
 @Component({
@@ -34,17 +33,14 @@ export class AddQuestionFormComponent implements OnInit {
 
   levels: Level[] = [
     {level: LevelEnum.EASY},
-    {level: LevelEnum.EASY_PLUS},
     {level: LevelEnum.MEDIUM},
-    {level: LevelEnum.MEDIUM_PLUS},
     {level: LevelEnum.HARD}];
 
   private isAdded: boolean;
 
   constructor(private fb: FormBuilder,
               private questionService: QuestionsService,
-              private infoService: InfoHelperService,
-              private errorService: ErrorService) {
+              private infoService: InfoHelperService) {
   }
 
   ngOnInit() {
@@ -84,6 +80,12 @@ export class AddQuestionFormComponent implements OnInit {
     tag.target.value = '';
   }
 
+  delTag(tag) {
+    const index = this.tags.findIndex(delTag => delTag === tag);
+
+    this.tags.splice(index, 1);
+  }
+
   removeAnswer(answer) {
     const control = this.questionForm.get('answers') as FormArray;
     const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);
@@ -119,23 +121,19 @@ export class AddQuestionFormComponent implements OnInit {
         setTimeout(() => {
           this.isAdded = false;
         }, 4000);
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject,
-      error => this.errorService.handleError(error));
+    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject);
   }
 
   getGroups() {
-    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups,
-      error => this.errorService.handleError(error));
+    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups);
   }
 
   getTags() {
-    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags,
-      error => this.errorService.handleError(error));
+    this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
   }
 
 }

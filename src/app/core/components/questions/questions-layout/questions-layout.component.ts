@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {QuestionsService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
-import {ErrorService} from '../../../../shared';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-questions-layout',
@@ -17,8 +16,7 @@ export class QuestionsLayoutComponent implements OnInit {
   questionForm: FormGroup;
 
   constructor(private questionsService: QuestionsService,
-              private activatedRoute: ActivatedRoute,
-              private errorService: ErrorService,
+              private activatedRoute: ActivatedRoute
               private fb: FormBuilder
   ) {
   }
@@ -39,7 +37,6 @@ export class QuestionsLayoutComponent implements OnInit {
         this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
           this.questions = questions.data.questions;
         });
-      },
-      error => this.errorService.handleError(error));
+      });
   }
 }

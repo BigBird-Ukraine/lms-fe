@@ -1,13 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {catchError} from 'rxjs/operators';
 
-import {RegistrationComponent} from '../user/registration/registration.component';
-import {AuthUserComponent} from '../user/auth-user/auth-user.component';
-import {AuthService} from '../../services';
-import {ErrorService} from '../../../shared';
-import {UserService} from '../../services';
-import {UserRoleEnum} from '../../enums';
+import {AuthService, UserService} from '../../services';
 
 @Component({
   selector: 'app-home-page',
@@ -17,56 +10,30 @@ import {UserRoleEnum} from '../../enums';
 export class HomePageComponent implements OnInit {
 
   userName = '';
-  isStudent: boolean;
   token = this.authService.getAccessToken();
   userInfo = this.userService.userInfo;
 
-  constructor(private dialog: MatDialog,
-              private authService: AuthService,
-              private userService: UserService,
-              private errorService: ErrorService
+  constructor(private authService: AuthService,
+              private userService: UserService
   ) {
   }
 
   ngOnInit() {
 
-    this.userService.getUserInfoByToken(this.token)
-      .pipe(
-        catchError((err) =>
-          this.errorService.handleError(err)
-        )
-      )
-      .subscribe(() => {
-        if (this.userInfo.subscribe()) {
-          this.userInfo.subscribe(user => {
-            this.userName = user.name;
-            this.isStudent = user.role_id === UserRoleEnum.STUDENT;
-          });
-        }
-        // else {
-        //   this.userService.getUserInfoByToken(this.token).subscribe();
-        //   this.userInfo.subscribe(user => {
-        //     this.userName = user.name;
-        //     this.isStudent = user.role_id === UserRoleEnum.STUDENT;
-        //   });
-        // }
-      });
-
+    // this.userService.getUserInfoByToken(this.token)
+    //   .subscribe(() => {
+    //     if (this.userInfo.subscribe() && this.authService.isAuthenticated()) {
+    //       this.userInfo.subscribe(user => {
+    //         this.userName = user.name;
+    //       });
+    //     }
+    //     // else {
+    //     //   this.userService.getUserInfoByToken(this.token).subscribe();
+    //     //   this.userInfo.subscribe(user => {
+    //     //     this.userName = user.name;
+    //     //   });
+    //     // }
+    //   });
   }
-
-  openRegForm() {
-    this.dialog.open(RegistrationComponent);
-  }
-
-  openLogForm() {
-    this.dialog.open(AuthUserComponent);
-  }
-
-  logout() {
-    this.authService.logout().subscribe(() => {
-      },
-      error => this.errorService.handleError(error)
-    );
-  }
-
 }
+

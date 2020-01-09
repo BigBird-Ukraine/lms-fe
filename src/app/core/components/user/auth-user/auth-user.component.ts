@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
-import {AuthService, UserService} from '../../../services';
-import {CustomSnackbarService, ErrorService} from '../../../../shared';
+import {AuthService} from '../../../services';
+import {CustomSnackbarService} from '../../../../shared';
 
 @Component({
   selector: 'app-auth-user',
@@ -18,9 +18,7 @@ export class AuthUserComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private customSnackbarService: CustomSnackbarService,
               private authService: AuthService,
-              private userService: UserService,
-              private errorService: ErrorService,
-              private dialog: MatDialog) {
+              public dialogRef: MatDialogRef<AuthUserComponent>) {
   }
 
   ngOnInit() {
@@ -40,11 +38,12 @@ export class AuthUserComponent implements OnInit {
   }
 
   login() {
-    this.authService.authUser(this.authForm.value).subscribe(() => {
-          this.dialog.closeAll();
-          this.customSnackbarService.open('Логін успішний', 'success');
-        },
-        error => this.errorService.handleError(error));
-    }
+    this.authService.authUser(this.authForm.value).subscribe((value) => {
+      this.dialogRef.close(value);
+      this.customSnackbarService.open('Логін успішний', 'success');
+    }, () => {
+      this.customSnackbarService.open('Юзера не знайдено', '');
+    });
+  }
 
 }

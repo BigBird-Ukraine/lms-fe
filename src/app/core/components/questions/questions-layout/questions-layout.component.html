@@ -5,42 +5,38 @@
     </mat-card-title>
 
     <mat-card-content>
-      <form formGroup="questionForm">
-        <table>
+      <table>
 
-          <tbody class="question_table" *ngFor="let item of questions; let i = index">
-
-            <mat-card class="question">
-              <tr>
-                <td class="q_text">
+        <tbody class="question_table" *ngFor="let item of questions; let i = index">
+        <mat-card class="question">
+          <tr>
+            <td class="q_text">
             <span>
                 {{i + 1}}.
              </span>
-                  <span>
+              <span>
               {{item.question}}
             </span>
-                </td>
-              </tr>
-
-              <mat-form-field>
-                <tr *ngFor="let a of item.answers">
-                  <td>
-                    <mat-checkbox formControlName="correct">
+            </td>
+            <mat-form-field>
+          <tr *ngFor="let a of item.answers">
+            <td>
+              <mat-checkbox formControlName="correct">
              <span>
                 {{a.value}}
              </span>
-                    </mat-checkbox>
+              </mat-checkbox>
 
-                  </td>
-              </mat-form-field>
-            </mat-card>
+            </td>
+            </mat-form-field>
+        </mat-card>
 
-          </tbody>
+        </tbody>
 
-        </table>
-        <mat-card-actions class="btn">
-          <button mat-raised-button color="primary" type="submit">Перевірити</button>
-        </mat-card-actions>
+      </table>
+      <mat-card-actions class="btn">
+        <button mat-raised-button color="primary" type="submit">Перевірити</button>
+      </mat-card-actions>
       </form>
     </mat-card-content>
   </mat-card>
