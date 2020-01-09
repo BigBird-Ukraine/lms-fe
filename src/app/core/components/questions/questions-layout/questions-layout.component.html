@@ -5,38 +5,39 @@
     </mat-card-title>
 
     <mat-card-content>
-      <table>
+      <form [formGroup]="questionForm"
+            (ngSubmit)="formTest()"
+            (keydown.enter)="$event.preventDefault()">
+        <table>
 
-        <tbody class="question_table" *ngFor="let item of questions; let i = index">
-        <mat-card class="question">
-          <tr>
-            <td class="q_text">
+          <tbody class="question_table" *ngFor="let item of questions; let i = index">
+          <mat-card class="question">
+            <tr>
+              <td class="q_text">
             <span>
                 {{i + 1}}.
              </span>
-              <span>
+                <span>
               {{item.question}}
             </span>
-            </td>
-            <mat-form-field>
-          <tr *ngFor="let a of item.answers">
-            <td>
-              <mat-checkbox formControlName="correct">
+              </td>
+            </tr>
+            <tr *ngFor="let a of item.answers">
+              <td>
+                  <mat-checkbox [value]="a._id" (change)="onCheckChange($event, item , i)">
              <span>
                 {{a.value}}
              </span>
-              </mat-checkbox>
+                  </mat-checkbox>
+              </td>
+          </mat-card>
+          </tbody>
 
-            </td>
-            </mat-form-field>
-        </mat-card>
+        </table>
+        <mat-card-actions class="btn">
+          <button mat-raised-button color="primary" type="submit">Перевірити</button>
+        </mat-card-actions>
 
-        </tbody>
-
-      </table>
-      <mat-card-actions class="btn">
-        <button mat-raised-button color="primary" type="submit">Перевірити</button>
-      </mat-card-actions>
       </form>
     </mat-card-content>
   </mat-card>

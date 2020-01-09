@@ -9,8 +9,8 @@ import {
 import {_MatMenuDirectivesModule, MatCardModule, MatMenuModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
-import {MatPaginatorIntl} from "@angular/material/paginator";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -30,9 +30,9 @@ import {FilterPipe} from './shared/pipe';
 import {ChangeRoleUserComponent} from './core/components/admin/users-page/change-role-user/change-role-user.component';
 import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
 import {LessonsModule} from './core/components/lessons/lessons.module';
-import {UpdateProfileComponent} from "./core/components/admin/users-page/update-profile/update-profile.component";
-import {DeleteUserComponent} from "./core/components/admin/users-page/delete-user/delete-user.component";
-import {getUkrainianPaginatorIntl} from "./shared/services/matPaginator.service";
+import {UpdateProfileComponent} from './core/components/admin/users-page/update-profile/update-profile.component';
+import {DeleteUserComponent} from './core/components/admin/users-page/delete-user/delete-user.component';
+import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
 
 @NgModule({
   entryComponents: [
