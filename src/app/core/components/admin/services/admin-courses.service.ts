@@ -10,12 +10,13 @@ import {config} from '../../../../shared/config';
   providedIn: 'root'
 })
 export class AdminCoursesService {
+  courseUrl = config.apiAdminUrl + '/courses';
 
   constructor(private http: HttpClient) {
   }
 
   addCourse(course): Observable<ICourse> {
-    return this.http.post<ICourse>(`${config.apiAdminUrl}/courses`, course);
+    return this.http.post<ICourse>(`${this.courseUrl}`, course);
   }
 
   getAllCourses(): Observable<IFullCourse> {
@@ -23,14 +24,18 @@ export class AdminCoursesService {
   }
 
   deleteCourse(id): Observable<ICourse> {
-    return this.http.delete<ICourse>(`${config.apiAdminUrl}/courses/${id}`);
+    return this.http.delete<ICourse>(`${this.courseUrl}/${id}`);
   }
 
   findCourseByParams(params): Observable<IFullCourse> {
-    return this.http.get<IFullCourse>(`${config.apiAdminUrl}/courses`, {
+    return this.http.get<IFullCourse>(`${this.courseUrl}`, {
       params: new HttpParams({
         fromObject: params
       })
     });
+  }
+
+  getById(id: string): Observable<any> {
+    return this.http.get(`${this.courseUrl}/${id}`);
   }
 }

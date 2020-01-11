@@ -3,3 +3,21 @@
     Створити групу
   </button>
 </div>
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [pageSizeOptions]="[25, 50, 100]">
+<!--               (page)="getFilteredUsers($event)">-->
+
+
+</mat-paginator>
+
+<app-group-out [groupsData] = "getGroups"></app-group-out>
+
+<mat-paginator *ngIf="length > 15"
+               [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [pageSizeOptions]="[25, 50, 100]">
+<!--               (page)="getFilteredUsers($event)">-->
+</mat-paginator>

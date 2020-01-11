@@ -1,0 +1,50 @@
+<div class="main-container" *ngIf="data && filteredUsers; else loader">
+
+  <div class="example-container">
+    <mat-card-content>
+      <form [formGroup]="form" (input)="subject.next()">
+        <span>Пошук: &nbsp;</span>
+        <mat-form-field>
+          <mat-label>Прізвище</mat-label>
+          <input matInput type="text" formControlName="surname">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <cdk-virtual-scroll-viewport itemSize="250" class="example-viewport" (scroll)="scroll($event)">
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="filteredUsers"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+        (dblclick)="dblclickMove($event.target.innerText, 'data', 'filteredUsers')">
+        <div class="example-box" *ngFor="let item of filteredUsers" cdkDrag>{{item.surname}} {{item.name}}</div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <div class="example-container group">
+    <h2>В групі</h2>
+    <cdk-virtual-scroll-viewport itemSize="250" class="example-viewport">
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="data"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list done"
+        (cdkDropListDropped)="drop($event)"
+        (dblclick)="dblclickMove($event.target.innerText, 'filteredUsers', 'data')">
+        <div class="example-box" *ngFor="let item of data" cdkDrag>{{item.surname}} {{item.name}}</div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="dialogRef.close()">Відміна</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close(data)">Зберегти</button>
+  </div>
+</div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,46 @@
+<div *ngIf="groupsData; else loader">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let group of groupsData.groups">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{group.label}} {{group.city}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="tools">
+        <div class="upDateAndDelete">
+          <button mat-icon-button class="icon" (click)="addAndDeleteUsers(group)">
+            <mat-icon color="primary">add_circle</mat-icon>
+          </button>
+          <button mat-icon-button class="icon" (click)="updateProfile(group)">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+          <button mat-icon-button class="icon" (click)="delete(group)">
+            <mat-icon color="primary">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cards">
+          <mat-card>
+            Кількість людей в групі: {{group.users_list.length}}
+          </mat-card>
+          <mat-card>
+            Дата початку: {{group.started_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+          <mat-card>
+            Дата закінчення: {{group.finished_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+          <mat-card>
+            Зареєстрована: {{group.created_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+          <mat-card *ngIf="group.updated_at">
+            Редагована: {{group.updated_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

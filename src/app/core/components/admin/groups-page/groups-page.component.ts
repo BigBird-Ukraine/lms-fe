@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 
-import {CreateGroupComponent} from '../../../../shared/components/templates';
+import {CreateGroupComponent} from './create-group/create-group.component';
+import {AdminGroupsService} from "../services";
 
 
 @Component({
@@ -10,11 +11,19 @@ import {CreateGroupComponent} from '../../../../shared/components/templates';
   styleUrls: ['./groups-page.component.scss']
 })
 export class GroupsPageComponent implements OnInit {
+  getGroups: any;
+  length: number;
+  pageSize: number = 50;
+  pageIndex: number = 0;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private adminGroupsService: AdminGroupsService) {
   }
 
   ngOnInit() {
+    this.adminGroupsService.getAll().subscribe(value => {
+      this.getGroups = value.data
+    });
   }
 
   create() {
