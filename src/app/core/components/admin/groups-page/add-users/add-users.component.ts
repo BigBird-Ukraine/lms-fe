@@ -84,9 +84,4 @@ export class AddUsersComponent implements OnInit {
       this.subject.next();
     }
   }
-
-  find() {
-
-
-  }
 }

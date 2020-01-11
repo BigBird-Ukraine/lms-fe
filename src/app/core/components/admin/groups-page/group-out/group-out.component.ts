@@ -1,12 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {switchMap, take} from "rxjs/operators";
+import {take} from "rxjs/operators";
 
 import {GroupModel, IGroupData, IUser} from "../../interfaces";
 import {AddUsersComponent} from "../add-users/add-users.component";
 import {AdminCoursesService, AdminGroupsService, AdminUsersService} from "../../services";
 import {DeleteComponent} from "../../../../../shared/components/delete/delete.component";
 import {CustomSnackbarService} from "../../../../../shared/services";
+import {Subject} from "rxjs";
+import {async} from "rxjs/internal/scheduler/async";
 
 @Component({
   selector: 'app-group-out',
@@ -16,15 +18,23 @@ import {CustomSnackbarService} from "../../../../../shared/services";
 export class GroupOutComponent implements OnInit {
   @Input() groupsData: IGroupData;
   IUserList: IUser[] = [];
+  subject = new Subject<any>();
 
   constructor(private dialog: MatDialog,
               private adminUsersService: AdminUsersService,
               private adminGroupsService: AdminGroupsService,
               private adminCoursesService: AdminCoursesService,
               private customSnackbarService: CustomSnackbarService) {
+
   }
 
   ngOnInit() {
+    this.subject.pipe( //TODO Victor
+      take(4)
+    )
+      .subscribe((value) => {
+        this.getCourseLabel(value)
+      })
   }
 
   updateProfile(group: GroupModel) {
@@ -62,17 +72,18 @@ export class GroupOutComponent implements OnInit {
         const result: string[] = [];
         value.forEach(value1 => result.push(value1._id));
         group.users_list = result;
-        this.adminGroupsService.update(group).subscribe();
+        // this.adminGroupsService.update(group).subscribe();
         group.updated_at = new Date().toDateString()
       }
     });
   }
 
-  getCourseLabel(course_id: string){
-      this.adminCoursesService.getById(course_id).pipe(
-        take(1),
-        switchMap(value => {
-        return value.data.label.toString()
-      })).subscribe(value => console.log(value))
+  getCourseLabel(course_id: string) {
+    let label: string = '';
+    this.adminCoursesService.getById(course_id).pipe(take(1))
+      .subscribe(value => {
+        label = value.data.lebel;
+        console.log(value.data.label);
+      });
   }
 }
