@@ -80,6 +80,12 @@ export class AddQuestionFormComponent implements OnInit {
     tag.target.value = '';
   }
 
+  delTag(tag) {
+    const index = this.tags.findIndex(delTag => delTag === tag);
+
+    this.tags.splice(index, 1);
+  }
+
   removeAnswer(answer) {
     const control = this.questionForm.get('answers') as FormArray;
     const idx = control.value.findIndex((answerToRemove) => answerToRemove.label === answer.value.label);

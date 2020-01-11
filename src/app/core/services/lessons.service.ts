@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {IFullLesson, ILesson} from '../interface';
+import {IEditLesson, IFullLesson, ILesson} from '../interface';
 import {commonAuthPath} from '../../shared/api';
 import {AuthService} from './auth';
 
@@ -41,5 +41,19 @@ export class LessonsService {
         fromObject: params
       })
     });
+  }
+
+  getMyLessons(): Observable<IFullLesson> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<IFullLesson>(`${commonAuthPath}/lessons/my`, options);
+  }
+
+  editLesson(id, lesson): Observable<IEditLesson> {
+    return this.http.patch<IEditLesson>(`${commonAuthPath}/lessons` + `/${id}`, lesson);
   }
 }

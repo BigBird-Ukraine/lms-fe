@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel, IUserSubjectModel} from '../../interface';
+import {UserModel, IUserSubjectModel, IUser} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -20,7 +20,9 @@ export class UserService {
     const formData: FormData = new FormData();
     const {photo_path, ...body} = user;
 
-    formData.append('files', user.photo_path);
+    if (photo_path) {
+      formData.append('files', photo_path);
+    }
 
     const strings = Object.keys(body);
     strings.forEach(key => {
@@ -30,21 +32,20 @@ export class UserService {
     return this.http.post<UserModel>(`${commonAuthPath}/users`, formData);
   }
 
-  updateUser(id, user): Observable<UserModel> {
+  updateUser(id, user): Observable<IUser> {
     const formData: FormData = new FormData();
     const {photo_path, ...body} = user;
 
-    formData.append('files', photo_path);
+    if (photo_path) {
+      formData.append('files', photo_path);
+    }
 
     const strings = Object.keys(body);
     strings.forEach(key => {
-      if (!body[key]) {
-        delete body[key];
-      }
       formData.append(key, body[key]);
     });
 
-    return this.http.patch<UserModel>(`${commonAuthPath}/users` + `/${id}`, formData);
+    return this.http.patch<IUser>(`${commonAuthPath}/users` + `/${id}`, formData);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {

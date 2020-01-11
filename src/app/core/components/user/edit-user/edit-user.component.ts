@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
     this.editForm = this.fb.group({
         email: this.fb.control(this.user.email, [Validators.email]),
         phone_number: this.fb.control(this.user.phone_number, [Validators.pattern(regExp.phone)]),
-        photo_path: this.user.photo_path
+        photo_path: ''
       },
     );
   }
@@ -60,13 +60,21 @@ export class EditUserComponent implements OnInit {
     const data: IUserEdit = this.editForm.value;
     const id: string = this.data.user._id;
 
+    const strings = Object.keys(data);
+    strings.forEach(key => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+
     this.updateUser(id, data);
   }
 
   updateUser(id: string, user: IUserEdit) {
-    this.userService.updateUser(id, user).subscribe((value: UserModel) => {
+    this.userService.updateUser(id, user).subscribe(() => {
         this.customSnackbarService.open('Редагування пройшло успішно', 'success');
-        this.dialogRef.close(value);
+        this.dialogRef.close();
+        console.log();
       },
       () => this.customSnackbarService.open('Невдала спроба', ''));
   }

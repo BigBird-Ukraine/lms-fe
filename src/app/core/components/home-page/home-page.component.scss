@@ -1,11 +1,17 @@
 .home-container {
-  margin: 15px 0;
-}
-button {
-  margin-right: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-.userName {
-  color: darkred;
-  font-weight: bold
+h1 {
+  color: white;
+  font-size: 100px;
+  padding-left: 40px;
+  padding-top: 40px;
+}
+
+.intro {
+  height: 500px;
+  background: rgba(46, 42, 218, 0.05) url('src/assets/images/background.jpg') center no-repeat;
+  background-size: cover;
 }

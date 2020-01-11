@@ -1,11 +1,72 @@
 .header-container {
   background-color: rgba(46, 42, 218, 0.05);
   height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
 }
 
 .logo {
   position: relative;
   width: 70px;
   height: 100%;
-  margin-left: 40px;
+  margin-right: 20px;
 }
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.nav {
+  line-height: 60px;
+  position: relative;
+}
+
+.nav a {
+  margin-left: 20px;
+  color: #00888E;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav a:hover {
+  border-bottom: 1px solid #00888E;
+}
+
+button .mat-menu-item:focus {
+  border: none;
+  outline: none;
+}
+
+.divider {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 1px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: #00888E;
+}
+
+.userName {
+  display: inline-block;
+  padding-left: 40px;
+  color: #00888E;
+  font-weight: 500;
+  position: relative;
+}
+
+.icon {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  font-size: 30px;
+}
+
+
+
