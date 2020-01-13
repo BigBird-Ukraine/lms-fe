@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
-import {MatCheckboxChange} from '@angular/material';
 
 import {QuestionsService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
@@ -16,7 +15,7 @@ export class QuestionsLayoutComponent implements OnInit {
   questions: QuestionModel[];
   questionForm: FormGroup;
   check: any;
-  count = 0;
+  count = true;
 
   constructor(private questionsService: QuestionsService,
               private activatedRoute: ActivatedRoute,
@@ -33,95 +32,48 @@ export class QuestionsLayoutComponent implements OnInit {
     this.questionForm = this.fb.group({
       question_list: this.fb.array([])
     });
-
   }
 
   getData() {
     this.activatedRoute.queryParams.subscribe((params: object) => {
       this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
         this.questions = questions.data.questions;
+        this.questions.forEach((el) => {
+          const questionListArr = (this.questionForm.get('question_list')) as FormArray;
+          const control = this.fb.group({
+            question: this.fb.control(el._id),
+            answer: this.fb.array([])
+          });
+          const answersArr = (control.get('answer')) as FormArray;
+          el.answers.forEach(singleAnswer => {
+            const answerControl = new FormGroup({
+              _id: new FormControl(singleAnswer._id),
+              value: new FormControl(singleAnswer.value),
+              checked: new FormControl(false)
+            });
+            answersArr.push(answerControl);
+          });
+          questionListArr.push(control);
+        });
       });
     });
   }
 
-  formTest(event) {
-    // const dataArray: FormArray = this.questionForm.get('data') as FormArray;
-    // const control = this.fb.group({
-    //   question_id: this.fb.control(null),
-    //   chosen_answers: this.fb.array([])
-    // });
-    //
-    // console.log(event);
-    const test = this.questionForm.value;
+  formTest() {
+    let xxx = (this.questionForm.get('question_list') as FormArray).controls
+      .map(a => {
+        let aaa = (a.get('answer') as FormArray).controls.map(o => {
+          if (o.get('checked').value === true) {
+            return o.get('_id').value;
+          }});
+        (a.get('answer') as FormArray).controls = aaa;
+      });
 
-    this.checkTest(test);
+    console.log(xxx);
   }
 
   checkTest(test) {
     console.log(test);
   }
-
-  onCheckChange(event: MatCheckboxChange, questionID) {
-    // const anwersID = [];
-    //
-    // if (event.checked) {
-    //   anwersID.push(event.source.value, questionID);
-    // }
-    //
-    // console.log(anwersID);
-
-    const dataArray: FormArray = this.questionForm.get('question_list') as FormArray;
-    // const control = this.fb.group({
-    //   // todo add info to obj
-    //   question: this.fb.control(questionID),
-    //   answer: this.fb.array([])
-    // });
-    if (this.count === 0) {
-      const control = this.fb.group({
-        // todo add info to obj
-        question: this.fb.control(questionID),
-        answer: this.fb.array([event.source.value])
-      });
-      dataArray.push(control);
-      this.count++;
-      return null;
-    }
-
-
-    dataArray.controls.forEach(q => {
-        if (q.get('question').value === questionID) {
-          if ((q.get('answer') as FormArray).controls.some(a => a.value === event.source.value)) {
-            let index = (q.get('answer') as FormArray).controls.findIndex(i => i.value === event.source.value);
-            (q.get('answer') as FormArray).controls.splice(index, 1);
-            // (q.get('answer') as FormArray).controls = (q.get('answer') as FormArray).controls.filter(arr => arr.value !== event.source.value);
-            console.log(22);
-          } else {
-            (q.get('answer') as FormArray).push(new FormControl(event.source.value));
-          }
-
-        } else {
-          const control = this.fb.group({
-            question: this.fb.control(questionID),
-            answer: this.fb.array([event.source.value])
-          });
-          dataArray.push(control);
-        }
-      }
-    );
-
-
-    // if (event.checked) {
-    //
-    //   if (this.check !== questionID) {
-    //     (control.get('answer') as FormArray).push(new FormControl(event.source.value));
-    //
-    //   } else {
-    //     (control.get('answer') as FormArray).push(new FormControl(event.source.value));
-    //     console.log(event.source.value);
-    //   }
-  }
-
-
-// }
 
 }
