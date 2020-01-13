@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 
 import {CreateGroupComponent} from './create-group/create-group.component';
 import {AdminGroupsService} from "../services";
+import {IGroupData} from "../interfaces";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {AdminGroupsService} from "../services";
   styleUrls: ['./groups-page.component.scss']
 })
 export class GroupsPageComponent implements OnInit {
-  getGroups: any;
+  getGroups: IGroupData;
   length: number;
   pageSize: number = 50;
   pageIndex: number = 0;

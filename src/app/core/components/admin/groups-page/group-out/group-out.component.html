@@ -3,7 +3,7 @@
     <mat-expansion-panel *ngFor="let group of groupsData.groups">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{group.label}} {{group.city}}
+          {{group.label}} {{group.city}} <!--{{getCourseLabel(group.course_id)}}-->
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="tools">

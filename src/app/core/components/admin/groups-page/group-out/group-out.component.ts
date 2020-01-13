@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {switchMap, take} from "rxjs/operators";
 
 import {GroupModel, IGroupData, IUser} from "../../interfaces";
 import {AddUsersComponent} from "../add-users/add-users.component";
@@ -28,7 +27,6 @@ export class GroupOutComponent implements OnInit {
   }
 
   updateProfile(group: GroupModel) {
-
   }
 
   delete(group: GroupModel) {
@@ -62,17 +60,14 @@ export class GroupOutComponent implements OnInit {
         const result: string[] = [];
         value.forEach(value1 => result.push(value1._id));
         group.users_list = result;
-        this.adminGroupsService.update(group).subscribe();
+        this.adminGroupsService.update(group._id, {users_list: group.users_list}).subscribe();
         group.updated_at = new Date().toDateString()
       }
     });
   }
 
-  getCourseLabel(course_id: string){
-      this.adminCoursesService.getById(course_id).pipe(
-        take(1),
-        switchMap(value => {
-        return value.data.label.toString()
-      })).subscribe(value => console.log(value))
+  getCourseLabel(course_id: string): string { //TODO
+    return ''
+
   }
 }

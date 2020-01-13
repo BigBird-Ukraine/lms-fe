@@ -23,8 +23,8 @@ export class AdminGroupsService {
 
   }
 
-  update(group: GroupModel): Observable<any> {
-    return this.httpClient.patch(`${this.groupUrl}`, group);
+  update(id: string, object: object): Observable<any> {
+    return this.httpClient.patch(`${this.groupUrl}/${id}`, object);
   }
 
   delete(_id: string): Observable<any> {
