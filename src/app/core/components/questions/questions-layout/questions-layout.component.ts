@@ -84,13 +84,11 @@ export class QuestionsLayoutComponent implements OnInit {
       }
     );
 
-    console.log(this.questionForm.value);
     this.checkTest(questionListArr);
   }
 
   checkTest(test) {
     this.testService.sendTests(test).subscribe();
-    console.log(test);
   }
 
 }
