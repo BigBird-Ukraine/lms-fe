@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {GroupModel} from '../interfaces';
@@ -18,16 +18,28 @@ export class AdminGroupsService {
     return this.httpClient.post<GroupModel>(`${this.groupUrl}`, group);
   }
 
-  getAll(): Observable<any> {
-    return this.httpClient.get<any>(`${this.groupUrl}`);
+  getAll(params?): Observable<any> {
+    return this.httpClient.get<any>(`${this.groupUrl}/`, {
+      params: new HttpParams({
+        fromObject: params
+      })
+    });
 
   }
 
-  update(id: string, object: object): Observable<any> {
+  getById(_id: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.groupUrl}/${_id}`)
+  }
+
+  updateUsersList(id: string, object: object): Observable<any> {
     return this.httpClient.patch(`${this.groupUrl}/${id}`, object);
   }
 
   delete(_id: string): Observable<any> {
     return this.httpClient.delete(`${this.groupUrl}/${_id}`)
+  }
+
+  updateById(_id: string, value: GroupModel): Observable<any> {
+    return this.httpClient.post(`${this.groupUrl}/${_id}`, value)
   }
 }

@@ -29,10 +29,13 @@ import {LoaderComponent} from "../../../shared/components/loader/loader.componen
 import {CreateGroupComponent} from "./groups-page/create-group/create-group.component";
 import { GroupOutComponent } from './groups-page/group-out/group-out.component';
 import { AddUsersComponent } from './groups-page/add-users/add-users.component';
+import { UpdateGroupComponent } from './groups-page/update-group/update-group.component';
 
 @NgModule({
   entryComponents:[
-    AddUsersComponent
+    AddUsersComponent,
+    CreateGroupComponent,
+    UpdateGroupComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -51,7 +54,8 @@ import { AddUsersComponent } from './groups-page/add-users/add-users.component';
     LoaderComponent,
     CreateGroupComponent,
     GroupOutComponent,
-    AddUsersComponent
+    AddUsersComponent,
+    UpdateGroupComponent
   ],
   imports: [
     CommonModule,

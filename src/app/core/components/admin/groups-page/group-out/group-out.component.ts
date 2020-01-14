@@ -1,11 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute} from "@angular/router";
+import {switchMap, take} from "rxjs/operators";
 
-import {GroupModel, IGroupData, IUser} from "../../interfaces";
-import {AddUsersComponent} from "../add-users/add-users.component";
-import {AdminCoursesService, AdminGroupsService, AdminUsersService} from "../../services";
-import {DeleteComponent} from "../../../../../shared/components/delete/delete.component";
-import {CustomSnackbarService} from "../../../../../shared/services";
+import {GroupModel, IGroupData, IUser} from '../../interfaces';
+import {AddUsersComponent} from '../add-users/add-users.component';
+import {AdminGroupsService} from '../../services';
+import {DeleteComponent} from '../../../../../shared/components/delete/delete.component';
+import {CustomSnackbarService} from '../../../../../shared/services';
+import {UpdateGroupComponent} from "../update-group/update-group.component";
 
 @Component({
   selector: 'app-group-out',
@@ -17,16 +20,29 @@ export class GroupOutComponent implements OnInit {
   IUserList: IUser[] = [];
 
   constructor(private dialog: MatDialog,
-              private adminUsersService: AdminUsersService,
               private adminGroupsService: AdminGroupsService,
-              private adminCoursesService: AdminCoursesService,
-              private customSnackbarService: CustomSnackbarService) {
+              private customSnackbarService: CustomSnackbarService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
   }
 
   updateProfile(group: GroupModel) {
+    this.dialog.open(UpdateGroupComponent, {
+      data: group
+    }).afterClosed().subscribe((value) => {
+      if (value) {
+        this.route.queryParams.pipe(
+          switchMap(value => {
+            return this.adminGroupsService.getAll(value)
+          }),
+          take(1),
+        ).subscribe(value => {
+          this.groupsData = value.data
+        })
+      }
+    })
   }
 
   delete(group: GroupModel) {
@@ -41,33 +57,23 @@ export class GroupOutComponent implements OnInit {
           this.groupsData.groups.splice(index, 1);
         });
       }
-    })
+    });
   }
 
   addAndDeleteUsers(group: GroupModel) {
-    this.IUserList = [];
-    group.users_list.forEach(value => {
-      this.adminUsersService.getByID(value).subscribe(value1 => {
-        this.IUserList.push(value1.data);
-      });
-    });
+    this.IUserList = group.users_list;
     this.dialog.open(AddUsersComponent, {
       data: this.IUserList,
       disableClose: true
     }).afterClosed().subscribe((value: IUser[]) => {
 
       if (value) {
-        const result: string[] = [];
-        value.forEach(value1 => result.push(value1._id));
+        const result: IUser[] = [];
+        value.forEach(value1 => result.push(value1));
         group.users_list = result;
-        this.adminGroupsService.update(group._id, {users_list: group.users_list}).subscribe();
+        this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list}).subscribe();
         group.updated_at = new Date().toDateString()
       }
     });
-  }
-
-  getCourseLabel(course_id: string): string { //TODO
-    return ''
-
   }
 }
