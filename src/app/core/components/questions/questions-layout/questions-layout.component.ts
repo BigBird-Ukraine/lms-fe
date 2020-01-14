@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
 
-import {QuestionsService} from '../../../services';
+import {QuestionsService, TestService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
 
 @Component({
@@ -17,9 +17,11 @@ export class QuestionsLayoutComponent implements OnInit {
   check: any;
   count = true;
 
+
   constructor(private questionsService: QuestionsService,
               private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder
+              private fb: FormBuilder,
+              private testService: TestService
   ) {
   }
 
@@ -48,7 +50,7 @@ export class QuestionsLayoutComponent implements OnInit {
           el.answers.forEach(singleAnswer => {
             const answerControl = new FormGroup({
               _id: new FormControl(singleAnswer._id),
-              value: new FormControl(singleAnswer.value),
+              value:  new FormControl(singleAnswer.value),
               checked: new FormControl(false)
             });
             answersArr.push(answerControl);
@@ -60,19 +62,34 @@ export class QuestionsLayoutComponent implements OnInit {
   }
 
   formTest() {
-    let xxx = (this.questionForm.get('question_list') as FormArray).controls
-      .map(a => {
-        let aaa = (a.get('answer') as FormArray).controls.map(o => {
-          if (o.get('checked').value === true) {
-            return o.get('_id').value;
-          }});
-        (a.get('answer') as FormArray).controls = aaa;
-      });
+    const questionListArr = {
+      question_list: []
+    };
 
-    console.log(xxx);
+    let answers = '';
+
+    (this.questionForm.get('question_list') as FormArray).controls.forEach(question => {
+        const control = {
+          question_id: null,
+          chosen_answers: []
+        };
+        control.question_id = question.get('question').value;
+        (question.get('answer') as FormArray).controls.forEach(answer => {
+          if (answer.get('checked').value === true) {
+            answers = answer.get('_id').value;
+            control.chosen_answers.push(answers);
+          }
+        });
+        questionListArr.question_list.push(control);
+      }
+    );
+
+    console.log(this.questionForm.value);
+    this.checkTest(questionListArr);
   }
 
   checkTest(test) {
+    this.testService.sendTests(test).subscribe();
     console.log(test);
   }
 

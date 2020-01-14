@@ -5,7 +5,7 @@ import {MatDialog} from '@angular/material';
 import {Tags, ILesson} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
 import {CustomSnackbarService} from '../../../../shared/services';
-import {LessonsService} from '../../../services/lessons.service';
+import {LessonsService} from '../../../services/lessons/lessons.service';
 
 @Component({
   selector: 'app-create-lesson',

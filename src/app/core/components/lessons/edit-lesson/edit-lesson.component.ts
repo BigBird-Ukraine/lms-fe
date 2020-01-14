@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {IEditLesson, ILesson, Tags} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
-import {LessonsService} from '../../../services/lessons.service';
+import {LessonsService} from '../../../services/lessons/lessons.service';
 import {CustomSnackbarService} from '../../../../shared/services';
 
 @Component({
