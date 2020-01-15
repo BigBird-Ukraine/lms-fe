@@ -3,7 +3,7 @@ import {
   MatButtonModule, MatCardModule,
   MatDialogModule,
   MatExpansionModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule, MatSidenavModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -36,7 +36,8 @@ import { SingleLessonComponent } from './single-lesson/single-lesson.component';
     CommonModule,
     MatExpansionModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule
   ],
   exports: []
 })

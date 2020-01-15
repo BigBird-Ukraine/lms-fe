@@ -56,4 +56,8 @@ export class LessonsService {
   editLesson(id, lesson): Observable<IEditLesson> {
     return this.http.patch<IEditLesson>(`${commonAuthPath}/lessons` + `/${id}`, lesson);
   }
+
+  getLessonById(id): Observable<IEditLesson> {
+    return this.http.get<IEditLesson>(`${commonAuthPath}/lessons/${id}`);
+  }
 }
