@@ -15,13 +15,15 @@ import {CreateLessonComponent} from './create-lesson/create-lesson.component';
 import {LessonsRoutingModule} from './lessons-routing.module';
 import {FilterPipe} from './filter.pipe';
 import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
+import { SingleLessonComponent } from './single-lesson/single-lesson.component';
 
 @NgModule({
   declarations: [
     LessonPageComponent,
     CreateLessonComponent,
     FilterPipe,
-    EditLessonComponent
+    EditLessonComponent,
+    SingleLessonComponent
   ],
   imports: [
     LessonsRoutingModule,
