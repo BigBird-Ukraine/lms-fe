@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
 import {Tags, ILesson} from '../../../interface';
-import {InfoHelperService} from '../../../services/questions';
+import {InfoHelperService, LessonsService} from '../../../services';
 import {CustomSnackbarService} from '../../../../shared/services';
-import {LessonsService} from '../../../services/lessons.service';
+
 
 @Component({
   selector: 'app-create-lesson',

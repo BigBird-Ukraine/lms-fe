@@ -9,8 +9,8 @@ import {
 import {_MatMenuDirectivesModule, MatCardModule, MatMenuModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
-import {MatPaginatorIntl} from "@angular/material/paginator";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';

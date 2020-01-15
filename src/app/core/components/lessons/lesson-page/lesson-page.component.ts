@@ -7,9 +7,7 @@ import {CreateLessonComponent} from '../create-lesson/create-lesson.component';
 import {UserService} from '../../../services/user';
 import {IEditLesson, IFullLesson, ILesson, Tags} from '../../../interface';
 import {UserRolesEnum} from '../../../../shared/enums';
-import {LessonsService} from '../../../services/lessons.service';
-import {InfoHelperService} from '../../../services/questions';
-import {AuthService} from '../../../services/auth';
+import {InfoHelperService, LessonsService, AuthService} from '../../../services';
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
 
 @Component({
@@ -127,10 +125,6 @@ export class LessonPageComponent implements OnInit {
     const index = this.tags.findIndex(delTag => delTag === tag);
 
     this.tags.splice(index, 1);
-  }
-
-  viewLesson(id: string) {
-    this.lesson = this.lessonsList.find(lesson => lesson._id === id);
   }
 
   showFiltered() {
