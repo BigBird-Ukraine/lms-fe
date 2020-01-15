@@ -1,0 +1,53 @@
+<mat-card class="dialog">
+  <mat-card-title>Створення Групи</mat-card-title>
+  <mat-dialog-content>
+    <form [formGroup]="form">
+      <div class="fields" fxLayout="column">
+
+        <mat-form-field appearance="standard">
+          <mat-label>Назва</mat-label>
+          <input matInput type="text" required formControlName="label">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Місто</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of cities" [value]="city.name">
+              {{city.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Курс</mat-label>
+          <mat-select formControlName="course_id">
+            <mat-option *ngFor="let course of courses" [value]="course._id">
+              {{course.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Дата старту" formControlName="started_at">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Дата закінчення"
+                 formControlName="finished_at">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
+      Зберегти
+    </button>
+  </mat-card-actions>
+</mat-card>

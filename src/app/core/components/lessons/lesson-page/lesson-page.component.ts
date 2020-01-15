@@ -127,10 +127,6 @@ export class LessonPageComponent implements OnInit {
     this.tags.splice(index, 1);
   }
 
-  viewLesson(id: string) {
-    this.lesson = this.lessonsList.find(lesson => lesson._id === id);
-  }
-
   showFiltered() {
     this.isFiltered = true;
     this.filterLessonsForm.value.tags = this.tags;

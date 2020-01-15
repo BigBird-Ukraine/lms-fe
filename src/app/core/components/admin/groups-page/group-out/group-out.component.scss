@@ -1,0 +1,26 @@
+.cards {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.panel {
+  display: flex;
+}
+
+.upDateAndDelete {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-expansion-panel:hover {
+  border: 1px solid #673ab7;
+}
+
+.icon {
+  top: -60px;
+  right: 20px;
+}
+
+
+
+

@@ -3,9 +3,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 
-import {ICourse} from '../../../../core/components/admin/interfaces';
-import {AdminCoursesService, AdminGroupsService} from '../../../../core/components/admin/services';
-import {CustomSnackbarService} from '../../../services';
+import {ICourse} from '../../interfaces';
+import {AdminCoursesService, AdminGroupsService} from '../../services';
+import {CustomSnackbarService} from '../../../../../shared/services';
 
 @Component({
   selector: 'app-create-group',
