@@ -60,7 +60,7 @@ export class UserOutComponent implements OnInit {
 
   delete(user: IUser): void {
     this.dialog.open(DeleteComponent, {
-      data: user.surname + ' ' + user.name
+      data: `${user.surname} ${user.name}`
     }).afterClosed().subscribe(value => {
 
       if (value) {
