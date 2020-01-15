@@ -3,3 +3,46 @@
     Створити групу
   </button>
 </div>
+<mat-toolbar class="filter-container">
+  <mat-card-content>
+    <form [formGroup]="form" (input)="subject.next()">
+      <span>Пошук по: &nbsp;</span>
+
+      <mat-form-field>
+        <mat-label>Назві групи</mat-label>
+        <input matInput type="text" formControlName="label">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Місто</mat-label>
+        <mat-select formControlName="city" (selectionChange)="getFilteredGroups()">
+          <mat-option *ngFor="let city of cities" [value]="city.value">{{city.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-icon-button (click)="reset()">
+        <mat-icon>clear_all</mat-icon>
+      </button>
+
+    </form>
+  </mat-card-content>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[25, 50, 100]"
+                 (page)="getFilteredGroups($event)">
+
+
+  </mat-paginator>
+</mat-toolbar>
+
+<app-group-out [groupsData]="getGroups"></app-group-out>
+
+<mat-paginator *ngIf="length > 15"
+               [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [pageSizeOptions]="[25, 50, 100]"
+               (page)="getFilteredGroups($event)">
+</mat-paginator>
+

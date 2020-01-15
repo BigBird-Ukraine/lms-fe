@@ -7,7 +7,7 @@ import {CustomSnackbarService} from '../../../../../shared/services';
 import {AdminUsersService} from '../../services';
 import {ChangeRoleUserComponent} from '../change-role-user/change-role-user.component';
 import {UpdateProfileComponent} from "../update-profile/update-profile.component";
-import {DeleteUserComponent} from "../delete-user/delete-user.component";
+import {DeleteComponent} from "../../../../../shared/components/delete/delete.component";
 
 @Component({
   selector: 'app-user-out',
@@ -59,8 +59,8 @@ export class UserOutComponent implements OnInit {
   }
 
   delete(user: IUser): void {
-    this.dialog.open(DeleteUserComponent, {
-      data: user
+    this.dialog.open(DeleteComponent, {
+      data: `${user.surname} ${user.name}`
     }).afterClosed().subscribe(value => {
 
       if (value) {

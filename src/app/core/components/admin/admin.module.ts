@@ -4,6 +4,10 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatAutocompleteModule, MatListModule} from '@angular/material';
 import {MatMenuModule} from "@angular/material/menu";
 import {FlexModule} from "@angular/flex-layout";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -21,11 +25,18 @@ import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role
 import {FilterPipe} from './filter.pipe';
 import {UpdateProfileComponent} from './users-page/update-profile/update-profile.component';
 import {DeleteUserComponent} from './users-page/delete-user/delete-user.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
 import {LoaderComponent} from "../../../shared/components/loader/loader.component";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {CreateGroupComponent} from "./groups-page/create-group/create-group.component";
+import { GroupOutComponent } from './groups-page/group-out/group-out.component';
+import { AddUsersComponent } from './groups-page/add-users/add-users.component';
+import { UpdateGroupComponent } from './groups-page/update-group/update-group.component';
 
 @NgModule({
+  entryComponents:[
+    AddUsersComponent,
+    CreateGroupComponent,
+    UpdateGroupComponent
+  ],
   declarations: [
     AuthAdminComponent,
     MainAdminComponent,
@@ -40,7 +51,11 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ChangeRoleUserComponent,
     UpdateProfileComponent,
     DeleteUserComponent,
-    LoaderComponent
+    LoaderComponent,
+    CreateGroupComponent,
+    GroupOutComponent,
+    AddUsersComponent,
+    UpdateGroupComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +67,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatMenuModule,
     FlexModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DragDropModule,
+    ScrollingModule
   ],
   providers: [
     {

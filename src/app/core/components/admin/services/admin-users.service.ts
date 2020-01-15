@@ -3,8 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {commonAdminPath} from '../../../../shared/api';
-import {IUser, IUserModel} from '../interfaces';
-import {Params} from "@angular/router";
+import {IUser} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -38,14 +37,20 @@ export class AdminUsersService {
   makeTeacher(id: string): Observable<string> {
     return this.httpClient.post<string>(this.urlUsers + `/${id}/teacher`, null);
   }
+
   makeAdmin(id: string): Observable<string> {
     return this.httpClient.post<string>(this.urlUsers + `/${id}/admin`, null);
   }
+
   makeStudent(id: string): Observable<string> {
     return this.httpClient.post<string>(this.urlUsers + `/${id}/student`, null);
   }
 
   updateProfile(id: string, value: any): Observable<IUser> {
     return this.httpClient.patch<IUser>(this.urlUsers + `/${id}`, value);
+  }
+
+  getByID(id: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.urlUsers}/${id}`)
   }
 }

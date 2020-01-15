@@ -1,3 +1,26 @@
-.group-container{
+.group-container {
   margin: 15px;
+}
+
+.active {
+  background: #3f51b5;
+  color: white;
+}
+
+.buttons {
+  margin: 10px;
+}
+
+.buttons > button {
+  margin-left: 5px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-container mat-form-field {
+  margin-right: 15px;
+  width: 150px;
 }

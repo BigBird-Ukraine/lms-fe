@@ -25,24 +25,23 @@ import {FooterComponent} from './shared/components/footer/footer.component';
 import {HeaderComponent} from './shared/components/header/header.component';
 import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layout.component';
 import {AdminModule} from './core/components/admin/admin.module';
-import {CreateGroupComponent, ModuleLayoutComponent, CourseLayoutComponent} from './shared/components/templates';
+import {ModuleLayoutComponent, CourseLayoutComponent} from './shared/components/templates';
 import {FilterPipe} from './shared/pipe';
 import {ChangeRoleUserComponent} from './core/components/admin/users-page/change-role-user/change-role-user.component';
 import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
 import {LessonsModule} from './core/components/lessons/lessons.module';
-import {UpdateProfileComponent} from './core/components/admin/users-page/update-profile/update-profile.component';
-import {DeleteUserComponent} from './core/components/admin/users-page/delete-user/delete-user.component';
-import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
+import {UpdateProfileComponent} from "./core/components/admin/users-page/update-profile/update-profile.component";
+import {getUkrainianPaginatorIntl} from "./shared/services/matPaginator.service";
+import { DeleteComponent } from './shared/components/delete/delete.component';
 
 @NgModule({
   entryComponents: [
-    CreateGroupComponent,
     CourseLayoutComponent,
     ModuleLayoutComponent,
     ConfirmLayoutComponent,
     ChangeRoleUserComponent,
     UpdateProfileComponent,
-    DeleteUserComponent
+    DeleteComponent
   ],
   declarations: [
     AppComponent,
@@ -52,11 +51,11 @@ import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service'
     FooterComponent,
     HeaderComponent,
     AdminLayoutComponent,
-    CreateGroupComponent,
     FilterPipe,
     CourseLayoutComponent,
     ModuleLayoutComponent,
-    ConfirmLayoutComponent
+    ConfirmLayoutComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
