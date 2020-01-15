@@ -47,12 +47,12 @@ export class QuestionsService {
     return this.http.get<QuestionData>(`${commonAuthPath}/questions`, options);
   }
 
-  getProductById(id): Observable<QuestionData> {
-    return this.http.get<QuestionData>(`${commonAuthPath}/questions/${id}`);
-  }
-
   findQuestionByParams(params): Observable<QuestionData> {
     return this.http.get<QuestionData>(`${commonAuthPath}/questions`, {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      }),
+
       params: new HttpParams({
         fromObject: params
       })

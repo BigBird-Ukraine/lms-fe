@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {IEditLesson, IFullLesson, ILesson} from '../interface';
-import {commonAuthPath} from '../../shared/api';
-import {AuthService} from './auth';
+import {IEditLesson, IFullLesson, ILesson} from '../../interface';
+import {commonAuthPath} from '../../../shared/api';
+import {AuthService} from '../auth';
 
 @Injectable({
   providedIn: 'root'

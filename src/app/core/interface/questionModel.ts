@@ -9,7 +9,7 @@ export interface QuestionData {
 export interface Answers {
   value: string;
   correct?: false;
-  id?: string;
+  _id?: string;
 }
 
 export interface Tags {
@@ -28,18 +28,15 @@ export interface Groups {
   group: string;
 }
 
-export class QuestionModel {
-  constructor(
-    public subject: Subject,
-    public group: Groups[],
-    public level: Level,
-    public tags: Tags [],
-    public user_id: string,
-    public question: string,
-    public answers: Answers[],
-    public description?: string,
-    public _id?: string
-  ) {
-  }
+export interface QuestionModel {
+  subject: Subject;
+  group: Groups[];
+  level: Level;
+  tags: Tags [];
+  user_id: string;
+  question: string;
+  answers: Answers[];
+  description?: string;
+  _id?: string;
+  lessons_id?: [string];
 }
-

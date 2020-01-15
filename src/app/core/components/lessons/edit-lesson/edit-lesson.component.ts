@@ -3,8 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {IEditLesson, ILesson, Tags} from '../../../interface';
-import {InfoHelperService} from '../../../services/questions';
-import {LessonsService} from '../../../services/lessons.service';
+import {InfoHelperService, LessonsService} from '../../../services';
 import {CustomSnackbarService} from '../../../../shared/services';
 
 @Component({
