@@ -1,12 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-import {ILesson, IUserEdit, Tags} from '../../../interface';
-import {InfoHelperService} from '../../../services/questions';
-import {LessonsService} from '../../../services/lessons.service';
-import {CustomSnackbarService} from '../../../../shared/services';
-import {MatDialog} from '@angular/material';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, FormGroup} from '@angular/forms';
+
+import {IEditLesson, ILesson, Tags} from '../../../interface';
+import {InfoHelperService, LessonsService} from '../../../services';
+import {CustomSnackbarService} from '../../../../shared/services';
 
 @Component({
   selector: 'app-edit-lesson',
@@ -39,9 +37,11 @@ export class EditLessonComponent implements OnInit {
       number: this.fb.control(this.lesson.number),
       label: this.fb.control(this.lesson.label),
       description: this.fb.control(this.lesson.description),
-      // tags: this.fb.array(this.lesson.tags),
+      tags: this.fb.array([]),
       // video_path: ''
     });
+
+    this.tags = this.lesson.tags;
   }
 
   fileChange(video) {
@@ -72,7 +72,7 @@ export class EditLessonComponent implements OnInit {
   }
 
   editLesson() {
-    // this.editLessonForm.value.tags = this.tags;
+    this.editLessonForm.value.tags = this.tags;
     const id: string = this.lesson._id;
     const lessonData = this.editLessonForm.value;
 
@@ -83,7 +83,7 @@ export class EditLessonComponent implements OnInit {
       }
     });
 
-    this.lessonService.editLesson(id, lessonData).subscribe((value) => {
+    this.lessonService.editLesson(id, lessonData).subscribe((value: IEditLesson) => {
         this.dialogRef.close(value);
         this.customSnackbarService.open('Урок відредаговано', '');
       },

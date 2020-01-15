@@ -7,9 +7,7 @@ import {CreateLessonComponent} from '../create-lesson/create-lesson.component';
 import {UserService} from '../../../services/user';
 import {IEditLesson, IFullLesson, ILesson, Tags} from '../../../interface';
 import {UserRolesEnum} from '../../../../shared/enums';
-import {LessonsService} from '../../../services/lessons.service';
-import {InfoHelperService} from '../../../services/questions';
-import {AuthService} from '../../../services/auth';
+import {InfoHelperService, LessonsService, AuthService} from '../../../services';
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
 
 @Component({
@@ -165,8 +163,9 @@ export class LessonPageComponent implements OnInit {
     this.dialog.open(EditLessonComponent, {
       data: {lesson: this.lesson}
     }).afterClosed().subscribe((value: IEditLesson) => {
+      console.log(value);
       const index = this.lessonsList.findIndex(findLesson => findLesson._id === id);
-      this.lessonsList[index] = value.data.updatedLesson;
+      this.lessonsList[index] = value.data;
     });
   }
 }
