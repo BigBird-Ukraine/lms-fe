@@ -16,6 +16,9 @@ import {LessonsRoutingModule} from './lessons-routing.module';
 import {FilterPipe} from './filter.pipe';
 import { EditLessonComponent } from './edit-lesson/edit-lesson.component';
 import { SingleLessonComponent } from './single-lesson/single-lesson.component';
+import {AddQuestionToLessonComponent} from './add-question-to-lesson/add-question-to-lesson.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { SingleLessonComponent } from './single-lesson/single-lesson.component';
     CreateLessonComponent,
     FilterPipe,
     EditLessonComponent,
-    SingleLessonComponent
+    SingleLessonComponent,
+    AddQuestionToLessonComponent
   ],
   imports: [
     LessonsRoutingModule,
@@ -37,7 +41,9 @@ import { SingleLessonComponent } from './single-lesson/single-lesson.component';
     MatExpansionModule,
     MatCardModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    ScrollingModule,
+    DragDropModule
   ],
   exports: []
 })

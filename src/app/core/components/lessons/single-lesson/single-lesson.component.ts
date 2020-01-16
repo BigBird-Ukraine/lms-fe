@@ -3,11 +3,12 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
-import {IEditLesson, ILesson} from '../../../interface';
+import {IEditLesson, ILesson, QuestionModel} from '../../../interface';
 import {LessonsService} from '../../../services/lessons';
 import {UserRolesEnum} from '../../../../shared/enums';
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
+import {AddQuestionToLessonComponent} from '../add-question-to-lesson/add-question-to-lesson.component';
 
 @Component({
   selector: 'app-single-lesson',
@@ -56,4 +57,15 @@ export class SingleLessonComponent implements OnInit {
     });
   }
 
+  addQuestionToLesson() {
+    this.dialog.open(AddQuestionToLessonComponent, {
+      data: this.lesson.questions_id
+    }).afterClosed().subscribe((questions: QuestionModel[]) => {
+      const data = {
+        NewQuestions_id: [],
+      };
+      questions.forEach(question => data.NewQuestions_id.push(question._id));
+      console.log(data);
+    });
+  }
 }
