@@ -9,6 +9,7 @@ export interface ILesson {
   tags: Tags[];
   module_id: string;
   tests?: [string];
+  questions_id?: [string];
   user_id: string;
 }
 

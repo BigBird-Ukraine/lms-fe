@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
-import {FormControl, FormGroup} from "@angular/forms";
-import {Subject} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
-import {AdminUsersService} from "../../services";
-import {IUser} from "../../interfaces";
+import {AdminUsersService} from '../../services';
+import {IUser} from '../../interfaces';
 
 
 @Component({
@@ -50,8 +50,8 @@ export class AddUsersComponent implements OnInit {
       this.adminUsersService.getAll(queryParams).subscribe(value => {
         this.filteredUsers = value.data.users;
         this.data.forEach(value1 => {
-          this.filteredUsers = this.filteredUsers.filter(value2 => value2._id !== value1._id)
-        })
+          this.filteredUsers = this.filteredUsers.filter(value2 => value2._id !== value1._id);
+        });
       });
     });
     this.subject.next();

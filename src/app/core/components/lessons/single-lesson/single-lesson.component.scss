@@ -1,0 +1,28 @@
+.lesson {
+  margin: 40px 20px;
+  display: flex;
+}
+
+.video_block {
+  width: 50%;
+}
+
+.lesson_video {
+  height: 350px;
+  background-color: #00888E;
+
+  color: white;
+  font-size: 100px;
+  line-height: 350px;
+  text-align: center;
+}
+
+.lesson_info {
+  width: 50%;
+  margin: 70px 30px;
+}
+
+.lesson_test {
+  width: max-content;
+  margin: 0 auto;
+}

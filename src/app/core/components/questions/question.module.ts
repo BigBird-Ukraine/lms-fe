@@ -4,7 +4,7 @@ import {MatCardModule, MatAutocompleteModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import {FormModule, MaterialModule} from '../../../shared/modules';
-import {QuestionRoutingModule} from './question-routing.module';
+// import {QuestionRoutingModule} from './question-routing.module';
 import {FilterPipe} from './filter.pipe';
 import {InfoHelperComponent} from './info-helper/info-helper.component';
 import {AddQuestionFormComponent} from './add-question-form/add-question-form.component';
@@ -23,7 +23,7 @@ import {QuestionsLayoutComponent} from './questions-layout/questions-layout.comp
     CommonModule,
     MaterialModule,
     FormModule,
-    QuestionRoutingModule,
+    // QuestionRoutingModule,
     MatExpansionModule,
     MatAutocompleteModule,
     MatExpansionModule,
@@ -32,7 +32,7 @@ import {QuestionsLayoutComponent} from './questions-layout/questions-layout.comp
   exports: [
     MaterialModule,
     FormModule,
-    QuestionRoutingModule,
+    // QuestionRoutingModule,
   ]
 })
 

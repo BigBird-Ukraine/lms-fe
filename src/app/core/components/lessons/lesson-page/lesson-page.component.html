@@ -63,37 +63,37 @@
 
         <div>
           <mat-form-field>
-            <input matInput placeholder="Теги"
-                   formGroupName="tags"
-                   (keyup.enter)="newTag($event)"
-                   [matAutocomplete]="autoTag"
-                   #searchTag
-            >
+        <input matInput placeholder="Теги"
+               formGroupName="tags"
+               (keyup.enter)="newTag($event)"
+               [matAutocomplete]="autoTag"
+               #searchTag
+        >
 
-            <mat-autocomplete autoActiveFirstOption
-                              #autoTag="matAutocomplete">
-              <mat-option
-                *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
-                [value]="tag">
-                {{tag}}
-              </mat-option>
+        <mat-autocomplete autoActiveFirstOption
+                          #autoTag="matAutocomplete">
+          <mat-option
+            *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
+            [value]="tag">
+            {{tag}}
+          </mat-option>
 
-            </mat-autocomplete>
-          </mat-form-field>
+        </mat-autocomplete>
+      </mat-form-field>
 
-          <div class="blocks">
-            <div *ngFor="let tag of tags"
-                 class="block">
-              {{tag}}
-              <button class="mini_btn"
-                      type="button"
-                      (click)="delTag(tag)">
-                &times;
-              </button>
-            </div>
-
+        <div class="blocks">
+          <div *ngFor="let tag of tags"
+               class="block">
+            {{tag}}
+            <button class="mini_btn"
+                    type="button"
+                    (click)="delTag(tag)">
+              &times;
+            </button>
           </div>
+
         </div>
+    </div>
 
         <button type="submit"
                 color="primary"
@@ -150,7 +150,7 @@
             <button mat-button
                     color="primary"
                     type="button"
-                    [routerLink]="['/lessons', lesson._id]">
+                    (click)="showLesson(lesson._id)" >
               Почати
             </button>
           </mat-action-row>
@@ -162,9 +162,6 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-
-
 
 
 
