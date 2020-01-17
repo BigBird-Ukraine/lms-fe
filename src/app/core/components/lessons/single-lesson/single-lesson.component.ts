@@ -64,8 +64,10 @@ export class SingleLessonComponent implements OnInit {
       const data = {
         NewQuestions_id: [],
       };
-      questions.forEach(question => data.NewQuestions_id.push(question._id));
-      console.log(data);
+      if (questions) {
+        questions.forEach(question => data.NewQuestions_id.push(question._id));
+        this.lessonService.addQuestionsToLesson(this.id, data).subscribe();
+      }
     });
   }
 }
