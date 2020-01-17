@@ -15,7 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SharedModule} from './shared/modules';
-import {CustomSnackbarService} from './shared/services';
+import {AuthGuardService, CustomSnackbarService} from './shared/services';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {QuestionModule} from './core/components/questions/question.module';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
@@ -81,6 +81,7 @@ import {DeleteComponent} from './shared/components/delete/delete.component';
   providers: [
     MatSnackBarContainer,
     CustomSnackbarService,
+    AuthGuardService,
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()}
   ],
 })

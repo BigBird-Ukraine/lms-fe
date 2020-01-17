@@ -150,7 +150,7 @@
             <button mat-button
                     color="primary"
                     type="button"
-                    [routerLink]="['/lessons', lesson._id]">
+                    (click)="showLesson(lesson._id)" >
               Почати
             </button>
           </mat-action-row>

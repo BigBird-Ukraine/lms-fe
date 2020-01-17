@@ -167,4 +167,8 @@ export class LessonPageComponent implements OnInit {
       this.lessonsList[index] = value.data;
     });
   }
+
+  showLesson(id) {
+    this.router.navigate([`/lessons/${id}`]);
+  }
 }
