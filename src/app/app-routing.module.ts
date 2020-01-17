@@ -20,6 +20,8 @@ import {MyQuestionsComponent} from './core/components/questions/my-questions/my-
 import {RegistrationComponent} from './core/components/user/registration/registration.component';
 import {AuthUserComponent} from './core/components/user/auth-user/auth-user.component';
 import {AuthGuardService} from './shared/services';
+import {LessonTestComponent} from './core/components/lessons/lesson-test/lesson-test.component';
+import {LessonTestResultComponent} from './core/components/lessons/lesson-test-result/lesson-test-result.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,8 @@ const routes: Routes = [
         ]},
       {path: 'lessons/:id', component: SingleLessonComponent},
       {path: 'lessons/:id/question', component: AddQuestionToLessonComponent},
+      {path: 'lessons/:id/test', component: LessonTestComponent},
+      {path: 'lessons/:id/test/result', component: LessonTestResultComponent},
       {path: 'questions', canActivate: [AuthGuardService], component: FilterForQuestionsComponent},
       {path: 'add_questions', canActivate: [AuthGuardService], component: AddQuestionFormComponent},
       {path: 'info', component: InfoHelperComponent},

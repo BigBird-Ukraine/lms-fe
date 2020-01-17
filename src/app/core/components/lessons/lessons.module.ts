@@ -1,6 +1,6 @@
 import {
   MatAutocompleteModule,
-  MatButtonModule, MatCardModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule,
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule, MatIconModule,
@@ -19,6 +19,8 @@ import { SingleLessonComponent } from './single-lesson/single-lesson.component';
 import {AddQuestionToLessonComponent} from './add-question-to-lesson/add-question-to-lesson.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { LessonTestComponent } from './lesson-test/lesson-test.component';
+import { LessonTestResultComponent } from './lesson-test-result/lesson-test-result.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     FilterPipe,
     EditLessonComponent,
     SingleLessonComponent,
-    AddQuestionToLessonComponent
+    AddQuestionToLessonComponent,
+    LessonTestComponent,
+    LessonTestResultComponent
   ],
   imports: [
     // LessonsRoutingModule,
@@ -43,7 +47,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatSidenavModule,
     MatIconModule,
     ScrollingModule,
-    DragDropModule
+    DragDropModule,
+    MatCheckboxModule
   ],
   exports: []
 })
