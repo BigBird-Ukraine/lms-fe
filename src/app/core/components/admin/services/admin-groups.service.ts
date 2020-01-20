@@ -28,7 +28,7 @@ export class AdminGroupsService {
   }
 
   getById(_id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.groupUrl}/${_id}`)
+    return this.httpClient.get<any>(`${this.groupUrl}/${_id}`);
   }
 
   updateUsersList(id: string, object: object): Observable<any> {
@@ -36,10 +36,10 @@ export class AdminGroupsService {
   }
 
   delete(_id: string): Observable<any> {
-    return this.httpClient.delete(`${this.groupUrl}/${_id}`)
+    return this.httpClient.delete(`${this.groupUrl}/${_id}`);
   }
 
   updateById(_id: string, value: GroupModel): Observable<any> {
-    return this.httpClient.post(`${this.groupUrl}/${_id}`, value)
+    return this.httpClient.post(`${this.groupUrl}/${_id}`, value);
   }
 }

@@ -163,9 +163,12 @@ export class LessonPageComponent implements OnInit {
     this.dialog.open(EditLessonComponent, {
       data: {lesson: this.lesson}
     }).afterClosed().subscribe((value: IEditLesson) => {
-      console.log(value);
       const index = this.lessonsList.findIndex(findLesson => findLesson._id === id);
       this.lessonsList[index] = value.data;
     });
+  }
+
+  showLesson(id) {
+    this.router.navigate([`/lessons/${id}`]);
   }
 }

@@ -1,0 +1,88 @@
+<h2 mat-dialog-title class="mat_dialog_title">Додайте питання до уроку</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-card-content>
+    <form [formGroup]="filterQuestions"
+          (ngSubmit)="showFiltered()"
+          (keydown.enter)="$event.preventDefault()">
+
+      <mat-form-field>
+        <input matInput placeholder="Пошук по тегам"
+               formGroupName="tags"
+               (keyup.enter)="newTag($event)"
+               [matAutocomplete]="autoTag"
+               #searchTag
+        >
+
+        <mat-autocomplete autoActiveFirstOption
+                          #autoTag="matAutocomplete">
+          <mat-option
+            *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
+            [value]="tag">
+            {{tag}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <div *ngFor="let tag of tags"
+             class="block">
+          {{tag}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delTag(tag)">
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <button type="submit"
+              color="primary"
+              mat-raised-button
+              class="btn"
+      >
+        Шукати
+      </button>
+
+    </form>
+  </mat-card-content>
+  <div class="main-container">
+
+    <div class="example-container">
+
+      <cdk-virtual-scroll-viewport itemSize="250" class="example-viewport" (scroll)="scroll($event)">
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="questions"
+          [cdkDropListConnectedTo]="[doneList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+          (dblclick)="dblclickMove($event.target.innerText, 'existingQuestions', 'questions')">
+          <div class="example-box" *ngFor="let item of questions" cdkDrag>{{item.question}}</div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+
+    <div class="example-container group">
+      <cdk-virtual-scroll-viewport itemSize="250" class="example-viewport">
+        <div
+          cdkDropList
+          #doneList="cdkDropList"
+          [cdkDropListData]="existingQuestions"
+          [cdkDropListConnectedTo]="[todoList]"
+          class="example-list done"
+          (cdkDropListDropped)="drop($event)"
+          (dblclick)="dblclickMove($event.target.innerText, 'questions', 'existingQuestions')">
+          <div class="example-box" *ngFor="let item of existingQuestions" cdkDrag>{{item.question}}</div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+
+  </div>
+  <div class="buttons">
+    <button mat-stroked-button color="primary" (click)="dialogRef.close()">Відміна</button>
+    <button mat-stroked-button color="primary" (click)="dialogRef.close(existingQuestions)">Зберегти</button>
+  </div>
+</mat-dialog-content>

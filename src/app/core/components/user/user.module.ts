@@ -10,7 +10,7 @@ import {
 } from '@angular/material';
 
 import {RegistrationComponent} from './registration/registration.component';
-import {UserRoutingModule} from './user-routing.module';
+// import {UserRoutingModule} from './user-routing.module';
 import {AuthUserComponent} from './auth-user/auth-user.component';
 import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
 import {EditUserComponent} from './edit-user/edit-user.component';
@@ -25,7 +25,7 @@ import {EditUserComponent} from './edit-user/edit-user.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule,
+    // UserRoutingModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
@@ -35,7 +35,7 @@ import {EditUserComponent} from './edit-user/edit-user.component';
     MatCardModule,
   ],
   exports: [
-    UserRoutingModule,
+    // UserRoutingModule,
     MatDialogModule,
     RegistrationComponent,
   ]

@@ -15,7 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SharedModule} from './shared/modules';
-import {CustomSnackbarService} from './shared/services';
+import {AuthGuardService, CustomSnackbarService} from './shared/services';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
 import {QuestionModule} from './core/components/questions/question.module';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
@@ -30,9 +30,9 @@ import {FilterPipe} from './shared/pipe';
 import {ChangeRoleUserComponent} from './core/components/admin/users-page/change-role-user/change-role-user.component';
 import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
 import {LessonsModule} from './core/components/lessons/lessons.module';
-import {UpdateProfileComponent} from "./core/components/admin/users-page/update-profile/update-profile.component";
-import {getUkrainianPaginatorIntl} from "./shared/services/matPaginator.service";
-import { DeleteComponent } from './shared/components/delete/delete.component';
+import {UpdateProfileComponent} from './core/components/admin/users-page/update-profile/update-profile.component';
+import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
+import {DeleteComponent} from './shared/components/delete/delete.component';
 
 @NgModule({
   entryComponents: [
@@ -81,6 +81,7 @@ import { DeleteComponent } from './shared/components/delete/delete.component';
   providers: [
     MatSnackBarContainer,
     CustomSnackbarService,
+    AuthGuardService,
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()}
   ],
 })
