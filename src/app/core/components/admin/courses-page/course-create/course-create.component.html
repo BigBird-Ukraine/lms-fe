@@ -1,0 +1,29 @@
+<mat-card class="dialog">
+  <mat-card-title>Створення Курсу</mat-card-title>
+  <mat-dialog-content>
+    <form [formGroup]="form">
+      <div class="fields" fxLayout="column">
+
+        <mat-form-field appearance="standard">
+          <mat-label>Назва</mat-label>
+          <input matInput type="text" required formControlName="label" minlength="4">
+          <mat-error *ngIf="form.get('label').hasError('minlength')" align="end">
+            Назва має бути не менше 4-х символів
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Опис</mat-label>
+          <input matInput type="text" formControlName="description" required>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
+      Зберегти
+    </button>
+  </mat-card-actions>
+</mat-card>

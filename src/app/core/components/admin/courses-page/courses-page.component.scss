@@ -1,53 +1,26 @@
-button {
-  margin: 20px;
+.group-container {
+  margin: 15px;
 }
 
-.mini_btn {
-  margin: 5px;
-  padding: 0;
-  display: inline-block;
-  text-align: center;
-  border: none;
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  font-size: 15px;
-  line-height: 15px
-}
-
-.info {
-  font-size: 11px;
-}
-
-.del_btn {
-  margin: 5px;
-}
-
-form {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.blocks {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-}
-
-.block {
-  border-radius: 5px;
-  padding: 3px;
-  background: #673ab7;
-  font-size: 12px;
+.active {
+  background: #3f51b5;
   color: white;
 }
 
-ol {
-  list-style-type: none;
-  padding: 0;
+.buttons {
+  margin: 10px;
 }
 
-li p, li div {
-  padding-left: 10px;
-  margin-bottom: 5px;
+.buttons > button {
+  margin-left: 5px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-container mat-form-field {
+  margin-right: 15px;
+  width: 150px;
 }
