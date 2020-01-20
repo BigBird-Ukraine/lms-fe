@@ -3,13 +3,13 @@
     <mat-expansion-panel *ngFor="let group of groupsData.groups">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{group.label}} {{group.city}} {{group.course_id.label}}
+          {{group.label}} {{group.city}}
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="tools">
         <div class="upDateAndDelete">
           <button mat-icon-button class="icon" (click)="addAndDeleteUsers(group)">
-            <mat-icon color="primary">add_circle</mat-icon>
+            <mat-icon color="primary">people</mat-icon>
           </button>
           <button mat-icon-button class="icon" (click)="updateProfile(group)">
             <mat-icon color="primary">edit</mat-icon>
@@ -21,6 +21,9 @@
       </div>
       <div class="panel">
         <div class="cards">
+          <mat-card *ngIf="group.course_id">
+            Курс: {{group.course_id.label}}
+          </mat-card>
           <mat-card>
             Кількість людей в групі: {{group.users_list.length}}
           </mat-card>

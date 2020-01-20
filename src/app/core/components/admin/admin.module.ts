@@ -24,18 +24,24 @@ import {UserOutComponent} from './users-page/user-out/user-out.component';
 import {ChangeRoleUserComponent} from './users-page/change-role-user/change-role-user.component';
 import {FilterPipe} from './filter.pipe';
 import {UpdateProfileComponent} from './users-page/update-profile/update-profile.component';
-import {DeleteUserComponent} from './users-page/delete-user/delete-user.component';
 import {LoaderComponent} from "../../../shared/components/loader/loader.component";
 import {CreateGroupComponent} from "./groups-page/create-group/create-group.component";
-import { GroupOutComponent } from './groups-page/group-out/group-out.component';
-import { AddUsersComponent } from './groups-page/add-users/add-users.component';
-import { UpdateGroupComponent } from './groups-page/update-group/update-group.component';
+import {GroupOutComponent} from './groups-page/group-out/group-out.component';
+import {AddUsersComponent} from './groups-page/add-users/add-users.component';
+import {UpdateGroupComponent} from './groups-page/update-group/update-group.component';
+import {AddModulesComponent} from './courses-page/add-modules/add-modules.component';
+import {CourseOutComponent} from './courses-page/course-out/course-out.component';
+import {CourseCreateComponent} from './courses-page/course-create/course-create.component';
+import {CourseUpdateComponent} from './courses-page/course-update/course-update.component';
 
 @NgModule({
-  entryComponents:[
+  entryComponents: [
     AddUsersComponent,
     CreateGroupComponent,
-    UpdateGroupComponent
+    UpdateGroupComponent,
+    CourseCreateComponent,
+    AddModulesComponent,
+    CourseUpdateComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -50,12 +56,15 @@ import { UpdateGroupComponent } from './groups-page/update-group/update-group.co
     UserOutComponent,
     ChangeRoleUserComponent,
     UpdateProfileComponent,
-    DeleteUserComponent,
     LoaderComponent,
     CreateGroupComponent,
     GroupOutComponent,
     AddUsersComponent,
-    UpdateGroupComponent
+    UpdateGroupComponent,
+    AddModulesComponent,
+    CourseOutComponent,
+    CourseCreateComponent,
+    CourseUpdateComponent
   ],
   imports: [
     CommonModule,

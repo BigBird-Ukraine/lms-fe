@@ -1,123 +1,39 @@
-<div>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          (click)="openForm()"
-  >Додати курс
-  </button>
-
-  <button mat-raised-button
-          color="primary"
-          type="button"
-          (click)="allCourses()"
-  >Всі курси
-  </button>
-
-  <div *ngIf="showAllCourses">
-
-    <form [formGroup]="filterCoursesForm"
-          (ngSubmit)="showFiltered()"
-          (keydown.enter)="$event.preventDefault()">
+<div class="group-container">
+  <button mat-raised-button (click)="create()" color="primary"> Створити курс</button>
+</div>
+<mat-toolbar class="filter-container">
+  <mat-card-content>
+    <form [formGroup]="form" (input)="subject.next()">
+      <span>Пошук по: &nbsp;</span>
 
       <mat-form-field>
-
-        <input type="text"
-               placeholder="Назва курсу"
-               matInput
-               formControlName="label"
-               [matAutocomplete]="autoCourse"
-               #searchCourse
-        >
-        <mat-autocomplete autoActiveFirstOption
-                          #autoCourse="matAutocomplete">
-          <mat-option *ngFor="let course of coursesForAutocomplete | filter: searchCourse.value" [value]="course">
-            {{course}}
-          </mat-option>
-        </mat-autocomplete>
-
+        <mat-label>Назві курсу</mat-label>
+        <input matInput type="text" formControlName="label">
       </mat-form-field>
 
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Модулі"
-                 formGroupName="modules_list"
-                 (keyup.enter)="newModule($event)"
-                 [matAutocomplete]="autoModule"
-                 #searchModule
-          >
-
-          <mat-autocomplete autoActiveFirstOption
-                            #autoModule="matAutocomplete">
-            <mat-option
-              *ngFor="let module of modulesForAutocomplete |
-          filter: searchModule.value"
-              [value]="module">
-              {{module}}
-            </mat-option>
-
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <div class="blocks">
-          <div *ngFor="let module of modules"
-               class="block">
-            {{module}}
-            <button class="mini_btn"
-                    type="button"
-                    (click)="delModule(module)">
-              &times;
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      <button type="submit"
-              mat-raised-button
-      >
-        Шукати
+      <button mat-icon-button (click)="reset()">
+        <mat-icon>clear_all</mat-icon>
       </button>
 
     </form>
+  </mat-card-content>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="[25, 50, 100]"
+                 (page)="getFilteredCourses($event)">
 
-    <ol *ngIf="coursesList.length; else noCourses">
-      <li *ngFor="let course of coursesList; let i = index">
 
-        <p>{{i + 1}}. {{course.label}}
-          <button class="mini_btn info"
-                  type="button"
-                  (click)="showInfo(course._id)">
-            ?
-          </button>
+  </mat-paginator>
+</mat-toolbar>
 
-          <button mat-button
-                  class="del_btn"
-                  type="button"
-                  (click)="deleteCourse(course._id)">
-            Видалити
-          </button>
-        </p>
+<app-course-out [coursesData]="getCourses"></app-course-out>
 
-        <div *ngIf="showFullInfo && courseId === course._id">
-          <b>Опис:</b> {{course.description}}<br>
-          <b>Список модулів:</b>
-          <ul>
-            <li *ngFor="let module of modulesData">
-              {{module.label}}
-            </li>
-          </ul>
-        </div>
-        <mat-divider></mat-divider>
-      </li>
-    </ol>
-
-    <ng-template #noCourses>
-      <mat-card>У вас поки що немає такого курсу</mat-card>
-    </ng-template>
-
-  </div>
-
-</div>
-
+<mat-paginator *ngIf="length > 15"
+               [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               [pageSizeOptions]="[25, 50, 100]"
+               (page)="getFilteredCourses($event)">
+</mat-paginator>
 

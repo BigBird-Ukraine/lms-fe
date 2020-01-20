@@ -6,7 +6,10 @@
 
         <mat-form-field appearance="standard">
           <mat-label>Назва</mat-label>
-          <input matInput type="text" required formControlName="label">
+          <input matInput type="text" required formControlName="label" minlength="4">
+          <mat-error *ngIf="form.get('label').hasError('minlength')" align="end">
+            Назва має бути не менше 4-х символів
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
@@ -17,8 +20,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="standard" *ngIf="!courses||courses.length > 0">
           <mat-label>Курс</mat-label>
           <mat-select formControlName="course_id">
             <mat-option *ngFor="let course of courses" [value]="course._id">

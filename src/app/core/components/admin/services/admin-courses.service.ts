@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {ICourse, IFullCourse} from '../interfaces';
+import {ICourse, IFullCourse, IModule} from '../interfaces';
 import {config} from '../../../../shared/config';
 
 
@@ -37,5 +37,18 @@ export class AdminCoursesService {
 
   getById(id: string): Observable<any> {
     return this.http.get(`${this.courseUrl}/${id}`);
+  }
+
+  save(course: ICourse): Observable<any> {
+    return this.http.post(`${this.courseUrl}`, course);
+
+  }
+
+  updateModuleList(_id: string, list: { modules_list: IModule[] }): Observable<any> {
+    return this.http.patch(`${this.courseUrl}/${_id}`, list);
+  }
+
+  updateById(_id: string, value: ICourse): Observable<any> {
+    return this.http.post(`${this.courseUrl}/${_id}`, value);
   }
 }

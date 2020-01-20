@@ -10,4 +10,13 @@ export interface IModule {
 
 export interface IFullModule {
   data: IModule[];
+
+}
+
+export interface IModuleSubject {
+  data: {
+    modules: IModule[],
+    count: number
+  }
+
 }

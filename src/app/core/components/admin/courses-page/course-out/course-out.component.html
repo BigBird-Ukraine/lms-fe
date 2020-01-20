@@ -1,0 +1,46 @@
+<div *ngIf="coursesData; else loader">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let course of coursesData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{course.label}} {{course.description ? course.description : null}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="tools">
+        <div class="upDateAndDelete">
+
+          <button mat-icon-button class="icon" (click)="addModules(course)">
+            <mat-icon color="primary">layers</mat-icon>
+          </button>
+
+          <button mat-icon-button class="icon" (click)="updateProfile(course)">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+
+          <button mat-icon-button class="icon" (click)="delete(course)">
+            <mat-icon color="primary">delete</mat-icon>
+
+          </button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="cards">
+          <mat-card>
+            Опис: {{course.description}}
+          </mat-card>
+
+          <mat-card>
+            Зареєстрований: {{course.created_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+
+          <mat-card *ngIf="course.updated_at">
+            Редагований: {{course.updated_at | date:'dd-MM-yyyy'}}
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

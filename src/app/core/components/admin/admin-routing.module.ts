@@ -22,12 +22,7 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsPageComponent},
       {
         path: 'users', component: UsersPageComponent, children: [
-          // {path: '', redirectTo: 'all', pathMatch: 'full'},
-          // {path: 'admins', component: UserOutComponent},
-          // {path: 'teachers', component: UserOutComponent},
-          // {path: 'students', component: UserOutComponent},
           {path: '', component: UserOutComponent},
-
         ]
       },
       {path: 'groups', component: GroupsPageComponent},
