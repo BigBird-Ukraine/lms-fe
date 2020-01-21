@@ -65,13 +65,13 @@ export class CourseOutComponent implements OnInit {
     this.dialog.open(AddModulesComponent, {
       data: this.moduleList,
       disableClose: true
-    }).afterClosed().subscribe((value: IModule[]) => {
+    }).afterClosed().subscribe((modulesList: IModule[]) => {
 
-      if (value) {
+      if (modulesList) {
         const result: IModule[] = [];
-        value.forEach(value1 => result.push(value1));
+        modulesList.forEach(module => result.push(module));
         course.modules_list = result;
-        this.adminCoursesService.updateModuleList(course._id, {modules_list: course.modules_list}).subscribe();
+        this.adminCoursesService.updateModuleList(course._id, {modules_list: course.modules_list.map(value => value._id)}).subscribe();
         course.updated_at = new Date().toDateString();
       }
     });

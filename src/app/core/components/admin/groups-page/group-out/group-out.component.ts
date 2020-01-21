@@ -65,13 +65,13 @@ export class GroupOutComponent implements OnInit {
     this.dialog.open(AddUsersComponent, {
       data: this.IUserList,
       disableClose: true
-    }).afterClosed().subscribe((value: IUser[]) => {
+    }).afterClosed().subscribe((usersList: IUser[]) => {
 
-      if (value) {
+      if (usersList) {
         const result: IUser[] = [];
-        value.forEach(value1 => result.push(value1));
+        usersList.forEach(user => result.push(user));
         group.users_list = result;
-        this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list}).subscribe();
+        this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list.map(value => value._id)}).subscribe();
         group.updated_at = new Date().toDateString()
       }
     });

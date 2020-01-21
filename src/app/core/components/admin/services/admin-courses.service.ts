@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {ICourse, IFullCourse, IModule} from '../interfaces';
+import {ICourse, IFullCourse} from '../interfaces';
 import {config} from '../../../../shared/config';
 
 
@@ -44,7 +44,7 @@ export class AdminCoursesService {
 
   }
 
-  updateModuleList(_id: string, list: { modules_list: IModule[] }): Observable<any> {
+  updateModuleList(_id: string, list: { modules_list: string[] }): Observable<any> {
     return this.http.patch(`${this.courseUrl}/${_id}`, list);
   }
 
