@@ -71,7 +71,7 @@ export class CourseOutComponent implements OnInit {
         const result: IModule[] = [];
         value.forEach(value1 => result.push(value1));
         course.modules_list = result;
-        this.adminCoursesService.updateModuleList(course._id, {modules_list: course.modules_list}).subscribe();
+        this.adminCoursesService.updateModuleList(course._id, {modules_list: course.modules_list.map(value1 => value1._id)}).subscribe();
         course.updated_at = new Date().toDateString();
       }
     });

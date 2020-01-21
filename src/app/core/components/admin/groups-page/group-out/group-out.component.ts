@@ -71,7 +71,7 @@ export class GroupOutComponent implements OnInit {
         const result: IUser[] = [];
         value.forEach(value1 => result.push(value1));
         group.users_list = result;
-        this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list}).subscribe();
+        this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list.map(value1 => value1._id)}).subscribe();
         group.updated_at = new Date().toDateString()
       }
     });
