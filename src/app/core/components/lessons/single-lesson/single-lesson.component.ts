@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
 import {IEditLesson, ILesson, QuestionModel} from '../../../interface';
@@ -26,6 +26,7 @@ export class SingleLessonComponent implements OnInit {
               private userService: UserService,
               private authService: AuthService,
               private activatedRoute: ActivatedRoute,
+              private router: Router,
               private lessonService: LessonsService) {
   }
 
@@ -69,5 +70,9 @@ export class SingleLessonComponent implements OnInit {
         this.lessonService.addQuestionsToLesson(this.id, data).subscribe();
       }
     });
+  }
+
+  startTest() {
+    this.router.navigate([`/lessons/${this.id}/test`]);
   }
 }

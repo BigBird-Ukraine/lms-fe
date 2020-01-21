@@ -84,11 +84,11 @@ export class QuestionsLayoutComponent implements OnInit {
       }
     );
 
-    this.checkTest(questionListArr);
+    // this.checkTest(questionListArr);
   }
 
-  checkTest(test) {
-    this.testService.sendTests(test).subscribe();
-  }
+  // checkTest(test) {
+  //   this.testService.sendTests(test).subscribe();
+  // }
 
 }

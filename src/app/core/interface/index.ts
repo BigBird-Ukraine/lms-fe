@@ -4,3 +4,4 @@ export * from './UserModel';
 export * from './user-subject.model';
 export * from '../components/admin/interfaces/GroupModel';
 export * from './lesson.interface';
+export * from './test.interface';

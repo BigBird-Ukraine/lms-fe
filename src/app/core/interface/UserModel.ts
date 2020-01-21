@@ -1,3 +1,5 @@
+import {IPassedTest} from './test.interface';
+
 export interface UserModel {
   _id?: string;
   name: string;
@@ -6,7 +8,7 @@ export interface UserModel {
   email: string;
   password: string;
   photo_path?: string;
-  passed_tests_id?: [string];
+  passed_tests?: IPassedTest[];
 }
 
 export interface IUser {
