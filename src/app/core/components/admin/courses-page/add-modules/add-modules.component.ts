@@ -47,8 +47,8 @@ export class AddModulesComponent implements OnInit {
       this.label = this.form.get('label').value;
       this.adminModuleService.getAll(queryParams).subscribe(value => {
         this.filteredModules = value.data.modules;
-        this.data.forEach(value1 => {
-          this.filteredModules = this.filteredModules.filter(value2 => value2._id !== value1._id)
+        this.data.forEach(moduleInCourse => {
+          this.filteredModules = this.filteredModules.filter(moduleFromAll => moduleFromAll._id !== moduleInCourse._id)
         })
       });
     });

@@ -49,8 +49,8 @@ export class AddUsersComponent implements OnInit {
       this.surname = this.form.get('surname').value;
       this.adminUsersService.getAll(queryParams).subscribe(value => {
         this.filteredUsers = value.data.users;
-        this.data.forEach(value1 => {
-          this.filteredUsers = this.filteredUsers.filter(value2 => value2._id !== value1._id)
+        this.data.forEach(userInGroup => {
+          this.filteredUsers = this.filteredUsers.filter(userFromAll => userFromAll._id !== userInGroup._id)
         })
       });
     });
