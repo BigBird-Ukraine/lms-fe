@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ITest, IUser, QuestionModel} from '../../../interface';
+import {IUser, QuestionModel, ITest} from '../../../interface';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material';
 
 import {QuestionsService} from '../../../services/questions';
 import {TestService} from '../../../services/tests';
-import {MatDialog} from '@angular/material';
 import {LessonTestResultComponent} from '../lesson-test-result/lesson-test-result.component';
 
 @Component({
@@ -17,8 +17,6 @@ export class LessonTestComponent implements OnInit {
 
   questions: QuestionModel[];
   questionForm: FormGroup;
-  check: any;
-  count = true;
   id: string;
 
   constructor(private questionsService: QuestionsService,
@@ -86,13 +84,11 @@ export class LessonTestComponent implements OnInit {
         questionListArr.question_list.push(control);
       }
     );
-
     this.checkTest(this.id, questionListArr);
   }
 
   checkTest(id, test) {
     this.testService.sendTests(id, test).subscribe((value: IUser) => {
-        console.log(value);
         this.dialog.open(LessonTestResultComponent, {
           data: value.data.passed_tests.pop()
       });
