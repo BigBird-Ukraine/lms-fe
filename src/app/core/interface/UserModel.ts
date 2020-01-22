@@ -1,7 +1,10 @@
 import {IPassedTest} from './test.interface';
 
 export interface UserModel {
+  status_id?: number;
+  role_id?: number;
   _id?: string;
+  groups_id?: string[];
   name: string;
   surname: string;
   phone_number?: string;

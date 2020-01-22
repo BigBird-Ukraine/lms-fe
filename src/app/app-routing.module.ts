@@ -22,6 +22,8 @@ import {AuthUserComponent} from './core/components/user/auth-user/auth-user.comp
 import {AuthGuardService} from './shared/services';
 import {LessonTestComponent} from './core/components/lessons/lesson-test/lesson-test.component';
 import {LessonTestResultComponent} from './core/components/lessons/lesson-test-result/lesson-test-result.component';
+import {AllGroupsComponent} from './core/components/groups/all-groups/all-groups.component';
+import {SingleGroupComponent} from './core/components/groups/single-group/single-group.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,9 @@ const routes: Routes = [
       {path: 'auth', component: AuthUserComponent},
       {path: 'user/:id', component: UserCabinetComponent},
       {path: 'user/:id/edit', component: EditUserComponent},
+      {path: 'groups', canActivate: [AuthGuardService], component: AllGroupsComponent, children: [
+          {path: ':id', component: SingleGroupComponent}
+        ]}
     ]
   },
   {

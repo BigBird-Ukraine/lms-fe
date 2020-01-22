@@ -33,6 +33,7 @@ import {LessonsModule} from './core/components/lessons/lessons.module';
 import {UpdateProfileComponent} from './core/components/admin/users-page/update-profile/update-profile.component';
 import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
 import {DeleteComponent} from './shared/components/delete/delete.component';
+import {GroupsModule} from './core/components/groups/groups.module';
 
 @NgModule({
   entryComponents: [
@@ -72,6 +73,7 @@ import {DeleteComponent} from './shared/components/delete/delete.component';
     MatAutocompleteModule,
     MatCardModule,
     LessonsModule,
+    GroupsModule,
     MatProgressSpinnerModule,
     _MatMenuDirectivesModule,
     MatMenuModule,

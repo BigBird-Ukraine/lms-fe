@@ -1,0 +1,54 @@
+<mat-sidenav-container class="example-container">
+
+  <mat-sidenav class="sidenav" mode="side" opened>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div *ngIf="groupsList && !isShowGroup"
+         class="group-layout">
+
+      <h2>Групи</h2>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let group of groupsList">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{group.label}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="group-inner">
+
+            <p>Місто: {{group.city}}</p>
+            <p>Розпочата: {{group.started_at}}</p>
+
+          </div>
+
+          <mat-action-row>
+
+            <button mat-button
+                    color="primary"
+                    type="button"
+                    (click)="showGroup(group._id)">
+              Переглянути
+            </button>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+
+    <app-single-group *ngIf="isShowGroup"
+                   [groupInfo]="groupInfo">
+
+    </app-single-group>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+
+

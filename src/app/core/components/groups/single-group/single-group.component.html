@@ -1,0 +1,29 @@
+<div class="group_list">
+
+  <!--  <h2>{{groupInfo}}</h2>-->
+
+  <!--  <mat-list>-->
+  <!--    <mat-list-item *ngFor="let student of studentList; let i = index">-->
+  <!--      <img matListAvatar [src]="path + '/' + student.photo_path" [alt]="student.surname">-->
+  <!--      <h3 matLine>{{i + 1}}. {{student.name}} {{student.surname}} </h3>-->
+  <!--    </mat-list-item>-->
+  <!--  </mat-list>-->
+
+  <table>
+
+    <tr>
+      <th>№</th>
+      <th>ПІБ</th>
+      <th>{{groupInfo.attendance[0].date}}</th>
+    </tr>
+
+    <tr *ngFor="let student of studentList; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{student.name}} {{student.surname}}</td>
+      <td [style.backgroundColor]="groupInfo.attendance[0].present_students_id.includes(student._id) ? 'green' : 'red'">
+      </td>
+    </tr>
+
+  </table>
+
+</div>
