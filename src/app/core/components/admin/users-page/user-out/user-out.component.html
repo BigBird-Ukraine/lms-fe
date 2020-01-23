@@ -30,14 +30,17 @@
       </mat-toolbar>
       <div class="panel">
         <div class="photo">
-
         </div>
         <div class="cards">
           <mat-card>
             Email: {{user.email}}
           </mat-card>
-          <mat-card *ngIf="user.phone_number">
-            Номер телефону: {{user.phone_number}}
+          <mat-card>
+            Номер телефону: {{user.phone_number ? user.phone_number : null}}
+          </mat-card>
+          <mat-card>
+            <span>Групи: </span> <span
+            *ngFor="let group of user.groups_id">[{{user.groups_id.length > 0 ? group.label : null}}]</span>
           </mat-card>
           <mat-card>
             Зареєстрований: {{user.created_at | date:'dd-MM-yyyy'}}
