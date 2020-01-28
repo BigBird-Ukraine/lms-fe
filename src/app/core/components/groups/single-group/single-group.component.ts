@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {IGroup, IGroupStudents, ISingleGroup, UserModel} from '../../../interface';
 import {GroupsService} from '../../../services/groups';
-import {config} from '../../../../shared/config';
-import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material';
+import {GroupPresentsComponent} from '../group-presents/group-presents.component';
 
 @Component({
   selector: 'app-single-group',
@@ -14,10 +14,9 @@ export class SingleGroupComponent implements OnInit {
 
   studentList: UserModel[];
   @Input() groupInfo: IGroup;
-  path = config.authUrl;
 
   constructor(private groupsService: GroupsService,
-              private activatedRoute: ActivatedRoute) {
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -25,10 +24,14 @@ export class SingleGroupComponent implements OnInit {
         this.studentList = students.data.users_list;
       }
     );
-    this.groupsService.getOneGroup(this.groupInfo._id).subscribe((group: any) => {
-      console.log(group);
+    this.groupsService.getOneGroup(this.groupInfo._id).subscribe((group: ISingleGroup) => {
       this.groupInfo = group.data;
     });
   }
 
+  addDate() {
+    this.dialog.open(GroupPresentsComponent, {
+      data: {students: this.studentList}
+    });
+  }
 }

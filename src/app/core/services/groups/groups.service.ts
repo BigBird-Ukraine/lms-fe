@@ -25,8 +25,8 @@ export class GroupsService {
     return this.http.get<IFullGroup>(`${commonAuthPath}/groups`, options);
   }
 
-  getOneGroup(id): Observable<any> {
-    return this.http.get<any>(`${commonAuthPath}/groups/${id}`);
+  getOneGroup(id): Observable<ISingleGroup> {
+    return this.http.get<ISingleGroup>(`${commonAuthPath}/groups/${id}`);
   }
 
   getGroupsStudents(id): Observable<IGroupStudents> {

@@ -1,29 +1,30 @@
 <div class="group_list">
 
-  <!--  <h2>{{groupInfo}}</h2>-->
-
-  <!--  <mat-list>-->
-  <!--    <mat-list-item *ngFor="let student of studentList; let i = index">-->
-  <!--      <img matListAvatar [src]="path + '/' + student.photo_path" [alt]="student.surname">-->
-  <!--      <h3 matLine>{{i + 1}}. {{student.name}} {{student.surname}} </h3>-->
-  <!--    </mat-list-item>-->
-  <!--  </mat-list>-->
+  <h2>{{groupInfo.label}}</h2>
 
   <table>
 
     <tr>
       <th>№</th>
       <th>ПІБ</th>
-      <th>{{groupInfo.attendance[0].date}}</th>
+      <th *ngFor="let attendance of groupInfo.attendance">{{attendance.date}}</th>
     </tr>
 
     <tr *ngFor="let student of studentList; let i = index">
       <td>{{i + 1}}</td>
       <td>{{student.name}} {{student.surname}}</td>
-      <td [style.backgroundColor]="groupInfo.attendance[0].present_students_id.includes(student._id) ? 'green' : 'red'">
+      <td class="absence_col" *ngFor="let attendance of groupInfo.attendance"
+          [style.color]="attendance.present_students_id.includes(student._id) ? '#86af49' : '#c94c4c'">
+        <span *ngIf="attendance.present_students_id.includes(student._id)"> &#10004; </span>
+        <span *ngIf="attendance.absent_students_id.includes(student._id)"> &#10008; </span>
       </td>
     </tr>
 
   </table>
+
+  <button mat-stroked-button
+          (click)="addDate()"
+  >Додати
+  </button>
 
 </div>

@@ -1,5 +1,4 @@
 import {UserModel} from './UserModel';
-import {IUserSubjectModel} from './user-subject.model';
 
 export interface IGroup {
   _id: string;
