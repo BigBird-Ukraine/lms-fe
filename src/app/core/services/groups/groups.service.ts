@@ -32,4 +32,8 @@ export class GroupsService {
   getGroupsStudents(id): Observable<IGroupStudents> {
     return this.http.get<IGroupStudents>(`${commonAuthPath}/groups/${id}/students`);
   }
+
+  sendPresence(id, data): Observable<any> {
+    return this.http.post<any>(`${commonAuthPath}/groups/${id}/attendance`, data);
+  }
 }

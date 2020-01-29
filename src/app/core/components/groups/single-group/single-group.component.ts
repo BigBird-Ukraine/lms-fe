@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
 import {IGroup, IGroupStudents, ISingleGroup, UserModel} from '../../../interface';
 import {GroupsService} from '../../../services/groups';
-import {MatDialog} from '@angular/material';
 import {GroupPresentsComponent} from '../group-presents/group-presents.component';
 
 @Component({
@@ -31,7 +31,15 @@ export class SingleGroupComponent implements OnInit {
 
   addDate() {
     this.dialog.open(GroupPresentsComponent, {
-      data: {students: this.studentList}
-    });
+      data: {
+        students: this.studentList,
+        groupID: this.groupInfo._id
+      }
+    }).afterClosed().subscribe(() => {
+        this.groupsService.getOneGroup(this.groupInfo._id).subscribe((group: ISingleGroup) => {
+          this.groupInfo = group.data;
+        });
+      }
+    );
   }
 }

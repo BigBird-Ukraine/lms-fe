@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {UserModel} from '../../../interface';
+import {GroupsService} from '../../../services/groups';
 
 @Component({
   selector: 'app-group-presents',
@@ -13,11 +14,14 @@ export class GroupPresentsComponent implements OnInit {
 
   presentForm: FormGroup;
   students: UserModel[];
+  groupID: string;
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<GroupPresentsComponent>,
+              private groupService: GroupsService,
               @Inject(MAT_DIALOG_DATA) public data) {
     this.students = data.students;
+    this.groupID = data.groupID;
   }
 
   ngOnInit() {
@@ -53,11 +57,19 @@ export class GroupPresentsComponent implements OnInit {
     };
 
     studentPresence.controls.forEach(student => {
-     if (student.value.checked === true) {
-       listOfPresence.present_students_id.push(student.value.id);
-     } else {
-       listOfPresence.absent_students_id.push(student.value.id);
-     }
+      if (student.value.checked === true) {
+        listOfPresence.present_students_id.push(student.value.id);
+      } else {
+        listOfPresence.absent_students_id.push(student.value.id);
+      }
+    });
+
+    this.sendData(listOfPresence);
+  }
+
+  sendData(data) {
+    this.groupService.sendPresence(this.groupID, data).subscribe(() => {
+      this.dialogRef.close();
     });
   }
 }
