@@ -22,7 +22,7 @@ export class GroupPresentsComponent implements OnInit {
 
   ngOnInit() {
     this.presentForm = this.fb.group({
-      date: this.fb.control(null),
+      date: this.fb.control(new Date()),
       studentsArr: this.fb.array([])
     });
 
@@ -42,6 +42,22 @@ export class GroupPresentsComponent implements OnInit {
 
 
   addDate() {
-    console.log(this.presentForm.value);
+    const studentPresence = (this.presentForm.get('studentsArr')) as FormArray;
+    const Date = this.presentForm.value.date;
+    const newDate = ('0' + (Date.getDate())).slice(-2) + '/' + ('0' + (Date.getMonth() + 1)).slice(-2) + '/' + (Date.getFullYear());
+
+    const listOfPresence = {
+      date: newDate,
+      present_students_id: [],
+      absent_students_id: []
+    };
+
+    studentPresence.controls.forEach(student => {
+     if (student.value.checked === true) {
+       listOfPresence.present_students_id.push(student.value.id);
+     } else {
+       listOfPresence.absent_students_id.push(student.value.id);
+     }
+    });
   }
 }
