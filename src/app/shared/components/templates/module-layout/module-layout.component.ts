@@ -8,6 +8,7 @@ import {AdminHelperService, CustomSnackbarService} from '../../../services';
 import {Tags} from '../../../../core/interface';
 import {InfoHelperService} from '../../../../core/services/questions';
 
+
 @Component({
   selector: 'app-module-layout',
   templateUrl: './module-layout.component.html',
@@ -18,6 +19,7 @@ export class ModuleLayoutComponent implements OnInit {
   moduleForm: FormGroup;
   lessons: string[] = [];
   lessonsForAutocomplete: string[] = [];
+  lessonsObjects: ILesson[] = [];
   tagsForAutocomplete: Tags[] = [];
   tags: Tags[] = [];
 
@@ -50,6 +52,9 @@ export class ModuleLayoutComponent implements OnInit {
 
     const moduleData: IModule = this.moduleForm.value;
 
+    const lessonsId = this.lessonsObjects.map(obj => obj._id);
+    moduleData.lessons_list = lessonsId;
+
     this.adminModuleService.addModule(moduleData).subscribe(() => {
       this.customSnackbarService.open('Модуль додано', '');
       this.dialog.closeAll();
@@ -77,6 +82,7 @@ export class ModuleLayoutComponent implements OnInit {
   getLessons() {
     this.adminHelper.getLessons().subscribe((lessons: ILesson[]) => {
       this.lessonsForAutocomplete = lessons.map(lesson => lesson.label);
+      this.lessonsObjects = lessons;
     });
   }
 

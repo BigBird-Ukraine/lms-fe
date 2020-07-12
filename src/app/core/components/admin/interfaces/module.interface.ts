@@ -2,15 +2,14 @@ import {Tags} from '../../../interface';
 
 export interface IModule {
   label: string;
-  lessons: string[];
+  lessons_list: string[];
   description?: string;
   _id?: string;
-  tags?: Tags[];
+  tag_list?: Tags[];
 }
 
 export interface IFullModule {
   data: IModule[];
-
 }
 
 export interface IModuleSubject {

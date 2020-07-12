@@ -98,6 +98,7 @@ export class LessonPageComponent implements OnInit {
     this.getTags();
 
     this.lessonService.getAllLessons().subscribe((lessons: IFullLesson) => {
+
       this.lessonsList = lessons.data.lesson.sort((a, b) => {
         return (a.number - b.number);
       });

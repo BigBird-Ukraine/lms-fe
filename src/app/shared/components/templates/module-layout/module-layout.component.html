@@ -3,7 +3,6 @@
 <mat-dialog-content class="mat-typography">
 
   <form [formGroup]="moduleForm"
-        (ngSubmit)="addModule()"
   >
     <div class="form">
 
@@ -78,8 +77,9 @@
 
     <button mat-raised-button
             color="primary"
-            type="submit"
+            type="button"
             [disabled]="moduleForm.invalid || !lessons.length"
+            (click) = "addModule()"
     >Створити
     </button>
 

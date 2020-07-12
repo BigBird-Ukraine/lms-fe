@@ -11,6 +11,7 @@ export interface ILesson {
   tests?: [string];
   questions_id?: [string];
   user_id: string;
+  __v?: string;
 }
 
 export interface IFullLesson {
