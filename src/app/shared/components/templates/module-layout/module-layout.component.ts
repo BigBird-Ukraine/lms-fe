@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
-import {IModule, ILesson} from '../../../../core/components/admin/interfaces';
+import {ILesson, IModule} from '../../../../core/components/admin/interfaces';
 import {AdminModuleService} from '../../../../core/components/admin/services';
 import {AdminHelperService, CustomSnackbarService} from '../../../services';
 import {Tags} from '../../../../core/interface';
@@ -52,8 +52,9 @@ export class ModuleLayoutComponent implements OnInit {
 
     const moduleData: IModule = this.moduleForm.value;
 
-    const lessonsId = this.lessonsObjects.map(obj => obj._id);
-    moduleData.lessons_list = lessonsId;
+    moduleData.lessons_list = this.lessonsObjects.filter(lessonObj =>
+      this.lessons.find(el => el === lessonObj.label)
+    ).map(obj => obj._id);
 
     this.adminModuleService.addModule(moduleData).subscribe(() => {
       this.customSnackbarService.open('Модуль додано', '');
