@@ -93,6 +93,6 @@ export class LessonTestComponent implements OnInit {
           data: value.data.passed_tests.pop()
       });
       }
-    );
+    ); // TEST
   }
 }
