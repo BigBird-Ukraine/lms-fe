@@ -1,1 +1,17 @@
-<p>questions-page works!</p>
+<div class="questionWrapper">
+
+  <button mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="setStatusAddQuestionBtn(!statusAddQuestionBtn)"
+  >
+    <span *ngIf="!statusAddQuestionBtn">Додати питання</span>
+    <span *ngIf="statusAddQuestionBtn">Скрити</span>
+  </button>
+
+
+</div>
+
+
+
+<app-add-question *ngIf="statusAddQuestionBtn"></app-add-question>
