@@ -1,0 +1,66 @@
+button {
+  margin: 10px;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-top: 20px;
+  color: #673ab7
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.answers {
+  display: flex;
+  align-items: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.checkbox {
+  margin: 10px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.block {
+  border-radius: 5px;
+  padding: 3px;
+  background: #673ab7;
+  font-size: 12px;
+  color: white;
+}
+
+.form-container {
+  padding: 20px;
+  margin: 20px;
+}
+
+.question-added {
+  display: inline-block;
+  color: forestgreen;
+}
+
+.mini_btn {
+  margin: 5px;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  font-size: 15px;
+  line-height: 15px
+}
+

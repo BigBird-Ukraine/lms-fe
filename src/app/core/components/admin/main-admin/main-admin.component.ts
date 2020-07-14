@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 
 import {AdminAuthService} from '../services';
 import {IUser} from '../interfaces';
-import {UpdateProfileComponent} from "../users-page/update-profile/update-profile.component";
+import {UpdateProfileComponent} from '../users-page/update-profile/update-profile.component';
 
 @Component({
   selector: 'app-main-admin',
