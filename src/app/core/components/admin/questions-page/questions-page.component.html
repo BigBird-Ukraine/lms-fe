@@ -9,9 +9,29 @@
     <span *ngIf="statusAddQuestionBtn">Скрити</span>
   </button>
 
+  <button mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="setStatusShowAllQuestion(!statusShowAllQuestion)"
+  >
+    <span *ngIf="!statusShowAllQuestion">Показати всі питання</span>
+    <span *ngIf="statusShowAllQuestion">Скрити</span>
+  </button>
+
+  <button mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="setStatusShowMyQuestion(!statusShowMyQuestion)"
+  >
+    <span *ngIf="!statusShowMyQuestion">Показати мої</span>
+    <span *ngIf="statusShowMyQuestion">Скрити</span>
+  </button>
+
 
 </div>
 
 
 
 <app-add-question *ngIf="statusAddQuestionBtn"></app-add-question>
+<app-all-question *ngIf="statusShowAllQuestion"></app-all-question>
+<app-my-question *ngIf="statusShowMyQuestion"></app-my-question>

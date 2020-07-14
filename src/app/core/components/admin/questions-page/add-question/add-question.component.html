@@ -1,0 +1,148 @@
+<mat-card class="form-container">
+  <h2 class="pageTitle">
+    Додайте, будь ласка, своє питання
+  </h2>
+  <form
+    [formGroup]="questionForm"
+    (ngSubmit)="addQuestion()"
+    (keydown.enter)="$event.preventDefault()">
+    <div class="form">
+
+      <mat-form-field>
+        <mat-label>Виберіть предмет</mat-label>
+        <input type="text" matInput required formControlName="subject" [matAutocomplete]="autoSubject"
+               #searchSubject>
+        <mat-autocomplete #autoSubject="matAutocomplete">
+          <mat-option *ngFor="let subject of subjects | filter: searchSubject.value" [value]="subject">
+            {{subject}}
+          </mat-option>
+        </mat-autocomplete>
+
+        <mat-error *ngIf="questionForm.get('subject').hasError('required')">
+          Виберіть, будь ласка, предмет
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput required
+               placeholder="Вкажіть групу"
+               formGroupName="group"
+               (keyup.enter)="newGroups($event)"
+               [matAutocomplete]="autoGroup"
+               #searchGroup
+        >
+
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-option *ngFor="let group of groupForAuto | filter: searchGroup.value" [value]="group">
+            {{group}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="blocks">
+        <span *ngFor="let gr of group"
+              class="block">
+          {{gr}}
+        </span>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Виберіть складність</mat-label>
+        <mat-select formControlName="level">
+          <mat-option *ngFor="let level of levels"
+                      [value]="level.level">
+            {{level.level}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="questionForm.get('level').hasError('required')">
+          Виберіть, будь ласка, складність
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+
+        <input matInput required
+               placeholder="Сформулюйте питтаня"
+               formControlName="question">
+        <mat-error *ngIf="questionForm.get('question').hasError('required')">
+          Це поле не може бути пустим
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div formArrayName="answers">
+      <div *ngFor="let answer of questionForm.get('answers').controls; let i = index">
+        <div [formGroupName]="i"
+             class="d-flex align-items-end">
+          <mat-checkbox class="checkbox"
+                        value="false"
+                        formControlName="correct">
+          </mat-checkbox>
+          <mat-form-field class="example-full-width">
+            <input matInput required
+                   value=""
+                   (keyup.enter)="addAnswer()"
+                   formControlName="value"
+                   placeholder="Відповідь {{i + 1}}">
+
+          </mat-form-field>
+          <button mat-mini-fab color="primary"
+                  (click)="removeAnswer(answer)"
+                  type="button"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
+      <button mat-raised-button
+              color="primary"
+              type="button"
+              [disabled] = "questionForm.value.answers.length >= 5"
+              (click)="addAnswer()">
+        Додати відповідь
+      </button>
+    </div>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Опис відповіді"
+                formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput required
+             placeholder="Вкажіть теги для питання"
+             formGroupName="tags"
+             (keyup.enter)="newTag($event)"
+             [matAutocomplete]="autoTag"
+             #searchTags
+      >
+      <mat-autocomplete #autoTag="matAutocomplete">
+        <mat-option *ngFor="let tag of tagsForAutocomplete | filter: searchTags.value" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div class="blocks">
+      <div *ngFor="let tag of tags"
+           class="block">
+        {{tag}}
+        <button class="mini_btn"
+                type="button"
+                (click)="delTag(tag)">
+          &times;
+        </button>
+      </div>
+
+    </div>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="questionForm.invalid || !tags.length"
+    >Надіслати
+    </button>
+
+    <h3 *ngIf="isAdded" class="question-added"> Додано успішно! </h3>
+  </form>
+</mat-card>
+

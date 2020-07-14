@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {commonAdminPath} from '../../../../shared/api';
-import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 import {AdminAuthService} from './admin-auth.service';
 import {QuestionData, QuestionModel} from '../interfaces/questionModel';
+import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -24,17 +24,6 @@ export class AdminQuestionsService {
     return this.http.post<QuestionModel>(`${commonAdminPath}/questions`, question, options);
   }
 
-  getMyQuestions(): Observable<ISuccessHttpResponse> {
-    const options = {
-      headers: new HttpHeaders({
-        Authorization: this.authService.getAccessToken()
-      })
-    };
-// todo query params in options
-    return this.http
-      .get<ISuccessHttpResponse>(`${commonAdminPath}/questions/my`, options);
-  }
-
   getAllQuestion(): Observable<QuestionData> {
     const options = {
       headers: new HttpHeaders({
@@ -43,6 +32,16 @@ export class AdminQuestionsService {
     };
 
     return this.http.get<QuestionData>(`${commonAdminPath}/questions`, options);
+  }
+
+  getMyQuestions(): Observable<ISuccessHttpResponse> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+// todo query params in options
+    return this.http.get<ISuccessHttpResponse>(`${commonAdminPath}/questions/my`, options);
   }
 
   findQuestionByParams(params): Observable<QuestionData> {

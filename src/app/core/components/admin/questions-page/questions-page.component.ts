@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-questions-page',
@@ -7,13 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionsPageComponent implements OnInit {
   statusAddQuestionBtn = false;
+  statusShowAllQuestion = false;
+  statusShowMyQuestion = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   setStatusAddQuestionBtn(value: boolean) {
-   this.statusAddQuestionBtn = value;
+    this.statusShowAllQuestion = false;
+    this.statusShowMyQuestion = false;
+    this.statusAddQuestionBtn = value;
+  }
+
+  setStatusShowAllQuestion(value: boolean) {
+    this.statusShowMyQuestion = false;
+    this.statusAddQuestionBtn = false;
+    this.statusShowAllQuestion = value;
+  }
+
+  setStatusShowMyQuestion(value: boolean) {
+    this.statusShowAllQuestion = false;
+    this.statusAddQuestionBtn = false;
+    this.statusShowMyQuestion = value;
   }
 }
