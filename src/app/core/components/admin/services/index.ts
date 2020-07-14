@@ -5,5 +5,4 @@ export * from './admin-questions.service';
 export * from  './admin-statistics.service';
 export * from './admin-users.service';
 export * from './admin-module.service';
-
-
+export * from './admin-lesson.service';

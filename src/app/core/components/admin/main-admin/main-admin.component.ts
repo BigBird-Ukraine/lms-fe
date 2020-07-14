@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 
 import {AdminAuthService} from '../services';
 import {IUser} from '../interfaces';
-import {UpdateProfileComponent} from "../users-page/update-profile/update-profile.component";
+import {UpdateProfileComponent} from '../users-page/update-profile/update-profile.component';
 
 @Component({
   selector: 'app-main-admin',
@@ -18,8 +18,8 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/questions', name: 'Питання'},
     {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/courses', name: 'Курси'},
-    {url: '/adminPanel/modules', name: 'Модулі'}
-
+    {url: '/adminPanel/modules', name: 'Модулі'},
+    {url: '/adminPanel/lessons', name: 'Уроки'}
   ];
   adminInfo: IUser;
 
@@ -30,7 +30,7 @@ export class MainAdminComponent implements OnInit {
 
   ngOnInit() {
     this.authAdminService.getAdminInfo().subscribe(value => {
-      this.adminInfo = value.data
+      this.adminInfo = value.data;
     });
   }
 
@@ -43,10 +43,10 @@ export class MainAdminComponent implements OnInit {
 
   updateProfile(user: IUser) {
     this.dialog.open(UpdateProfileComponent, {
-      data: {user:user}
-    }).afterClosed().subscribe(()=>{
-      this.ngOnInit()
-    })
+      data: {user}
+    }).afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
   }
 }
 

@@ -10,6 +10,7 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
+import {LessonsPageComponent} from './lessons-page/lessons-page.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
       {path: 'groups', component: GroupsPageComponent},
       {path: 'questions', component: QuestionsPageComponent},
       {path: 'courses', component: CoursesPageComponent},
-      {path: 'modules', component: ModulePageComponent}
+      {path: 'modules', component: ModulePageComponent},
+      {path: 'lessons', component: LessonsPageComponent}
     ]
   }
 ];

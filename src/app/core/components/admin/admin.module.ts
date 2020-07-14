@@ -33,6 +33,8 @@ import {AddModulesComponent} from './courses-page/add-modules/add-modules.compon
 import {CourseOutComponent} from './courses-page/course-out/course-out.component';
 import {CourseCreateComponent} from './courses-page/course-create/course-create.component';
 import {CourseUpdateComponent} from './courses-page/course-update/course-update.component';
+import { LessonsPageComponent } from './lessons-page/lessons-page.component';
+import { CreateLessonAdminComponent } from './lessons-page/create-lesson-admin/create-lesson-admin.component';
 
 @NgModule({
   entryComponents: [
@@ -64,7 +66,9 @@ import {CourseUpdateComponent} from './courses-page/course-update/course-update.
     AddModulesComponent,
     CourseOutComponent,
     CourseCreateComponent,
-    CourseUpdateComponent
+    CourseUpdateComponent,
+    LessonsPageComponent,
+    CreateLessonAdminComponent
   ],
   imports: [
     CommonModule,

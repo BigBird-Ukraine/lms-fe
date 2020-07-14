@@ -1,0 +1,11 @@
+<div class="lessonsWrapper">
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="setStatusCreateLesson(!statusCreateLesson)"
+  > <span *ngIf="!statusCreateLesson">Додати урок</span>
+    <span *ngIf="statusCreateLesson">Скрити</span>
+  </button>
+
+  <app-create-lesson-admin *ngIf="statusCreateLesson"></app-create-lesson-admin>
+</div>
