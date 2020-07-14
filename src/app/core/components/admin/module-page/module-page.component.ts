@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 
-import {ModuleLayoutComponent} from '../../../../shared/components/templates/module-layout/module-layout.component';
+import {ModuleLayoutComponent} from '../../../../shared/components/templates';
 
 @Component({
   selector: 'app-module-page',

@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "lms-fe"
+  "defaultProject": "lms-fe",
+  "cli": {
+    "analytics": false
+  }
 }
