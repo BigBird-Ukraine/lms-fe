@@ -2,8 +2,9 @@ export * from './user.interface';
 export * from './course.interface';
 export * from './module.interface';
 export * from './GroupModel';
-export * from '../../../interface/lesson.interface';
 export * from './UserModel';
-export * from './paginator.interface'
-
-
+export * from './paginator.interface';
+export * from './user-subject.model';
+export * from './test.interface';
+export * from './lesson.interface';
+export * from './questionModel';

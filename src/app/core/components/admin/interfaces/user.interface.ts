@@ -8,7 +8,7 @@ export interface IUser {
   phone_number: string;
   role_id: number;
   status_id: number;
-  created_at: Date;
+  created_at?: Date;
   updated_at?: string;
   photo_path?: string;
   groups_id?: GroupModel[];

@@ -30,7 +30,7 @@ export class MainAdminComponent implements OnInit {
 
   ngOnInit() {
     this.authAdminService.getAdminInfo().subscribe(value => {
-      this.adminInfo = value.data;
+      this.adminInfo = value;
     });
   }
 

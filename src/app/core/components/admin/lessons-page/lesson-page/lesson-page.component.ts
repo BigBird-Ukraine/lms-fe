@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material';
+import {InfoHelperService} from '../../../../services/questions';
 import {ActivatedRoute, Router} from '@angular/router';
-
-import {CreateLessonComponent} from '../create-lesson/create-lesson.component';
-import {UserService} from '../../../services/user';
-import {IEditLesson, IFullLesson, ILesson, Tags} from '../../../interface';
-import {UserRolesEnum} from '../../../../shared/enums';
-import {InfoHelperService, LessonsService, AuthService} from '../../../services';
+import {UserRolesEnum} from '../../../../../shared/enums';
+import {AdminAuthService, AdminLessonService, AdminUsersService} from '../../services';
+import {CreateLessonAdminComponent} from '../create-lesson-admin/create-lesson-admin.component';
+import {IEditLesson, IFullLesson, ILesson, Tags} from '../../interfaces';
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
 
 @Component({
@@ -19,7 +18,7 @@ export class LessonPageComponent implements OnInit {
   lessonsForAutocomplete: string[] = [];
   lessonsNumberForAutocomplete: number[] = [];
   filterLessonsForm: FormGroup;
-  isTeacher: boolean;
+  isAdmin: boolean;
   userID: string;
   showAllLessons = false;
   lessonsList: ILesson[];
@@ -31,22 +30,22 @@ export class LessonPageComponent implements OnInit {
   isFiltered = false;
 
   constructor(private dialog: MatDialog,
-              private userService: UserService,
-              private lessonService: LessonsService,
+              private userService: AdminUsersService,
+              private lessonService: AdminLessonService,
               private fb: FormBuilder,
               private infoService: InfoHelperService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) {
+              private authService: AdminAuthService) {
   }
 
   ngOnInit() {
     this.userService.getUserInfoByToken(this.token)
       .subscribe(() => {
         if (this.userService.userInfo.subscribe()) {
-          this.userService.userInfo.subscribe(user => {
-            this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
-            this.userID = user._id;
+          this.userService.userInfo.subscribe(res => {
+            this.isAdmin = res.role_id === UserRolesEnum.ADMIN;
+            this.userID = res._id;
           });
         }
       });
@@ -64,7 +63,7 @@ export class LessonPageComponent implements OnInit {
   }
 
   openForm() {
-    this.dialog.open(CreateLessonComponent);
+    this.dialog.open(CreateLessonAdminComponent);
   }
 
   myLessons() {
@@ -105,7 +104,7 @@ export class LessonPageComponent implements OnInit {
       this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
     });
 
-    this.router.navigate(['/lessons']);
+    this.router.navigate(['adminPanel/lessons']);
   }
 
   getTags() {
@@ -139,7 +138,7 @@ export class LessonPageComponent implements OnInit {
       }
     });
 
-    this.router.navigate(['/lessons'], {
+    this.router.navigate(['adminPanel/lessons'], {
       queryParams: {
         ...this.filterLessonsForm.value
       }
@@ -169,6 +168,7 @@ export class LessonPageComponent implements OnInit {
   }
 
   showLesson(id) {
-    this.router.navigate([`/lessons/${id}`]);
+    this.router.navigate([`adminPanel/lessons/${id}`]);
   }
+
 }

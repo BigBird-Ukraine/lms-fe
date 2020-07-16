@@ -99,7 +99,7 @@ export class AuthService {
     return localStorage.getItem(this.accessTokenKey);
   }
 
-  private getRefreshToken(): string {
+  public getRefreshToken(): string {
     return localStorage.getItem(this.refreshTokenKey);
   }
 

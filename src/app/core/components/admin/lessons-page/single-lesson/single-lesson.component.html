@@ -1,0 +1,54 @@
+<div class="lesson_page" *ngIf="lesson">
+
+  <div class="lesson">
+
+    <mat-card class="video_block">
+
+      <h2>{{lesson.number}}. {{lesson.label}}</h2>
+
+      <div class="lesson_video">
+        ВІДЕО
+      </div>
+
+    </mat-card>
+
+    <div class="lesson_info">
+
+      <div class="info">
+        <p>{{lesson.description}}</p>
+      </div>
+
+      <button mat-button
+              color="primary"
+              type="button"
+              *ngIf="isAdmin"
+              (click)="editLesson()">
+        Редагувати урок
+      </button>
+      <br>
+      <button mat-button
+              color="primary"
+              type="button"
+              *ngIf="isAdmin"
+              (click)="addQuestionToLesson()">
+        Додати питання до уроку
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="lesson_test">
+
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            (click)="startTest()"
+    >
+      <mat-icon aria-hidden="false">school</mat-icon>
+      Пройти тест
+    </button>
+
+  </div>
+
+</div>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ILesson, Tags} from '../../../../interface';
+
+import {ILesson, Tags} from '../../interfaces';
 import {InfoHelperService} from '../../../../services/questions';
+import {AdminLessonService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {MatDialog} from '@angular/material';
-import {AdminLessonService} from '../../services';
+
 
 @Component({
   selector: 'app-create-lesson-admin',

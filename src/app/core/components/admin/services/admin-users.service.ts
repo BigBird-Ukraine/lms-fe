@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
 import {commonAdminPath} from '../../../../shared/api';
-import {IUser} from '../interfaces';
+import {IUser, IUserSubjectModel} from '../interfaces';
+import {catchError, tap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import {IUser} from '../interfaces';
 })
 export class AdminUsersService {
   urlUsers: string = commonAdminPath + '/users';
+  userInfo: BehaviorSubject<Partial<IUser>> = new BehaviorSubject({});
 
   constructor(private httpClient: HttpClient) {
   }
@@ -52,6 +54,24 @@ export class AdminUsersService {
   }
 
   getByID(id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.urlUsers}/${id}`)
+    return this.httpClient.get<any>(`${this.urlUsers}/${id}`);
+  }
+
+  getUserInfoByToken(accessToken: string): Observable<IUser> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: accessToken
+      })
+    };
+
+    return this.httpClient.get<IUser>(`${commonAdminPath}/users/getInfo`, options)
+      .pipe(
+        tap((response: IUser) => {
+          this.userInfo.next(response);
+        }),
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
   }
 }

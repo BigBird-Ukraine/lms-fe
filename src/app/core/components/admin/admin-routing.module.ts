@@ -10,7 +10,14 @@ import {QuestionsPageComponent} from './questions-page/questions-page.component'
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {ModulePageComponent} from './module-page/module-page.component';
 import {UserOutComponent} from './users-page/user-out/user-out.component';
-import {LessonsPageComponent} from './lessons-page/lessons-page.component';
+import {CreateLessonAdminComponent} from './lessons-page/create-lesson-admin/create-lesson-admin.component';
+import {SingleLessonComponent} from './lessons-page/single-lesson/single-lesson.component';
+import {LessonTestComponent} from './lessons-page/lesson-test/lesson-test.component';
+import {LessonTestResultComponent} from './lessons-page/lesson-test-result/lesson-test-result.component';
+import {LessonPageComponent} from './lessons-page/lesson-page/lesson-page.component';
+import {EditLessonComponent} from './lessons-page/edit-lesson/edit-lesson.component';
+import {AddQuestionToLessonComponent} from './lessons-page/add-question-to-lesson/add-question-to-lesson.component';
+
 
 
 const routes: Routes = [
@@ -30,9 +37,17 @@ const routes: Routes = [
       {path: 'questions', component: QuestionsPageComponent},
       {path: 'courses', component: CoursesPageComponent},
       {path: 'modules', component: ModulePageComponent},
-      {path: 'lessons', component: LessonsPageComponent}
-    ]
-  }
+
+      {path: 'lessons', component: LessonPageComponent, children: [
+          {path: 'create', component: CreateLessonAdminComponent},
+          {path: ':id/edit', component: EditLessonComponent}
+        ]},
+      {path: 'lessons/:id', component: SingleLessonComponent},
+      {path: 'lessons/:id/question', component: AddQuestionToLessonComponent},
+      {path: 'lessons/:id/test', component: LessonTestComponent},
+      {path: 'lessons/:id/test/result', component: LessonTestResultComponent},
+
+]}
 ];
 
 @NgModule({

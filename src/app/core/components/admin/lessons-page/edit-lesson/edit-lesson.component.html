@@ -1,0 +1,77 @@
+<h2 mat-dialog-title class="mat_dialog_title">Редагувати урок</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="editLessonForm"
+        (ngSubmit)="editLesson()"
+        (keydown.enter)="$event.preventDefault()"
+  >
+    <div class="form">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Номер уроку</mat-label>
+        <input type="text" matInput
+               formControlName="number"
+        >
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Назва уроку</mat-label>
+        <input type="text" matInput
+               formControlName="label"
+        >
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Опис уроку</mat-label>
+        <textarea type="text" matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="Вкажіть теги "
+               formGroupName="tags"
+               (keyup.enter)="newTag($event)"
+               [matAutocomplete]="autoTag"
+               #searchTags
+        >
+        <mat-autocomplete #autoTag="matAutocomplete">
+          <mat-option *ngFor="let tag of tagsForAutocomplete | filter:
+           searchTags.value"
+                      [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="blocks">
+        <div *ngFor="let tag of tags"
+             class="block">
+          {{tag}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delTag(tag)">
+            &times;
+          </button>
+        </div>
+
+      </div>
+
+      <!--      <span>Додати відео:</span>-->
+      <!--      <div class="example-full-width" style="margin: 30px">-->
+      <!--        <input type="file"-->
+      <!--               (change)="fileChange($event)"-->
+      <!--        >-->
+      <!--      </div>-->
+
+    </div>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+    >Редагувати
+    </button>
+
+  </form>
+</mat-dialog-content>
