@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
-import {IEditLesson, ILesson, Tags} from '../../../interface';
-import {InfoHelperService, LessonsService} from '../../../services';
-import {CustomSnackbarService} from '../../../../shared/services';
+import {CustomSnackbarService} from '../../../../../shared/services';
+import {IEditLesson, ILesson, Tags} from '../../interfaces';
+import {InfoHelperService} from '../../../../services/questions';
+import {AdminLessonService} from '../../services';
 
 @Component({
   selector: 'app-edit-lesson',
@@ -19,7 +20,7 @@ export class EditLessonComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private infoService: InfoHelperService,
-              private lessonService: LessonsService,
+              private lessonService: AdminLessonService,
               private customSnackbarService: CustomSnackbarService,
               public dialogRef: MatDialogRef<EditLessonComponent>,
               @Inject(MAT_DIALOG_DATA) public data
@@ -83,12 +84,11 @@ export class EditLessonComponent implements OnInit {
       }
     });
 
-    this.lessonService.editLesson(id, lessonData)
-      .subscribe((value: IEditLesson) => {
+    this.lessonService.editLesson(id, lessonData).subscribe((value: IEditLesson) => {
         this.dialogRef.close(value);
         this.customSnackbarService.open('Урок відредаговано', '');
       },
-      () => this.customSnackbarService.open('Невдала спроба', '')
-      );
+      () => this.customSnackbarService.open('Невдала спроба', ''));
   }
+
 }

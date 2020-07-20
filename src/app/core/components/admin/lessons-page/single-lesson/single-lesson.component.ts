@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {IEditLesson, ILesson, QuestionModel} from '../../../../interface';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {UserRolesEnum} from '../../../../../shared/enums';
+import {AdminAuthService, AdminLessonService, AdminUsersService} from '../../services';
+import {IUser} from '../../interfaces';
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
-import {IEditLesson, ILesson, QuestionModel} from '../../../interface';
-import {LessonsService} from '../../../services/lessons';
-import {UserRolesEnum} from '../../../../shared/enums';
-import {UserService} from '../../../services/user';
-import {AuthService} from '../../../services/auth';
 import {AddQuestionToLessonComponent} from '../add-question-to-lesson/add-question-to-lesson.component';
+
 
 @Component({
   selector: 'app-single-lesson',
@@ -18,24 +17,24 @@ import {AddQuestionToLessonComponent} from '../add-question-to-lesson/add-questi
 export class SingleLessonComponent implements OnInit {
 
   token = this.authService.getAccessToken();
-  isTeacher: boolean;
+  isAdmin: boolean;
   lesson: ILesson;
   id: string;
 
   constructor(private dialog: MatDialog,
-              private userService: UserService,
-              private authService: AuthService,
+              private userService: AdminUsersService,
+              private authService: AdminAuthService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private lessonService: LessonsService) {
+              private lessonService: AdminLessonService) {
   }
 
   ngOnInit() {
     this.userService.getUserInfoByToken(this.token)
       .subscribe(() => {
         if (this.userService.userInfo.subscribe()) {
-          this.userService.userInfo.subscribe(user => {
-            this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
+          this.userService.userInfo.subscribe((user: IUser) => {
+            this.isAdmin = user.role_id === UserRolesEnum.ADMIN;
           });
         }
       });
@@ -73,6 +72,7 @@ export class SingleLessonComponent implements OnInit {
   }
 
   startTest() {
-    this.router.navigate([`/lessons/${this.id}/test`]);
+    this.router.navigate([`adminPanel/lessons/${this.id}/test`]);
   }
+
 }

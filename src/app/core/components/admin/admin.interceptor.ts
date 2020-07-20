@@ -52,11 +52,13 @@ export class AdminInterceptor implements HttpInterceptor {
       if (error.status === 403) {
         this.isRefreshing = false;
         this.dialog.closeAll();
-        this.router.navigate(['admin/login'], {
-          queryParams: {
-            sessionFiled: true
-          }
-        });
+        if (request.url.includes(`${config.adminPort}`)) {
+          this.router.navigate(['admin/login'], {
+            queryParams: {
+              sessionFiled: true
+            }
+          });
+        }
       }
       return throwError(error);
     }));

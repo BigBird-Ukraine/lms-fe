@@ -8,6 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -36,6 +37,13 @@ import {CourseUpdateComponent} from './courses-page/course-update/course-update.
 import { AddQuestionComponent } from './questions-page/add-question/add-question.component';
 import { AllQuestionComponent } from './questions-page/all-question/all-question.component';
 import { MyQuestionComponent } from './questions-page/my-question/my-question.component';
+import { CreateLessonAdminComponent } from './lessons-page/create-lesson-admin/create-lesson-admin.component';
+import { LessonPageComponent } from './lessons-page/lesson-page/lesson-page.component';
+import { AddQuestionToLessonComponent } from './lessons-page/add-question-to-lesson/add-question-to-lesson.component';
+import { EditLessonComponent } from './lessons-page/edit-lesson/edit-lesson.component';
+import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.component';
+import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
+import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
 
 @NgModule({
   entryComponents: [
@@ -70,7 +78,15 @@ import { MyQuestionComponent } from './questions-page/my-question/my-question.co
     CourseUpdateComponent,
     AddQuestionComponent,
     AllQuestionComponent,
-    MyQuestionComponent
+    MyQuestionComponent,
+    CourseUpdateComponent,
+    CreateLessonAdminComponent,
+    LessonPageComponent,
+    AddQuestionToLessonComponent,
+    EditLessonComponent,
+    LessonTestComponent,
+    LessonTestResultComponent,
+    SingleLessonComponent,
   ],
   imports: [
     CommonModule,
@@ -91,7 +107,9 @@ import { MyQuestionComponent } from './questions-page/my-question/my-question.co
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: AdminInterceptor
-    }
+    },
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
   ]
 })
 export class AdminModule {

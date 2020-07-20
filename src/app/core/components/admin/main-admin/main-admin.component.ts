@@ -18,8 +18,8 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/questions', name: 'Питання'},
     {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/courses', name: 'Курси'},
-    {url: '/adminPanel/modules', name: 'Модулі'}
-
+    {url: '/adminPanel/modules', name: 'Модулі'},
+    {url: '/adminPanel/lessons', name: 'Уроки'}
   ];
   adminInfo: IUser;
 
@@ -30,7 +30,7 @@ export class MainAdminComponent implements OnInit {
 
   ngOnInit() {
     this.authAdminService.getAdminInfo().subscribe(value => {
-      this.adminInfo = value.data
+      this.adminInfo = value;
     });
   }
 
@@ -43,10 +43,10 @@ export class MainAdminComponent implements OnInit {
 
   updateProfile(user: IUser) {
     this.dialog.open(UpdateProfileComponent, {
-      data: {user:user}
-    }).afterClosed().subscribe(()=>{
-      this.ngOnInit()
-    })
+      data: {user}
+    }).afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
   }
 }
 
