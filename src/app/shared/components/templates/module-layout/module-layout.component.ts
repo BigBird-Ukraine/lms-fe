@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
-import {ILesson, IModule} from '../../../../core/components/admin/interfaces';
+import {IFullLesson, ILesson, IModule} from '../../../../core/components/admin/interfaces';
 import {AdminModuleService} from '../../../../core/components/admin/services';
 import {AdminHelperService, CustomSnackbarService} from '../../../services';
 import {Tags} from '../../../../core/interface';
@@ -56,7 +56,8 @@ export class ModuleLayoutComponent implements OnInit {
       this.lessons.find(el => el === lessonObj.label)
     ).map(obj => obj._id);
 
-    this.adminModuleService.addModule(moduleData).subscribe(() => {
+    this.adminModuleService.addModule(moduleData).subscribe((res) => {
+      this.adminModuleService.modules.push(res);
       this.customSnackbarService.open('Модуль додано', '');
       this.dialog.closeAll();
     });
@@ -81,9 +82,9 @@ export class ModuleLayoutComponent implements OnInit {
   }
 
   getLessons() {
-    this.adminHelper.getLessons().subscribe((lessons: ILesson[]) => {
-      this.lessonsForAutocomplete = lessons.map(lesson => lesson.label);
-      this.lessonsObjects = lessons;
+    this.adminHelper.getLessons().subscribe((lessons: IFullLesson) => {
+      this.lessonsForAutocomplete = lessons.data.lesson.map(lesson => lesson.label);
+      this.lessonsObjects = lessons.data.lesson;
     });
   }
 

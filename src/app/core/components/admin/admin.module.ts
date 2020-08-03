@@ -44,6 +44,10 @@ import { EditLessonComponent } from './lessons-page/edit-lesson/edit-lesson.comp
 import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.component';
 import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
 import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
+import { AllModulesComponent } from './module-page/all-modules/all-modules.component';
+import { SingleModuleComponent } from './module-page/single-module/single-module.component';
+import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
+
 
 @NgModule({
   entryComponents: [
@@ -87,6 +91,8 @@ import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesso
     LessonTestComponent,
     LessonTestResultComponent,
     SingleLessonComponent,
+    AllModulesComponent,
+    SingleModuleComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +116,7 @@ import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesso
     },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
+    SingleModuleResolverService
   ]
 })
 export class AdminModule {
