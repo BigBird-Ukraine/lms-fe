@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup} from "@angular/forms";
-import {debounceTime, switchMap, take} from "rxjs/operators";
-import {Subject} from "rxjs";
+import {FormControl, FormGroup} from '@angular/forms';
+import {debounceTime, switchMap, take} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 import {AdminUsersService} from '../services';
-import {UserRolesEnum} from "../../../../shared/enums";
-import {IPaginator, IUserModel} from "../interfaces";
+import {UserRolesEnum} from '../../../../shared/enums';
+import {IPaginator, IUserModel} from '../interfaces';
 
 @Component({
   selector: 'app-users-page',
@@ -28,6 +28,8 @@ export class UsersPageComponent implements OnInit {
     {name: 'Студент', value: UserRolesEnum.STUDENT},
   ];
 
+  createFormsStatus = false;
+
 
   constructor(private adminUsersService: AdminUsersService,
               private router: Router,
@@ -35,7 +37,7 @@ export class UsersPageComponent implements OnInit {
   ) {
     this.subject.pipe(
       debounceTime(500)
-    ).subscribe(() => this.getFilteredUsers())
+    ).subscribe(() => this.getFilteredUsers());
   }
 
   ngOnInit() {
@@ -76,16 +78,20 @@ export class UsersPageComponent implements OnInit {
 
     this.route.queryParams.pipe(
       switchMap(value => {
-        return this.adminUsersService.getAll(value)
+        return this.adminUsersService.getAll(value);
       }),
       take(1),
     ).subscribe(value => {
       this.length = value.data.count;
-      this.getUsers = value.data
-    })
+      this.getUsers = value.data;
+    });
   }
 
   reset() {
     this.ngOnInit();
+  }
+
+  setCreateFormsStatus() {
+    this.createFormsStatus = !this.createFormsStatus;
   }
 }

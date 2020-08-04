@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -44,6 +44,7 @@ import { EditLessonComponent } from './lessons-page/edit-lesson/edit-lesson.comp
 import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.component';
 import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
 import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
+import {CreateUserComponent} from './users-page/create-user/create-user.component';
 
 @NgModule({
   entryComponents: [
@@ -87,6 +88,7 @@ import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesso
     LessonTestComponent,
     LessonTestResultComponent,
     SingleLessonComponent,
+    CreateUserComponent
   ],
   imports: [
     CommonModule,
