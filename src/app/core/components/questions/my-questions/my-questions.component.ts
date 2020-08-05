@@ -5,6 +5,8 @@ import {QuestionModel} from '../../../interface';
 import {QuestionsService} from '../../../services';
 import {ISuccessHttpResponse} from '../../../../shared';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
+import {EditQuestionComponent} from '../edit-question/edit-question.component';
+
 
 @Component({
   selector: 'app-my-questions',
@@ -36,6 +38,22 @@ export class MyQuestionsComponent implements OnInit {
             this.questions = data.data.questions;
           });
         });
+      }
+    });
+  }
+
+  editQuestion(id: string) {
+    const questionModels = this.questions.find(question => question._id === id);
+
+    this.dialog.open(EditQuestionComponent, {
+      data: questionModels,
+      height: '800px',
+      width: '700px',
+    }).afterClosed().subscribe((result) => {
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i]._id === result._id) {
+          this.questions[i] = result;
+        }
       }
     });
   }

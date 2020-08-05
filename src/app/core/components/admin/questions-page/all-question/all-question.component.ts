@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {QuestionModel} from '../../../../interface';
 import {ISuccessHttpResponse} from '../../../../../shared/models/interfaces';
 import {ConfirmLayoutComponent} from '../../../../../shared/components/confirm-layout/confirm-layout.component';
 import {AdminQuestionsService} from '../../services';
+import {EditQuestionComponent} from '../edit-question/edit-question.component';
 
 @Component({
   selector: 'app-all-question',
@@ -36,6 +37,23 @@ export class AllQuestionComponent implements OnInit {
             this.questions = data.data.questions;
           });
         });
+      }
+    });
+  }
+
+
+  editQuestion(id: string) {
+    const questionModels = this.questions.find(question => question._id === id);
+
+    this.dialog.open(EditQuestionComponent, {
+      data: questionModels,
+      height: '800px',
+      width: '700px',
+    }).afterClosed().subscribe((result) => {
+      for (let i = 0; i < this.questions.length; i++) {
+        if (this.questions[i]._id === result._id) {
+          this.questions[i] = result;
+        }
       }
     });
   }

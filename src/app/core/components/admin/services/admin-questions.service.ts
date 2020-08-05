@@ -24,6 +24,16 @@ export class AdminQuestionsService {
     return this.http.post<QuestionModel>(`${commonAdminPath}/questions`, question, options);
   }
 
+  update(question): Observable<QuestionModel> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.put<QuestionModel>(`${commonAdminPath}/questions`, question, options);
+  }
+
   getAllQuestion(): Observable<QuestionData> {
     const options = {
       headers: new HttpHeaders({

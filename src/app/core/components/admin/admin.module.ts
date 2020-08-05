@@ -44,6 +44,7 @@ import { EditLessonComponent } from './lessons-page/edit-lesson/edit-lesson.comp
 import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.component';
 import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
 import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
+import { EditQuestionComponent } from './questions-page/edit-question/edit-question.component';
 
 @NgModule({
   entryComponents: [
@@ -53,6 +54,7 @@ import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesso
     CourseCreateComponent,
     AddModulesComponent,
     CourseUpdateComponent,
+    EditQuestionComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -87,6 +89,7 @@ import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesso
     LessonTestComponent,
     LessonTestResultComponent,
     SingleLessonComponent,
+    EditQuestionComponent,
   ],
   imports: [
     CommonModule,

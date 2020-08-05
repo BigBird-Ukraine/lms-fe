@@ -74,7 +74,6 @@ export class EditUserComponent implements OnInit {
     this.userService.updateUser(id, user).subscribe(() => {
         this.customSnackbarService.open('Редагування пройшло успішно', 'success');
         this.dialogRef.close();
-        console.log();
       },
       () => this.customSnackbarService.open('Невдала спроба', ''));
   }
