@@ -25,6 +25,7 @@ import {LessonTestResultComponent} from './core/components/lessons/lesson-test-r
 import {AllGroupsComponent} from './core/components/groups/all-groups/all-groups.component';
 import {SingleGroupComponent} from './core/components/groups/single-group/single-group.component';
 import {GroupPresentsComponent} from './core/components/groups/group-presents/group-presents.component';
+import {MyPassedTestComponent} from './core/components/lessons/my-passed-test/my-passed-test.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'add_questions', canActivate: [AuthGuardService], component: AddQuestionFormComponent},
       {path: 'info', component: InfoHelperComponent},
       {path: 'test', canActivate: [AuthGuardService], component: QuestionsLayoutComponent},
+      {path: 'tests/my', canActivate: [AuthGuardService], component: MyPassedTestComponent},
       {path: 'questions/my', canActivate: [AuthGuardService], component: MyQuestionsComponent},
       {path: 'registration', component: RegistrationComponent},
       {path: 'auth', component: AuthUserComponent},
