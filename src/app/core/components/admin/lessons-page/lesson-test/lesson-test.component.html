@@ -1,17 +1,19 @@
 <div class="questions_container">
-  <mat-card>
+  <mat-card class="text-center bg-dark text-white">
     <mat-card-title>
       Тестування по предмету:
     </mat-card-title>
+    <p>Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
+      балів, за одну помилку, в вас забирають <span class="font-weight-bold">5</span> балів</p>
 
-    <mat-card-content>
+    <mat-card-content >
       <form [formGroup]="questionForm"
             (ngSubmit)="formTest()"
             (keydown.enter)="$event.preventDefault()">
-        <table>
+        <div class="">
 
-          <tbody class="question_table" formArrayName="question_list">
-          <mat-card class="question" *ngFor="let item of questions; let i = index;"
+          <tbody class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
+          <mat-card class="question col-2 m-2" *ngFor="let item of questions; let i = index;"
                     [formGroupName]="i">
             <tr>
               <td class="q_text" >
@@ -28,7 +30,7 @@
               <tr *ngFor="let a of item.answers; let j = index"
                   [formGroupName]="j">
                 <td>
-                  <mat-checkbox formControlName="checked">
+                  <mat-checkbox  formControlName="checked">
                <span>
                   {{a.value}}
                </span>
@@ -39,7 +41,7 @@
           </mat-card>
           </tbody>
 
-        </table>
+        </div>
         <mat-card-actions class="btn">
           <button mat-raised-button color="primary" type="submit">Перевірити</button>
         </mat-card-actions>
