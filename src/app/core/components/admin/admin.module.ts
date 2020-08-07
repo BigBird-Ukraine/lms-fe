@@ -44,6 +44,7 @@ import { EditLessonComponent } from './lessons-page/edit-lesson/edit-lesson.comp
 import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.component';
 import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
 import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
+import { EditQuestionComponent } from './questions-page/edit-question/edit-question.component';
 import { AllModulesComponent } from './module-page/all-modules/all-modules.component';
 import { SingleModuleComponent } from './module-page/single-module/single-module.component';
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
@@ -57,6 +58,7 @@ import {SingleModuleResolverService} from './resolvers/single-module.resolver.se
     CourseCreateComponent,
     AddModulesComponent,
     CourseUpdateComponent,
+    EditQuestionComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -93,6 +95,7 @@ import {SingleModuleResolverService} from './resolvers/single-module.resolver.se
     SingleLessonComponent,
     AllModulesComponent,
     SingleModuleComponent,
+    EditQuestionComponent,
   ],
   imports: [
     CommonModule,

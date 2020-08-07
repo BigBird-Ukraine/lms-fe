@@ -29,7 +29,7 @@ export class AuthService {
   ) {
   }
 
-  refreshToken(): Observable<any> {
+  authRefreshToken(): Observable<any> {
     return this.httpClient.post(authApiUrls.refreshTokens, null
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
@@ -58,7 +58,6 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-
     const options = {
       headers: new HttpHeaders({
         Authorization: this.getAccessToken()

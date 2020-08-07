@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {QuestionModel} from '../../../../interface';
 import {ISuccessHttpResponse} from '../../../../../shared/models/interfaces';

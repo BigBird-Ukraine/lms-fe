@@ -62,7 +62,6 @@ export class UserOutComponent implements OnInit {
     this.dialog.open(DeleteComponent, {
       data: `${user.surname} ${user.name}`
     }).afterClosed().subscribe(value => {
-
       if (value) {
         const index: number = this.data.users.indexOf(user);
         this.adminUsersService.deleteUser(user._id).subscribe(() => {

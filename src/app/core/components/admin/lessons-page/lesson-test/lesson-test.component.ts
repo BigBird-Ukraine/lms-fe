@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ITest, IUser, QuestionModel} from '../../../../interface';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog} from '@angular/material';
+import {MatCheckboxChange, MatDialog} from '@angular/material';
 import {LessonTestResultComponent} from '../../../lessons/lesson-test-result/lesson-test-result.component';
 import {AdminQuestionsService} from '../../services';
 import {AdminTestService} from '../../services/admin-test.service';
@@ -18,6 +18,7 @@ export class LessonTestComponent implements OnInit {
   questions: QuestionModel[];
   questionForm: FormGroup;
   id: string;
+  public personCheckedIndex = -1;
 
   constructor(private questionsService: AdminQuestionsService,
               private activatedRoute: ActivatedRoute,
@@ -37,6 +38,11 @@ export class LessonTestComponent implements OnInit {
     this.questionForm = this.fb.group({
       question_list: this.fb.array([])
     });
+  }
+
+  personCheckboxChange(event: MatCheckboxChange, index: number) {
+    // This allows only one checkbox to be checked among each checkbox
+    this.personCheckedIndex = event.checked ? index : -1;
   }
 
   getData() {
@@ -88,11 +94,13 @@ export class LessonTestComponent implements OnInit {
   }
 
   checkTest(id, test) {
-    const { question_list } = test;
+    const {question_list} = test;
+
     this.testService.sendTests(id, question_list).subscribe((value: IUser) => {
         this.dialog.open(LessonTestResultComponent, {
           data: value.data.passed_tests.pop()
         });
+
       }
     );
   }

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import { QuestionData, QuestionModel} from '../../interface';
 import {AuthService} from '../auth';
-import {ISuccessHttpResponse, commonAuthPath} from '../../../shared';
+import {ISuccessHttpResponse, commonAuthPath, commonAdminPath} from '../../../shared';
 
 
 @Injectable({
@@ -24,6 +24,16 @@ export class QuestionsService {
     };
 
     return this.http.post<QuestionModel>(`${commonAuthPath}/questions`, question, options);
+  }
+
+  update(question): Observable<QuestionModel> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.put<QuestionModel>(`${commonAuthPath}/questions`, question, options);
   }
 
   getMyQuestions(): Observable<ISuccessHttpResponse> {

@@ -28,7 +28,7 @@ export class CoursesPageComponent implements OnInit {
               private route: ActivatedRoute) {
     this.subject.pipe(
       debounceTime(500)
-    ).subscribe(() => this.getFilteredCourses())
+    ).subscribe(() => this.getFilteredCourses());
   }
 
   ngOnInit() {

@@ -68,19 +68,19 @@ export class AdminInterceptor implements HttpInterceptor {
     return request.clone({setHeaders: {Authorization: token}});
   }
 
-
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      return this.authService.refreshToken().pipe(
-        switchMap((token: any) => {
-          this.isRefreshing = false;
-          this.refreshTokenSubject.next(token.data.accessToken);
-          return next.handle(this.addToken(request, token.data.accessToken));
-        }));
-
+      return (request.url.includes(`${config.adminPort}`) ?
+          this.authService.refreshToken() :
+          this.authService.authRefreshToken()
+      ).pipe(switchMap((token: any) => {
+        this.isRefreshing = false;
+        this.refreshTokenSubject.next(token.data.accessToken);
+        return next.handle(this.addToken(request, token.data.accessToken));
+      }));
     }
     return this.refreshTokenSubject.pipe(
       filter(token => token != null),

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel, IUserSubjectModel, IUser} from '../../interface';
+import {UserModel, IUserSubjectModel, IUser, IPassedData} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -64,5 +64,15 @@ export class UserService {
           return throwError(err);
         })
       );
+  }
+
+  getUserPassedTest(accessToken: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: accessToken
+      })
+    };
+
+    return this.http.get<IPassedData>(`${commonAuthPath}/users/my_passed_tests`, options);
   }
 }
