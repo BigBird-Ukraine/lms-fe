@@ -32,7 +32,7 @@ export class UpdateProfileComponent implements OnInit {
       surname: new FormControl(this.user.surname, [Validators.minLength(2), Validators.maxLength(255), Validators.pattern(regExp.nameRegexp), Validators.required]),
       email: new FormControl(this.user.email, [Validators.email, Validators.required]),
       phone_number: new FormControl(this.user.phone_number, [Validators.pattern(regExp.phone)]),
-    })
+    });
   }
 
 

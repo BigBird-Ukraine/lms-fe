@@ -1,26 +1,26 @@
 <mat-card>
   <div *ngFor="let question of questions">
-    Питання: {{question.question}} <br>
-    Предмет: {{question.subject}} <br>
-    Групи: {{question.group}} <br>
-    Опис: {{question.description}} <br>
-    Теги: {{question.tags}} <br>
-    Відповіді:
-    <div *ngFor="let answer of question.answers; let i = index">
-      {{i + 1}}) {{answer.value}}
-      <span *ngIf="answer.correct" class="correct">&#10004;</span>
-      <span *ngIf="!answer.correct" class="incorrect">&#10060;</span>
-    </div>
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            (click)="deleteQuestion(question._id)"
-    >Видалити питання
-    </button>
-    <hr>
+      Питання: {{question.question}} <br>
+      Предмет: {{question.subject}} <br>
+      Групи: {{question.group}} <br>
+      Опис: {{question.description}} <br>
+      Теги: {{question.tags}} <br>
+      Відповіді:
+      <div *ngFor="let answer of question.answers; let i = index">
+        {{i + 1}}) {{answer.value}}
+        <span *ngIf="answer.correct" class="correct">&#10004;</span>
+        <span *ngIf="!answer.correct" class="incorrect">&#10060;</span>
+      </div>
+      <button mat-raised-button
+              color="primary"
+              type="button"
+              (click)="deleteQuestion(question._id)"
+      >Видалити питання
+      </button>
+      <hr>
   </div>
 
   <div *ngIf="!questions.length">
-   <span> У вас ще немає створених питань.</span>
+    <span> У вас ще немає створених питань.</span>
   </div>
 </mat-card>
