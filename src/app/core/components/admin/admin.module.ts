@@ -50,6 +50,8 @@ import { SingleModuleComponent } from './module-page/single-module/single-module
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
 
 import {CreateUserComponent} from './users-page/create-user/create-user.component';
+import { AttendanceUsersComponent } from './groups-page/attendance-users/attendance-users.component';
+import { AddAttendanceComponent } from './groups-page/add-attendance/add-attendance.component';
 
 @NgModule({
   entryComponents: [
@@ -59,7 +61,9 @@ import {CreateUserComponent} from './users-page/create-user/create-user.componen
     CourseCreateComponent,
     AddModulesComponent,
     CourseUpdateComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    AttendanceUsersComponent,
+    AddAttendanceComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -97,7 +101,9 @@ import {CreateUserComponent} from './users-page/create-user/create-user.componen
     AllModulesComponent,
     SingleModuleComponent,
     EditQuestionComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    AttendanceUsersComponent,
+    AddAttendanceComponent
   ],
   imports: [
     CommonModule,
