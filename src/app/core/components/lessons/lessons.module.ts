@@ -21,6 +21,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { LessonTestComponent } from './lesson-test/lesson-test.component';
 import { LessonTestResultComponent } from './lesson-test-result/lesson-test-result.component';
+import { MyPassedTestComponent } from './my-passed-test/my-passed-test.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LessonTestResultComponent } from './lesson-test-result/lesson-test-resu
     SingleLessonComponent,
     AddQuestionToLessonComponent,
     LessonTestComponent,
-    LessonTestResultComponent
+    LessonTestResultComponent,
+    MyPassedTestComponent
   ],
   imports: [
     // LessonsRoutingModule,
