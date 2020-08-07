@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AuthAdminComponent} from './auth-admin/auth-admin.component';
@@ -45,6 +45,11 @@ import { LessonTestComponent } from './lessons-page/lesson-test/lesson-test.comp
 import { LessonTestResultComponent } from './lessons-page/lesson-test-result/lesson-test-result.component';
 import { SingleLessonComponent } from './lessons-page/single-lesson/single-lesson.component';
 import { EditQuestionComponent } from './questions-page/edit-question/edit-question.component';
+import { AllModulesComponent } from './module-page/all-modules/all-modules.component';
+import { SingleModuleComponent } from './module-page/single-module/single-module.component';
+import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
+
+import {CreateUserComponent} from './users-page/create-user/create-user.component';
 
 @NgModule({
   entryComponents: [
@@ -89,7 +94,10 @@ import { EditQuestionComponent } from './questions-page/edit-question/edit-quest
     LessonTestComponent,
     LessonTestResultComponent,
     SingleLessonComponent,
+    AllModulesComponent,
+    SingleModuleComponent,
     EditQuestionComponent,
+    CreateUserComponent
   ],
   imports: [
     CommonModule,
@@ -113,6 +121,7 @@ import { EditQuestionComponent } from './questions-page/edit-question/edit-quest
     },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
+    SingleModuleResolverService
   ]
 })
 export class AdminModule {

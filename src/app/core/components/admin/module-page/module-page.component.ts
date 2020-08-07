@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 
 import {ModuleLayoutComponent} from '../../../../shared/components/templates';
 
+
 @Component({
   selector: 'app-module-page',
   templateUrl: './module-page.component.html',
@@ -17,6 +18,5 @@ export class ModulePageComponent implements OnInit {
 
   openForm() {
     this.dialog.open(ModuleLayoutComponent);
-
   }
 }

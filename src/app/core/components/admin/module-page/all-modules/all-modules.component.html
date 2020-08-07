@@ -1,0 +1,11 @@
+<div class="d-flex flex-wrap text-center justify-content-center">
+
+  <div *ngFor="let module of moduleService.modules" class="m-2 p-2 border col-3 cursor bg-purple">
+    <h2 class="text-white">{{module.label}}</h2>
+    <p>{{module.description}}</p>
+    <button type="button" class="btn btn-warning"
+            (click)="moduleService.navigate('adminPanel/modules/single/'+ module._id)">Відкрити
+    </button>
+  </div>
+
+</div>

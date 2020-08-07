@@ -1,18 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Params} from "@angular/router";
+import {Params, Router} from '@angular/router';
 
-import {IModule} from '../interfaces';
+import {IFullModule, IModule} from '../interfaces';
 import {commonAdminPath} from '../../../../shared/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminModuleService {
+  public modules: IModule[] = [];
+
   moduleUrl = `${commonAdminPath}/modules`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: Router) {
   }
 
   addModule(module): Observable<IModule> {
@@ -24,6 +26,25 @@ export class AdminModuleService {
       params: new HttpParams({
         fromObject: params
       })
-    })
+    });
+  }
+
+  getAllCropped() {
+    return this.http.get<IFullModule>(`${this.moduleUrl}` + '/all-cropped');
+  }
+
+  getOneFullModule(id: string) {
+    return this.http.get<IFullModule>(`${this.moduleUrl}/${id}`);
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${this.moduleUrl}/${id}`).subscribe(res => {
+      alert('Success');
+      this.navigate('/adminPanel/modules');
+    });
+  }
+
+  navigate(value) {
+    this.route.navigate([value]);
   }
 }

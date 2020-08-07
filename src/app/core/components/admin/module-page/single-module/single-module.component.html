@@ -1,0 +1,22 @@
+<div>
+
+  <div class="text-center py-2  ">
+    <h1>{{module.label}}</h1>
+    <p>{{module.description}}</p>
+
+    <div class="d-flex flex-wrap m-3 justify-content-center">
+      <div class="col-3 m-2 border p-2 bg-purple text-center cursor"
+           *ngFor="let lesson of module.lessons_list"
+           (click)="moduleService.navigate('/adminPanel/lessons/'+lesson._id)">
+        <h2 class="text-white">{{lesson.label}}</h2>
+        <p>{{lesson.description}}</p>
+      </div>
+
+      <div *ngIf="module.lessons_list.length === 0" class="p-3 ">
+        <span> Уроків ще не має </span>
+      </div>
+    </div>
+    <button type="button" class="btn btn-danger" (click)="deleteModule(module._id)">Удалити</button>
+  </div>
+
+</div>
