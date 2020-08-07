@@ -19,7 +19,8 @@ export class MainAdminComponent implements OnInit {
     {url: '/adminPanel/groups', name: 'Групи'},
     {url: '/adminPanel/courses', name: 'Курси'},
     {url: '/adminPanel/modules', name: 'Модулі'},
-    {url: '/adminPanel/lessons', name: 'Уроки'}
+    {url: '/adminPanel/lessons', name: 'Уроки'},
+    {url: '/adminPanel/cities', name: 'Міста'}
   ];
   adminInfo: IUser;
 

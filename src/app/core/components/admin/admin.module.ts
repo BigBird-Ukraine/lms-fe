@@ -50,6 +50,10 @@ import { SingleModuleComponent } from './module-page/single-module/single-module
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
 
 import {CreateUserComponent} from './users-page/create-user/create-user.component';
+import { CitiesAdminComponent } from './cities-admin/cities-admin.component';
+import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admin.component';
+
+
 
 @NgModule({
   entryComponents: [
@@ -59,7 +63,8 @@ import {CreateUserComponent} from './users-page/create-user/create-user.componen
     CourseCreateComponent,
     AddModulesComponent,
     CourseUpdateComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    AddCityAdminComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -97,7 +102,9 @@ import {CreateUserComponent} from './users-page/create-user/create-user.componen
     AllModulesComponent,
     SingleModuleComponent,
     EditQuestionComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    CitiesAdminComponent,
+    AddCityAdminComponent
   ],
   imports: [
     CommonModule,

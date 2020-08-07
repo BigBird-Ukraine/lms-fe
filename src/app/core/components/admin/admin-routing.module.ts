@@ -20,6 +20,7 @@ import {AddQuestionToLessonComponent} from './lessons-page/add-question-to-lesso
 import {AllModulesComponent} from './module-page/all-modules/all-modules.component';
 import {SingleModuleComponent} from './module-page/single-module/single-module.component';
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
+import {CitiesAdminComponent} from './cities-admin/cities-admin.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
       {path: 'lessons/:id/test', component: LessonTestComponent},
       {path: 'lessons/:id/test/result', component: LessonTestResultComponent},
 
+      {path: 'cities', component: CitiesAdminComponent}
     ]
   }
 ];
