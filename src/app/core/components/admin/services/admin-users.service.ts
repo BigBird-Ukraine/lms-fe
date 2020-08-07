@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
-import {commonAdminPath} from '../../../../shared/api';
+import {commonAdminPath, commonAuthPath} from '../../../../shared/api';
 import {IUser, IUserSubjectModel} from '../interfaces';
 import {catchError, tap} from 'rxjs/operators';
+import {UserModel} from '../../../interface';
 
 
 @Injectable({
@@ -73,5 +74,22 @@ export class AdminUsersService {
           return throwError(err);
         })
       );
+  }
+
+  createUser(user): Observable<UserModel> {
+
+    const formData: FormData = new FormData();
+    const {photo_path, ...body} = user;
+
+    if (photo_path) {
+      formData.append('files', photo_path);
+    }
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.httpClient.post<UserModel>(`${commonAuthPath}/users`, formData);
   }
 }
