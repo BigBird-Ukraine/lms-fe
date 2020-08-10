@@ -14,5 +14,5 @@ export interface IUser {
   groups_id?: GroupModel[];
   passed_test_id?: string; // for future
   password?: string;
-  city: string;
+  population_point: string;
 }

@@ -42,7 +42,7 @@ export class CreateUserComponent implements OnInit {
           Validators.required,
           Validators.email
         ]),
-        city: this.fb.control(null, [
+        population_point: this.fb.control(null, [
           Validators.required,
           Validators.pattern(regExp.nameRegexp)
         ]),
@@ -82,7 +82,7 @@ export class CreateUserComponent implements OnInit {
       name: this.registrationForm.value.name,
       surname: this.registrationForm.value.surname,
       email: this.registrationForm.value.email,
-      city: this.registrationForm.value.city,
+      population_point: this.registrationForm.value.population_point,
       phone_number: this.registrationForm.value.phone_number,
       password: this.registrationForm.value.password,
       photo_path: this.registrationForm.value.photo_path

@@ -9,5 +9,5 @@ export interface IUserEdit {
   email?: string;
   phone_number?: string;
   photo_path?: string;
-  city?: string;
+  population_point?: string;
 }

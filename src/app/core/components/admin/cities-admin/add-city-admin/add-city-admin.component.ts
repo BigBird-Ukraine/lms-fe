@@ -20,7 +20,7 @@ export class AddCityAdminComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(null, [Validators.required, Validators.min(1)]),
-      country: new FormControl(null, [Validators.required, Validators.min(2)]),
+      country: new FormControl('Україна', [Validators.required, Validators.min(2)]),
     });
   }
 
