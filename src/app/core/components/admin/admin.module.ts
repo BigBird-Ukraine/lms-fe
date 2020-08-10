@@ -48,14 +48,11 @@ import { EditQuestionComponent } from './questions-page/edit-question/edit-quest
 import { AllModulesComponent } from './module-page/all-modules/all-modules.component';
 import { SingleModuleComponent } from './module-page/single-module/single-module.component';
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
-
 import {CreateUserComponent} from './users-page/create-user/create-user.component';
 import { AttendanceUsersComponent } from './groups-page/attendance-users/attendance-users.component';
 import { AddAttendanceComponent } from './groups-page/add-attendance/add-attendance.component';
 import { CitiesAdminComponent } from './cities-admin/cities-admin.component';
-import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admin.component';
-
-
+import { AddCityAdminComponent } from './cities-admin/add-city-admin/add-city-admin.component';
 
 @NgModule({
   entryComponents: [
@@ -65,11 +62,10 @@ import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admi
     CourseCreateComponent,
     AddModulesComponent,
     CourseUpdateComponent,
-    EditQuestionComponent,
     AttendanceUsersComponent,
-    AddAttendanceComponent
-    EditQuestionComponent,
-    AddCityAdminComponent
+    AddAttendanceComponent,
+    AddCityAdminComponent,
+    EditQuestionComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -96,7 +92,6 @@ import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admi
     AddQuestionComponent,
     AllQuestionComponent,
     MyQuestionComponent,
-    CourseUpdateComponent,
     CreateLessonAdminComponent,
     LessonPageComponent,
     AddQuestionToLessonComponent,
@@ -108,11 +103,10 @@ import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admi
     SingleModuleComponent,
     EditQuestionComponent,
     CreateUserComponent,
-    AttendanceUsersComponent,
-    AddAttendanceComponent
-    CreateUserComponent,
     CitiesAdminComponent,
-    AddCityAdminComponent
+    AddCityAdminComponent,
+    AttendanceUsersComponent,
+    AddAttendanceComponent,
   ],
   imports: [
     CommonModule,
