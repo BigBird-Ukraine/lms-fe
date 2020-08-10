@@ -3,6 +3,7 @@ export interface IUserSubjectModel {
   surname: string;
   email: string;
   phone_number: string;
+  city: string;
   role_id: number;
   status_id: number;
   _id?: string;

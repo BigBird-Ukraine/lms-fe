@@ -44,6 +44,7 @@ export class UsersPageComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(''),
       surname: new FormControl(''),
+      city: new FormControl(''),
       email: new FormControl(''),
       phone_number: new FormControl(''),
       role_id: new FormControl('')

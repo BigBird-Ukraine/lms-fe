@@ -4,6 +4,7 @@ export interface IUserSubjectModel {
     email: string;
     groups_id?: [string];
     name: string;
+    city: string;
     passed_tests?: []
     role_id: number;
     status_id: number;
