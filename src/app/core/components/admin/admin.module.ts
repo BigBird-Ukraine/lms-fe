@@ -52,6 +52,10 @@ import {SingleModuleResolverService} from './resolvers/single-module.resolver.se
 import {CreateUserComponent} from './users-page/create-user/create-user.component';
 import { AttendanceUsersComponent } from './groups-page/attendance-users/attendance-users.component';
 import { AddAttendanceComponent } from './groups-page/add-attendance/add-attendance.component';
+import { CitiesAdminComponent } from './cities-admin/cities-admin.component';
+import {AddCityAdminComponent} from './cities-admin/add-city-admin/add-city-admin.component';
+
+
 
 @NgModule({
   entryComponents: [
@@ -64,6 +68,8 @@ import { AddAttendanceComponent } from './groups-page/add-attendance/add-attenda
     EditQuestionComponent,
     AttendanceUsersComponent,
     AddAttendanceComponent
+    EditQuestionComponent,
+    AddCityAdminComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -104,6 +110,9 @@ import { AddAttendanceComponent } from './groups-page/add-attendance/add-attenda
     CreateUserComponent,
     AttendanceUsersComponent,
     AddAttendanceComponent
+    CreateUserComponent,
+    CitiesAdminComponent,
+    AddCityAdminComponent
   ],
   imports: [
     CommonModule,

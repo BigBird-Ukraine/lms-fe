@@ -1,0 +1,15 @@
+<div class="p-3">
+  <button mat-raised-button (click)="create()" color="primary">
+    Записати місто
+  </button>
+
+  <div class="d-flex flex-wrap m-2 p-2 ">
+
+    <div *ngFor="let city of cities" class="m-2 p-3 border ">
+      <p><span class="text-muted">Місто - </span>{{city.title}}</p>
+      <p><span class="text-muted">Країна - </span>{{city.country}}</p>
+
+      <button type="button" class="btn btn-danger m-2" (click)="deleteCity(city._id)">Удалити</button >
+    </div>
+  </div>
+</div>

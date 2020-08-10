@@ -86,7 +86,7 @@ export class UserOutComponent implements OnInit {
 
   updateProfile(user: IUser) {
     this.dialog.open(UpdateProfileComponent, {
-      data: {user: user}
+      data: {user}
     }).afterClosed().subscribe((value: IUser) => {
       if (value) {
         const index: number = this.data.users.indexOf(user);

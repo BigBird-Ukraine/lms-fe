@@ -20,6 +20,23 @@
       </mat-form-field>
     </div>
 
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false" class="icon">city</mat-icon>
+      <mat-form-field>
+        <input type="text" matInput
+               placeholder="Введіть Ваше місто"
+               formControlName="city"
+               required
+        >
+        <mat-error *ngIf="editForm.get('city').hasError('required')">
+          Введіть, будь ласка, ваше місто
+        </mat-error>
+        <mat-error *ngIf="editForm.get('city').hasError('pattern')">
+          Місто введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
+
 
     <div class="example-full-width">
       <mat-icon aria-hidden="false" class="icon">phone_android</mat-icon>

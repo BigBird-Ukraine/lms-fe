@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
-import {ICourse} from '../../interfaces';
+import {ICity, ICourse} from '../../interfaces';
 import {AdminCoursesService, AdminGroupsService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
+import {AdminCityService} from '../../services/admin-city.service';
 
 @Component({
   selector: 'app-create-group',
@@ -13,14 +14,12 @@ import {CustomSnackbarService} from '../../../../../shared/services';
 })
 export class CreateGroupComponent implements OnInit {
   form: FormGroup;
-  cities = [
-    {name: 'Львів'},
-    {name: 'Київ'}
-  ];
+  cities: ICity[];
   courses: ICourse[];
 
   constructor(private groupsService: AdminGroupsService,
               private coursesService: AdminCoursesService,
+              private cityService: AdminCityService,
               private dialog: MatDialog,
               private snackbarService: CustomSnackbarService,
   ) {
@@ -38,6 +37,8 @@ export class CreateGroupComponent implements OnInit {
     this.coursesService.getAllCourses().subscribe(value => {
       this.courses = value.data.courses;
     });
+
+    this.cityService.getCities().subscribe(cities => this.cities = cities);
   }
 
   save() {
