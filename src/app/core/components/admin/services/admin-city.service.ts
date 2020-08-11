@@ -3,8 +3,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {commonAdminPath} from '../../../../shared/api';
-import {ICity} from '../interfaces';
+
 import {AuthService} from '../../../services/auth';
+import {ICity} from '../interfaces';
+
 
 
 @Injectable({
@@ -35,13 +37,13 @@ export class AdminCityService {
     return this.http.get<ICity[]>(`${commonAdminPath}/cities`, options);
   }
 
-  deleteCity(): Observable<ICity> {
+  deleteCity(id: string): Observable<ICity> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.delete<ICity>(`${commonAdminPath}/cities`, options);
+    return this.http.delete<ICity>(`${commonAdminPath}/cities?city_id=${id}`, options);
   }
 }

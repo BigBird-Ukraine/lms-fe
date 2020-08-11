@@ -62,15 +62,15 @@
       <mat-icon aria-hidden="false" class="icon">location_city</mat-icon>
       <mat-form-field>
         <input type="text" matInput
-               placeholder="Введіть Ваше місто"
-               formControlName="city"
+               placeholder="Введіть Ваш населений пункт"
+               formControlName="population_point"
                required
         >
-        <mat-error *ngIf="registrationForm.get('city').hasError('required')">
-          Введіть, будь ласка, ваше місто
+        <mat-error *ngIf="registrationForm.get('population_point').hasError('required')">
+          Введіть, будь ласка, ваш населений пункт
         </mat-error>
-        <mat-error *ngIf="registrationForm.get('city').hasError('pattern')">
-          Місто введено некоректно
+        <mat-error *ngIf="registrationForm.get('population_point').hasError('pattern')">
+          Населений пункт введено некоректно
         </mat-error>
       </mat-form-field>
     </div>

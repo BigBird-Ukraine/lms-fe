@@ -11,7 +11,7 @@ export interface UserModel {
   email: string;
   password: string;
   photo_path?: string;
-  city: string;
+  population_point: string;
   passed_tests?: IPassedTest[];
 }
 
@@ -23,5 +23,5 @@ export interface IUserEdit {
   email?: string;
   phone_number?: string;
   photo_path?: string;
-  city?: string;
+  population_point?: string;
 }

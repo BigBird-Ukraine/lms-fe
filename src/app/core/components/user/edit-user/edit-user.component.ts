@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
     this.editForm = this.fb.group({
         email: this.fb.control(this.user.email, [Validators.email]),
         phone_number: this.fb.control(this.user.phone_number, [Validators.pattern(regExp.phone)]),
-        city: this.fb.control(this.user.city, [
+        population_point: this.fb.control(this.user.population_point, [
           Validators.required,
           Validators.pattern(regExp.nameRegexp)
         ]),

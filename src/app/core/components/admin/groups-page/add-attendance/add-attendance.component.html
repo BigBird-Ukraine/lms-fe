@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="mat_dialog_title">Контроль присутності</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="presentForm"
+        (ngSubmit)="addDate()"
+        (keydown.enter)="$event.preventDefault()">
+    <div class="form">
+
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker"
+               placeholder="Choose a date"
+               formControlName="date"
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div formArrayName="studentsArr">
+        <div *ngFor="let student of students; let i = index"
+             [formGroupName]="i">
+          <mat-checkbox formControlName="checked">
+            {{i + 1}}. {{student.name}} {{student.surname}}
+          </mat-checkbox>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-card-actions class="btn">
+      <button mat-raised-button color="primary" type="submit">Додати</button>
+    </mat-card-actions>
+  </form>
+
+</mat-dialog-content>

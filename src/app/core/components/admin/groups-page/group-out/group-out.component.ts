@@ -1,14 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {ActivatedRoute} from "@angular/router";
-import {switchMap, take} from "rxjs/operators";
+import {ActivatedRoute} from '@angular/router';
+import {switchMap, take} from 'rxjs/operators';
 
 import {GroupModel, IGroupData, IUser} from '../../interfaces';
 import {AddUsersComponent} from '../add-users/add-users.component';
 import {AdminGroupsService} from '../../services';
 import {DeleteComponent} from '../../../../../shared/components/delete/delete.component';
 import {CustomSnackbarService} from '../../../../../shared/services';
-import {UpdateGroupComponent} from "../update-group/update-group.component";
+import {UpdateGroupComponent} from '../update-group/update-group.component';
+import {AttendanceUsersComponent} from '../attendance-users/attendance-users.component';
 
 @Component({
   selector: 'app-group-out',
@@ -34,15 +35,15 @@ export class GroupOutComponent implements OnInit {
     }).afterClosed().subscribe((value) => {
       if (value) {
         this.route.queryParams.pipe(
-          switchMap(value => {
-            return this.adminGroupsService.getAll(value)
+          switchMap(value1 => {
+            return this.adminGroupsService.getAll(value1);
           }),
           take(1),
-        ).subscribe(value => {
-          this.groupsData = value.data
-        })
+        ).subscribe(value2 => {
+          this.groupsData = value2.data;
+        });
       }
-    })
+    });
   }
 
   delete(group: GroupModel) {
@@ -72,8 +73,17 @@ export class GroupOutComponent implements OnInit {
         usersList.forEach(user => result.push(user));
         group.users_list = result;
         this.adminGroupsService.updateUsersList(group._id, {users_list: group.users_list.map(value => value._id)}).subscribe();
-        group.updated_at = new Date().toDateString()
+        group.updated_at = new Date().toDateString();
       }
     });
+  }
+
+  showAttendace(group: GroupModel) {
+     this.dialog.open(AttendanceUsersComponent, {
+       data: {
+         students: group.users_list,
+         group
+       }
+     });
   }
 }

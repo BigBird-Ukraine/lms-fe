@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 
 import {GroupModel} from '../interfaces';
 import {config} from '../../../../shared/config';
+import {commonAuthPath} from '../../../../shared/api';
+import {ISingleGroup} from '../../../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class AdminGroupsService {
 
   }
 
-  getById(_id: string): Observable<any> {
+  getOneGroup(_id: string): Observable<any> {
     return this.httpClient.get<any>(`${this.groupUrl}/${_id}`);
   }
 
@@ -42,4 +44,9 @@ export class AdminGroupsService {
   updateById(_id: string, value: GroupModel): Observable<any> {
     return this.httpClient.post(`${this.groupUrl}/${_id}`, value);
   }
+
+  sendPresence(id, data): Observable<any> {
+    return this.httpClient.post<any>(`${this.groupUrl}/${id}/attendance`, data);
+  }
+
 }
