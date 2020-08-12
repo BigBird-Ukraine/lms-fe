@@ -26,6 +26,8 @@ import {AllGroupsComponent} from './core/components/groups/all-groups/all-groups
 import {SingleGroupComponent} from './core/components/groups/single-group/single-group.component';
 import {GroupPresentsComponent} from './core/components/groups/group-presents/group-presents.component';
 import {MyPassedTestComponent} from './core/components/lessons/my-passed-test/my-passed-test.component';
+import {MyCoursesComponent} from './core/components/courses/my-courses/my-courses.component';
+
 
 const routes: Routes = [
   {
@@ -50,16 +52,19 @@ const routes: Routes = [
       {path: 'auth', component: AuthUserComponent},
       {path: 'user/:id', component: UserCabinetComponent},
       {path: 'user/:id/edit', component: EditUserComponent},
-      {path: 'groups', canActivate: [AuthGuardService], component: AllGroupsComponent, children: [
+      {
+        path: 'groups', canActivate: [AuthGuardService], component: AllGroupsComponent, children: [
           {path: ':id', component: SingleGroupComponent},
           {path: 'presents', component: GroupPresentsComponent}
-        ]}
+        ]
+      },
+      {path: 'my-courses', canActivate: [AuthGuardService], component: MyCoursesComponent}
     ]
   },
   {
     path: 'admin', component: AdminLayoutComponent, children: [
-      {path: '', redirectTo: '/admin/login',  pathMatch: 'full'},
-      {path: 'login' , component: AuthAdminComponent}
+      {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+      {path: 'login', component: AuthAdminComponent}
     ]
   }
 ];
