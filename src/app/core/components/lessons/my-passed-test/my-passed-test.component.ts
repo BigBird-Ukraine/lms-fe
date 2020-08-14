@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
 
-import {IPassedData, IPassedTestFull, QuestionModel} from '../../../interface';
+import {IPassedData} from '../../../interface';
 
 @Component({
   selector: 'app-my-passed-test',

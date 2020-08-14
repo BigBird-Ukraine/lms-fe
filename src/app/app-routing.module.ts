@@ -61,9 +61,7 @@ const routes: Routes = [
           {path: 'presents', component: GroupPresentsComponent}
         ]
       },
-      {path: 'my-courses', canActivate: [AuthGuardService], component: MyCoursesComponent}
-        ]
-      },
+      {path: 'my-courses', canActivate: [AuthGuardService], component: MyCoursesComponent},
       {
         path: 'my-groups', canActivate: [AuthGuardService], resolve: {myGroupsResolverService: MyGroupsResolverService},
         component: MyGroupsComponent, children: [
