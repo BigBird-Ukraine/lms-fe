@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel, IUserSubjectModel, IUser, IPassedData} from '../../interface';
+import {UserModel, IUserSubjectModel, IUser, IPassedTestFull} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -73,6 +73,6 @@ export class UserService {
       })
     };
 
-    return this.http.get<IPassedData>(`${commonAuthPath}/users/my_passed_tests`, options);
+    return this.http.get<IPassedTestFull>(`${commonAuthPath}/users/my_passed_tests`, options);
   }
 }
