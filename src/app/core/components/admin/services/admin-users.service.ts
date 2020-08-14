@@ -6,6 +6,7 @@ import {commonAdminPath, commonAuthPath} from '../../../../shared/api';
 import {IUser, IUserSubjectModel} from '../interfaces';
 import {catchError, tap} from 'rxjs/operators';
 import {UserModel} from '../../../interface';
+import {IUserStatistics} from '../interfaces/statistics.interface';
 
 
 @Injectable({
@@ -91,5 +92,15 @@ export class AdminUsersService {
     });
 
     return this.httpClient.post<UserModel>(`${commonAuthPath}/users`, formData);
+  }
+
+  getUsersStatics(): Observable<IUserStatistics> {
+
+    return this.httpClient.get<IUserStatistics>(`${commonAdminPath}/users/statics`);
+  }
+
+  getUsersByStatus(status: string): Observable<Partial<IUser[]>> {
+
+    return this.httpClient.get<Partial<IUser[]>>(`${commonAdminPath}/users/by_status?status=${status}`);
   }
 }

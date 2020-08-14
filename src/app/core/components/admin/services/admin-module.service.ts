@@ -3,8 +3,9 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Params, Router} from '@angular/router';
 
-import {IFullModule, IModule} from '../interfaces';
+import {IFullModule, ILesson, IModule, IModuleStatistics} from '../interfaces';
 import {commonAdminPath} from '../../../../shared/api';
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,16 @@ export class AdminModuleService {
     });
   }
 
-  navigate(value) {
+  getModulesStatics(): Observable<IModuleStatistics[]> {
+    return this.http.get<IModuleStatistics[]>(`${this.moduleUrl}/statics`);
+  }
+
+
+  getModulesByCourse(id: string) {
+    return this.http.get<Partial<IModule[]>>(`${this.moduleUrl}/by_course?course_id=${id}`);
+  }
+
+  navigate(value: string) {
     this.route.navigate([value]);
   }
 }

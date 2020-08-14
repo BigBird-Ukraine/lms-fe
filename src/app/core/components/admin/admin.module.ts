@@ -53,6 +53,16 @@ import { AttendanceUsersComponent } from './groups-page/attendance-users/attenda
 import { AddAttendanceComponent } from './groups-page/add-attendance/add-attendance.component';
 import { CitiesAdminComponent } from './cities-admin/cities-admin.component';
 import { AddCityAdminComponent } from './cities-admin/add-city-admin/add-city-admin.component';
+import { UsersComponent } from './statistics-page/users/users.component';
+import { QuestionsComponent } from './statistics-page/questions/questions.component';
+import { GroupsComponent } from './statistics-page/groups/groups.component';
+import { GroupComponent } from './statistics-page/group/group.component';
+import { QuestionComponent } from './statistics-page/question/question.component';
+import { UserComponent } from './statistics-page/user/user.component';
+import { ModulesComponent } from './statistics-page/modules/modules.component';
+import { ModuleComponent } from './statistics-page/module/module.component';
+import { LessonsComponent } from './statistics-page/lessons/lessons.component';
+import { LessonComponent } from './statistics-page/lesson/lesson.component';
 
 @NgModule({
   entryComponents: [
@@ -65,7 +75,12 @@ import { AddCityAdminComponent } from './cities-admin/add-city-admin/add-city-ad
     AttendanceUsersComponent,
     AddAttendanceComponent,
     AddCityAdminComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    GroupComponent,
+    QuestionComponent,
+    UserComponent,
+    ModuleComponent,
+    LessonComponent
   ],
   declarations: [
     AuthAdminComponent,
@@ -107,6 +122,16 @@ import { AddCityAdminComponent } from './cities-admin/add-city-admin/add-city-ad
     AddCityAdminComponent,
     AttendanceUsersComponent,
     AddAttendanceComponent,
+    UsersComponent,
+    QuestionsComponent,
+    GroupsComponent,
+    GroupComponent,
+    QuestionComponent,
+    UserComponent,
+    ModulesComponent,
+    ModuleComponent,
+    LessonsComponent,
+    LessonComponent,
   ],
   imports: [
     CommonModule,

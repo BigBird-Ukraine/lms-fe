@@ -1,0 +1,11 @@
+<div class="border m-2 p-2 d-flex flex-wrap justify-content-center" *ngIf="groups">
+  <div *ngFor="let group of groups"
+       class="border m-2 p-2 text-center">
+    <p>{{group.label}}</p>
+    <p><span class="text-secondary">Місто -</span> {{group.city}}</p>
+    <p><span class="text-danger">{{group.created_at | date}}</span> - <span
+      class="text-info">{{group.finished_at | date}}</span></p>
+  </div>
+</div>
+
+<app-loader *ngIf="!groups"></app-loader>

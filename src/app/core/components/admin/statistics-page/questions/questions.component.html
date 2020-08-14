@@ -1,0 +1,15 @@
+<div class="m-2 p-2 borderWrapper text-center" *ngIf="questionsStatistic">
+  <p>Питання: </p>
+  <div class="d-flex flex-wrap justify-content-center m-1 p-2 ">
+    <div *ngFor="let question of questionsStatistic"
+         class="text-center border m-2 p-2 col-3 cursor"
+         (click)="openForm(question.label, question.count)">
+      <div>
+        {{question.label}} Course - <span
+        [classList]="question.count > 0 ? 'text-info': 'text-danger'">
+          <span>{{question.count}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

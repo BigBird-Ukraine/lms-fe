@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {commonAdminPath} from '../../../../shared/api';
 import {AdminAuthService} from './admin-auth.service';
-import {QuestionData, QuestionModel} from '../interfaces/questionModel';
+import {ISubjectStatistics, QuestionData, QuestionModel} from '../interfaces/questionModel';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
+import {IUserStatistics} from '../interfaces/statistics.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 export class AdminQuestionsService {
 
   constructor(private http: HttpClient,
-              private authService: AdminAuthService) { }
+              private authService: AdminAuthService) {
+  }
 
   createQuestion(question): Observable<QuestionModel> {
     const options = {
@@ -74,5 +76,15 @@ export class AdminQuestionsService {
     };
 
     return this.http.delete<QuestionData>(`${commonAdminPath}/questions/${id}`, options);
+  }
+
+  getQuestionStatics(): Observable<ISubjectStatistics[]> {
+
+    return this.http.get<ISubjectStatistics[]>(`${commonAdminPath}/questions/statics`);
+  }
+
+  getQuestionBySubject(subject: string): Observable<Partial<QuestionModel[]>> {
+
+    return this.http.get<Partial<QuestionModel[]>>(`${commonAdminPath}/questions/by_subject?subject=${subject}`);
   }
 }

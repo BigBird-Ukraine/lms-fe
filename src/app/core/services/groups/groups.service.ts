@@ -36,4 +36,8 @@ export class GroupsService {
   sendPresence(id, data): Observable<any> {
     return this.http.post<any>(`${commonAuthPath}/groups/${id}/attendance`, data);
   }
+
+  getGroupsStatics() {
+
+  }
 }
