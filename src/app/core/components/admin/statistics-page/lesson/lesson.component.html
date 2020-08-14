@@ -1,0 +1,16 @@
+<div *ngIf="lessons">
+  <div class="d-flex flex-wrap justify-content-center border m-2 p-2">
+    <div *ngFor="let lesson of lessons"
+         class="border m-2 p-2 text-center col-3">
+      <p class="text-info">{{lesson.label}}</p>
+      <p>{{lesson.description}}</p>
+      <p>Номер: {{lesson.number}}</p>
+      <span>Теги: </span>
+      <div class="m-2 p-2 border">
+        <p *ngFor="let tag of lesson.tags" class="text-warning  m-2">{{tag}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="!lessons"></app-loader>

@@ -40,3 +40,8 @@ export interface QuestionModel {
   _id?: string;
   lessons_id?: [string];
 }
+
+export interface ISubjectStatistics {
+  label: string;
+  count: number;
+}

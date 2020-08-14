@@ -48,6 +48,12 @@
       </button>
 
       <button mat-menu-item
+              [routerLink]="['my-courses']"
+              *ngIf="isStudent && authService.isAuthenticated()"
+      >Мої курси
+      </button>
+
+      <button mat-menu-item
               [routerLink]="['/lessons']"
               *ngIf="authService.isAuthenticated()"
       >Уроки

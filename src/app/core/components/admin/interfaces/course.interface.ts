@@ -1,4 +1,4 @@
-import {IModule} from "./module.interface";
+import {IModule, IModuleFull} from './module.interface';
 
 export interface ICourse {
   _id?: string;
@@ -8,6 +8,16 @@ export interface ICourse {
   modules_list: IModule[];
   created_at: string;
   updated_at: string;
+}
+
+export interface PatricalICourse {
+  groups_id: {
+    course_id: {
+      label: string;
+      description: string;
+      modules_list: IModuleFull[];
+    }
+  };
 }
 
 

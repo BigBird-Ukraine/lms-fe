@@ -1,0 +1,18 @@
+<div *ngIf="courses" class="text-center center">
+    <div *ngFor="let course of courses.groups_id" class="m-3 p-2 border ">
+      <h3>{{course.course_id.label}}</h3>
+      <p>{{course.course_id.description}}</p>
+      <div class="m-auto p-2 border bg-secondary col-9">
+        <div *ngFor="let module of course.course_id.modules_list" class="my-2">
+          <h3>{{module.label}}</h3>
+          <p>{{module.description}}</p>
+          <div class="m-auto p-2 border bg-dark col-10 text-white">
+            <div *ngFor="let lesson of module.lessons_list" class="my-2">
+              <h3>{{lesson.label}}</h3>
+              <p>{{lesson.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

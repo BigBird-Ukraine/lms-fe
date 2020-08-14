@@ -34,6 +34,7 @@ import {UpdateProfileComponent} from './core/components/admin/users-page/update-
 import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
 import {DeleteComponent} from './shared/components/delete/delete.component';
 import {GroupsModule} from './core/components/groups/groups.module';
+import { MyCoursesComponent } from './core/components/courses/my-courses/my-courses.component';
 import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers';
 
 
@@ -59,6 +60,7 @@ import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers'
     ModuleLayoutComponent,
     ConfirmLayoutComponent,
     DeleteComponent,
+    MyCoursesComponent,
   ],
   imports: [
     BrowserModule,

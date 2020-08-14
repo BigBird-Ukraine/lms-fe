@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
 
+import {IPassedData} from '../../../interface';
+
 @Component({
   selector: 'app-my-passed-test',
   templateUrl: './my-passed-test.component.html',

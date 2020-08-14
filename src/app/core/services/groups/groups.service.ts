@@ -37,6 +37,10 @@ export class GroupsService {
     return this.http.post<any>(`${commonAuthPath}/groups/${id}/attendance`, data);
   }
 
+  getGroupsStatics() {
+
+  }
+
   getMyGroups(): Observable<Partial<IGroup>[]> {
     const options = {
       headers: new HttpHeaders({

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AdminStatisticsService} from '../services';
 
 @Component({
   selector: 'app-statistics-page',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminStatisticsService: AdminStatisticsService) {
+  }
 
   ngOnInit() {
   }
+
 
 }

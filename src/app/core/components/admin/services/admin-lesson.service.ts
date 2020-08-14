@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+
 import {IEditLesson, IFullLesson, ILesson} from '../../../interface';
 import {commonAdminPath} from '../../../../shared/api';
 import {AdminAuthService} from './admin-auth.service';
+import {ILessonStatistics} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +64,26 @@ export class AdminLessonService {
 
   addQuestionsToLesson(id, questions): Observable<IEditLesson> {
     return this.http.patch<IEditLesson>(`${commonAdminPath}/lessons/${id}/question`, questions);
+  }
+
+  getLessonsStatics(): Observable<ILessonStatistics[]> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<ILessonStatistics[]>(`${commonAdminPath}/lessons/statics`, options);
+  }
+
+  getLessonsByModule(id: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+
+    return this.http.get<Partial<ILesson[]>>(`${commonAdminPath}/lessons/by_module?module_id=${id}`, options);
   }
 }

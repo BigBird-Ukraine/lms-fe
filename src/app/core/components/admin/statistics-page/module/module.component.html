@@ -1,0 +1,10 @@
+<div class="border m-2 p-2 d-flex flex-wrap justify-content-center" *ngIf="modules">
+
+  <div class="col-3 m-2 p-2 border text-center" *ngFor="let module of modules">
+    <p class="text-warning">{{module.label}}</p>
+    <p>{{module.description}}</p>
+  </div>
+
+</div>
+
+<app-loader *ngIf="!modules"></app-loader>

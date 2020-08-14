@@ -1,0 +1,15 @@
+<div *ngIf="questions"
+     class="d-flex flex-wrap border m-2 p-2 text-center justify-content-center ">
+  <div *ngFor="let question of questions" class="border col-3 m-2">
+    <p class="text-info">{{question.question}}</p>
+    <p>{{question.description}}</p>
+    <span class="text-dark">Теги:</span>
+    <div class="d-flex flex-wrap justify-content-center">
+      <p *ngFor="let tags of question.tags"
+         class="m-2 text-warning"
+      >{{tags}}</p>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="!questions"></app-loader>

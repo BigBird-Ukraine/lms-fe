@@ -25,3 +25,9 @@ export interface IFullLesson {
 export interface IEditLesson {
   data: ILesson;
 }
+
+export interface ILessonStatistics {
+  label: string;
+  count: [{lessons_list: number}];
+  _id?: string;
+}
