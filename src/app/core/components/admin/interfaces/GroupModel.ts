@@ -14,6 +14,12 @@ export interface GroupModel {
 }
 
 export interface IGroupData {
-    groups: [GroupModel]
-    count: number
+    groups: [GroupModel];
+    count: number;
+}
+
+export interface IGroupStatistics {
+  label: string;
+  count: number;
+  _id?: string;
 }

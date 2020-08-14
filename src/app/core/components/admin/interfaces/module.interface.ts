@@ -25,3 +25,9 @@ export interface IModuleSubject {
     count: number
   };
 }
+
+export interface IModuleStatistics {
+  label: string;
+  count: number;
+  _id?: string;
+}

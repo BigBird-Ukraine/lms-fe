@@ -1,0 +1,17 @@
+<div *ngIf="lessonsStatistic"
+     class="m-2 my-4 p-2 border text-center">
+  <p>Уроки: </p>
+  <div class="d-flex flex-wrap justify-content-center m-1 p-2 ">
+    <div *ngFor="let module of lessonsStatistic"
+         class="text-center border m-2 p-2 col-3 cursor"
+         (click)="openForm(module._id, module.count[0].lessons_list)">
+      <div>
+        {{module.label}} Module - <span
+        [classList]="module.count[0].lessons_list > 0 ? 'text-info': 'text-danger'">
+          <span>{{module.count[0].lessons_list}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+

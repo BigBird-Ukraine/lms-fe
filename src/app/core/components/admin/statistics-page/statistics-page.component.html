@@ -1,1 +1,11 @@
-<p>statistics-page works!</p>
+<div class="p-2">
+  <div [classList]="adminStatisticsService.displayPage < 5 && 'hidden'">
+    <app-users></app-users>
+    <app-questions></app-questions>
+    <app-groups></app-groups>
+    <app-modules></app-modules>
+    <app-lessons></app-lessons>
+  </div>
+
+  <app-loader *ngIf="adminStatisticsService.displayPage < 5"></app-loader>
+</div>

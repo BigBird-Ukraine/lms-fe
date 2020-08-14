@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {GroupModel} from '../interfaces';
+import {GroupModel, IGroupStatistics} from '../interfaces';
 import {config} from '../../../../shared/config';
-import {commonAuthPath} from '../../../../shared/api';
-import {ISingleGroup} from '../../../interface';
+import {IGroup} from '../../../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +48,13 @@ export class AdminGroupsService {
     return this.httpClient.post<any>(`${this.groupUrl}/${id}/attendance`, data);
   }
 
+  getGroupsStatics(): Observable<IGroupStatistics[]> {
+
+    return this.httpClient.get<IGroupStatistics[]>(`${this.groupUrl}/statics`);
+  }
+
+  getGroupsByCourse(id: string): Observable<Partial<IGroup[]>> {
+
+    return this.httpClient.get<Partial<IGroup[]>>(`${this.groupUrl}/by_course?course_id=${id}`);
+  }
 }

@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AdminStatisticsService {
+  displayPage = 0;
 
-  constructor() { }
+  constructor() {
+  }
+
+  setDisplayPage() {
+    this.displayPage++;
+  }
 }

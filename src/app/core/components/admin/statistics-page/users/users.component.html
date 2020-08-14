@@ -1,0 +1,17 @@
+<div class="m-2 my-4 p-2 border text-center" *ngIf="usersStatistic">
+  <p>Користувачі:</p>
+  <div class="d-flex flex-wrap justify-content-center">
+    <div class="border m-2 p-2 cursor col-3"
+         (click)="openForm(1 , usersStatistic.activeUser)"
+    >Активні користувачі: <br> <span class="text-info">{{usersStatistic.activeUser}}</span>
+    </div>
+
+    <div class="border m-2 p-2 cursor col-3"
+         (click)="openForm(2 , usersStatistic.blockedUser)"
+    >Заблоковані користувачі: <br> <span class="text-danger">{{usersStatistic.blockedUser}}</span>
+
+    </div>
+
+    <div class="border m-2 p-2 col-3">Не активовані користувачі: <br> <span>N</span></div>
+  </div>
+</div>

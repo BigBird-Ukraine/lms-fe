@@ -1,0 +1,9 @@
+<div *ngIf="users" class="d-flex flex-wrap m-2 p-2 border justify-content-center">
+  <div *ngFor="let user of users" class="m-2 p-2 border text-center col-3">
+    <p class="text-info">{{user.name}}  {{user.surname}}</p>
+    <p>{{user.email}}</p>
+    <p>{{user.phone_number}}</p>
+  </div>
+</div>
+
+<app-loader *ngIf="!users"></app-loader>

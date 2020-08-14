@@ -1,0 +1,17 @@
+<div *ngIf="groupsStatistic"
+     class="m-2 my-4 p-2 border text-center">
+  <p>Групи: </p>
+  <div class="d-flex flex-wrap justify-content-center m-1 p-2 ">
+    <div *ngFor="let group of groupsStatistic"
+         class="text-center border m-2 p-2 col-3 cursor"
+         (click)="openForm(group._id, group.count)">
+      <div>
+        {{group.label}} Course - <span
+        [classList]="group.count > 0 ? 'text-info': 'text-danger'">
+          <span>{{group.count}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
