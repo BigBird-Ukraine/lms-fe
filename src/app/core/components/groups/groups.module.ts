@@ -15,12 +15,16 @@ import {
 import {AllGroupsComponent} from './all-groups/all-groups.component';
 import { SingleGroupComponent } from './single-group/single-group.component';
 import { GroupPresentsComponent } from './group-presents/group-presents.component';
+import { MyGroupsComponent } from './my-groups/my-groups.component';
+import { AttendanceComponent } from './group-attendance/attendance.component';
 
 @NgModule({
   declarations: [
     AllGroupsComponent,
     SingleGroupComponent,
     GroupPresentsComponent,
+    MyGroupsComponent,
+    AttendanceComponent,
   ],
   imports: [
     MatSidenavModule,

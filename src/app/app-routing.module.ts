@@ -28,6 +28,9 @@ import {GroupPresentsComponent} from './core/components/groups/group-presents/gr
 import {MyPassedTestComponent} from './core/components/lessons/my-passed-test/my-passed-test.component';
 import {MyCoursesComponent} from './core/components/courses/my-courses/my-courses.component';
 
+import {MyGroupsComponent} from './core/components/groups/my-groups/my-groups.component';
+import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers';
+import {AttendanceComponent} from './core/components/groups/group-attendance/attendance.component';
 
 const routes: Routes = [
   {
@@ -59,6 +62,17 @@ const routes: Routes = [
         ]
       },
       {path: 'my-courses', canActivate: [AuthGuardService], component: MyCoursesComponent}
+        ]
+      },
+      {
+        path: 'my-groups', canActivate: [AuthGuardService], resolve: {myGroupsResolverService: MyGroupsResolverService},
+        component: MyGroupsComponent, children: [
+          {
+            path: ':id', canActivate: [AuthGuardService], resolve: {myGroupResolverService: MyGroupResolverService},
+            component: AttendanceComponent
+          }
+        ]
+      },
     ]
   },
   {

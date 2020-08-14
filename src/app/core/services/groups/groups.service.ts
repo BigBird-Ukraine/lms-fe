@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
-import {IFullGroup, IGroupStudents, ISingleGroup} from '../../interface';
+import {IFullGroup, IGroup, IGroupStudents, ISingleGroup} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -25,19 +25,29 @@ export class GroupsService {
     return this.http.get<IFullGroup>(`${commonAuthPath}/groups`, options);
   }
 
-  getOneGroup(id): Observable<ISingleGroup> {
+  getOneGroup(id: string): Observable<ISingleGroup> {
     return this.http.get<ISingleGroup>(`${commonAuthPath}/groups/${id}`);
   }
 
-  getGroupsStudents(id): Observable<IGroupStudents> {
+  getGroupsStudents(id: string): Observable<IGroupStudents> {
     return this.http.get<IGroupStudents>(`${commonAuthPath}/groups/${id}/students`);
   }
 
-  sendPresence(id, data): Observable<any> {
+  sendPresence(id: string, data): Observable<any> {
     return this.http.post<any>(`${commonAuthPath}/groups/${id}/attendance`, data);
   }
 
   getGroupsStatics() {
 
+  }
+
+  getMyGroups(): Observable<Partial<IGroup>[]> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<Partial<IGroup>[]>(`${commonAuthPath}/users/my-groups`, options);
   }
 }

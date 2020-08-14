@@ -16,17 +16,20 @@ export interface IPassedTest {
 }
 
 export interface IPassedTestFull {
-  questions: QuestionModel[];
-  lesson: ILesson;
-  result: number;
-  created_at: string;
+  passed_tests: {
+    questions: Partial<QuestionModel[]>;
+    lesson: Partial<ILesson>;
+    result: number;
+    created_at: string;
+  };
 }
 
 
 export interface IPassedData {
   _id?: string;
-  lessons: ILesson[];
-  passed_tests: IPassedTest[];
-  questions: QuestionModel[];
+  questions: Partial<QuestionModel[]>;
+  lesson: Partial<ILesson>;
+  result: number;
+  created_at: string;
 }
 

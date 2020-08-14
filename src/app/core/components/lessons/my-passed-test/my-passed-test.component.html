@@ -1,13 +1,13 @@
-<div class="d-flex flex-wrap justify-content-around">
+<div class="d-flex flex-wrap justify-content-around" *ngIf="userPassedTest">
 
   <div class="col-5 m-2 p-2 border bg-secondary" *ngFor="let test of userPassedTest">
     <div class="text-center mx-4 text-white">
-      <p>{{test.lesson.label}}</p>
-      <p>{{test.lesson.description}}</p>
+      <p>{{test.lesson_id.label}}</p>
+      <p>{{test.lesson_id.description}}</p>
     </div>
 
     <div class="mx-2 d-flex flex-wrap ">
-      <div class="col-12 border p-2 m-2 text-center bg-white" *ngFor="let question of test.questions">
+      <div class="col-12 border p-2 m-2 text-center bg-white" *ngFor="let question of test.questions_id">
         <p><span class="text-secondary">Питання: </span>{{question.question}}</p>
         <p>{{question.description}}</p>
         <p><span class="text-secondary">Рівень:</span> {{question.level}}</p>
@@ -21,4 +21,7 @@
     </div>
   </div>
 
+  <div *ngIf="!userPassedTest.length">
+    У вас ще немає пройдених тестів
+  </div>
 </div>

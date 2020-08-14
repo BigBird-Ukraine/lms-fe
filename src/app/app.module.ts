@@ -35,6 +35,7 @@ import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service'
 import {DeleteComponent} from './shared/components/delete/delete.component';
 import {GroupsModule} from './core/components/groups/groups.module';
 import { MyCoursesComponent } from './core/components/courses/my-courses/my-courses.component';
+import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers';
 
 
 @NgModule({
@@ -87,7 +88,9 @@ import { MyCoursesComponent } from './core/components/courses/my-courses/my-cour
     MatSnackBarContainer,
     CustomSnackbarService,
     AuthGuardService,
-    {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()}
+    {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
+    MyGroupsResolverService,
+    MyGroupResolverService
   ],
 })
 

@@ -21,7 +21,7 @@ import {EditUserComponent} from './edit-user/edit-user.component';
     RegistrationComponent,
     AuthUserComponent,
     UserCabinetComponent,
-    EditUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

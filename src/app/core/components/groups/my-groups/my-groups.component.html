@@ -1,0 +1,19 @@
+<div class="min-vh-100 border m-2 text-center">
+  <div class="m-2 p-3   d-flex flex-wrap justify-content-center ">
+    <div *ngIf="!myGroups.length" class="text-center">
+      Вас ще не добавили до жодної групи
+    </div>
+
+    <div *ngFor="let group of myGroups" class="col-3 m-2 p-2 border bg-purple text-center text-white">
+      <h2>{{group.label}}</h2>
+      <p>{{group.city}}</p>
+      <p>{{group.created_at | date}} - {{group.finished_at | date}}</p>
+      <button type="button" class="btn btn-warning" (click)="navigate('my-groups/'+group._id)">Журнал відвідуваності
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

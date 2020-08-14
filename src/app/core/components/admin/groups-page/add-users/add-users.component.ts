@@ -51,7 +51,7 @@ export class AddUsersComponent implements OnInit {
         this.filteredUsers = value.data.users;
         this.data.forEach(userInGroup => {
           this.filteredUsers = this.filteredUsers.filter(userFromAll => userFromAll._id !== userInGroup._id)
-        })
+        });
       });
     });
     this.subject.next();
@@ -84,4 +84,5 @@ export class AddUsersComponent implements OnInit {
       this.subject.next();
     }
   }
+
 }

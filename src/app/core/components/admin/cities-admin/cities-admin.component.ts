@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminCityService} from '../services/admin-city.service';
-import {ICity} from '../interfaces';
+
 import {AddCityAdminComponent} from './add-city-admin/add-city-admin.component';
 import {MatDialog} from '@angular/material';
+import {ICity} from '../interfaces';
 
 @Component({
   selector: 'app-cities-admin',
