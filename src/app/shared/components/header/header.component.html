@@ -54,6 +54,12 @@
       </button>
 
       <button mat-menu-item
+              [routerLink]="['/my-groups']"
+              *ngIf="isStudent && authService.isAuthenticated()"
+      >Мої групи
+      </button>
+
+      <button mat-menu-item
               [routerLink]="['/groups']"
               *ngIf="!isStudent && authService.isAuthenticated()"
       >Групи

@@ -34,6 +34,7 @@ import {UpdateProfileComponent} from './core/components/admin/users-page/update-
 import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
 import {DeleteComponent} from './shared/components/delete/delete.component';
 import {GroupsModule} from './core/components/groups/groups.module';
+import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers';
 
 
 @NgModule({
@@ -85,7 +86,9 @@ import {GroupsModule} from './core/components/groups/groups.module';
     MatSnackBarContainer,
     CustomSnackbarService,
     AuthGuardService,
-    {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()}
+    {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
+    MyGroupsResolverService,
+    MyGroupResolverService
   ],
 })
 
