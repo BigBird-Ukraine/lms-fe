@@ -86,4 +86,14 @@ export class AdminLessonService {
 
     return this.http.get<Partial<ILesson[]>>(`${commonAdminPath}/lessons/by_module?module_id=${id}`, options);
   }
+
+  deleteLesson(id: any) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete(`${commonAdminPath}/lessons/${id}`, options);
+  }
 }

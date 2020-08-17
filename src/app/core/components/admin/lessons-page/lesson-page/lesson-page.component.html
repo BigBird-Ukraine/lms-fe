@@ -138,7 +138,7 @@
             <button mat-button
                     color="primary"
                     type="button"
-                    *ngIf="isMyLesson"
+                    *ngIf="isAdmin"
                     (click)="editLesson(lesson._id)">
               Редагувати
             </button>
@@ -148,6 +148,14 @@
                     type="button"
                     (click)="showLesson(lesson._id)" >
               Почати
+            </button>
+
+            <button mat-button
+                    color="primary"
+                    type="button"
+                    *ngIf="isAdmin"
+                    (click)="deleteLesson(lesson._id)">
+              Удалити
             </button>
           </mat-action-row>
 
