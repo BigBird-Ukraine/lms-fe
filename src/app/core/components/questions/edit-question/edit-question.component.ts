@@ -139,6 +139,11 @@ export class EditQuestionComponent implements OnInit {
     this.tags.splice(index, 1);
   }
 
+  delGroup(label: string) {
+    const index = this.group.findIndex(delGroup => delGroup.label === label);
+    this.group.splice(index, 1);
+  }
+
   getSubjects() {
     this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject);
   }

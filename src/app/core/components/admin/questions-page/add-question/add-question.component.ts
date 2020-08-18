@@ -118,7 +118,9 @@ export class AddQuestionComponent implements OnInit {
   }
 
   getSubjects() {
-    this.infoService.getSubject().subscribe((subject: Subject[]) => this.subjects = subject);
+    this.infoService.getSubject().subscribe((subject: Subject[]) => {
+      this.subjects = subject;
+    });
   }
 
   getGroups() {
