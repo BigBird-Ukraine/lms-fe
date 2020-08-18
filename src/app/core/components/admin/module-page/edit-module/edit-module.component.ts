@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {IModule, Tags} from '../../interfaces';
+import {IModule} from '../../interfaces';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AdminModuleService} from '../../services';
 
 @Component({
   selector: 'app-edit-module',
@@ -28,7 +27,7 @@ export class EditModuleComponent implements OnInit {
     this.dialogRef.close({...this.data, ...this.form.value});
   }
 
-  deleteTag(tagDel: Tags) {
+  deleteTag(tagDel: string) {
     this.data.tags = this.data.tags.filter(tag => tag !== tagDel);
   }
 

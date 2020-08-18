@@ -1,4 +1,3 @@
-import {Tags} from '../../../interface';
 import {ILesson} from './lesson.interface';
 
 export interface IModule {
@@ -6,7 +5,7 @@ export interface IModule {
   lessons_list?: string[];
   description?: string;
   _id?: string;
-  tags?: Tags[];
+  tags?: string[];
 }
 
 export interface IModuleFull {

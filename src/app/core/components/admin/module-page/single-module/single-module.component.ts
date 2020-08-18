@@ -4,7 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {IModule} from '../../interfaces';
 import {EditModuleComponent} from '../edit-module/edit-module.component';
-import {MatDialog} from '@angular/material';
 import {AddLessonComponent} from '../add-lesson/add-lesson.component';
 import {ILesson} from '../../interfaces';
 
@@ -20,15 +19,11 @@ export class SingleModuleComponent implements OnInit {
               private route: ActivatedRoute,
               private dialog: MatDialog
   ) {
-  constructor(private moduleService: AdminModuleService,
-              private route: ActivatedRoute,
-              private dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.route.data
-      .subscribe(
-        res => (this.module = res.singleModuleResolverService.data));
+    this.route.data.subscribe(
+      res => (this.module = res.singleModuleResolverService.data));
   }
 
   deleteModule(id: string) {
@@ -42,7 +37,7 @@ export class SingleModuleComponent implements OnInit {
       disableClose: true
     }).afterClosed().subscribe((moduleInfo: IModule) => {
       if (moduleInfo) {
-        this.moduleService.editModule(moduleInfo).subscribe( updatedModule => {
+        this.moduleService.editModule(moduleInfo).subscribe(updatedModule => {
           this.module = updatedModule;
         });
       }

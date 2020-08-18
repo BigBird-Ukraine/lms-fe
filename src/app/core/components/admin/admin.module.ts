@@ -83,7 +83,7 @@ import { AddLessonComponent } from './module-page/add-lesson/add-lesson.componen
     UserComponent,
     ModuleComponent,
     LessonComponent,
-    AddLessonComponent
+    AddLessonComponent,
     LessonComponent,
     EditModuleComponent
   ],
