@@ -42,13 +42,13 @@ export class ModuleLayoutComponent implements OnInit {
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null),
       lessons_list: this.fb.array([]),
-      tag_list: this.fb.array([])
+      tags: this.fb.array([])
     });
   }
 
   addModule() {
     this.moduleForm.value.lessons_list = this.lessons;
-    this.moduleForm.value.tag_list = this.tags;
+    this.moduleForm.value.tags = this.tags;
 
     const moduleData: IModule = this.moduleForm.value;
 

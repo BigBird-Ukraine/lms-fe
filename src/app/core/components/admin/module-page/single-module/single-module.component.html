@@ -1,6 +1,13 @@
 <div>
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          (click)="editModule()"
+          class="mx-3"
+  >Редагувати модуль
+  </button>
 
-  <div class="text-center py-2  ">
+  <div class="text-center py-2 border bg-secondary m-4">
     <h1>{{module.label}}</h1>
     <p>{{module.description}}</p>
 
@@ -12,7 +19,7 @@
         <p>{{lesson.description}}</p>
       </div>
 
-      <div *ngIf="module.lessons_list.length === 0" class="p-3 ">
+      <div *ngIf="module.lessons_list && module.lessons_list.length === 0" class="p-3 ">
         <span> Уроків ще не має </span>
       </div>
     </div>

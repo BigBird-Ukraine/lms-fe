@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Params, Router} from '@angular/router';
 
-import {IFullModule, ILesson, IModule, IModuleStatistics} from '../interfaces';
+import {IFullModule, IModule, IModuleStatistics} from '../interfaces';
 import {commonAdminPath} from '../../../../shared/api';
 
 
@@ -52,6 +52,10 @@ export class AdminModuleService {
 
   getModulesByCourse(id: string) {
     return this.http.get<Partial<IModule[]>>(`${this.moduleUrl}/by_course?course_id=${id}`);
+  }
+
+  editModule(moduleInfo: IModule) {
+    return this.http.patch<IModule>(`${this.moduleUrl}/${moduleInfo._id}`, moduleInfo);
   }
 
   navigate(value: string) {
