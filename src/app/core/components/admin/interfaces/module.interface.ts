@@ -6,7 +6,7 @@ export interface IModule {
   lessons_list?: string[];
   description?: string;
   _id?: string;
-  tag_list?: Tags[];
+  tags?: Tags[];
 }
 
 export interface IModuleFull {

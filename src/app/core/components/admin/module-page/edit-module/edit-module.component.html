@@ -1,0 +1,47 @@
+<mat-card class="dialog">
+  <mat-card-title>Редагування</mat-card-title>
+  <mat-dialog-content>
+    <form [formGroup]="form">
+      <div class="fields" fxLayout="column">
+
+        <mat-form-field appearance="standard">
+          <mat-label>Назва</mat-label>
+          <input matInput type="text" required formControlName="label" minlength="4">
+          <mat-error *ngIf="form.get('label').hasError('minlength')" align="end">
+             Назва має бути не менше 4-х символів
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Опис</mat-label>
+          <input matInput type="text" formControlName="description" required>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="my-2 hover">
+        <span  *ngFor="let tag of data.tags"
+              class="text-warning m-2 p-2 border"
+              (click)="deleteTag(tag)">
+          {{tag}}
+        </span>
+    </div>
+
+    <div class="mt-4">
+      <input  type="text" [(ngModel)]="newTag">
+      <button type="button" class="btn btn-secondary mx-2"
+              (click)="addNewTag()"
+              [disabled]="!newTag"
+      >
+        Добавити новий тег
+      </button>
+    </div>
+  </mat-dialog-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="dialogRef.close()">Скасувати</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
+      Зберегти
+    </button>
+  </mat-card-actions>
+</mat-card>
