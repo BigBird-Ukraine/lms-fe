@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminModuleService} from '../../services';
-import {IModule} from '../../interfaces';
 
 @Component({
   selector: 'app-all-modules',

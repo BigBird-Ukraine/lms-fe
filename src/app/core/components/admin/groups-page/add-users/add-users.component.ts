@@ -17,9 +17,9 @@ import {IUser} from '../../interfaces';
 
 export class AddUsersComponent implements OnInit {
   filteredUsers: IUser[] = [];
-  pageSize: number = 50;
-  pageIndex: number = 1;
-  surname: string = '';
+  pageSize = 50;
+  pageIndex = 1;
+  surname = '';
   subject = new Subject<any>();
   form: FormGroup;
 
@@ -50,7 +50,7 @@ export class AddUsersComponent implements OnInit {
       this.adminUsersService.getAll(queryParams).subscribe(value => {
         this.filteredUsers = value.data.users;
         this.data.forEach(userInGroup => {
-          this.filteredUsers = this.filteredUsers.filter(userFromAll => userFromAll._id !== userInGroup._id)
+          this.filteredUsers = this.filteredUsers.filter(userFromAll => userFromAll._id !== userInGroup._id);
         });
       });
     });
