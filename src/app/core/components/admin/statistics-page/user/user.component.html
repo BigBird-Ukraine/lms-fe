@@ -4,6 +4,5 @@
     <p>{{user.email}}</p>
     <p>{{user.phone_number}}</p>
   </div>
+  <app-loader *ngIf="!users"></app-loader>
 </div>
-
-<app-loader *ngIf="!users"></app-loader>

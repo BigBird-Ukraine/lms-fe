@@ -4,6 +4,9 @@ import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
 
 import {QuestionsService, TestService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
+import {LessonTestResultComponent} from '../../lessons/lesson-test-result/lesson-test-result.component';
+import {MatDialog} from '@angular/material';
+
 
 @Component({
   selector: 'app-questions-layout',
@@ -17,10 +20,10 @@ export class QuestionsLayoutComponent implements OnInit {
   check: any;
   count = true;
 
-
   constructor(private questionsService: QuestionsService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
+              private dialog: MatDialog,
               private testService: TestService
   ) {
   }
@@ -50,7 +53,7 @@ export class QuestionsLayoutComponent implements OnInit {
           el.answers.forEach(singleAnswer => {
             const answerControl = new FormGroup({
               _id: new FormControl(singleAnswer._id),
-              value:  new FormControl(singleAnswer.value),
+              value: new FormControl(singleAnswer.value),
               checked: new FormControl(false)
             });
             answersArr.push(answerControl);
@@ -59,6 +62,8 @@ export class QuestionsLayoutComponent implements OnInit {
         });
       });
     });
+
+
   }
 
   formTest() {
@@ -83,12 +88,16 @@ export class QuestionsLayoutComponent implements OnInit {
         questionListArr.question_list.push(control);
       }
     );
-
-    // this.checkTest(questionListArr);
+    this.checkTest(questionListArr);
   }
 
-  // checkTest(test) {
-  //   this.testService.sendTests(test).subscribe();
-  // }
-
+  checkTest(test) {
+    const {question_list} = test;
+    this.testService.sendFilteredTests(question_list).subscribe((value) => {
+        this.dialog.open(LessonTestResultComponent, {
+          data: value.data.passed_tests.pop()
+        });
+      }
+    );
+  }
 }

@@ -3,9 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {commonAdminPath} from '../../../../shared/api';
 import {AdminAuthService} from './admin-auth.service';
-import {ISubjectStatistics, QuestionData, QuestionModel} from '../interfaces/questionModel';
+import {ISubjectStatistics, QuestionData, QuestionModel} from '../interfaces';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
-import {IUserStatistics} from '../interfaces/statistics.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -9,7 +9,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: Partial<IUser[]> = [];
+  users: Partial<IUser[]>;
 
   constructor(private userService: AdminUsersService, @Inject(MAT_DIALOG_DATA) public data: any) {
   }
