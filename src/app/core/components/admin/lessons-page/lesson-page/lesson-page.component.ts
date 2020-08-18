@@ -171,4 +171,8 @@ export class LessonPageComponent implements OnInit {
     this.router.navigate([`adminPanel/lessons/${id}`]);
   }
 
+  deleteLesson(id) {
+    this.lessonService.deleteLesson(id).subscribe(res => this.ngOnInit());
+  }
+
 }

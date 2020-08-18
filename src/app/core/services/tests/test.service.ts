@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
@@ -10,7 +10,8 @@ import {ITest, IUser} from '../../interface';
 })
 export class TestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getTestByLessonId(id): Observable<ITest> {
     return this.http.get<ITest>(`${commonAuthPath}/lessons/${id}/test`);
@@ -18,5 +19,9 @@ export class TestService {
 
   sendTests(id, test): Observable<IUser> {
     return this.http.post<IUser>(`${commonAuthPath}/lessons/${id}/test`, test);
+  }
+
+  sendFilteredTests(test): Observable<IUser> {
+    return this.http.post<IUser>(`${commonAuthPath}/questions/test`, test);
   }
 }

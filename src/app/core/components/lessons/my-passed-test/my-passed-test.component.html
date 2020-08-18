@@ -1,8 +1,13 @@
 <div class="d-flex flex-wrap justify-content-around" *ngIf="userPassedTest">
 
   <div class="col-5 m-2 p-2 border bg-secondary" *ngFor="let test of userPassedTest">
-    <div class="text-center mx-4 text-white">
-      <p>{{test.lesson_id.label}}</p>
+    <div *ngIf="!test.lesson_id">
+      <p class="text-warning text-center">Змішані питання вашого пройденого тесту </p>
+    </div>
+
+    <div *ngIf="test.lesson_id"
+         class="text-center mx-4 text-white">
+      <p><span class="text-warning">Урок: </span>{{test.lesson_id.label}}</p>
       <p>{{test.lesson_id.description}}</p>
     </div>
 

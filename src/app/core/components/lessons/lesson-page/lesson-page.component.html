@@ -150,6 +150,14 @@
             <button mat-button
                     color="primary"
                     type="button"
+                    *ngIf="isMyLesson"
+                    (click)="deleteLesson(lesson._id)">
+              Удалити
+            </button>
+
+            <button mat-button
+                    color="primary"
+                    type="button"
                     (click)="showLesson(lesson._id)" >
               Почати
             </button>

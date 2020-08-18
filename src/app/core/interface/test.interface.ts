@@ -10,7 +10,7 @@ export interface ITest {
 export interface IPassedTest {
   questions_id: string[];
   _id: string;
-  lesson_id: string;
+  lesson_id?: string;
   result: number;
   created_at?: string;
 }
@@ -18,7 +18,7 @@ export interface IPassedTest {
 export interface IPassedTestFull {
   passed_tests: {
     questions: Partial<QuestionModel[]>;
-    lesson: Partial<ILesson>;
+    lesson?: Partial<ILesson>;
     result: number;
     created_at: string;
   };
@@ -28,7 +28,7 @@ export interface IPassedTestFull {
 export interface IPassedData {
   _id?: string;
   questions: Partial<QuestionModel[]>;
-  lesson: Partial<ILesson>;
+  lesson?: Partial<ILesson>;
   result: number;
   created_at: string;
 }
