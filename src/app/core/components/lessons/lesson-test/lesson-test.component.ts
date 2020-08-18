@@ -84,6 +84,7 @@ export class LessonTestComponent implements OnInit {
         questionListArr.question_list.push(control);
       }
     );
+
     this.checkTest(this.id, questionListArr);
   }
 

@@ -64,4 +64,14 @@ export class LessonsService {
   addQuestionsToLesson(id, questions): Observable<IEditLesson> {
     return this.http.patch<IEditLesson>(`${commonAuthPath}/lessons/${id}/question`, questions);
   }
+
+  deleteLesson(id: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete(`${commonAuthPath}/lessons/${id}`, options);
+  }
 }
