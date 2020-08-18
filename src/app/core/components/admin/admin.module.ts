@@ -64,6 +64,7 @@ import { ModuleComponent } from './statistics-page/module/module.component';
 import { LessonsComponent } from './statistics-page/lessons/lessons.component';
 import { LessonComponent } from './statistics-page/lesson/lesson.component';
 import { EditModuleComponent } from './module-page/edit-module/edit-module.component';
+import { AddLessonComponent } from './module-page/add-lesson/add-lesson.component';
 
 @NgModule({
   entryComponents: [
@@ -81,6 +82,8 @@ import { EditModuleComponent } from './module-page/edit-module/edit-module.compo
     QuestionComponent,
     UserComponent,
     ModuleComponent,
+    LessonComponent,
+    AddLessonComponent
     LessonComponent,
     EditModuleComponent
   ],
@@ -134,6 +137,7 @@ import { EditModuleComponent } from './module-page/edit-module/edit-module.compo
     ModuleComponent,
     LessonsComponent,
     LessonComponent,
+    AddLessonComponent,
     EditModuleComponent,
   ],
   imports: [

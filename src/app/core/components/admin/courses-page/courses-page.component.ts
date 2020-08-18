@@ -77,7 +77,7 @@ export class CoursesPageComponent implements OnInit {
     ).subscribe(value => {
       this.length = value.data.count;
       this.getCourses = value.data.courses
-    })
+    });
   }
 
   reset() {

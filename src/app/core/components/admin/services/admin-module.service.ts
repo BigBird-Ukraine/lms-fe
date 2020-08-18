@@ -34,7 +34,7 @@ export class AdminModuleService {
     return this.http.get<IFullModule>(`${this.moduleUrl}` + '/all-cropped');
   }
 
-  getOneFullModule(id: string) {
+  getOneFullModule(id: string): Observable<IFullModule> {
     return this.http.get<IFullModule>(`${this.moduleUrl}/${id}`);
   }
 
@@ -50,8 +50,12 @@ export class AdminModuleService {
   }
 
 
-  getModulesByCourse(id: string) {
+  getModulesByCourse(id: string): Observable<IModule[]> {
     return this.http.get<Partial<IModule[]>>(`${this.moduleUrl}/by_course?course_id=${id}`);
+  }
+
+  updateLessonList(id: string, list: { lessons_list: string[] }): Observable<any> {
+    return this.http.patch(`${this.moduleUrl}/${id}/lesson`, list);
   }
 
   editModule(moduleInfo: IModule) {
