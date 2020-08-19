@@ -16,6 +16,7 @@ import {LessonTestResultComponent} from '../lesson-test-result/lesson-test-resul
 export class LessonTestComponent implements OnInit {
 
   questions: QuestionModel[];
+  cutQuestions: Partial<QuestionModel>[] = [];
   questionForm: FormGroup;
   id: string;
 
@@ -43,6 +44,7 @@ export class LessonTestComponent implements OnInit {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
       this.questions = questions.data.questions_id;
       this.questions.forEach((el) => {
+        this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
         const control = this.fb.group({
           question: this.fb.control(el._id),
@@ -89,11 +91,11 @@ export class LessonTestComponent implements OnInit {
   }
 
   checkTest(id, test) {
-    const { question_list } = test;
-    this.testService.sendTests(id, question_list).subscribe((value: IUser) => {
+    const {question_list} = test;
+    this.testService.sendTests(id, question_list, this.cutQuestions).subscribe((value: IUser) => {
         this.dialog.open(LessonTestResultComponent, {
-          data: value.data.passed_tests.pop()
-      });
+          data: value
+        });
       }
     );
   }

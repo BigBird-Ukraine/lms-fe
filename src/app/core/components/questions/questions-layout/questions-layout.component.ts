@@ -16,6 +16,7 @@ import {MatDialog} from '@angular/material';
 export class QuestionsLayoutComponent implements OnInit {
 
   questions: QuestionModel[];
+  cutQuestions: Partial<QuestionModel>[] = [];
   questionForm: FormGroup;
   check: any;
   count = true;
@@ -44,6 +45,7 @@ export class QuestionsLayoutComponent implements OnInit {
       this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
         this.questions = questions.data.questions;
         this.questions.forEach((el) => {
+          this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
           const questionListArr = (this.questionForm.get('question_list')) as FormArray;
           const control = this.fb.group({
             question: this.fb.control(el._id),
@@ -93,9 +95,9 @@ export class QuestionsLayoutComponent implements OnInit {
 
   checkTest(test) {
     const {question_list} = test;
-    this.testService.sendFilteredTests(question_list).subscribe((value) => {
+    this.testService.sendFilteredTests(question_list, this.cutQuestions).subscribe((value) => {
         this.dialog.open(LessonTestResultComponent, {
-          data: value.data.passed_tests.pop()
+          data: value
         });
       }
     );

@@ -28,7 +28,8 @@ export interface IPassedTestFull {
 export interface IPassedData {
   _id?: string;
   questions: Partial<QuestionModel[]>;
-  lesson?: Partial<ILesson>;
+  lesson_label: string;
+  lesson_description: string;
   result: number;
   created_at: string;
 }

@@ -96,9 +96,9 @@ export class LessonTestComponent implements OnInit {
   checkTest(id, test) {
     const {question_list} = test;
 
-    this.testService.sendTests(id, question_list).subscribe((value: IUser) => {
+    this.testService.sendTests(id, question_list).subscribe((value: number) => {
         this.dialog.open(LessonTestResultComponent, {
-          data: value.data.passed_tests.pop()
+          data: value
         });
 
       }
