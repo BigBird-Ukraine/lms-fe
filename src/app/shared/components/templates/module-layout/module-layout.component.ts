@@ -57,7 +57,9 @@ export class ModuleLayoutComponent implements OnInit {
     ).map(obj => obj._id);
 
     this.adminModuleService.addModule(moduleData).subscribe((res) => {
-      this.adminModuleService.modules.push(res);
+      this.adminModuleService.getAllCropped().subscribe(
+        modules => this.adminModuleService.modules = modules.data
+      );
       this.customSnackbarService.open('Модуль додано', '');
       this.dialog.closeAll();
     });

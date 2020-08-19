@@ -1,12 +1,8 @@
 <div class="buttons">
   <button mat-raised-button color="primary" (click)="setCreateFormsStatus()">
-    <span *ngIf="!createFormsStatus">Створити</span>
-    <span *ngIf="createFormsStatus">Закрити</span>
+    <span (click)="createUser()">Створити</span>
   </button>
 </div>
-
-
-<app-create-user *ngIf="createFormsStatus"></app-create-user>
 
 <mat-toolbar class="filter-container">
   <mat-card-content>

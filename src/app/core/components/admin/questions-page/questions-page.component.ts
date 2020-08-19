@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class QuestionsPageComponent implements OnInit {
   statusAddQuestionBtn = false;
-  statusShowAllQuestion = false;
+  statusShowAllQuestion = true;
   statusShowMyQuestion = false;
 
   constructor() {

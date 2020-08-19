@@ -85,7 +85,8 @@ import { AddLessonComponent } from './module-page/add-lesson/add-lesson.componen
     LessonComponent,
     AddLessonComponent,
     LessonComponent,
-    EditModuleComponent
+    EditModuleComponent,
+    CreateUserComponent
   ],
   declarations: [
     AuthAdminComponent,

@@ -5,7 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {debounceTime} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import {ILesson} from '../../interfaces';
+import {ILesson, IModule} from '../../interfaces';
 import {AdminLessonService} from '../../services';
 
 @Component({
@@ -23,7 +23,7 @@ export class AddLessonComponent implements OnInit {
 
   constructor(private lessonService: AdminLessonService,
               private dialogRef: MatDialogRef<AddLessonComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data: Partial<IModule[]>) {
   }
 
   ngOnInit() {
