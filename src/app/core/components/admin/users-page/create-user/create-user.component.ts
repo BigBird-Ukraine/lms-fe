@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {fileConfigs, regExp} from '../../../../constans';
 import {matchPassword} from '../../../../../shared/validators';
@@ -18,6 +18,7 @@ export class CreateUserComponent implements OnInit {
   hide2 = true;
 
   constructor(private dialog: MatDialog,
+              private dialogRef: MatDialogRef<CreateUserComponent>,
               private customSnackbarService: CustomSnackbarService,
               private fb: FormBuilder,
               private userService: AdminUsersService
@@ -92,8 +93,9 @@ export class CreateUserComponent implements OnInit {
 
   createUser(user: IUser) {
     this.userService.createUser(user).subscribe(() => {
+        this.registrationForm.reset();
         this.customSnackbarService.open('Реєстрація успішна', 'success');
-        this.dialog.closeAll();
+        this.dialogRef.close(user);
       },
       () => this.customSnackbarService.open('Не вдала спроба', ''));
   }

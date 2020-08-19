@@ -3,19 +3,10 @@
     <button mat-raised-button
             color="primary"
             type="button"
-            class="nav-btn"
+            class="nav-btn col-1"
             (click)="openForm()"
     >Додати урок
     </button>
-
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            class="nav-btn"
-            (click)="allLessons()"
-    >Список уроків
-    </button>
-
     <div *ngIf="showAllLessons"
          class="lesson-layout">
 
@@ -91,28 +82,32 @@
           </div>
         </div>
 
-        <button type="submit"
-                color="primary"
-                mat-raised-button
-        >
-          Шукати
-        </button>
+        <div>
+          <button type="submit"
+                  color="primary"
+                  mat-raised-button
+          >
+            Шукати
+          </button>
 
-        <button mat-raised-button
-                color="primary"
-                type="button"
-                *ngIf="isAdmin && !isMyLesson && !isFiltered"
-                (click)="myLessons()"
-        >Мої уроки
-        </button>
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="mx-2"
+                  *ngIf="isAdmin && !isMyLesson && !isFiltered"
+                  (click)="myLessons()"
+          >Мої уроки
+          </button>
 
-        <button mat-raised-button
-                color="primary"
-                type="button"
-                *ngIf="isAdmin && isMyLesson || isFiltered"
-                (click)="getLessons()"
-        >Всі уроки
-        </button>
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="mx-2"
+                  *ngIf="isAdmin && isMyLesson || isFiltered"
+                  (click)="getLessons()"
+          >Всі уроки
+          </button>
+        </div>
 
       </form>
 
@@ -146,7 +141,7 @@
             <button mat-button
                     color="primary"
                     type="button"
-                    (click)="showLesson(lesson._id)" >
+                    (click)="showLesson(lesson._id)">
               Почати
             </button>
 

@@ -20,7 +20,7 @@ export class LessonPageComponent implements OnInit {
   filterLessonsForm: FormGroup;
   isAdmin: boolean;
   userID: string;
-  showAllLessons = false;
+  showAllLessons = true;
   lessonsList: ILesson[];
   lesson: ILesson;
   tagsForAutocomplete: Tags[] = [];
@@ -63,7 +63,11 @@ export class LessonPageComponent implements OnInit {
   }
 
   openForm() {
-    this.dialog.open(CreateLessonAdminComponent);
+    this.dialog.open(CreateLessonAdminComponent).afterClosed().subscribe(res => {
+      if (res) {
+        this.ngOnInit();
+      }
+    });
   }
 
   myLessons() {
@@ -84,10 +88,6 @@ export class LessonPageComponent implements OnInit {
         this.lessonsList = [];
       }
     });
-  }
-
-  allLessons() {
-    this.showAllLessons = !this.showAllLessons;
   }
 
   getLessons() {

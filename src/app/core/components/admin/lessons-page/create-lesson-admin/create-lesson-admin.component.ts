@@ -5,7 +5,7 @@ import {ILesson, Tags} from '../../interfaces';
 import {InfoHelperService} from '../../../../services/questions';
 import {AdminLessonService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -22,7 +22,8 @@ export class CreateLessonAdminComponent implements OnInit {
               private infoService: InfoHelperService,
               private lessonService: AdminLessonService,
               private customSnackbarService: CustomSnackbarService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<CreateLessonAdminComponent>) {
   }
 
   ngOnInit() {
@@ -74,7 +75,7 @@ export class CreateLessonAdminComponent implements OnInit {
 
     this.lessonService.createLesson(lessonData).subscribe(() => {
       this.customSnackbarService.open('Урок додано', '');
-      this.dialog.closeAll();
+      this.dialogRef.close(true);
     });
   }
 

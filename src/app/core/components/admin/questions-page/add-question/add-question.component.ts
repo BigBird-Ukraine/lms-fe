@@ -110,6 +110,8 @@ export class AddQuestionComponent implements OnInit {
 
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe(() => {
+      this.group = [];
+      this.tags = [];
       this.isAdded = true;
       setTimeout(() => {
         this.isAdded = false;

@@ -5,7 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {debounceTime} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import {ILesson} from '../../interfaces';
+import {ILesson, IModule} from '../../interfaces';
 import {AdminLessonService} from '../../services';
 
 @Component({
@@ -14,35 +14,6 @@ import {AdminLessonService} from '../../services';
   styleUrls: ['./add-lesson.component.scss']
 })
 export class AddLessonComponent implements OnInit {
-  // lessons: Partial<ILesson[]> = [];
-  //
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  //             private lessonService: AdminLessonService,
-  //             private moduleService: AdminModuleService) {
-  // }
-  //
-  // // todo
-  // ngOnInit() {
-  //   this.lessonService.getAllLessonsLabels().subscribe(lessonsRes => {
-  //     console.log(lessonsRes);
-  //     lessonsRes.filter(list => this.data.lesson_list.filter(oldList => {
-  //       if (list._id !== oldList._id) {
-  //         this.lessons.push(list);
-  //       }
-  //     }));
-  //   });
-  // }
-  //
-  // addLessonToModule(lessonId: string) {
-  //   this.moduleService.addLessonToModule(lessonId, this.data.module_id).subscribe(res => {
-  //     this.lessons.forEach(lesson => {
-  //       if (lesson._id === lessonId) {
-  //         lesson.number = 1;
-  //       }
-  //     });
-  //   });
-  // }
-
   filteredLessons: Partial<ILesson[]> = [];
   pageSize = 50;
   pageIndex = 1;
@@ -52,7 +23,7 @@ export class AddLessonComponent implements OnInit {
 
   constructor(private lessonService: AdminLessonService,
               private dialogRef: MatDialogRef<AddLessonComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data: Partial<IModule[]>) {
   }
 
   ngOnInit() {

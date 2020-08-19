@@ -7,6 +7,8 @@ import {Subject} from 'rxjs';
 import {AdminUsersService} from '../services';
 import {UserRolesEnum} from '../../../../shared/enums';
 import {IPaginator, IUserModel} from '../interfaces';
+import {MatDialog} from '@angular/material';
+import {CreateUserComponent} from './create-user/create-user.component';
 
 @Component({
   selector: 'app-users-page',
@@ -18,8 +20,8 @@ export class UsersPageComponent implements OnInit {
   getUsers: IUserModel;
   form: FormGroup;
   length: number;
-  pageSize: number = 50;
-  pageIndex: number = 0;
+  pageSize = 50;
+  pageIndex = 0;
   subject = new Subject<any>();
   roles = [
     {name: 'Всі', value: ''},
@@ -33,7 +35,8 @@ export class UsersPageComponent implements OnInit {
 
   constructor(private adminUsersService: AdminUsersService,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private dialog: MatDialog
   ) {
     this.subject.pipe(
       debounceTime(500)
@@ -94,5 +97,13 @@ export class UsersPageComponent implements OnInit {
 
   setCreateFormsStatus() {
     this.createFormsStatus = !this.createFormsStatus;
+  }
+
+  createUser() {
+    this.dialog.open(CreateUserComponent).afterClosed().subscribe(res => {
+      if (res) {
+        this.reset();
+      }
+    });
   }
 }

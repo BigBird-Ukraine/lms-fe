@@ -41,11 +41,10 @@ const routes: Routes = [
       {path: 'courses', component: CoursesPageComponent},
       {
         path: 'modules', component: ModulePageComponent, children: [
-          {path: '', component: AllModulesComponent},
-          {path: 'single/:id', resolve: {singleModuleResolverService: SingleModuleResolverService}, component: SingleModuleComponent}
+          {path: '', component: AllModulesComponent}
         ]
       },
-
+      {path: 'modules/single/:id', resolve: {singleModuleResolverService: SingleModuleResolverService}, component: SingleModuleComponent},
       {
         path: 'lessons', component: LessonPageComponent, children: [
           {path: 'create', component: CreateLessonAdminComponent},
