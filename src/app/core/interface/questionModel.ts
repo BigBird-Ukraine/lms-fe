@@ -17,7 +17,7 @@ export interface Tags {
 }
 
 export interface Subject {
-  subject: string;
+  label: string;
 }
 
 export interface Level {
@@ -25,7 +25,7 @@ export interface Level {
 }
 
 export interface Groups {
-  group: string;
+  label: string;
 }
 
 export interface QuestionModel {

@@ -64,7 +64,6 @@ export class AddQuestionFormComponent implements OnInit {
 
   newGroups(group) {
     const text = group.target.value;
-
     if (text.length) {
       this.group.push(text);
     }

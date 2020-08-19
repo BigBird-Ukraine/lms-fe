@@ -10,8 +10,8 @@
         <input type="text" matInput required formControlName="subject" [matAutocomplete]="autoSubject"
                #searchSubject>
         <mat-autocomplete #autoSubject="matAutocomplete">
-          <mat-option *ngFor="let subject of subjects | filter: searchSubject.value" [value]="subject">
-            {{subject}}
+          <mat-option *ngFor="let subject of subjects " [value]="subject.label">
+            {{subject.label}}
           </mat-option>
         </mat-autocomplete>
 
@@ -31,8 +31,8 @@
         >
 
         <mat-autocomplete #autoGroup="matAutocomplete">
-          <mat-option *ngFor="let group of groupForAuto | filter: searchGroup.value" [value]="group">
-            {{group}}
+          <mat-option *ngFor="let group of groupForAuto" [value]="group.label">
+            {{group.label}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -41,6 +41,13 @@
         <span *ngFor="let gr of group"
               class="block">
           {{gr}}
+          <button mat-mini-fab color="primary"
+                  (click)="delGroup(gr.label)"
+                  type="button"
+                  class="mx-2"
+          >
+              &times;
+            </button>
         </span>
       </div>
 
