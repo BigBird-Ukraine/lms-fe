@@ -23,7 +23,7 @@ export class MyPassedTestComponent implements OnInit {
   getInfo() {
     this.userService.getUserPassedTest(this.authService.getAccessToken())
       .subscribe((res) => {
-        this.userPassedTest = res.passed_tests;
+        this.userPassedTest = res;
       });
   }
 

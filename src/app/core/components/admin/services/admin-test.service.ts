@@ -14,7 +14,7 @@ export class AdminTestService {
     return this.http.get<ITest>(`${commonAdminPath}/lessons/${id}/test`);
   }
 
-  sendTests(id, test): Observable<IUser> {
-    return this.http.post<IUser>(`${commonAdminPath}/lessons/${id}/test`, test);
+  sendTests(id, test): Observable<number> {
+    return this.http.post<number>(`${commonAdminPath}/lessons/${id}/test`, test);
   }
 }
