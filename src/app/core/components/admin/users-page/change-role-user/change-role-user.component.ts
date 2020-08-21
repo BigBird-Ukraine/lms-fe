@@ -25,7 +25,7 @@ export class ChangeRoleUserComponent implements OnInit {
   constructor(
     private adminUsersService: AdminUsersService,
     public dialogRef: MatDialogRef<ChangeRoleUserComponent>,
-    private snackbarService:CustomSnackbarService,
+    private snackbarService: CustomSnackbarService,
     @Inject(MAT_DIALOG_DATA) public user: IUser,
   ) {
   }

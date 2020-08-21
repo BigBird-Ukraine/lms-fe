@@ -30,21 +30,9 @@
       </button>
 
       <button mat-menu-item
-              [routerLink]="['/add_questions']"
-              *ngIf="!isStudent && authService.isAuthenticated()"
-      >Додати питання
-      </button>
-
-      <button mat-menu-item
               [routerLink]="['/questions/my']"
               *ngIf="!isStudent && authService.isAuthenticated()"
       >Мої питання
-      </button>
-
-      <button mat-menu-item
-              [routerLink]="['/tests/my']"
-              *ngIf="isStudent && authService.isAuthenticated()"
-      >Мої тести
       </button>
 
       <button mat-menu-item
@@ -54,13 +42,7 @@
       </button>
 
       <button mat-menu-item
-              [routerLink]="['/lessons']"
-              *ngIf="authService.isAuthenticated()"
-      >Уроки
-      </button>
-
-      <button mat-menu-item
-              [routerLink]="['/my-groups']"
+              [routerLink]="['/groups/my']"
               *ngIf="isStudent && authService.isAuthenticated()"
       >Мої групи
       </button>
@@ -72,11 +54,28 @@
       </button>
 
       <button mat-menu-item
+              [routerLink]="['/lessons']"
+              *ngIf="authService.isAuthenticated()"
+      >Уроки
+      </button>
+
+      <button mat-menu-item
               [routerLink]="['/questions']"
               *ngIf="authService.isAuthenticated()"
       >Пройти тест
       </button>
 
+      <button mat-menu-item
+              [routerLink]="['/test/my']"
+              *ngIf="isStudent || isTeacher && authService.isAuthenticated()"
+      >Мої пройдені тести
+      </button>
+
+      <button mat-menu-item
+              [routerLink]="['/questions/add_questions']"
+              *ngIf="!isStudent && authService.isAuthenticated()"
+      >Додати питання
+      </button>
     </mat-menu>
 
     <a (click)="openRegForm()"

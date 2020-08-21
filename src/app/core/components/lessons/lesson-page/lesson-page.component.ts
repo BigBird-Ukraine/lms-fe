@@ -21,7 +21,6 @@ export class LessonPageComponent implements OnInit {
   filterLessonsForm: FormGroup;
   isTeacher: boolean;
   userID: string;
-  showAllLessons = false;
   lessonsList: ILesson[];
   lesson: ILesson;
   tagsForAutocomplete: Tags[] = [];
@@ -64,7 +63,7 @@ export class LessonPageComponent implements OnInit {
   }
 
   openForm() {
-    this.dialog.open(CreateLessonComponent);
+    this.dialog.open(CreateLessonComponent).afterClosed().subscribe(res => res && this.ngOnInit());
   }
 
   myLessons() {
@@ -80,15 +79,10 @@ export class LessonPageComponent implements OnInit {
 
         lessons.data.lesson.forEach(lessonArr => this.tagsForAutocomplete.push(...lessonArr.tags));
         this.tagsForAutocomplete = [...new Set(this.tagsForAutocomplete)];
-
       } else {
         this.lessonsList = [];
       }
     });
-  }
-
-  allLessons() {
-    this.showAllLessons = !this.showAllLessons;
   }
 
   getLessons() {

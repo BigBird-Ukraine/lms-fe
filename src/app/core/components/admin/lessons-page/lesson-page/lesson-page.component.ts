@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {InfoHelperService} from '../../../../services/questions';
@@ -104,7 +104,7 @@ export class LessonPageComponent implements OnInit {
       this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);
     });
 
-    this.router.navigate(['adminPanel/lessons']);
+    this.router.navigate(['admin/adminPanel/lessons']);
   }
 
   getTags() {
@@ -138,7 +138,7 @@ export class LessonPageComponent implements OnInit {
       }
     });
 
-    this.router.navigate(['adminPanel/lessons'], {
+    this.router.navigate(['admin/adminPanel/lessons'], {
       queryParams: {
         ...this.filterLessonsForm.value
       }
@@ -162,13 +162,15 @@ export class LessonPageComponent implements OnInit {
     this.dialog.open(EditLessonComponent, {
       data: {lesson: this.lesson}
     }).afterClosed().subscribe((value: IEditLesson) => {
-      const index = this.lessonsList.findIndex(findLesson => findLesson._id === id);
-      this.lessonsList[index] = value.data;
+      if (value) {
+        const index = this.lessonsList.findIndex(findLesson => findLesson._id === id);
+        this.lessonsList[index] = value.data;
+      }
     });
   }
 
   showLesson(id) {
-    this.router.navigate([`adminPanel/lessons/${id}`]);
+    this.router.navigate([`admin/adminPanel/lessons/${id}`]);
   }
 
   deleteLesson(id) {

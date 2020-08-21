@@ -116,11 +116,16 @@ export class AddQuestionFormComponent implements OnInit {
 
   createQuestion(question: QuestionModel) {
     this.questionService.createQuestion(question).subscribe(() => {
-        this.isAdded = true;
-        setTimeout(() => {
-          this.isAdded = false;
-        }, 4000);
-      });
+      this.group = [];
+      this.tags = [];
+      const control = this.questionForm.get('answers') as FormArray;
+      control.clear();
+      this.clickCount = 0;
+      this.isAdded = true;
+      setTimeout(() => {
+        this.isAdded = false;
+      }, 4000);
+    });
   }
 
   getSubjects() {

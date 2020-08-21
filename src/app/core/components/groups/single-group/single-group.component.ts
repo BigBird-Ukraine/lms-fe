@@ -4,6 +4,8 @@ import {MatDialog} from '@angular/material';
 import {IGroup, IGroupStudents, ISingleGroup, UserModel} from '../../../interface';
 import {GroupsService} from '../../../services/groups';
 import {GroupPresentsComponent} from '../group-presents/group-presents.component';
+import {UserRolesEnum} from '../../../../shared/enums';
+import {UserService} from '../../../services/user';
 
 @Component({
   selector: 'app-single-group',
@@ -14,8 +16,10 @@ export class SingleGroupComponent implements OnInit {
 
   studentList: UserModel[];
   @Input() groupInfo: IGroup;
+  isTeacher = false;
 
   constructor(private groupsService: GroupsService,
+              private userService: UserService,
               private dialog: MatDialog) {
   }
 
@@ -26,6 +30,10 @@ export class SingleGroupComponent implements OnInit {
     );
     this.groupsService.getOneGroup(this.groupInfo._id).subscribe((group: ISingleGroup) => {
       this.groupInfo = group.data;
+    });
+
+    this.userService.userInfo.subscribe(user => {
+      this.isTeacher = (user.role_id === UserRolesEnum.TEACHER && true);
     });
   }
 

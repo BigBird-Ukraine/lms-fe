@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 import {ICity, ICourse} from '../../interfaces';
 import {AdminCoursesService, AdminGroupsService} from '../../services';
@@ -20,7 +20,7 @@ export class CreateGroupComponent implements OnInit {
   constructor(private groupsService: AdminGroupsService,
               private coursesService: AdminCoursesService,
               private cityService: AdminCityService,
-              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<CreateGroupComponent>,
               private snackbarService: CustomSnackbarService,
   ) {
   }
@@ -50,7 +50,7 @@ export class CreateGroupComponent implements OnInit {
     });
     this.groupsService.save(this.form.value).subscribe(() => {
       this.snackbarService.open(`Група ${this.form.value.label} створена`);
-      this.dialog.closeAll();
+      this.dialogRef.close(true);
     });
   }
 }

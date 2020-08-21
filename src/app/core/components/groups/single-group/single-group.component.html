@@ -1,4 +1,4 @@
-<div class="group_list">
+<div class="group_list" *ngIf="studentList">
 
   <h2>{{groupInfo.label}}</h2>
   <table>
@@ -21,9 +21,11 @@
 
   </table>
 
-  <button mat-stroked-button
+  <button *ngIf="isTeacher" mat-stroked-button
           (click)="addDate()"
   >Додати
   </button>
 
 </div>
+
+<app-main-loader *ngIf="!studentList"></app-main-loader>

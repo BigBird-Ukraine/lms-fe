@@ -9,35 +9,32 @@ import {
   MatInputModule
 } from '@angular/material';
 
-import {RegistrationComponent} from './registration/registration.component';
-// import {UserRoutingModule} from './user-routing.module';
-import {AuthUserComponent} from './auth-user/auth-user.component';
 import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
 import {EditUserComponent} from './edit-user/edit-user.component';
+import {UserRoutingModule} from './user-routing.module';
+import {SharedModule} from '../../../shared/modules';
 
 
 @NgModule({
   declarations: [
-    RegistrationComponent,
-    AuthUserComponent,
     UserCabinetComponent,
     EditUserComponent
   ],
   imports: [
     CommonModule,
-    // UserRoutingModule,
+    ReactiveFormsModule,
+    UserRoutingModule,
+    SharedModule,
+
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule,
     MatCardModule,
   ],
   exports: [
-    // UserRoutingModule,
-    MatDialogModule,
-    RegistrationComponent,
+    MatDialogModule
   ]
 })
 export class UserModule {

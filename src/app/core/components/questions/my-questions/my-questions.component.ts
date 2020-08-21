@@ -6,6 +6,7 @@ import {QuestionsService} from '../../../services';
 import {ISuccessHttpResponse} from '../../../../shared';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 import {EditQuestionComponent} from '../edit-question/edit-question.component';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,11 +17,12 @@ import {EditQuestionComponent} from '../edit-question/edit-question.component';
 export class MyQuestionsComponent implements OnInit {
 
   constructor(private questionService: QuestionsService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private router: Router
   ) {
   }
 
-  questions: QuestionModel[] = [];
+  questions: QuestionModel[];
 
   ngOnInit() {
     this.questionService.getMyQuestions().subscribe((data: ISuccessHttpResponse) => {

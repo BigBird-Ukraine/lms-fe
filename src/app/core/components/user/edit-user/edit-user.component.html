@@ -5,6 +5,22 @@
         (ngSubmit)="editUser()"
   >
 
+    <div class="example-full-width">
+      <mat-icon aria-hidden="false" class="icon">person_outline</mat-icon>
+      <mat-form-field>
+        <input type="text" matInput
+               placeholder="Введіть Ваше ім'я"
+               formControlName="name"
+               required
+        >
+        <mat-error *ngIf="editForm.get('name').hasError('required')">
+          Введіть, будь ласка, ім'я
+        </mat-error>
+        <mat-error *ngIf="editForm.get('name').hasError('pattern')">
+          Ім'я введено некоректно
+        </mat-error>
+      </mat-form-field>
+    </div>
 
     <div class="example-full-width">
       <mat-icon aria-hidden="false" class="icon">email</mat-icon>

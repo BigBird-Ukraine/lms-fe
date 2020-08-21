@@ -50,9 +50,11 @@ export class AllQuestionComponent implements OnInit {
       height: '800px',
       width: '700px',
     }).afterClosed().subscribe((result) => {
-      for (let i = 0; i < this.questions.length; i++) {
-        if (this.questions[i]._id === result._id) {
-          this.questions[i] = result;
+      if (result) {
+        for (let i = 0; i < this.questions.length; i++) {
+          if (this.questions[i]._id === result._id) {
+            this.questions[i] = result;
+          }
         }
       }
     });

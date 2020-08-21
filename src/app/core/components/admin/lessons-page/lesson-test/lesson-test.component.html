@@ -1,4 +1,4 @@
-<div class="questions_container">
+<div class="questions_container" *ngIf="questions">
   <mat-card class="text-center bg-dark text-white">
     <mat-card-title>
       Тестування по предмету:
@@ -50,4 +50,6 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-loader *ngIf="!questions"></app-loader>
 

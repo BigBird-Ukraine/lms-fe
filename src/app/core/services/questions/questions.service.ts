@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import { QuestionData, QuestionModel} from '../../interface';
 import {AuthService} from '../auth';
-import {ISuccessHttpResponse, commonAuthPath, commonAdminPath} from '../../../shared';
+import {ISuccessHttpResponse, commonAuthPath} from '../../../shared';
 
 
 @Injectable({

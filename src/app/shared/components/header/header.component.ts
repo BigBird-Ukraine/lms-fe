@@ -5,8 +5,8 @@ import {MatDialog} from '@angular/material';
 import {AuthService} from '../../../core/services/auth';
 import {UserService} from '../../../core/services/user';
 import {UserRolesEnum} from '../../enums';
-import {RegistrationComponent} from '../../../core/components/user/registration/registration.component';
-import {AuthUserComponent} from '../../../core/components/user/auth-user/auth-user.component';
+import {RegistrationComponent} from '../../../core/components/auth/registration/registration.component';
+import {AuthUserComponent} from '../../../core/components/auth/auth-user/auth-user.component';
 import {IUserSubjectModel} from '../../../core/interface';
 
 @Component({
@@ -31,17 +31,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserInfoByToken(this.token)
-      .subscribe(() => {
-        if (this.userInfo.subscribe()) {
-          this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
-            this.userName = user.name;
-            this.userId = user._id;
-            this.isStudent = user.role_id === UserRolesEnum.STUDENT;
-            this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
-          });
-        }
-      });
+    if (this.token) {
+      this.userService.getUserInfoByToken(this.token)
+        .subscribe(() => {
+          if (this.userInfo.subscribe()) {
+            this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
+              this.userName = user.name;
+              this.userId = user._id;
+              this.isStudent = user.role_id === UserRolesEnum.STUDENT;
+              this.isTeacher = user.role_id === UserRolesEnum.TEACHER;
+            });
+          }
+        });
+    }
   }
 
   openRegForm() {
@@ -50,15 +52,17 @@ export class HeaderComponent implements OnInit {
 
   openLogForm() {
     this.dialog.open(AuthUserComponent).afterClosed().subscribe(value => {
-      this.userService.getUserInfoByToken(value.data.accessToken)
-        .subscribe(() => {
-          if (this.userInfo.subscribe()) {
-            this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
-              this.userName = user.name;
-              this.isStudent = user.role_id === UserRolesEnum.STUDENT;
-            });
-          }
-        });
+      if (value) {
+        this.userService.getUserInfoByToken(value.data.accessToken)
+          .subscribe(() => {
+            if (this.userInfo.subscribe()) {
+              this.userInfo.subscribe((user: Partial<IUserSubjectModel>) => {
+                this.userName = user.name;
+                this.isStudent = user.role_id === UserRolesEnum.STUDENT;
+              });
+            }
+          });
+      }
     });
   }
 
@@ -70,4 +74,9 @@ export class HeaderComponent implements OnInit {
   redirectToHome() {
     this.router.navigateByUrl('/');
   }
+
+  test() {
+    this.router.navigateByUrl('/auth');
+  }
+
 }

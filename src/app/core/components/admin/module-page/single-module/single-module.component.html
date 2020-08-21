@@ -21,7 +21,7 @@
     <div class="d-flex flex-wrap m-3 justify-content-center">
       <div class="col-3 m-2 border p-2 bg-purple text-center cursor"
            *ngFor="let lesson of module.lessons_list"
-           (click)="moduleService.navigate('/adminPanel/lessons/'+lesson._id)">
+           (click)="moduleService.navigate('admin/adminPanel/lessons/'+lesson._id)">
         <h2 class="text-white">{{lesson.label}}</h2>
         <p>{{lesson.description}}</p>
       </div>

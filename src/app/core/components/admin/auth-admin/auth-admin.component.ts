@@ -54,7 +54,7 @@ export class AuthAdminComponent implements OnInit {
   login() {
     this.authAdminService.authAdmin(this.authForm.value).subscribe(() => {
       this.customSnackbarService.open('Логін успішний');
-      this.router.navigate(['/adminPanel/statistics']);
+      this.router.navigate(['admin/adminPanel']);
     }, () => {
       this.customSnackbarService.open('Не вірний логін або пароль');
     });

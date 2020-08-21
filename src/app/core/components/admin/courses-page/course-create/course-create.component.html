@@ -21,7 +21,7 @@
   </mat-dialog-content>
 
   <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close(false)">Скасувати</button>
     <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
       Зберегти
     </button>

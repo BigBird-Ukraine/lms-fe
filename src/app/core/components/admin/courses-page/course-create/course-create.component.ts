@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {AdminCoursesService} from '../../services';
@@ -15,7 +15,7 @@ export class CourseCreateComponent implements OnInit {
 
   constructor(private adminCoursesService: AdminCoursesService,
               private coursesService: AdminCoursesService,
-              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<CourseCreateComponent>,
               private snackbarService: CustomSnackbarService,
   ) {
   }
@@ -30,7 +30,7 @@ export class CourseCreateComponent implements OnInit {
   save() {
     this.adminCoursesService.save(this.form.value).subscribe(() => {
       this.snackbarService.open(`Курс ${this.form.value.label} створений`);
-      this.dialog.closeAll();
+      this.dialogRef.close(true);
     });
   }
 }

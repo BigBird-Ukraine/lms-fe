@@ -1,93 +1,87 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatSnackBarContainer,
   MatSnackBarModule
 } from '@angular/material/snack-bar';
-import {_MatMenuDirectivesModule, MatCardModule, MatMenuModule} from '@angular/material';
-import {MatAutocompleteModule} from '@angular/material';
+import {_MatMenuDirectivesModule, MatDialogModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {FlexModule} from '@angular/flex-layout';
 import {MatPaginatorIntl} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressSpinnerModule} from '@angular/material';
+import {MatListModule} from '@angular/material/list';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {SharedModule} from './shared/modules';
+import {MaterialModule, SharedModule} from './shared/modules';
 import {AuthGuardService, CustomSnackbarService} from './shared/services';
 import {MainLayoutComponent} from './shared/components/main-layout/main-layout.component';
-import {QuestionModule} from './core/components/questions/question.module';
 import {HomePageComponent} from './core/components/home-page/home-page.component';
-import {UserModule} from './core/components/user/user.module';
-import {MyQuestionsComponent} from './core/components/questions/my-questions/my-questions.component';
-import {FooterComponent} from './shared/components/footer/footer.component';
 import {HeaderComponent} from './shared/components/header/header.component';
-import {AdminLayoutComponent} from './shared/components/admin-layout/admin-layout.component';
-import {AdminModule} from './core/components/admin/admin.module';
-import {ModuleLayoutComponent, CourseLayoutComponent} from './shared/components/templates';
 import {FilterPipe} from './shared/pipe';
-import {ChangeRoleUserComponent} from './core/components/admin/users-page/change-role-user/change-role-user.component';
 import {ConfirmLayoutComponent} from './shared/components/confirm-layout/confirm-layout.component';
-import {LessonsModule} from './core/components/lessons/lessons.module';
-import {UpdateProfileComponent} from './core/components/admin/users-page/update-profile/update-profile.component';
 import {getUkrainianPaginatorIntl} from './shared/services/matPaginator.service';
 import {DeleteComponent} from './shared/components/delete/delete.component';
-import {GroupsModule} from './core/components/groups/groups.module';
-import { MyCoursesComponent } from './core/components/courses/my-courses/my-courses.component';
 import {MyGroupResolverService, MyGroupsResolverService} from './core/resolvers';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthUserComponent} from './core/components/auth/auth-user/auth-user.component';
+import {RegistrationComponent} from './core/components/auth/registration/registration.component';
+import {AuthModule} from './core/components/auth/auth.module';
+import {AdminInterceptor} from './core/components/admin/admin.interceptor';
 
+const mat = [
+  MaterialModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
+  _MatMenuDirectivesModule,
+  MatMenuModule,
+  MatIconModule,
+  MatListModule,
+  MatDialogModule,
+];
 
 @NgModule({
   entryComponents: [
-    CourseLayoutComponent,
-    ModuleLayoutComponent,
     ConfirmLayoutComponent,
-    ChangeRoleUserComponent,
-    UpdateProfileComponent,
-    DeleteComponent
+    DeleteComponent,
+
+    AuthUserComponent,
+    RegistrationComponent
   ],
   declarations: [
     AppComponent,
-    MainLayoutComponent,
-    HomePageComponent,
-    MyQuestionsComponent,
-    FooterComponent,
     HeaderComponent,
-    AdminLayoutComponent,
+    HomePageComponent,
+    MainLayoutComponent,
     FilterPipe,
-    CourseLayoutComponent,
-    ModuleLayoutComponent,
     ConfirmLayoutComponent,
     DeleteComponent,
-    MyCoursesComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    QuestionModule,
+    BrowserModule,
     HttpClientModule,
-    UserModule,
-    AdminModule,
-    MatSnackBarModule,
-    AdminModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     FlexModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    LessonsModule,
-    GroupsModule,
-    MatProgressSpinnerModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
+    AuthModule,
+    SharedModule,
+
+    ...mat
   ],
-  exports: [],
   bootstrap: [AppComponent],
   providers: [
     MatSnackBarContainer,
     CustomSnackbarService,
     AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AdminInterceptor
+    },
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
     MyGroupsResolverService,
     MyGroupResolverService

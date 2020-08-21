@@ -1,2 +1,2 @@
-export * from './my-group.resolver.service';
-export * from './my-groups.resolver.service'
+export * from './groups/my-group.resolver.service';
+export * from './groups/my-groups.resolver.service';

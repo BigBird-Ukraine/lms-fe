@@ -111,7 +111,7 @@
 
       </form>
 
-      <mat-accordion>
+      <mat-accordion *ngIf="lessonsList && lessonsList.length">
         <mat-expansion-panel *ngFor="let lesson of lessonsList">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -157,7 +157,11 @@
         </mat-expansion-panel>
       </mat-accordion>
 
+      <p *ngIf="lessonsList && !lessonsList.length" class="text-center text-warning m-auto">Уроків ще не має, створіть перший!</p>
+
     </div>
+
+    <app-loader *ngIf="!lessonsList"></app-loader>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

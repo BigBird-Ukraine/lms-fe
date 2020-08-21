@@ -1,45 +1,38 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatCardModule, MatAutocompleteModule} from '@angular/material';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {MatAutocompleteModule, MatCardModule, MatExpansionModule} from '@angular/material';
 
-import {FormModule, MaterialModule} from '../../../shared/modules';
-import {FilterPipe} from './filter.pipe';
-import {InfoHelperComponent} from './info-helper/info-helper.component';
+import {EditQuestionComponent} from './edit-question/edit-question.component';
 import {AddQuestionFormComponent} from './add-question-form/add-question-form.component';
+import {QuestionRoutingModule} from './question-routing.module';
+import {FormModule, MaterialModule, SharedModule} from '../../../shared/modules';
 import {FilterForQuestionsComponent} from './filter-for-questions/filter-for-questions.component';
-import {QuestionsLayoutComponent} from './questions-layout/questions-layout.component';
-import { EditQuestionComponent } from './edit-question/edit-question.component';
+import {FilterPipe} from './filter.pipe';
+import {MyQuestionsComponent} from './my-questions/my-questions.component';
 
 @NgModule({
   entryComponents: [
     EditQuestionComponent
   ],
   declarations: [
-    InfoHelperComponent,
     AddQuestionFormComponent,
     FilterForQuestionsComponent,
     FilterPipe,
-    QuestionsLayoutComponent,
     EditQuestionComponent,
+    MyQuestionsComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule,
     FormModule,
-    // QuestionRoutingModule,
+    QuestionRoutingModule,
+    SharedModule,
+
+    MaterialModule,
     MatExpansionModule,
     MatAutocompleteModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
   ],
-  exports: [
-    MaterialModule,
-    FormModule,
-    // QuestionRoutingModule,
-  ]
+  exports: []
 })
-
-export class QuestionModule {
-
-}
+export class QuestionModule { }
