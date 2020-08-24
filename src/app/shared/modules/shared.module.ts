@@ -1,13 +1,11 @@
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {MainLoaderComponent} from '../components/main-loader/main-loader.component';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-  ],
-  exports: [
-    HttpClientModule
-  ]
+  declarations: [MainLoaderComponent],
+  imports: [MatProgressSpinnerModule],
+  exports: [MainLoaderComponent, MatProgressSpinnerModule],
 })
 
 export class SharedModule {

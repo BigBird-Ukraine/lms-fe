@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 import {Tags, ILesson} from '../../../interface';
 import {InfoHelperService, LessonsService} from '../../../services';
@@ -21,7 +21,7 @@ export class CreateLessonComponent implements OnInit {
               private infoService: InfoHelperService,
               private lessonService: LessonsService,
               private customSnackbarService: CustomSnackbarService,
-              private dialog: MatDialog) {
+              private dialogRef: MatDialogRef<CreateLessonComponent>) {
   }
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class CreateLessonComponent implements OnInit {
 
     this.lessonService.createLesson(lessonData).subscribe(() => {
       this.customSnackbarService.open('Урок додано', '');
-      this.dialog.closeAll();
+      this.dialogRef.close(true);
     });
   }
 }

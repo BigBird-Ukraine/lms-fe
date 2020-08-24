@@ -1,4 +1,4 @@
-<div class="questions_container m-2">
+<div class="questions_container m-2" *ngIf="questions">
   <mat-card class="text-center bg-dark text-white">
     <mat-card-title>
       Тестування по предмету:
@@ -12,7 +12,8 @@
             (keydown.enter)="$event.preventDefault()">
         <div class="">
 
-          <tbody class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
+          <tbody *ngIf="questions && questions.length"
+            class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
           <mat-card class="question col-2 m-2" *ngFor="let item of questions; let i = index;"
                     [formGroupName]="i">
             <tr>
@@ -41,8 +42,12 @@
           </mat-card>
           </tbody>
 
+          <div *ngIf="questions && !questions.length">
+            <p class="text-center text-danger">До даного уроку ще не добавлені питання</p>
+          </div>
+
         </div>
-        <mat-card-actions class="btn">
+        <mat-card-actions class="btn" *ngIf="questions && questions.length">
           <button mat-raised-button color="white" type="submit">Перевірити</button>
         </mat-card-actions>
 
@@ -50,3 +55,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-main-loader *ngIf="!questions"></app-main-loader>

@@ -6,8 +6,8 @@ import {UserRolesEnum, UserStatusEnum} from '../../../../../shared/enums';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {AdminUsersService} from '../../services';
 import {ChangeRoleUserComponent} from '../change-role-user/change-role-user.component';
-import {UpdateProfileComponent} from "../update-profile/update-profile.component";
-import {DeleteComponent} from "../../../../../shared/components/delete/delete.component";
+import {UpdateProfileComponent} from '../update-profile/update-profile.component';
+import {DeleteComponent} from '../../../../../shared/components/delete/delete.component';
 
 @Component({
   selector: 'app-user-out',

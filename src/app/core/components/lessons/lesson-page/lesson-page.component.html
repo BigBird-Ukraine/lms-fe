@@ -1,26 +1,17 @@
 <mat-sidenav-container class="example-container">
 
-  <mat-sidenav class="sidenav" mode="side" opened>
+  <mat-sidenav class="sidenav" mode="side" opened  *ngIf="isTeacher">
     <button mat-raised-button
             color="primary"
             type="button"
             class="nav-btn"
-            *ngIf="isTeacher"
             (click)="openForm()"
     >Додати урок
-    </button>
-
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            class="nav-btn"
-            (click)="allLessons()"
-    >Список уроків
     </button>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div *ngIf="showAllLessons"
+    <div *ngIf="lessonsList"
          class="lesson-layout">
 
       <form [formGroup]="filterLessonsForm"
@@ -167,6 +158,8 @@
       </mat-accordion>
 
     </div>
+
+    <app-main-loader *ngIf="!lessonsList"></app-main-loader>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

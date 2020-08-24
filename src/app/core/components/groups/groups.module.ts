@@ -17,22 +17,28 @@ import { SingleGroupComponent } from './single-group/single-group.component';
 import { GroupPresentsComponent } from './group-presents/group-presents.component';
 import { MyGroupsComponent } from './my-groups/my-groups.component';
 import { AttendanceComponent } from './group-attendance/attendance.component';
+import {GroupsRoutingModule} from './groups-routing.module';
+import {SharedModule} from '../../../shared/modules';
 
 @NgModule({
   declarations: [
-    AllGroupsComponent,
-    SingleGroupComponent,
-    GroupPresentsComponent,
-    MyGroupsComponent,
     AttendanceComponent,
+    MyGroupsComponent,
+    GroupPresentsComponent,
+    SingleGroupComponent,
+    AllGroupsComponent,
   ],
   imports: [
+    GroupsRoutingModule,
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    SharedModule,
+
     MatSidenavModule,
     MatExpansionModule,
     MatCardModule,
     MatButtonModule,
-    CommonModule,
-    RouterModule,
     MatListModule,
     MatTableModule,
     MatDatepickerModule,
@@ -40,7 +46,6 @@ import { AttendanceComponent } from './group-attendance/attendance.component';
     MatInputModule,
     MatDialogModule,
     MatCheckboxModule,
-    ReactiveFormsModule
   ],
   exports: []
 })

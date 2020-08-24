@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ITest, IUser, QuestionModel} from '../../../../interface';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatCheckboxChange, MatDialog} from '@angular/material';
-import {LessonTestResultComponent} from '../../../lessons/lesson-test-result/lesson-test-result.component';
+
+import {ITest, QuestionModel} from '../../../../interface';
 import {AdminQuestionsService} from '../../services';
 import {AdminTestService} from '../../services/admin-test.service';
+import {LessonsTestResultComponent} from '../lessons-test-result/lessons-test-result.component';
 
 @Component({
   selector: 'app-lesson-test',
@@ -24,7 +25,8 @@ export class LessonTestComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private testService: AdminTestService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private router: Router
   ) {
   }
 
@@ -97,9 +99,9 @@ export class LessonTestComponent implements OnInit {
     const {question_list} = test;
 
     this.testService.sendTests(id, question_list).subscribe((value: number) => {
-        this.dialog.open(LessonTestResultComponent, {
+        this.dialog.open(LessonsTestResultComponent, {
           data: value
-        });
+        }).afterClosed().subscribe(res => this.router.navigate(['admin/adminPanel/lessons']));
 
       }
     );

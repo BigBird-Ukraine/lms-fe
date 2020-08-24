@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IUser, QuestionModel, ITest} from '../../../interface';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 
 import {QuestionsService} from '../../../services/questions';
@@ -24,7 +24,8 @@ export class LessonTestComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
               private testService: TestService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private router: Router
   ) {
   }
 
@@ -95,7 +96,7 @@ export class LessonTestComponent implements OnInit {
     this.testService.sendTests(id, question_list, this.cutQuestions).subscribe((value: IUser) => {
         this.dialog.open(LessonTestResultComponent, {
           data: value
-        });
+        }).afterClosed().subscribe(res => this.router.navigate(['/lessons']));
       }
     );
   }

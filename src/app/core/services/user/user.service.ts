@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel, IUserSubjectModel, IUser, IPassedTestFull, IPassedData} from '../../interface';
+import {UserModel, IUserSubjectModel, IUser, IPassedData} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({

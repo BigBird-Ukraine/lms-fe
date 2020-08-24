@@ -4,9 +4,9 @@
 
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content *ngIf="groupsList">
 
-    <div *ngIf="groupsList && !isShowGroup"
+    <div *ngIf="groupsList.length && !isShowGroup"
          class="group-layout">
 
       <h2>Групи</h2>
@@ -41,11 +41,15 @@
     </div>
 
     <app-single-group *ngIf="isShowGroup"
-                   [groupInfo]="groupInfo">
+                      [groupInfo]="groupInfo">
 
     </app-single-group>
 
   </mat-sidenav-content>
+
+  <p *ngIf="groupsList && !groupsList.length" class="text-center text-red m-auto"> Групи ще не добавили</p>
+
+  <app-main-loader *ngIf="!groupsList"></app-main-loader>
 
 </mat-sidenav-container>
 

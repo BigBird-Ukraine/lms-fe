@@ -1,10 +1,9 @@
-<div class="cabinet">
+<div class="cabinet"  *ngIf="user">
 
   <h1>Мій Кабінет</h1>
   <hr>
 
-  <mat-card *ngIf="user" class="userInfoBlock">
-
+  <mat-card class="userInfoBlock">
     <div class="avatarBlock">
       <div class="avatar">
         <img [src]="path + '/' + user.photo_path">
@@ -34,3 +33,5 @@
   </mat-card>
 
 </div>
+
+<app-main-loader *ngIf="!user"></app-main-loader>

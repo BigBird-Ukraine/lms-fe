@@ -72,7 +72,7 @@ export class SingleLessonComponent implements OnInit {
   }
 
   startTest() {
-    this.router.navigate([`adminPanel/lessons/${this.id}/test`]);
+    this.router.navigate([`admin/adminPanel/lessons/${this.id}/test`]);
   }
 
 }

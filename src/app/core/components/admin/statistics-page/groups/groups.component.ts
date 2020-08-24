@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IGroupStatistics} from '../../interfaces';
 import {AdminGroupsService, AdminStatisticsService} from '../../services';
 import {MatDialog} from '@angular/material';
@@ -9,7 +9,7 @@ import {GroupComponent} from '../group/group.component';
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit, OnDestroy {
   groupsStatistic: IGroupStatistics[];
 
   constructor(private groupsService: AdminGroupsService,
@@ -33,5 +33,9 @@ export class GroupsComponent implements OnInit {
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.statisticService.reset();
   }
 }
