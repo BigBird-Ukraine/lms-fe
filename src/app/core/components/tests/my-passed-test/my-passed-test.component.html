@@ -20,11 +20,17 @@
       </div>
     </div>
 
-    <div class="col-4 ml-3 bg-danger p-2 my-2">
-      <p>Результат: <span class="text-white">{{test.result}}</span></p>
+    <div class="col-5 ml-3 bg-danger p-2 my-2">
+      <p>Результат:
+        <span *ngIf="test.result >= 5" class="text-white">{{test.result}}</span>
+        <span *ngIf="test.result < 5" class="text-white">Тест провалено!</span>
+      </p>
       <p class="my-2">Дата проходженя: <br> <span class="text-white">{{test.created_at |  date:'medium' }}</span></p>
     </div>
   </div>
 </div>
 
 <app-main-loader *ngIf="!userPassedTest"></app-main-loader>
+
+<p *ngIf="userPassedTest && userPassedTest.questions "
+    class="text-center text-danger">Ви не пройшли жодного тесту.</p>

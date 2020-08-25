@@ -1,23 +1,23 @@
-<div class="questions_container m-2" *ngIf="questions">
+<div class="questions_container" *ngIf="questions">
   <mat-card class="text-center bg-dark text-white">
     <mat-card-title>
       Тестування по предмету:
     </mat-card-title>
     <p>Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
       балів, за одну помилку, в вас забирають <span class="font-weight-bold">5</span> балів</p>
+    <p>Максимально можливий бал за цей тест, становить: <span class="text-danger">{{countCorrectAnswer}}</span></p>
 
-    <mat-card-content >
+    <mat-card-content>
       <form [formGroup]="questionForm"
             (ngSubmit)="formTest()"
             (keydown.enter)="$event.preventDefault()">
         <div class="">
 
-          <tbody *ngIf="questions && questions.length"
-            class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
-          <mat-card class="question col-2 m-2" *ngFor="let item of questions; let i = index;"
+          <tbody class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
+          <mat-card class="question col-3 m-2 " *ngFor="let item of questions; let i = index;"
                     [formGroupName]="i">
             <tr>
-              <td class="q_text" >
+              <td class="q_text">
                 <input formControlName="question" [value]="item._id" type="hidden">
                 <span>
                 {{i + 1}}.
@@ -28,27 +28,23 @@
               </td>
             </tr>
             <ng-container formArrayName="answer">
-              <tr *ngFor="let a of item.answers; let j = index"
-                  [formGroupName]="j">
-                <td>
-                  <mat-checkbox  formControlName="checked">
-               <span>
-                  {{a.value}}
-               </span>
+              <div *ngFor="let a of item.answers; let j = index"
+                   [formGroupName]="j"
+                   class="my-2 ">
+                <div class="d-flex">
+                  <mat-checkbox formControlName="checked" class="col-1"><span class="hide">{{a.value}}</span>
                   </mat-checkbox>
-                </td>
-              </tr>
+                  <span class="px-1 justify">{{a.value}}</span>
+                </div>
+
+              </div>
             </ng-container>
           </mat-card>
           </tbody>
 
-          <div *ngIf="questions && !questions.length">
-            <p class="text-center text-danger">До даного уроку ще не добавлені питання</p>
-          </div>
-
         </div>
-        <mat-card-actions class="btn" *ngIf="questions && questions.length">
-          <button mat-raised-button color="white" type="submit">Перевірити</button>
+        <mat-card-actions class="btn">
+          <button mat-raised-button color="primary" type="submit">Перевірити</button>
         </mat-card-actions>
 
       </form>

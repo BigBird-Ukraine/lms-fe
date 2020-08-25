@@ -11,7 +11,7 @@ import {commonAdminPath} from '../../../../shared/api';
   providedIn: 'root'
 })
 export class AdminModuleService {
-  public modules: IModule[] = [];
+  public modules: IModule[];
 
   moduleUrl = `${commonAdminPath}/modules`;
 
@@ -41,7 +41,7 @@ export class AdminModuleService {
   delete(id: string) {
     return this.http.delete(`${this.moduleUrl}/${id}`).subscribe(res => {
       alert('Success');
-      this.navigate('/adminPanel/modules');
+      this.navigate('/admin/adminPanel/modules');
     });
   }
 

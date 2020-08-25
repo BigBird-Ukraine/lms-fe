@@ -93,4 +93,17 @@ export class ModuleLayoutComponent implements OnInit {
   getTags() {
     this.infoService.getTags().subscribe((tags: Tags[]) => this.tagsForAutocomplete = tags);
   }
+
+
+  delTag(tag) {
+    const index = this.tags.findIndex(delTag => delTag === tag);
+
+    this.tags.splice(index, 1);
+  }
+
+  delLesson(lesson) {
+    const index = this.lessons.findIndex(delLesson => delLesson === lesson);
+
+    this.lessons.splice(index, 1);
+  }
 }

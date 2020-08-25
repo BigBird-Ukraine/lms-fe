@@ -5,3 +5,11 @@
 .border-blue {
   border: 1px solid cornflowerblue;
 }
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor :hover {
+  background: orange;
+}

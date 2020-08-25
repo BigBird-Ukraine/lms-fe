@@ -112,10 +112,10 @@
       </form>
 
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let lesson of lessonsList">
+        <mat-expansion-panel *ngFor="let lesson of lessonsList; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Урок {{lesson.number}}.
+              Урок {{i+1}}.
               {{lesson.label}}
             </mat-panel-title>
           </mat-expansion-panel-header>

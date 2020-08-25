@@ -10,7 +10,9 @@ import {IGroup} from '../../../interface';
 })
 export class MyGroupsComponent implements OnInit {
 
-  myGroups: Partial<IGroup>[];
+  groupsList: Partial<IGroup>[];
+  isShowGroup = false;
+  btnStatus = false;
 
   constructor(private groupsService: GroupsService,
               private route: ActivatedRoute,
@@ -21,11 +23,12 @@ export class MyGroupsComponent implements OnInit {
     this.route.data
       .subscribe(
         res => {
-          this.myGroups = res.myGroupsResolverService[0].groups;
+          this.groupsList = res.myGroupsResolverService.groups_id;
         });
   }
 
-  navigate(value) {
+  openAttendance(value) {
     this.router.navigate([value]);
+    this.btnStatus = !this.btnStatus;
   }
 }

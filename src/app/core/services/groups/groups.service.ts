@@ -43,7 +43,7 @@ export class GroupsService {
         Authorization: this.authService.getAccessToken()
       })
     };
-
+    
     return this.http.get<Partial<IGroup>[]>(`${commonAuthPath}/users/my-groups`, options);
   }
 }

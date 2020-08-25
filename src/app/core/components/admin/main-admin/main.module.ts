@@ -17,6 +17,7 @@ import {UpdateProfileComponent} from '../users-page/update-profile/update-profil
     AdminModule,
     MatToolbarModule,
     MatSidenavModule
-  ]
+  ],
+  exports: [UpdateProfileComponent]
 })
 export class MainModule { }

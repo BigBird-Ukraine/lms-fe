@@ -11,12 +11,6 @@ import {AttendanceComponent} from './group-attendance/attendance.component';
 
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthGuardService], component: AllGroupsComponent, children: [
-      {path: ':id', component: SingleGroupComponent},
-      {path: 'presents', component: GroupPresentsComponent}
-    ]
-  },
-  {
     path: 'my', canActivate: [AuthGuardService], resolve: {myGroupsResolverService: MyGroupsResolverService},
     component: MyGroupsComponent, children: [
       {
@@ -25,6 +19,13 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: '', canActivate: [AuthGuardService], component: AllGroupsComponent, children: [
+      {path: ':id', component: SingleGroupComponent},
+      {path: 'presents', component: GroupPresentsComponent}
+    ]
+  },
+
 ];
 
 @NgModule({
