@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap text-center justify-content-center" *ngIf="moduleService.modules.length">
+<div class="d-flex flex-wrap text-center justify-content-center" *ngIf="moduleService.modules">
 
   <div *ngFor="let module of moduleService.modules" class="m-2 p-2 border col-3 cursor bg-purple">
     <h2 class="text-white">{{module.label}}</h2>
@@ -10,4 +10,7 @@
 
 </div>
 
-<app-loader *ngIf="!moduleService.modules.length"></app-loader>
+<app-loader *ngIf="!moduleService.modules"></app-loader>
+
+<p class="text-danger text-center"
+  *ngIf="moduleService.modules && !moduleService.modules.length">Модулів ще не має, додайте перший!</p>

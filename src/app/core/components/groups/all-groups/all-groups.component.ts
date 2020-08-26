@@ -15,6 +15,7 @@ export class AllGroupsComponent implements OnInit {
   groupInfo: IGroup;
   isShowGroup = false;
 
+
   constructor(private groupsService: GroupsService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {

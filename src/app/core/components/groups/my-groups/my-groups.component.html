@@ -1,19 +1,54 @@
-<div class="min-vh-100 border m-2 text-center">
-  <div class="m-2 p-3   d-flex flex-wrap justify-content-center ">
-    <div *ngIf="!myGroups.length" class="text-center">
-      Вас ще не добавили до жодної групи
-    </div>
+<mat-sidenav-container class="example-container">
 
-    <div *ngFor="let group of myGroups" class="col-3 m-2 p-2 border bg-purple text-center text-white">
-      <h2>{{group.label}}</h2>
-      <p>{{group.city}}</p>
-      <p>{{group.created_at | date}} - {{group.finished_at | date}}</p>
-      <button type="button" class="btn btn-warning" (click)="navigate('my-groups/'+group._id)">Журнал відвідуваності
-      </button>
-    </div>
-  </div>
+  <mat-sidenav class="sidenav" mode="side" opened>
 
-  <div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div *ngIf="groupsList.length && !isShowGroup"
+         class="group-layout">
+
+      <h2>Групи</h2>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let group of groupsList">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{group.label}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="group-inner">
+
+            <p>Місто: {{group.city}}</p>
+            <p>Розпочата: {{group.started_at | date}}</p>
+            <p>Планове закінчення: {{group.finished_at | date}}</p>
+          </div>
+
+          <mat-action-row>
+
+            <button *ngIf="!btnStatus" mat-button
+                    color="primary"
+                    type="button"
+                    (click)="openAttendance('/groups/my/'+group._id)">
+              Журнал відвідувань
+            </button>
+
+            <button *ngIf="btnStatus" mat-button
+                    color="primary"
+                    type="button"
+                    (click)="openAttendance('/groups/my')">
+              Назад
+            </button>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
     <router-outlet></router-outlet>
-  </div>
-</div>
+  </mat-sidenav-content>
+
+  <p *ngIf="!groupsList.length" class="text-center text-red m-auto"> Групи ще не добавили</p>
+</mat-sidenav-container>
+

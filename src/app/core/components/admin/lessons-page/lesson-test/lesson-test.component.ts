@@ -20,6 +20,7 @@ export class LessonTestComponent implements OnInit {
   questionForm: FormGroup;
   id: string;
   public personCheckedIndex = -1;
+  public countCorrectAnswer = 0;
 
   constructor(private questionsService: AdminQuestionsService,
               private activatedRoute: ActivatedRoute,
@@ -49,6 +50,7 @@ export class LessonTestComponent implements OnInit {
 
   getData() {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
+      console.log(questions);
       this.questions = questions.data.questions_id;
       this.questions.forEach((el) => {
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
@@ -58,6 +60,9 @@ export class LessonTestComponent implements OnInit {
         });
         const answersArr = (control.get('answer')) as FormArray;
         el.answers.forEach(singleAnswer => {
+          if (singleAnswer.correct) {
+            this.countCorrectAnswer = +this.countCorrectAnswer + 1;
+          }
           const answerControl = new FormGroup({
             _id: new FormControl(singleAnswer._id),
             value: new FormControl(singleAnswer.value),
@@ -67,6 +72,7 @@ export class LessonTestComponent implements OnInit {
         });
         questionListArr.push(control);
       });
+      this.countCorrectAnswer *= 10;
     });
   }
 

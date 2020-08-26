@@ -47,7 +47,7 @@
           <p class="text-center text-danger">Питання ще не добавлені</p>
         </div>
 
-        <mat-card-actions class="btn">
+        <mat-card-actions *ngIf="questions && questions.length" class="btn">
           <button mat-raised-button color="primary" type="submit">Перевірити</button>
         </mat-card-actions>
 

@@ -1,1 +1,4 @@
-<mat-dialog-content>Ваш результат: <b>{{data}}</b></mat-dialog-content>
+<mat-dialog-content>
+  <span *ngIf="data >=5 ">Ваш результат: <b>{{data}}</b></span>
+  <span *ngIf="data < 5">Тест провалено!</span>
+</mat-dialog-content>

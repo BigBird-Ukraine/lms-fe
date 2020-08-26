@@ -5,27 +5,29 @@ import {UsersRoutingModule} from './users-routing.module';
 import {UsersPageComponent} from './user-page/users-page.component';
 import {UserOutComponent} from './user-out/user-out.component';
 import {AdminModule} from '../admin.module';
-import {UpdateProfileComponent} from './update-profile/update-profile.component';
 import {CreateUserComponent} from './create-user/create-user.component';
+import {MainModule} from '../main-admin/main.module';
+import {ChangeRoleUserComponent} from './change-role-user/change-role-user.component';
 
 
 
 @NgModule({
   entryComponents: [
-    UpdateProfileComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ChangeRoleUserComponent
   ],
   declarations: [
     UsersPageComponent,
-    UpdateProfileComponent,
     UserOutComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ChangeRoleUserComponent
   ],
   imports: [
     CommonModule,
     UsersRoutingModule,
 
-    AdminModule
+    AdminModule,
+    MainModule
   ]
 })
 export class UsersModule { }

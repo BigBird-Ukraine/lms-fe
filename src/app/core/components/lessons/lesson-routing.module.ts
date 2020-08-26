@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuardService} from '../../../shared/services';
+import {AuthGuardService, RoleGuardService} from '../../../shared/services';
 import {LessonPageComponent} from './lesson-page/lesson-page.component';
 import {CreateLessonComponent} from './create-lesson/create-lesson.component';
 import {EditLessonComponent} from './edit-lesson/edit-lesson.component';
@@ -10,7 +10,7 @@ import {LessonTestComponent} from './lesson-test/lesson-test.component';
 import {LessonTestResultComponent} from './lesson-test-result/lesson-test-result.component';
 
 const routes: Routes = [
-  {path: '', canActivate: [AuthGuardService], component: LessonPageComponent, children: [
+  {path: '', canActivate: [AuthGuardService, RoleGuardService], component: LessonPageComponent, children: [
       {path: 'create', component: CreateLessonComponent},
       {path: ':id/edit', component: EditLessonComponent}
     ]},

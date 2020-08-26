@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
 
-import {QuestionsService, TestService} from '../../../services';
+import {QuestionsService, TestService, UserService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
 import {LessonTestResultComponent} from '../../lessons/lesson-test-result/lesson-test-result.component';
-import {MatDialog} from '@angular/material';
-
 
 @Component({
   selector: 'app-questions-layout',
@@ -26,7 +25,8 @@ export class QuestionsLayoutComponent implements OnInit {
               private fb: FormBuilder,
               private dialog: MatDialog,
               private testService: TestService,
-              private router: Router
+              private router: Router,
+              private userService: UserService
   ) {
   }
 
@@ -99,7 +99,9 @@ export class QuestionsLayoutComponent implements OnInit {
     this.testService.sendFilteredTests(question_list, this.cutQuestions).subscribe((value) => {
         this.dialog.open(LessonTestResultComponent, {
           data: value
-        }).afterClosed().subscribe(res => this.router.navigate(['/lessons']));
+        }).afterClosed().subscribe(res => {
+          this.router.navigate(['questions'] );
+        });
       }
     );
   }

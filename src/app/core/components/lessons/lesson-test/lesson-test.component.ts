@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material';
 import {QuestionsService} from '../../../services/questions';
 import {TestService} from '../../../services/tests';
 import {LessonTestResultComponent} from '../lesson-test-result/lesson-test-result.component';
+import {UserService} from '../../../services/user';
 
 @Component({
   selector: 'app-lesson-test',
@@ -18,6 +19,7 @@ export class LessonTestComponent implements OnInit {
   questions: QuestionModel[];
   cutQuestions: Partial<QuestionModel>[] = [];
   questionForm: FormGroup;
+  countCorrectAnswer = 0;
   id: string;
 
   constructor(private questionsService: QuestionsService,
@@ -25,6 +27,7 @@ export class LessonTestComponent implements OnInit {
               private fb: FormBuilder,
               private testService: TestService,
               private dialog: MatDialog,
+              private userService: UserService,
               private router: Router
   ) {
   }
@@ -53,6 +56,9 @@ export class LessonTestComponent implements OnInit {
         });
         const answersArr = (control.get('answer')) as FormArray;
         el.answers.forEach(singleAnswer => {
+          if (singleAnswer.correct) {
+            this.countCorrectAnswer = +this.countCorrectAnswer + 1;
+          }
           const answerControl = new FormGroup({
             _id: new FormControl(singleAnswer._id),
             value: new FormControl(singleAnswer.value),
@@ -62,6 +68,7 @@ export class LessonTestComponent implements OnInit {
         });
         questionListArr.push(control);
       });
+      this.countCorrectAnswer *= 10;
     });
   }
 
@@ -96,7 +103,9 @@ export class LessonTestComponent implements OnInit {
     this.testService.sendTests(id, question_list, this.cutQuestions).subscribe((value: IUser) => {
         this.dialog.open(LessonTestResultComponent, {
           data: value
-        }).afterClosed().subscribe(res => this.router.navigate(['/lessons']));
+        }).afterClosed().subscribe(res => {
+          this.router.navigate([`lessons/${id}`]);
+        });
       }
     );
   }

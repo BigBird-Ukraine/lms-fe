@@ -27,7 +27,6 @@
                formGroupName="lessons_list"
                (keyup.enter)="newLesson($event)"
                [matAutocomplete]="autoLessons"
-               required
                #searchLessons
         >
 
@@ -46,6 +45,11 @@
         <span *ngFor="let lesson of lessons"
               class="block">
           {{lesson}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delLesson(lesson)">
+              &times;
+            </button>
         </span>
       </div>
 
@@ -70,6 +74,11 @@
         <span *ngFor="let tag of tags"
               class="block">
           {{tag}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delTag(tag)">
+            &times;
+          </button>
         </span>
       </div>
 
@@ -78,7 +87,7 @@
     <button mat-raised-button
             color="primary"
             type="button"
-            [disabled]="moduleForm.invalid || !lessons.length"
+            [disabled]="moduleForm.invalid"
             (click) = "addModule()"
     >Створити
     </button>
