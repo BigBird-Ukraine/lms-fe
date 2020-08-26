@@ -19,7 +19,7 @@ export class LessonTestComponent implements OnInit {
   questions: QuestionModel[];
   cutQuestions: Partial<QuestionModel>[] = [];
   questionForm: FormGroup;
-  countCorrectAnswer = 0;
+  maxMark: number;
   id: string;
 
   constructor(private questionsService: QuestionsService,
@@ -46,7 +46,8 @@ export class LessonTestComponent implements OnInit {
 
   getData() {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
-      this.questions = questions.data.questions_id;
+      this.maxMark = questions.data.maxMark;
+      this.questions = questions.data.questions;
       this.questions.forEach((el) => {
         this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
@@ -56,9 +57,6 @@ export class LessonTestComponent implements OnInit {
         });
         const answersArr = (control.get('answer')) as FormArray;
         el.answers.forEach(singleAnswer => {
-          if (singleAnswer.correct) {
-            this.countCorrectAnswer = +this.countCorrectAnswer + 1;
-          }
           const answerControl = new FormGroup({
             _id: new FormControl(singleAnswer._id),
             value: new FormControl(singleAnswer.value),
@@ -68,7 +66,6 @@ export class LessonTestComponent implements OnInit {
         });
         questionListArr.push(control);
       });
-      this.countCorrectAnswer *= 10;
     });
   }
 
