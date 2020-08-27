@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {IEditLesson, IFullLesson, ILesson} from '../../../interface';
 import {commonAdminPath} from '../../../../shared/api';
 import {AdminAuthService} from './admin-auth.service';
-import {ILessonStatistics} from '../interfaces';
+import {IComment, ICommentPaginator, IEditLesson, IFullLesson, ILesson, ILessonStatistics} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +104,45 @@ export class AdminLessonService {
     };
 
     return this.http.delete(`${commonAdminPath}/lessons/${id}`, options);
+  }
+
+  saveComment(id: string, comment: IComment) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.post(`${commonAdminPath}/lessons/${id}/comment`, comment, options);
+  }
+
+  getCommentaries(id: string, params?): Observable<ICommentPaginator> {
+    return this.http.get<ICommentPaginator>(`${commonAdminPath}/lessons/${id}/comment`, {
+      params: new HttpParams({
+        fromObject: params
+      }),
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    });
+  }
+
+  deleteComment(id: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete(`${commonAdminPath}/lessons/comment?comment_id=${id}`, options);
+  }
+
+  editComment(comId: string, text: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+    return this.http.put(`${commonAdminPath}/lessons/comment?comment_id=${comId}`, {text}, options);
   }
 }

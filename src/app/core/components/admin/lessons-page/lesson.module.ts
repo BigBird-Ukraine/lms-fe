@@ -10,12 +10,14 @@ import {SingleLessonComponent} from './single-lesson/single-lesson.component';
 import {AdminModule} from '../admin.module';
 import {QuestionsModule} from '../questions-page/questions.module';
 import {LessonsTestResultComponent} from './lessons-test-result/lessons-test-result.component';
+import { EditCommentComponent } from './edit-comment/edit-comment.component';
 
 
 
 @NgModule({
   entryComponents: [
     LessonsTestResultComponent,
+    EditCommentComponent
   ],
   declarations: [
     CreateLessonAdminComponent,
@@ -24,7 +26,8 @@ import {LessonsTestResultComponent} from './lessons-test-result/lessons-test-res
     LessonTestComponent,
     LessonsTestResultComponent,
     SingleLessonComponent,
-    LessonsTestResultComponent
+    LessonsTestResultComponent,
+    EditCommentComponent
   ],
   imports: [
     CommonModule,

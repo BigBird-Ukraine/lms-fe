@@ -6,7 +6,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule, MatSidenavModule
+  MatInputModule, MatPaginatorModule, MatSidenavModule
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -21,11 +21,13 @@ import {AddQuestionToLessonComponent} from './add-question-to-lesson/add-questio
 import {LessonTestComponent} from './lesson-test/lesson-test.component';
 import {LessonTestResultComponent} from './lesson-test-result/lesson-test-result.component';
 import {LessonRoutingModule} from './lesson-routing.module';
-import {SharedModule} from '../../../shared/modules';
+import {MaterialModule, SharedModule} from '../../../shared/modules';
+import { EditCommentComponent } from './edit-comment/edit-comment.component';
 
 
 
 @NgModule({
+  entryComponents:[EditCommentComponent],
   declarations: [
     LessonPageComponent,
     CreateLessonComponent,
@@ -34,7 +36,8 @@ import {SharedModule} from '../../../shared/modules';
     SingleLessonComponent,
     AddQuestionToLessonComponent,
     LessonTestComponent,
-    LessonTestResultComponent
+    LessonTestResultComponent,
+    EditCommentComponent
   ],
   imports: [
     LessonRoutingModule,
@@ -55,6 +58,8 @@ import {SharedModule} from '../../../shared/modules';
     MatSidenavModule,
     MatIconModule,
     MatCheckboxModule,
+    MatPaginatorModule,
+    MaterialModule
   ],
   exports: [LessonTestResultComponent]
 })

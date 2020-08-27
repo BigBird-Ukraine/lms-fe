@@ -19,7 +19,6 @@ export class LessonTestComponent implements OnInit {
   questions: QuestionModel[];
   questionForm: FormGroup;
   id: string;
-  public personCheckedIndex = -1;
   public countCorrectAnswer = 0;
 
   constructor(private questionsService: AdminQuestionsService,
@@ -43,14 +42,8 @@ export class LessonTestComponent implements OnInit {
     });
   }
 
-  personCheckboxChange(event: MatCheckboxChange, index: number) {
-    // This allows only one checkbox to be checked among each checkbox
-    this.personCheckedIndex = event.checked ? index : -1;
-  }
-
   getData() {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
-      console.log(questions);
       this.questions = questions.data.questions_id;
       this.questions.forEach((el) => {
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
