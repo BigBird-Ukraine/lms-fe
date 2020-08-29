@@ -1,36 +1,34 @@
 <div class="d-flex flex-wrap justify-content-around" *ngIf="userPassedTest">
 
-  <div class="col-5 m-2 p-2 border bg-secondary" *ngFor="let test of userPassedTest">
-    <div *ngIf="!test.lesson_label">
-      <p class="text-warning text-center">Змішані питання вашого пройденого тесту </p>
-    </div>
+  <div class="col-5 m-2 p-2 border bg-secondary" *ngFor="let test of userPassedTest.passed_tests">
 
-    <div *ngIf="test.lesson_label"
+
+    <div *ngIf="test.passed_lesson_id"
          class="text-center mx-4 text-white">
-      <p><span class="text-warning">Урок: </span>{{test.lesson_label}}</p>
-      <p>{{test.lesson_description}}</p>
+      <p><span class="text-warning">Урок: </span>{{test.passed_lesson_id.lesson_label}}</p>
+      <p>{{test.passed_lesson_id.lesson_description}}</p>
     </div>
 
-    <div class="mx-2 d-flex flex-wrap ">
-      <div class="col-12 border p-2 m-2 text-center bg-white" *ngFor="let question of test.questions">
-        <p><span class="text-secondary">Питання: </span>{{question.question}}</p>
-        <p>{{question.description}}</p>
-        <p><span class="text-secondary">Рівень:</span> {{question.level}}</p>
-        <p><span class="text-secondary">Предмет:</span> {{question.subject}}</p>
-      </div>
+    <div class="mx-2 d-flex flex-wrap" *ngIf="test.passed_lesson_id">
+      <app-passed-question class="col-12" [questions]=test.passed_lesson_id.questions></app-passed-question>
     </div>
 
-    <div class="col-5 ml-3 bg-danger p-2 my-2">
+    <div class="mx-2 d-flex flex-wrap " *ngIf="test.passed_questions_id.length">
+      <p class="text-warning  m-auto">Змішані питання вашого пройденого тесту </p>
+      <app-passed-question class="col-12" [questions]=test.passed_questions_id></app-passed-question>
+    </div>
+
+    <div class="col-5 m-auto bg-danger p-2 my-2">
       <p>Результат:
         <span *ngIf="test.result >= 5" class="text-white">{{test.result}}</span>
         <span *ngIf="test.result < 5" class="text-white">Тест провалено!</span>
       </p>
-      <p class="my-2">Дата проходженя: <br> <span class="text-white">{{test.created_at |  date:'medium' }}</span></p>
+      <p class="my-2">Дата проходженя: <br> <span class="text-white">{{test.passed_at |  date:'medium' }}</span></p>
     </div>
   </div>
 </div>
 
 <app-main-loader *ngIf="!userPassedTest"></app-main-loader>
 
-<p *ngIf="userPassedTest && userPassedTest.questions "
-    class="text-center text-danger">Ви не пройшли жодного тесту.</p>
+<p *ngIf="userPassedTest && !userPassedTest.passed_tests.length"
+   class="text-center text-danger">Ви не пройшли жодного тесту.</p>

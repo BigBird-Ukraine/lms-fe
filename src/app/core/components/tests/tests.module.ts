@@ -9,6 +9,7 @@ import {TestsRoutingModule} from './tests-routing.module';
 import {MaterialModule, SharedModule} from '../../../shared/modules';
 import {LessonModule} from '../lessons/lesson.module';
 import {LessonTestResultComponent} from '../lessons/lesson-test-result/lesson-test-result.component';
+import { PassedQuestionComponent } from './my-passed-test/passed-question/passed-question.component';
 
 
 
@@ -16,7 +17,7 @@ import {LessonTestResultComponent} from '../lessons/lesson-test-result/lesson-te
   entryComponents: [
     LessonTestResultComponent
   ],
-  declarations: [QuestionsLayoutComponent, MyPassedTestComponent],
+  declarations: [QuestionsLayoutComponent, MyPassedTestComponent, PassedQuestionComponent],
   imports: [
     TestsRoutingModule,
     CommonModule,

@@ -48,7 +48,12 @@ export class LessonTestComponent implements OnInit {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
       this.questions = questions.data.questions_id;
       this.questions.forEach((el) => {
-        this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
+        this.cutQuestions.push({
+          question: el.question,
+          description: el.description,
+          level: el.level,
+          subject: el.subject
+        });
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
         const control = this.fb.group({
           question: this.fb.control(el._id),
