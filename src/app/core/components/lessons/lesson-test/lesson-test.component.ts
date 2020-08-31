@@ -49,7 +49,12 @@ export class LessonTestComponent implements OnInit {
       this.maxMark = questions.data.maxMark;
       this.questions = questions.data.questions;
       this.questions.forEach((el) => {
-        this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
+        this.cutQuestions.push({
+          question: el.question,
+          description: el.description,
+          level: el.level,
+          subject: el.subject
+        });
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;
         const control = this.fb.group({
           question: this.fb.control(el._id),

@@ -17,10 +17,14 @@ export interface IPassedTest {
 }
 
 export interface IPassedData {
-  _id?: string;
-  questions: Partial<QuestionModel[]>;
-  lesson_label: string;
-  lesson_description: string;
-  result: number;
-  created_at: string;
+  passed_tests: [{
+    passed_at: Date;
+    passed_lesson_id?: {
+      lesson_description: string;
+      lesson_label: string;
+      questions: Partial<QuestionModel[]>
+    },
+    passed_questions_id?: [Partial<QuestionModel>]
+    result: number;
+  }];
 }
