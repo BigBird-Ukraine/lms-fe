@@ -3,7 +3,8 @@ import {ILesson} from './lesson.interface';
 
 export interface ITest {
   data: {
-    questions_id: QuestionModel[];
+    questions: QuestionModel[];
+    maxMark: number;
   };
 }
 
@@ -15,16 +16,6 @@ export interface IPassedTest {
   created_at?: string;
 }
 
-export interface IPassedTestFull {
-  passed_tests: {
-    questions: Partial<QuestionModel[]>;
-    lesson?: Partial<ILesson>;
-    result: number;
-    created_at: string;
-  };
-}
-
-
 export interface IPassedData {
   _id?: string;
   questions: Partial<QuestionModel[]>;
@@ -33,4 +24,3 @@ export interface IPassedData {
   result: number;
   created_at: string;
 }
-

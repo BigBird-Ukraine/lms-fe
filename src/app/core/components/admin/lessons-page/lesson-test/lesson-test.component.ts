@@ -3,10 +3,10 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatCheckboxChange, MatDialog} from '@angular/material';
 
-import {ITest, QuestionModel} from '../../../../interface';
 import {AdminQuestionsService} from '../../services';
 import {AdminTestService} from '../../services/admin-test.service';
 import {LessonsTestResultComponent} from '../lessons-test-result/lessons-test-result.component';
+import {ITest, QuestionModel} from '../../interfaces';
 
 @Component({
   selector: 'app-lesson-test',
@@ -50,7 +50,6 @@ export class LessonTestComponent implements OnInit {
 
   getData() {
     this.testService.getTestByLessonId(this.id).subscribe((questions: ITest) => {
-      console.log(questions);
       this.questions = questions.data.questions_id;
       this.questions.forEach((el) => {
         const questionListArr = (this.questionForm.get('question_list')) as FormArray;

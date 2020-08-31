@@ -13,8 +13,8 @@ export class TestService {
   constructor(private http: HttpClient) {
   }
 
-  getTestByLessonId(id): Observable<ITest> {
-    return this.http.get<ITest>(`${commonAuthPath}/lessons/${id}/test`);
+  getTestByLessonId(id): Observable<Partial<ITest>> {
+    return this.http.get<Partial<ITest>>(`${commonAuthPath}/lessons/${id}/test`);
   }
 
   sendTests(id, test, questions: Partial<QuestionModel>[]): Observable<IUser> {
