@@ -44,10 +44,71 @@
             color="primary"
             type="button"
             (click)="startTest()"
-            >
+    >
       <mat-icon aria-hidden="false">school</mat-icon>
       Пройти тест
     </button>
+
+  </div>
+
+  <div class="border m-3 p-3">
+    <mat-paginator
+      *ngIf="commentaries && commentaries.length"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      (page)="getFilteredComments($event)">
+    </mat-paginator>
+
+    <div *ngIf="commentaries">
+      <div *ngFor="let com of commentaries" class="hover">
+        <span class="text-secondary ">{{com.user_id.name}} {{com.user_id.surname}} -</span> {{com.text}}
+        <button *ngIf="(com.user_id._id === userService.userInfo.value._id) "
+                mat-stroked-button
+                color="primary"
+                type="button"
+                class="ml-1 my-1"
+                (click)="delComment(com._id)"
+        >
+          <mat-icon aria-hidden="false">delete</mat-icon>
+        </button>
+
+        <button *ngIf="com.user_id._id === userService.userInfo.value._id"
+                mat-stroked-button
+                color="primary"
+                type="button"
+                class="mx-2"
+                (click)="openEditComment(com._id, com.text)"
+        >
+          <mat-icon aria-hidden="false">edit</mat-icon>
+        </button>
+      </div>
+    </div>
+    <p *ngIf="commentaries && !commentaries.length" class="text-center text-secondary">Коментарів ще немає</p>
+
+    <app-main-loader *ngIf="!commentaries"></app-main-loader>
+
+    <div>
+      <mat-form-field class="example-full-width col-6">
+        <mat-label>Коментар</mat-label>
+        <textarea
+          type="text" matInput
+          [formControl]="textArea"
+          required>
+      </textarea>
+      </mat-form-field>
+
+      <button mat-stroked-button
+              color="primary"
+              type="button"
+              (click)="saveComment()"
+      >
+        <mat-icon aria-hidden="false">comment</mat-icon>
+        Добавити
+      </button>
+    </div>
+
 
   </div>
 

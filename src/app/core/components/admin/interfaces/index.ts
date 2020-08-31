@@ -9,3 +9,4 @@ export * from './test.interface';
 export * from './lesson.interface';
 export * from './questionModel';
 export * from './city.interface';
+export * from './comment-interface';

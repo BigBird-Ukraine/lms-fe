@@ -3,12 +3,16 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {EditLessonComponent} from '../edit-lesson/edit-lesson.component';
-import {IEditLesson, ILesson, QuestionModel} from '../../../interface';
+import {ICommentFull, IEditLesson, ILesson, QuestionModel} from '../../../interface';
 import {LessonsService} from '../../../services/lessons';
 import {UserRolesEnum} from '../../../../shared/enums';
 import {UserService} from '../../../services/user';
 import {AuthService} from '../../../services/auth';
 import {AddQuestionToLessonComponent} from '../add-question-to-lesson/add-question-to-lesson.component';
+import {FormControl} from '@angular/forms';
+import {switchMap, take} from 'rxjs/operators';
+import {IPaginator} from '../../admin/interfaces';
+import {EditCommentComponent} from '../edit-comment/edit-comment.component';
 
 @Component({
   selector: 'app-single-lesson',
@@ -21,6 +25,13 @@ export class SingleLessonComponent implements OnInit {
   isTeacher: boolean;
   lesson: ILesson;
   id: string;
+
+  commentaries: ICommentFull[];
+  length: number;
+  pageSize = 10;
+  pageIndex = 0;
+
+  textArea = new FormControl();
 
   constructor(private dialog: MatDialog,
               private userService: UserService,
@@ -42,6 +53,7 @@ export class SingleLessonComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params.id;
     this.getLesson(this.id);
+    this.getFilteredComments();
   }
 
   getLesson(id) {
@@ -74,5 +86,56 @@ export class SingleLessonComponent implements OnInit {
 
   startTest() {
     this.router.navigate([`/lessons/${this.id}/test`]);
+  }
+
+  saveComment() {
+    this.lessonService.saveComment(this.id, {text: this.textArea.value}).subscribe(res => {
+      this.getFilteredComments();
+      this.textArea.reset();
+    });
+  }
+
+  getFilteredComments(event?: Partial<IPaginator>) {
+    if (event) {
+      this.pageIndex = event.pageIndex;
+      this.pageSize = event.pageSize;
+    } else {
+      this.pageIndex = 0;
+    }
+
+    this.commentaries = null;
+
+    this.router.navigate([`/lessons/${this.id}`], {
+      queryParams: {
+        pageSize: this.pageSize,
+        pageIndex: this.pageIndex
+      }
+    });
+
+    this.activatedRoute.queryParams.pipe(
+      switchMap(value => {
+        return this.lessonService.getCommentaries(this.id, value);
+      }),
+      take(1),
+    ).subscribe(value => {
+      this.length = value.data.count;
+      this.commentaries = value.data.comments;
+    });
+  }
+
+  delComment(id: string) {
+    this.lessonService.deleteComment(id).subscribe(res => this.getFilteredComments());
+  }
+
+  openEditComment(comId: string, text: string) {
+    this.dialog.open(EditCommentComponent, {
+      width: '30%',
+      data: {comId, text}
+    }).afterClosed().subscribe((editedText: string) => {
+      if (editedText) {
+        const index = this.commentaries.findIndex(com => com._id === comId);
+        this.commentaries[index] = {...this.commentaries[index], text: editedText};
+      }
+    });
   }
 }
