@@ -10,14 +10,16 @@ import {MaterialModule, SharedModule} from '../../../shared/modules';
 import {LessonModule} from '../lessons/lesson.module';
 import {LessonTestResultComponent} from '../lessons/lesson-test-result/lesson-test-result.component';
 import { PassedQuestionComponent } from './my-passed-test/passed-question/passed-question.component';
+import { MyPassedTestWrapperComponent } from './my-passed-test/my-passed-test-wrapper/my-passed-test-wrapper.component';
 
 
 
 @NgModule({
   entryComponents: [
-    LessonTestResultComponent
+    LessonTestResultComponent,
+    MyPassedTestComponent
   ],
-  declarations: [QuestionsLayoutComponent, MyPassedTestComponent, PassedQuestionComponent],
+  declarations: [QuestionsLayoutComponent, MyPassedTestComponent, PassedQuestionComponent, MyPassedTestWrapperComponent],
   imports: [
     TestsRoutingModule,
     CommonModule,
@@ -28,7 +30,8 @@ import { PassedQuestionComponent } from './my-passed-test/passed-question/passed
 
     MatCardModule,
     MatCheckboxModule,
-    MaterialModule,
-  ]
+    MaterialModule
+  ],
+  exports: [MyPassedTestComponent]
 })
 export class TestsModule { }

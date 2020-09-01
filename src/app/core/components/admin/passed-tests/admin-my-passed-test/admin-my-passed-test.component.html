@@ -10,12 +10,12 @@
     </div>
 
     <div class="mx-2 d-flex flex-wrap" *ngIf="test.passed_lesson_id">
-      <app-passed-question class="col-12" [questions]=test.passed_lesson_id.questions></app-passed-question>
+      <app-admin-passed-question class="col-12" [questions]=test.passed_lesson_id.questions></app-admin-passed-question>
     </div>
 
     <div class="mx-2 d-flex flex-wrap " *ngIf="test.passed_questions_id.length">
       <p class="text-warning  m-auto">Змішані питання вашого пройденого тесту </p>
-      <app-passed-question class="col-12" [questions]=test.passed_questions_id></app-passed-question>
+      <app-admin-passed-question class="col-12" [questions]=test.passed_questions_id></app-admin-passed-question>
     </div>
 
     <div class="col-5 m-auto bg-danger p-2 my-2">
@@ -28,10 +28,7 @@
   </div>
 </div>
 
-<app-main-loader *ngIf="!userPassedTest"></app-main-loader>
+<app-loader *ngIf="!userPassedTest"></app-loader>
 
 <p *ngIf="userPassedTest && !userPassedTest.passed_tests.length"
-   class="text-center text-danger">
-  <span *ngIf="data">Користувач не пройшов жодного тесту</span>
-  <span *ngIf="!data">Ви не пройшли жодного тесту.</span></p>
-
+   class="text-center text-danger">Користувач не пройшов жодного тесту.</p>

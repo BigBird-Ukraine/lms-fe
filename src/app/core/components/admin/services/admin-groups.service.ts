@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {GroupModel, IGroupStatistics} from '../interfaces';
 import {config} from '../../../../shared/config';
-import {IGroup} from '../../../interface';
+import {IAttendance, IGroup} from '../../../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,20 +28,20 @@ export class AdminGroupsService {
 
   }
 
-  getOneGroup(_id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.groupUrl}/${_id}`);
+  getOneGroup(id: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.groupUrl}/${id}`);
   }
 
   updateUsersList(id: string, object: object): Observable<any> {
     return this.httpClient.patch(`${this.groupUrl}/${id}`, object);
   }
 
-  delete(_id: string): Observable<any> {
-    return this.httpClient.delete(`${this.groupUrl}/${_id}`);
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.groupUrl}/${id}`);
   }
 
-  updateById(_id: string, value: GroupModel): Observable<any> {
-    return this.httpClient.post(`${this.groupUrl}/${_id}`, value);
+  updateById(id: string, value: GroupModel): Observable<any> {
+    return this.httpClient.post(`${this.groupUrl}/${id}`, value);
   }
 
   sendPresence(id, data): Observable<any> {
@@ -56,5 +56,17 @@ export class AdminGroupsService {
   getGroupsByCourse(id: string): Observable<Partial<IGroup[]>> {
 
     return this.httpClient.get<Partial<IGroup[]>>(`${this.groupUrl}/by_course?course_id=${id}`);
+  }
+
+  deleteVisitLog(visitId: string, groupId: string) {
+
+    return this.httpClient.delete<Partial<IGroup>[]>(
+      `${this.groupUrl}/${groupId}/attendance?visitId=${visitId}`);
+  }
+
+  changeAttendance(visitId: string, studentId: string, groupId: string): Observable<IAttendance[]> {
+
+    return this.httpClient.patch<IAttendance[]>(
+      `${this.groupUrl}/${groupId}/attendance?visitId=${visitId}&studentId=${studentId}`, {});
   }
 }

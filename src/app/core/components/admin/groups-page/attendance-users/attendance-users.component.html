@@ -6,13 +6,21 @@
     <tr>
       <th>№</th>
       <th>ПІБ</th>
-      <th *ngFor="let attendance of groupInfo.attendance">{{attendance.date}}</th>
+      <th class="hoverRed"
+          title="Удалити"
+          (click)="deleteVisitLog(attendance._id)"
+        *ngFor="let attendance of groupInfo.attendance"><span>{{attendance.date}}</span></th>
     </tr>
 
     <tr *ngFor="let student of studentList; let i = index">
       <td>{{i + 1}}</td>
-      <td>{{student.name}} {{student.surname}}</td>
-      <td class="absence_col" *ngFor="let attendance of groupInfo.attendance"
+      <td>
+        <span>{{student.name}} {{student.surname}}</span>
+      </td>
+      <td (click)="changeVisitLog(attendance._id, student._id)"
+          [title]="student.name + ' ' + student.surname"
+           class="absence_col hoverOrange"
+          *ngFor="let attendance of groupInfo.attendance"
           [style.color]="attendance.present_students_id.includes(student._id) ? '#86af49' : '#c94c4c'">
         <span *ngIf="attendance.present_students_id.includes(student._id)"> &#10004; </span>
         <span *ngIf="attendance.absent_students_id.includes(student._id)"> &#10008; </span>

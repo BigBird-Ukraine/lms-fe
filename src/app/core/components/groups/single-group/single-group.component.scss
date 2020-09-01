@@ -17,3 +17,21 @@ table, th, td {
   font-size: 20px;
   text-align: center;
 }
+
+.hover :hover{
+  opacity: 80%;
+  color: green;
+  cursor: pointer;
+}
+
+.hoverRed :hover{
+  opacity: 80%;
+  color: red;
+  cursor: pointer;
+}
+
+.hoverOrange :hover {
+  opacity: 80%;
+  color: orange;
+  cursor: pointer;
+}

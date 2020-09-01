@@ -23,6 +23,9 @@
           <button mat-icon-button class="icon" [hidden]="user.status_id !== isBlocked" disabled>
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-icon-button class="icon" (click)="showActivityStudent(user._id)" [hidden]="user.status_id === isBlocked">
+            <mat-icon color="primary">grading</mat-icon>
+          </button>
           <button mat-icon-button class="icon" (click)="delete(user)">
             <mat-icon color="primary">delete</mat-icon>
           </button>

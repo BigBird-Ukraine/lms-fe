@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
-import {IFullGroup, IGroup, IGroupStudents, ISingleGroup} from '../../interface';
+import {IAttendance, IFullGroup, IGroup, IGroupStudents, ISingleGroup} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -43,7 +43,29 @@ export class GroupsService {
         Authorization: this.authService.getAccessToken()
       })
     };
-    
+
     return this.http.get<Partial<IGroup>[]>(`${commonAuthPath}/users/my-groups`, options);
+  }
+
+  deleteVisitLog(visitId: string, groupId: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete<Partial<IGroup>[]>(
+      `${commonAuthPath}/groups/${groupId}/attendance?visitId=${visitId}`, options);
+  }
+
+  changeAttendance(visitId: string, studentId: string, groupId: string): Observable<IAttendance[]> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.patch<IAttendance[]>(
+      `${commonAuthPath}/groups/${groupId}/attendance?visitId=${visitId}&studentId=${studentId}`, options);
   }
 }
