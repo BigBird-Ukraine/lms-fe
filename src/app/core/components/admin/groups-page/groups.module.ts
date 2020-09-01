@@ -10,6 +10,8 @@ import {GroupOutComponent} from './group-out/group-out.component';
 import {AttendanceUsersComponent} from './attendance-users/attendance-users.component';
 import {AddAttendanceComponent} from './add-attendance/add-attendance.component';
 import {AddUsersComponent} from './add-users/add-users.component';
+import {AdminMyPassedTestComponent} from '../passed-tests/admin-my-passed-test/admin-my-passed-test.component';
+import {AdminPassedQuestionComponent} from '../passed-tests/admin-passed-question/admin-passed-question.component';
 
 
 

@@ -69,6 +69,7 @@ export class EditQuestionComponent implements OnInit {
 
   editQuestion() {
     const question: QuestionModel = {...this.data, ...this.questionForm.value, tags: [...this.tags], group: [...this.group]};
+
     this.questionService.update(question).subscribe(() => {
         this.isAdded = true;
         setTimeout(() => {

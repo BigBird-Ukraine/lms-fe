@@ -8,11 +8,7 @@ export interface IGroup {
   started_at: string;
   finished_at: string;
   users_list: UserModel[];
-  attendance: [{
-    date: string;
-    present_students_id: string[];
-    absent_students_id: string[];
-  }];
+  attendance: IAttendance[];
   created_at: string;
   updated_at: string;
 }
@@ -32,4 +28,11 @@ export interface IGroupStudents {
   data: {
     users_list: UserModel[];
   };
+}
+
+export interface IAttendance {
+  _id?: string;
+  date: string;
+  present_students_id: string[];
+  absent_students_id: string[];
 }

@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 
-import {IGroup, ISingleGroup, UserModel} from '../../../../interface';
+import {IAttendance, IGroup, ISingleGroup, UserModel} from '../../../../interface';
 import {AdminGroupsService} from '../../services';
 import {AddAttendanceComponent} from '../add-attendance/add-attendance.component';
+import {ConfirmLayoutComponent} from '../../../../../shared/components/confirm-layout/confirm-layout.component';
 
 @Component({
   selector: 'app-attendance-users',
@@ -36,6 +37,20 @@ export class AttendanceUsersComponent implements OnInit {
         this.groupInfo = group.data;
       });
     });
+  }
+
+  deleteVisitLog(id: string) {
+    this.dialog.open(ConfirmLayoutComponent).afterClosed().subscribe(res => {
+      if (res) {
+        this.groupsService.deleteVisitLog(id, this.groupInfo._id).subscribe(() => {
+          this.groupInfo.attendance = this.groupInfo.attendance.filter(visitLog => visitLog._id.toString() !== id) as IAttendance[];
+        });
+      }
+    });
+  }
+
+  changeVisitLog(visitLogId: string, studentId: string) {
+    this.groupsService.changeAttendance(visitLogId, studentId, this.groupInfo._id).subscribe(res => this.groupInfo.attendance = res);
   }
 }
 

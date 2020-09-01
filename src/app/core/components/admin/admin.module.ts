@@ -17,6 +17,8 @@ import {FormModule, MaterialModule} from '../../../shared/modules';
 import {LoaderComponent} from '../../../shared/components/loader/loader.component';
 import {AdminLayoutComponent} from '../../../shared/components/admin-layout/admin-layout.component';
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
+import { AdminMyPassedTestComponent } from './passed-tests/admin-my-passed-test/admin-my-passed-test.component';
+import { AdminPassedQuestionComponent } from './passed-tests/admin-passed-question/admin-passed-question.component';
 
 const mat = [
   FlexModule,

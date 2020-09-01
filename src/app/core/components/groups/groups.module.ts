@@ -19,6 +19,7 @@ import { MyGroupsComponent } from './my-groups/my-groups.component';
 import { AttendanceComponent } from './group-attendance/attendance.component';
 import {GroupsRoutingModule} from './groups-routing.module';
 import {SharedModule} from '../../../shared/modules';
+import {TestsModule} from '../tests/tests.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {SharedModule} from '../../../shared/modules';
     MyGroupsComponent,
     GroupPresentsComponent,
     SingleGroupComponent,
-    AllGroupsComponent,
+    AllGroupsComponent
   ],
   imports: [
     GroupsRoutingModule,
@@ -34,6 +35,7 @@ import {SharedModule} from '../../../shared/modules';
     RouterModule,
     ReactiveFormsModule,
     SharedModule,
+    TestsModule,
 
     MatSidenavModule,
     MatExpansionModule,
@@ -45,7 +47,7 @@ import {SharedModule} from '../../../shared/modules';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatCheckboxModule,
+    MatCheckboxModule
   ],
   exports: []
 })

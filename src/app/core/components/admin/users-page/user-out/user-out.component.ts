@@ -8,6 +8,7 @@ import {AdminUsersService} from '../../services';
 import {ChangeRoleUserComponent} from '../change-role-user/change-role-user.component';
 import {UpdateProfileComponent} from '../update-profile/update-profile.component';
 import {DeleteComponent} from '../../../../../shared/components/delete/delete.component';
+import {AdminMyPassedTestComponent} from '../../passed-tests/admin-my-passed-test/admin-my-passed-test.component';
 
 @Component({
   selector: 'app-user-out',
@@ -69,7 +70,7 @@ export class UserOutComponent implements OnInit {
           this.data.users.splice(index, 1);
         });
       }
-    })
+    });
   }
 
   openEditForm(user: IUser) {
@@ -92,10 +93,17 @@ export class UserOutComponent implements OnInit {
         const index: number = this.data.users.indexOf(user);
         this.data.users[index] = value;
       }
-    })
+    });
   }
 
   private getNameOfRole(role: UserRolesEnum): string {
     return this.roles[role - 1].name;
+  }
+
+  showActivityStudent(id: string) {
+    this.dialog.open(AdminMyPassedTestComponent, {
+      data: id,
+      height: '100%'
+    });
   }
 }

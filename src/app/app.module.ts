@@ -38,7 +38,7 @@ const mat = [
   MatMenuModule,
   MatIconModule,
   MatListModule,
-  MatDialogModule,
+  MatDialogModule
 ];
 
 @NgModule({

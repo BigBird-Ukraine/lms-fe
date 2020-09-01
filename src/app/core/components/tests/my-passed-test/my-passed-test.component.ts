@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 
 import {UserService} from '../../../services/user';
-import {AuthService} from '../../../services/auth';
 import {IPassedData} from '../../../interface';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-my-passed-test',
@@ -13,15 +13,16 @@ export class MyPassedTestComponent implements OnInit {
 
   userPassedTest: IPassedData;
 
-  constructor(public userService: UserService, private authService: AuthService) {
+  constructor(public userService: UserService,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit() {
-    this.getInfo();
+    this.getInfo(this.data);
   }
 
-  getInfo() {
-    this.userService.getUserPassedTest(this.authService.getAccessToken())
+  getInfo(userId: string) {
+    this.userService.getUserPassedTest(userId)
       .subscribe((res) => {
         this.userPassedTest = res;
       });

@@ -3,11 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
 import {commonAdminPath, commonAuthPath} from '../../../../shared/api';
-import {IUser, IUserSubjectModel} from '../interfaces';
+import {IPassedData, IUser} from '../interfaces';
 import {catchError, tap} from 'rxjs/operators';
-import {UserModel} from '../../../interface';
 import {IUserStatistics} from '../interfaces/statistics.interface';
-
 
 @Injectable({
   providedIn: 'root'
@@ -54,11 +52,6 @@ export class AdminUsersService {
   updateProfile(id: string, value: any): Observable<IUser> {
     return this.httpClient.patch<IUser>(this.urlUsers + `/${id}`, value);
   }
-
-  getByID(id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.urlUsers}/${id}`);
-  }
-
   getUserInfoByToken(accessToken: string): Observable<IUser> {
     const options = {
       headers: new HttpHeaders({
@@ -77,7 +70,7 @@ export class AdminUsersService {
       );
   }
 
-  createUser(user): Observable<UserModel> {
+  createUser(user): Observable<IUser> {
 
     const formData: FormData = new FormData();
     const {photo_path, ...body} = user;
@@ -91,7 +84,7 @@ export class AdminUsersService {
       formData.append(key, body[key]);
     });
 
-    return this.httpClient.post<UserModel>(`${commonAuthPath}/users`, formData);
+    return this.httpClient.post<IUser>(`${commonAuthPath}/users`, formData);
   }
 
   getUsersStatics(): Observable<IUserStatistics> {
@@ -102,5 +95,10 @@ export class AdminUsersService {
   getUsersByStatus(status: string): Observable<Partial<IUser[]>> {
 
     return this.httpClient.get<Partial<IUser[]>>(`${commonAdminPath}/users/by_status?status=${status}`);
+  }
+
+  getUserPassedTest(userId: string): Observable<IPassedData> {
+
+    return this.httpClient.get<IPassedData>(`${commonAdminPath}/users/passed_tests?userId=${userId}`);
   }
 }

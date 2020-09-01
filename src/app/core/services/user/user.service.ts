@@ -15,7 +15,6 @@ export class UserService {
   }
 
   userInfo: BehaviorSubject<Partial<IUserSubjectModel>> = new BehaviorSubject({});
-  userRole
 
   createUser(user): Observable<UserModel> {
     const formData: FormData = new FormData();
