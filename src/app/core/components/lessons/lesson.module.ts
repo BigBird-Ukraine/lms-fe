@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
   MatAutocompleteModule,
   MatButtonModule, MatCardModule, MatCheckboxModule,
@@ -22,12 +22,11 @@ import {LessonTestComponent} from './lesson-test/lesson-test.component';
 import {LessonTestResultComponent} from './lesson-test-result/lesson-test-result.component';
 import {LessonRoutingModule} from './lesson-routing.module';
 import {MaterialModule, SharedModule} from '../../../shared/modules';
-import { EditCommentComponent } from './edit-comment/edit-comment.component';
-
+import {EditCommentComponent} from './edit-comment/edit-comment.component';
 
 
 @NgModule({
-  entryComponents:[EditCommentComponent],
+  entryComponents: [EditCommentComponent],
   declarations: [
     LessonPageComponent,
     CreateLessonComponent,
@@ -63,4 +62,5 @@ import { EditCommentComponent } from './edit-comment/edit-comment.component';
   ],
   exports: [LessonTestResultComponent]
 })
-export class LessonModule { }
+export class LessonModule {
+}

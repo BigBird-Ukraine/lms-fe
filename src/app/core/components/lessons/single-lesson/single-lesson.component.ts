@@ -30,6 +30,7 @@ export class SingleLessonComponent implements OnInit {
   length: number;
   pageSize = 10;
   pageIndex = 0;
+  spinnerStatus = false;
 
   textArea = new FormControl();
 
@@ -137,5 +138,22 @@ export class SingleLessonComponent implements OnInit {
         this.commentaries[index] = {...this.commentaries[index], text: editedText};
       }
     });
+  }
+
+
+  fileChange(video) {
+    const file = video.target.files[0];
+
+    this.spinnerStatus = true;
+    this.lessonService.changeVideo(file, this.lesson._id).subscribe(res => {
+        this.spinnerStatus = false;
+        alert('Відео скоро загрузиться, очікуйте...');
+        this.router.navigate(['/lessons']);
+      },
+      error1 => this.spinnerStatus = false);
+  }
+
+  deleteLesson() {
+    this.lessonService.deleteLesson(this.lesson._id).subscribe(res => this.router.navigate(['/lessons']));
   }
 }

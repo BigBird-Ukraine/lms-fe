@@ -69,12 +69,13 @@
 
       </div>
 
-      <!--      <span>Додати відео:</span>-->
-      <!--      <div class="example-full-width" style="margin: 30px">-->
-      <!--        <input type="file"-->
-      <!--               (change)="fileChange($event)"-->
-      <!--        >-->
-      <!--      </div>-->
+      <div *ngIf="!spinnerStatus">
+        <label for="file-upload" class="custom-file-upload">
+          Додати відео
+        </label>
+        <input  formGroupName="video_path" class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
+      </div>
+      <app-loader *ngIf="spinnerStatus"></app-loader>
 
     </div>
 

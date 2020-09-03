@@ -1,35 +1,39 @@
-<div class="lesson_page" *ngIf="lesson">
+<div class="lesson_page p-3 border bg-secondary mt-3" *ngIf="lesson">
 
   <div class="lesson">
 
     <mat-card class="video_block">
-
-      <h2>{{lesson.number}}. {{lesson.label}}</h2>
-
-      <div class="lesson_video">
-        ВІДЕО
-      </div>
+      <video width="99%" height="300px" controls src="{{lesson.video_path}}">
+        Your browser does not support the video tag.
+      </video>
 
     </mat-card>
 
     <div class="lesson_info">
 
       <div class="info">
+        <h2 class="text-white">{{lesson.label}}</h2>
         <p>{{lesson.description}}</p>
       </div>
 
-      <button mat-button
-              color="primary"
+      <div *ngIf="!spinnerStatus">
+        <label for="file-upload" class="custom-file-upload">
+          Замінити відео
+        </label>
+        <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
+      </div>
+
+      <app-loader *ngIf="spinnerStatus"></app-loader>
+
+      <button mat-raised-button
               type="button"
-              *ngIf="isAdmin"
+              class="mb-2"
               (click)="editLesson()">
         Редагувати урок
       </button>
       <br>
-      <button mat-button
-              color="primary"
+      <button mat-raised-button
               type="button"
-              *ngIf="isAdmin"
               (click)="addQuestionToLesson()">
         Додати питання до уроку
       </button>
@@ -38,20 +42,18 @@
 
   </div>
 
-  <div class="lesson_test">
+  <div class="lesson_test mb-3">
 
-    <button mat-stroked-button
-            color="primary"
+    <button mat-fab
             type="button"
             (click)="startTest()"
     >
       <mat-icon aria-hidden="false">school</mat-icon>
-      Пройти тест
     </button>
 
   </div>
 
-  <div class="border m-3 p-3">
+  <div class="border m-3 p-3 ">
     <mat-paginator
       *ngIf="commentaries && commentaries.length"
       [length]="length"
@@ -62,19 +64,19 @@
     </mat-paginator>
 
     <div *ngIf="commentaries">
-      <div *ngFor="let com of commentaries" class="hover m-2">
-        <span class="text-secondary ">{{com.user_id.name}} {{com.user_id.surname}} -</span> {{com.text}}
-        <button mat-stroked-button
-                color="primary"
+      <div *ngFor="let com of commentaries" class="hover">
+        <span class="text-white pl-2">{{com.user_id.name}} {{com.user_id.surname}} -</span> {{com.text}}
+        <button *ngIf="(com.user_id._id === userService.userInfo.value._id) "
+                mat-stroked-button
                 type="button"
-                class="ml-1"
+                class="ml-1 my-1"
                 (click)="delComment(com._id)"
         >
           <mat-icon aria-hidden="false">delete</mat-icon>
         </button>
 
-        <button mat-stroked-button
-                color="primary"
+        <button *ngIf="com.user_id._id === userService.userInfo.value._id"
+                mat-stroked-button
                 type="button"
                 class="mx-2"
                 (click)="openEditComment(com._id, com.text)"
@@ -88,7 +90,7 @@
     <app-loader *ngIf="!commentaries"></app-loader>
 
     <div>
-      <mat-form-field class="example-full-width col-6">
+      <mat-form-field class="example-full-width col-6 text-white">
         <mat-label>Коментар</mat-label>
         <textarea
           type="text" matInput
@@ -98,8 +100,8 @@
       </mat-form-field>
 
       <button mat-stroked-button
-              color="primary"
               type="button"
+              [disabled]="!textArea.value"
               (click)="saveComment()"
       >
         <mat-icon aria-hidden="false">comment</mat-icon>
@@ -111,3 +113,5 @@
   </div>
 
 </div>
+
+<app-loader *ngIf="!lesson"></app-loader>

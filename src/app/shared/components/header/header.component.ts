@@ -74,9 +74,4 @@ export class HeaderComponent implements OnInit {
   redirectToHome() {
     this.router.navigateByUrl('/');
   }
-
-  test() {
-    this.router.navigateByUrl('/auth');
-  }
-
 }

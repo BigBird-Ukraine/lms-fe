@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 import {Tags, ILesson} from '../../../interface';
 import {InfoHelperService, LessonsService} from '../../../services';
@@ -16,6 +16,8 @@ export class CreateLessonComponent implements OnInit {
   lessonForm: FormGroup;
   tagsForAutocomplete: Tags[] = [];
   tags: Tags[] = [];
+
+  spinnerStatus = false;
 
   constructor(private fb: FormBuilder,
               private infoService: InfoHelperService,
@@ -35,7 +37,7 @@ export class CreateLessonComponent implements OnInit {
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null),
       tags: this.fb.array([]),
-      // video_path: ''
+      video_path: ''
     });
   }
 
@@ -71,7 +73,9 @@ export class CreateLessonComponent implements OnInit {
 
     const lessonData: ILesson = this.lessonForm.value;
 
+    this.spinnerStatus = true;
     this.lessonService.createLesson(lessonData).subscribe(() => {
+      this.spinnerStatus = false;
       this.customSnackbarService.open('Урок додано', '');
       this.dialogRef.close(true);
     });
