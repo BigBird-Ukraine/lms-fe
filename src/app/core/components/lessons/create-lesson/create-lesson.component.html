@@ -69,19 +69,20 @@
 
       </div>
 
-<!--      <span>Додати відео:</span>-->
-<!--      <div class="example-full-width" style="margin: 30px">-->
-<!--        <input type="file"-->
-<!--               (change)="fileChange($event)"-->
-<!--        >-->
-<!--      </div>-->
-
+      <div *ngIf="!spinnerStatus">
+        <label for="file-upload" class="custom-file-upload">
+          Додати відео
+        </label>
+        <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
       </div>
+      <app-main-loader *ngIf="spinnerStatus"></app-main-loader>
+    </div>
 
-    <button mat-raised-button
+    <button *ngIf="!spinnerStatus"
+            mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="lessonForm.invalid || !tags.length"
+            [disabled]="lessonForm.invalid || !tags.length "
     >Створити
     </button>
 

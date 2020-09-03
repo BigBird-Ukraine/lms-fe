@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {commonAdminPath} from '../../../../shared/api';
+import {commonAdminPath, commonAuthPath} from '../../../../shared/api';
 import {AdminAuthService} from './admin-auth.service';
 import {IComment, ICommentPaginator, IEditLesson, IFullLesson, ILesson, ILessonStatistics} from '../interfaces';
 
@@ -15,14 +15,26 @@ export class AdminLessonService {
 
   }
 
-  createLesson(lesson): Observable<ILesson> {
+  createLesson(lesson: ILesson) {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.post<ILesson>(`${commonAdminPath}/lessons`, lesson, options);
+    const formData: FormData = new FormData();
+    const {video_path, ...body} = lesson;
+
+    if (video_path) {
+      formData.append('files', video_path);
+    }
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.http.post(`${commonAdminPath}/lessons`, formData, options);
   }
 
   getAllLessons(): Observable<IFullLesson> {
@@ -144,5 +156,21 @@ export class AdminLessonService {
       })
     };
     return this.http.put(`${commonAdminPath}/lessons/comment?comment_id=${comId}`, {text}, options);
+  }
+
+  changeVideo(file, id: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    const formData: FormData = new FormData();
+
+    if (file) {
+      formData.append('files', file);
+    }
+
+    return this.http.patch(`${commonAdminPath}/lessons/${id}/video`, formData, options);
   }
 }

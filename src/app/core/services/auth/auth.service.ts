@@ -35,8 +35,12 @@ export class AuthService {
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;
         this.setTokens(accessToken, refreshToken);
-
       }),
+      catchError( (err: any) => {
+        this.deleteTokens();
+        window.location.reload();
+        return null;
+      })
     );
   }
 

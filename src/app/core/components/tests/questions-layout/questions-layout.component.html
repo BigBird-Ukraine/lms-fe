@@ -3,7 +3,7 @@
     <mat-card-title>
       Тестування по предмету:
     </mat-card-title>
-    <p>Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
+    <p *ngIf="questions && questions.length">Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
       балів, за одну помилку, в вас забирають <span class="font-weight-bold">5</span> балів</p>
 
     <mat-card-content>

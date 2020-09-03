@@ -22,7 +22,19 @@ export class LessonsService {
       })
     };
 
-    return this.http.post<ILesson>(`${commonAuthPath}/lessons`, lesson, options);
+    const formData: FormData = new FormData();
+    const {video_path, ...body} = lesson;
+
+    if (video_path) {
+      formData.append('files', video_path);
+    }
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.http.post<ILesson>(`${commonAuthPath}/lessons`, formData, options);
   }
 
   getAllLessons(): Observable<IFullLesson> {
@@ -113,5 +125,21 @@ export class LessonsService {
       })
     };
     return this.http.put(`${commonAuthPath}/lessons/comment?comment_id=${comId}`, {text}, options);
+  }
+
+  changeVideo(file, id: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    const formData: FormData = new FormData();
+
+    if (file) {
+      formData.append('files', file);
+    }
+
+    return this.http.patch(`${commonAuthPath}/lessons/${id}/video`, formData, options);
   }
 }

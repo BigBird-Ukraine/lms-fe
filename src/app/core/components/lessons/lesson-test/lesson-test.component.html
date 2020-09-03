@@ -5,7 +5,7 @@
     </mat-card-title>
     <p>Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
       балів, за одну помилку, в вас забирають <span class="font-weight-bold">5</span> балів</p>
-    <p>Максимально можливий бал за цей тест, становить: <span class="text-danger">{{maxMark}}</span></p>
+    <p *ngIf="questions && questions.length">Максимально можливий бал за цей тест, становить: <span class="text-danger">{{maxMark}}</span></p>
 
     <mat-card-content>
       <form [formGroup]="questionForm"
@@ -43,7 +43,12 @@
           </tbody>
 
         </div>
-        <mat-card-actions class="btn">
+
+        <div *ngIf="questions && !questions.length">
+          <p class="text-center text-danger">Питання ще не добавлені</p>
+        </div>
+
+        <mat-card-actions *ngIf="questions && questions.length" class="btn">
           <button mat-raised-button color="primary" type="submit">Перевірити</button>
         </mat-card-actions>
 

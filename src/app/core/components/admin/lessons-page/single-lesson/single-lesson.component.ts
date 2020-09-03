@@ -27,6 +27,7 @@ export class SingleLessonComponent implements OnInit {
   length: number;
   pageSize = 10;
   pageIndex = 0;
+  spinnerStatus = false;
 
   textArea = new FormControl();
 
@@ -102,7 +103,7 @@ export class SingleLessonComponent implements OnInit {
 
     this.commentaries = null;
 
-    this.router.navigate([`admin/adminPanel//lessons/${this.id}`], {
+    this.router.navigate([`admin/adminPanel/lessons/${this.id}`], {
       queryParams: {
         pageSize: this.pageSize,
         pageIndex: this.pageIndex
@@ -136,4 +137,14 @@ export class SingleLessonComponent implements OnInit {
     });
   }
 
+  fileChange(video) {
+    const file = video.target.files[0];
+
+    this.spinnerStatus = true;
+    this.lessonService.changeVideo(file, this.lesson._id).subscribe(res => {
+      this.spinnerStatus = false;
+      alert('Відео скоро загрузиться, очікуйте...');
+      this.router.navigate(['admin/adminPanel/lessons']);
+    }, error1 => this.spinnerStatus = false);
+  }
 }
