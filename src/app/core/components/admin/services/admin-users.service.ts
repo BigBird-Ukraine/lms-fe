@@ -84,7 +84,7 @@ export class AdminUsersService {
       formData.append(key, body[key]);
     });
 
-    return this.httpClient.post<IUser>(`${commonAuthPath}/users`, formData);
+    return this.httpClient.post<IUser>(`${commonAdminPath}/users`, formData);
   }
 
   getUsersStatics(): Observable<IUserStatistics> {
