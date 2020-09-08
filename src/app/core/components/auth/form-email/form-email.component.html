@@ -1,0 +1,9 @@
+<div *ngIf="!spinnerStatus">
+  <input [formControl]="email" type="text" class="mx-2" placeholder="Введіть ваш mail">
+  <button type="button" class="btn btn-warning"
+          (click)="sendEmail()"
+          [disabled]="email.invalid || !email.value">Підтвердити
+  </button>
+</div>
+
+<app-main-loader *ngIf="spinnerStatus"></app-main-loader>

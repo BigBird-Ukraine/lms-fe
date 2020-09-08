@@ -1,0 +1,5 @@
+<div class="text-center p-7">
+  <h1 *ngIf="status && !alreadyActivatedStatus">Account is activated!</h1>
+  <h1 *ngIf="!status && !alreadyActivatedStatus">Activation, please wait</h1>
+  <h1 *ngIf="!status && alreadyActivatedStatus">Account already activated</h1>
+</div>

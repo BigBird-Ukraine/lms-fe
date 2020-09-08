@@ -13,12 +13,16 @@ import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
 import {EditUserComponent} from './edit-user/edit-user.component';
 import {UserRoutingModule} from './user-routing.module';
 import {SharedModule} from '../../../shared/modules';
+import { ConfirmMailComponent } from './confirm-mail/confirm-mail.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
     UserCabinetComponent,
-    EditUserComponent
+    EditUserComponent,
+    ConfirmMailComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

@@ -4,15 +4,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {RegistrationComponent} from './registration/registration.component';
 import {AuthUserComponent} from './auth-user/auth-user.component';
-import {MaterialModule} from '../../../shared/modules';
+import {MaterialModule, SharedModule} from '../../../shared/modules';
+import { FormEmailComponent } from './form-email/form-email.component';
 
 @NgModule({
-  declarations: [RegistrationComponent, AuthUserComponent],
+  entryComponents: [FormEmailComponent],
+  declarations: [RegistrationComponent, AuthUserComponent, FormEmailComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   exports: [RegistrationComponent, AuthUserComponent]
 })

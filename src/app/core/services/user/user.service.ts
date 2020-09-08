@@ -75,4 +75,9 @@ export class UserService {
 
     return this.http.get<IPassedData>(`${commonAuthPath}/users/my_passed_tests`, options);
   }
+
+  confirmUserMail(token: string): Observable<any> {
+
+    return this.http.patch<UserModel>(`${commonAuthPath}/users/confirm/mail`, {confirmMailToken: token});
+  }
 }
