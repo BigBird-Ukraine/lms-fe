@@ -1,7 +1,12 @@
 .photo{
-  width: 200px;
+  width: 300px;
   height: 250px;
   background: rebeccapurple;
+}
+
+.photo img {
+  width: 100%;
+  height:100%;
 }
 
 .cards{
