@@ -15,14 +15,19 @@ import {UserRoutingModule} from './user-routing.module';
 import {SharedModule} from '../../../shared/modules';
 import { ConfirmMailComponent } from './confirm-mail/confirm-mail.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 
 
 @NgModule({
+  entryComponents: [ChangePasswordComponent],
   declarations: [
     UserCabinetComponent,
     EditUserComponent,
     ConfirmMailComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    ConfirmPasswordComponent
   ],
   imports: [
     CommonModule,

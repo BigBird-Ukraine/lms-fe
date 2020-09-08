@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
-import {UserModel, IUserSubjectModel, IUser, IPassedData} from '../../interface';
+import {UserModel, IUserSubjectModel, IUser, IPassedData, IChangePassword} from '../../interface';
 import {commonAuthPath} from '../../../shared/api';
 
 @Injectable({
@@ -78,6 +78,16 @@ export class UserService {
 
   confirmUserMail(token: string): Observable<any> {
 
-    return this.http.patch<UserModel>(`${commonAuthPath}/users/confirm/mail`, {confirmMailToken: token});
+    return this.http.patch(`${commonAuthPath}/users/confirm/mail`, {confirmToken: token});
+  }
+
+  changePassword(passwords: IChangePassword): Observable<any> {
+
+    return this.http.post(`${commonAuthPath}/users/password`, passwords);
+  }
+
+  confirmChangedPassword(token: string): Observable<any> {
+
+    return this.http.put(`${commonAuthPath}/users/password`, {confirmToken: token});
   }
 }

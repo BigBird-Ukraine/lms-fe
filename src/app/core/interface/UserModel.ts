@@ -25,3 +25,8 @@ export interface IUserEdit {
   photo_path?: string;
   population_point?: string;
 }
+
+export interface IChangePassword {
+  password: string;
+  new_password: string;
+}
