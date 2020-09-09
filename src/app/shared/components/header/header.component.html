@@ -13,12 +13,33 @@
   </div>
 
   <mat-nav-list class="nav">
+    <div class="d-flex flex-wrap justify-content-between ">
 
-    <a
-      [matMenuTriggerFor]="menu"
-      *ngIf="authService.isAuthenticated()"
-    >Меню
-    </a>
+      <a
+        [matMenuTriggerFor]="menu"
+        *ngIf="authService.isAuthenticated()"
+      >Меню
+      </a>
+
+      <a (click)="openRegForm()"
+         *ngIf="!authService.isAuthenticated()"
+      >Зареєструватися
+      </a>
+
+      <div class="divider"
+           *ngIf="!authService.isAuthenticated()">
+      </div>
+
+      <a (click)="openLogForm()"
+         *ngIf="!authService.isAuthenticated()"
+      >Увійти
+      </a>
+
+      <a (click)="logout()"
+         *ngIf="authService.isAuthenticated()"
+      >Вийти
+      </a>
+    </div>
 
     <mat-menu #menu="matMenu"
               xPosition="before">
@@ -77,25 +98,6 @@
       >Додати питання
       </button>
     </mat-menu>
-
-    <a (click)="openRegForm()"
-       *ngIf="!authService.isAuthenticated()"
-    >Зареєструватися
-    </a>
-
-    <div class="divider"
-         *ngIf="!authService.isAuthenticated()">
-    </div>
-
-    <a (click)="openLogForm()"
-       *ngIf="!authService.isAuthenticated()"
-    >Увійти
-    </a>
-
-    <a (click)="logout()"
-       *ngIf="authService.isAuthenticated()"
-    >Вийти
-    </a>
 
   </mat-nav-list>
 </div>

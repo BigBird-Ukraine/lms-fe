@@ -1,27 +1,18 @@
 .userInfoBlock {
   display: flex;
   justify-content: center;
-}
-
-.avatarBlock {
-  width: 20%
-}
-
-.mainInfoBlock {
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
+  background-color: rgba(46, 42, 218, 0.05);
 }
 
 .avatar {
   width: 250px;
-  height: 230px;
+  height: 270px;
 }
 
 .avatar img {
   max-width: 100%;
   height: auto;
-  max-height: 180px;
+  max-height: 250px;
 }
 
 button {
@@ -30,4 +21,11 @@ button {
 
 .cabinet {
   padding: 20px;
+}
+
+
+@media screen and (max-width: 576px) {
+  .text-sm-center {
+    text-align: center;
+  }
 }

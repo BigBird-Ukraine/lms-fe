@@ -1,4 +1,4 @@
-<h2 mat-dialog-title class="mat_dialog_title">Редагувати профіль</h2>
+<h2 mat-dialog-title class="mat_dialog_title text-center">Редагувати профіль</h2>
 <mat-dialog-content class="mat-typography">
 
   <form [formGroup]="editForm"
@@ -40,7 +40,7 @@
     </div>
 
     <div class="example-full-width">
-      <mat-icon aria-hidden="false" class="icon">city</mat-icon>
+      <mat-icon aria-hidden="false" class="icon">location_city</mat-icon>
       <mat-form-field>
         <input type="text" matInput
                placeholder="Введіть Ваш населений пункт"
@@ -69,17 +69,12 @@
       </mat-form-field>
     </div>
 
-
-    <div class="example-full-width" style="margin: 5px 0 20px">
-      <p>
-      <mat-icon aria-hidden="false" class="icon">photo</mat-icon>
-        Оновити фото:
-      </p>
-      <input type="file"
-             (change)="fileChange($event)"
-      >
+    <div>
+      <label for="file-upload" class="custom-file-upload">
+        Оновити фото
+      </label>
+      <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
     </div>
-
 
     <button mat-raised-button
             color="primary"

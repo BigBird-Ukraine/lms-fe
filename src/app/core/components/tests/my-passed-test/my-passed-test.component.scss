@@ -1,5 +1,18 @@
-.center{
-  display: flex;
-  justify-content: center;
+.borderB {
+  border: solid silver;
+  border-width: 0 0 1px 0;
 }
 
+.bg_light_white {
+  background-color: rgba(46, 42, 218, 0.05);
+}
+
+@media screen and (max-width: 768px) {
+  .hidden {
+    display: none;
+  }
+
+  .fn-size-md-3 {
+    font-size: 15px;
+  }
+}

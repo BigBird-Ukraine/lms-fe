@@ -17,18 +17,6 @@
   cursor: pointer;
 }
 
-.nav {
-  line-height: 60px;
-  position: relative;
-}
-
-.nav a {
-  margin-left: 20px;
-  color: #00888E;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 .nav a:hover {
   border-bottom: 1px solid #00888E;
 }
@@ -69,4 +57,33 @@ button .mat-menu-item:focus {
 }
 
 
+@media screen and (max-width: 4800px) {
+  .nav {
+    line-height: 52px;
+    position: relative;
+  }
 
+  .nav a {
+    margin-left: 10px;
+    color: #00888E;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .nav {
+    line-height: 30px;
+    position: relative;
+    margin-left: 20px;
+  }
+
+  .nav a {
+    color: #00888E;
+    font-weight: 500;
+  }
+
+  .userName {
+    display: none;
+  }
+}

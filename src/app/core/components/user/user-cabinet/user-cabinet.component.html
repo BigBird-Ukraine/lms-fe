@@ -3,42 +3,39 @@
   <h1>Мій Кабінет</h1>
   <hr>
 
-  <mat-card class="userInfoBlock">
-    <div class="avatarBlock">
-      <div class="avatar">
+  <mat-card class="userInfoBlock flex-wrap">
+
+    <div class="avatarBlock mx-3">
+      <div class="avatar border p-2 mb-2">
         <img [src]="user.photo_path">
       </div>
     </div>
 
-    <div class="mainInfoBlock">
-
-      <div class="info">
-        <p>Ім'я: {{user.name}}</p>
-        <p>Прізвище: {{user.surname}}</p>
-        <p>Населений пункт: {{user.population_point}}</p>
-        <p>Email: {{user.email}}</p>
-        <p>Номер телефону: {{user.phone_number}}</p>
+    <div>
+      <div class="info text-sm-center">
+        <h3>{{user.name}} {{user.surname}}</h3>
+        <p><i class="text-secondary mx-1">Населений пункт:</i>  {{user.population_point}}</p>
+        <p><i class="text-secondary mx-1">Email: </i> {{user.email}}</p>
+        <p><i class="text-secondary mx-1">Номер телефону:</i> {{user.phone_number}}</p>
       </div>
 
       <div>
         <button mat-raised-button
-                color="primary"
                 type="button"
                 (click)="openEditing()"
-        class="mb-2">
+        class="mb-2 mx-2">
           <mat-icon aria-hidden="false">create</mat-icon>
           Редагувати
         </button>
-        <br>
+
         <button mat-raised-button
-                color="primary"
                 type="button"
+                class="mx-2"
                 (click)="openChangePassword()">
           <mat-icon aria-hidden="false">vpn_key</mat-icon>
           Змінити пароль
         </button>
       </div>
-
     </div>
 
 
@@ -47,3 +44,4 @@
 </div>
 
 <app-main-loader *ngIf="!user"></app-main-loader>
+
