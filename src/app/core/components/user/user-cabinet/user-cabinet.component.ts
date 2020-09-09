@@ -6,6 +6,7 @@ import {AuthService} from '../../../services/auth';
 import {IUserSubjectModel} from '../../../interface';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {config} from '../../../../shared/config';
+import {ChangePasswordComponent} from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-user-cabinet',
@@ -43,6 +44,11 @@ export class UserCabinetComponent implements OnInit {
       data: {user: this.user}
     }).afterClosed().subscribe(() => {
       this.getInfo();
+    });
+  }
+
+  openChangePassword() {
+    this.dialog.open(ChangePasswordComponent, {
     });
   }
 }

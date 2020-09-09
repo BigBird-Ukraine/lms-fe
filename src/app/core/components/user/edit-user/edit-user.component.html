@@ -23,15 +23,18 @@
     </div>
 
     <div class="example-full-width">
-      <mat-icon aria-hidden="false" class="icon">email</mat-icon>
+      <mat-icon aria-hidden="false" class="icon">person_outline</mat-icon>
       <mat-form-field>
-        <input type="email" matInput
-               placeholder="Новий email"
-               formControlName="email"
+        <input type="text" matInput
+               placeholder="Введіть Ваше ім'я"
+               formControlName="surname"
+               required
         >
-
-        <mat-error *ngIf="editForm.get('email').hasError('email')">
-          Email введено некоректно
+        <mat-error *ngIf="editForm.get('surname').hasError('required')">
+          Введіть, будь ласка, прізвище
+        </mat-error>
+        <mat-error *ngIf="editForm.get('surname').hasError('pattern')">
+          Прізвище введено некоректно
         </mat-error>
       </mat-form-field>
     </div>

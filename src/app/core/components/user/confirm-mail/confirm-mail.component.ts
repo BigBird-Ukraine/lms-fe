@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ConfirmMailComponent implements OnInit {
   status = false;
-  alreadyActivatedStatus = false;
+  err = '';
 
   constructor(private userService: UserService,
               private activateRoute: ActivatedRoute) {
@@ -25,7 +25,7 @@ export class ConfirmMailComponent implements OnInit {
         }, 1500);
       },
         err => {
-        this.alreadyActivatedStatus = true;
+        this.err = err.error.error.message;
         });
     });
 
