@@ -2,20 +2,6 @@
   height: 150vh;
 }
 
-.main-container {
-  height: 500px;
-  display: flex;
-  align-items: baseline;
-}
-
-.example-container {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 25px 0 0;
-  display: inline-block;
-  vertical-align: top;
-}
-
 .example-list {
   border: solid 1px #ccc;
   min-height: 60px;
@@ -74,14 +60,6 @@ h2 {
   border: 1px solid #ccc;
 }
 
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.buttons button {
-  margin-left: 15px;
-}
 
 .group {
   margin-top: 27px;
@@ -122,4 +100,54 @@ form {
 
 .btn {
   height: max-content;
+}
+
+@media screen and (max-width: 4800px) {
+  .main-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+
+  .example-container {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 0 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+
+  .example-container {
+    width: 100px;
+    max-width: 100%;
+    margin: 0 25px 0 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+
+@media screen and (max-width: 360px) {
+  .example-container {
+    width: 90px;
+    max-width: 100%;
+    margin: 0 25px 0 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+@media screen and (max-width: 280px) {
+
+  .example-container {
+    width: 70px;
+    max-width: 100%;
+    margin: 0 25px 0 0;
+    display: inline-block;
+    vertical-align: top;
+  }
 }

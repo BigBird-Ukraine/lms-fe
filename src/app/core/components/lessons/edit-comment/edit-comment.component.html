@@ -1,5 +1,5 @@
 <div>
-  <mat-form-field class="example-full-width col-8">
+  <mat-form-field class="example-full-width col-12">
     <mat-label>Коментар</mat-label>
     <textarea
       type="text" matInput
@@ -8,21 +8,23 @@
       </textarea>
   </mat-form-field>
 
-  <button mat-stroked-button
-          color="primary"
-          type="button"
-          class="mx-2"
-          (click)="cancel()"
-  >
-    <mat-icon aria-hidden="false">cancel</mat-icon>
-  </button>
+  <div>
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            class="mx-2"
+            (click)="cancel()"
+    >
+      <mat-icon aria-hidden="false">cancel</mat-icon>
+    </button>
 
-  <button mat-stroked-button
-          color="primary"
-          type="button"
-          (click)="saveComment()"
-  >
-    <mat-icon aria-hidden="false">check</mat-icon>
-  </button>
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            (click)="saveComment()"
+    >
+      <mat-icon aria-hidden="false">check</mat-icon>
+    </button>
+  </div>
 </div>
 

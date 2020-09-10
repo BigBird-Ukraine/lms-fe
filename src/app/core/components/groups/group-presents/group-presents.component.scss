@@ -11,3 +11,30 @@
 form {
   padding: 10px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .example-full-width {
+    width: 80%;
+    padding-bottom: 10px;
+  }
+}
+
+
+
+@media screen and (max-width: 576px) {
+  .example-full-width {
+    width: 38%;
+    padding-bottom: 10px;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  .example-full-width {
+    width: 30%;
+    padding-bottom: 10px;
+  }
+}
+
+

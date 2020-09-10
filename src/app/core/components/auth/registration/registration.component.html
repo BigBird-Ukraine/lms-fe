@@ -162,12 +162,11 @@
       </mat-form-field>
     </div>
 
-
-    <div class="example-full-width" style="margin: 30px">
-      <mat-icon aria-hidden="false" class="icon">insert_photo</mat-icon>
-      <input type="file"
-             (change)="fileChange($event)"
-      >
+    <div>
+      <label for="file-upload" class="custom-file-upload">
+        Додати фото
+      </label>
+      <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
     </div>
 
     <button mat-raised-button

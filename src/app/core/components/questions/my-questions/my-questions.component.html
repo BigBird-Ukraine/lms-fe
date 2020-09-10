@@ -1,11 +1,19 @@
 <mat-card *ngIf="questions">
-  <div *ngFor="let question of questions">
-    Питання: {{question.question}} <br>
-    Предмет: {{question.subject}} <br>
-    Групи: {{question.group}} <br>
-    Опис: {{question.description}} <br>
-    Теги: {{question.tags}} <br>
-    Відповіді:
+  <button mat-raised-button
+          color="primary"
+          type="button"
+          [routerLink]="['/questions/add_questions']"
+  >Додати питання
+  </button>
+
+  <div *ngFor="let question of questions" class="mt-3">
+    <span class="my-1"> <span class="text-secondary">Питання:</span> {{question.question}} <br></span>
+    <span class="my-1"> <span class="text-secondary">Предмет: </span>{{question.subject}} <br></span>
+    <span class="my-1"> <span class="text-secondary">Групи:</span> {{question.group}} <br></span>
+    <span class="my-1"> <span class="text-secondary">Опис:</span> {{question.description}} <br></span>
+    <span class="my-1"> <span class="text-secondary">Теги:</span> {{question.tags}} <br></span>
+    <span class="my-1"> Відповіді:</span>
+
     <div *ngFor="let answer of question.answers; let i = index">
       {{i + 1}}) {{answer.value}}
       <span *ngIf="answer.correct" class="correct">&#10004;</span>
@@ -15,6 +23,7 @@
             color="primary"
             type="button"
             (click)="deleteQuestion(question._id)"
+            class="ml-2"
     >Видалити питання
     </button>
     <button mat-raised-button

@@ -22,6 +22,8 @@ export class LessonTestComponent implements OnInit {
   maxMark: number;
   id: string;
 
+  statusCheck = false;
+
   constructor(private questionsService: QuestionsService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
@@ -102,7 +104,10 @@ export class LessonTestComponent implements OnInit {
 
   checkTest(id, test) {
     const {question_list} = test;
+    this.statusCheck = true;
+
     this.testService.sendTests(id, question_list, this.cutQuestions).subscribe((value: IUser) => {
+        this.statusCheck = false;
         this.dialog.open(LessonTestResultComponent, {
           data: value
         }).afterClosed().subscribe(res => {

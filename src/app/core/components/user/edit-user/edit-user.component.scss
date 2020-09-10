@@ -1,9 +1,6 @@
+
 .icon {
   margin: auto 10px auto 0;
-}
-
-mat-form-field {
-  width: 90%;
 }
 
 .example-full-width {
@@ -27,3 +24,43 @@ mat-form-field {
 form {
   padding: 10px;
 }
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: white;
+  border-radius: 5px;
+}
+
+.disable {
+  display: none;
+}
+
+
+
+@media screen and (max-width: 4800px) {
+  mat-form-field {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-form-field {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  mat-form-field {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  mat-form-field {
+    width: 23%;
+  }
+}
+

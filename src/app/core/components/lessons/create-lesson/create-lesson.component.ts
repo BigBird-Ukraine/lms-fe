@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {Tags, ILesson} from '../../../interface';
 import {InfoHelperService, LessonsService} from '../../../services';
@@ -23,7 +23,8 @@ export class CreateLessonComponent implements OnInit {
               private infoService: InfoHelperService,
               private lessonService: LessonsService,
               private customSnackbarService: CustomSnackbarService,
-              private dialogRef: MatDialogRef<CreateLessonComponent>) {
+              private dialogRef: MatDialogRef<CreateLessonComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class CreateLessonComponent implements OnInit {
 
   formData() {
     this.lessonForm = this.fb.group({
-      number: this.fb.control(null, [Validators.required]),
+      number: this.fb.control(this.data + 1),
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null),
       tags: this.fb.array([]),

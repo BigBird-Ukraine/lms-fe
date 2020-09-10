@@ -17,37 +17,13 @@
   cursor: pointer;
 }
 
-.nav {
-  line-height: 60px;
-  position: relative;
-}
-
-.nav a {
-  margin-left: 20px;
-  color: #00888E;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 .nav a:hover {
-  border-bottom: 1px solid #00888E;
+  border-bottom: 1px solid black;
 }
 
 button .mat-menu-item:focus {
   border: none;
   outline: none;
-}
-
-.divider {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-block;
-  width: 1px;
-  height: 30px;
-  margin-left: 10px;
-  background-color: #00888E;
 }
 
 .userName {
@@ -69,4 +45,39 @@ button .mat-menu-item:focus {
 }
 
 
+@media screen and (max-width: 4800px) {
+  .nav {
+    line-height: 52px;
+    position: relative;
+  }
 
+  .nav a {
+    margin-left: 10px;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .nav {
+    line-height: 30px;
+    position: relative;
+    margin-left: 20px;
+  }
+
+  .nav a {
+    color: black;
+    font-weight: 500;
+  }
+
+  .userName {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 280px) {
+   .font-size280 {
+     font-size: 13px;
+   }
+}

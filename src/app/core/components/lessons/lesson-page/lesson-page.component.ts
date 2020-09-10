@@ -63,7 +63,9 @@ export class LessonPageComponent implements OnInit {
   }
 
   openForm() {
-    this.dialog.open(CreateLessonComponent).afterClosed().subscribe(res => res && this.ngOnInit());
+    this.dialog.open(CreateLessonComponent,
+      {data: this.lessonsList[this.lessonsList.length - 1].number}
+    ).afterClosed().subscribe(res => res && this.ngOnInit());
   }
 
   myLessons() {
@@ -72,7 +74,6 @@ export class LessonPageComponent implements OnInit {
 
     this.lessonService.getMyLessons().subscribe((lessons: IFullLesson) => {
       if (lessons.data.lesson) {
-
         this.lessonsList = lessons.data.lesson;
         this.lessonsForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.label);
         this.lessonsNumberForAutocomplete = lessons.data.lesson.map(lessonsArr => lessonsArr.number);

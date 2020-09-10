@@ -1,10 +1,7 @@
 .lesson {
   margin: 40px 20px;
   display: flex;
-}
-
-.video_block {
-  width: 50%;
+  flex-wrap: wrap;
 }
 
 .lesson_video {
@@ -15,11 +12,6 @@
   font-size: 100px;
   line-height: 350px;
   text-align: center;
-}
-
-.lesson_info {
-  width: 50%;
-  margin: 70px 30px;
 }
 
 .lesson_test {
@@ -42,4 +34,48 @@
 
 .disable {
   display: none;
+}
+
+.border-radius {
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 4800px) {
+  .heightVideo {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .height100 {
+    height: 120vh;
+  }
+
+  .text-center-md {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .height100 {
+    height: 100%;
+  }
+
+  .heightVideo {
+    height: 200px;
+  }
+
+  .fn-size-md-1 {
+    font-size: 25px;
+  }
+
+  .fn-size-md-2 {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .hidden {
+    display: none;
+  }
 }

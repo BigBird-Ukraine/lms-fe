@@ -20,6 +20,8 @@ export class QuestionsLayoutComponent implements OnInit {
   check: any;
   count = true;
 
+  statusCheck = false;
+
   constructor(private questionsService: QuestionsService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder,
@@ -96,11 +98,14 @@ export class QuestionsLayoutComponent implements OnInit {
 
   checkTest(test) {
     const {question_list} = test;
+    this.statusCheck = true;
+
     this.testService.sendFilteredTests(question_list, this.cutQuestions).subscribe((value) => {
+        this.statusCheck = false;
         this.dialog.open(LessonTestResultComponent, {
           data: value
         }).afterClosed().subscribe(res => {
-          this.router.navigate(['questions'] );
+          this.router.navigate(['questions']);
         });
       }
     );

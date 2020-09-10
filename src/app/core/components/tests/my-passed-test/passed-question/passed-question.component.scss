@@ -2,3 +2,24 @@
   display: flex;
   justify-content: center;
 }
+
+.height {
+  height: 240px;
+}
+
+.width {
+  min-width: 60vw;
+}
+
+@media screen and (max-width: 4800px) {
+  .questions {
+    overflow: scroll
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .questions {
+    display: none !important;
+    overflow: hidden;
+  }
+}

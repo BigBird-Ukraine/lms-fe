@@ -18,13 +18,13 @@ table, th, td {
   text-align: center;
 }
 
-.hover :hover{
+.hover :hover {
   opacity: 80%;
   color: green;
   cursor: pointer;
 }
 
-.hoverRed :hover{
+.hoverRed :hover {
   opacity: 80%;
   color: red;
   cursor: pointer;
@@ -34,4 +34,10 @@ table, th, td {
   opacity: 80%;
   color: orange;
   cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+  h2 {
+   font-size: 20px;
+  }
 }

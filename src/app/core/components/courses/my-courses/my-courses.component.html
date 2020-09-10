@@ -1,21 +1,26 @@
 <div *ngIf="courses" class="text-center center">
-    <div *ngFor="let course of courses.groups_id" class="m-2 p-2 border ">
-      <h3>{{course.course_id.label}}</h3>
-      <p>{{course.course_id.description}}</p>
-      <div class="m-auto p-2 border bg-secondary col-9">
-        <div *ngFor="let module of course.course_id.modules_list" class="my-2 p-2 ">
-          <h3 class="text-warning">Модуль: {{module.label}}</h3>
-          <p>{{module.description}}</p>
-          <div class="m-auto p-2 border bg-dark col-10 text-white cursor">
-            Уроки:
-            <div (click)="router.navigate(['/lessons/'+ lesson._id])"
-              *ngFor="let lesson of module.lessons_list"
-                 class="m-2 p-2 border-blue col-5 m-auto">
-              <h3>{{lesson.label}}</h3>
-              <p>{{lesson.description}}</p>
-            </div>
+  <div *ngFor="let course of courses.groups_id" class="m-2 p-2 border border-radius">
+    <h2>{{course.course_id.label}}</h2>
+    <p class="text-secondary text-justify col-8 m-auto hidden">{{course.course_id.description}}</p>
+    <div class="m-auto p-2 border bg-secondary col-xl-9 com-sm-12 border-radius ">
+      <div *ngFor="let module of course.course_id.modules_list" class="m-2 p-2 d-flex flex-wrap">
+
+        <div class="col-xl-8 col-md-12">
+          <h3>{{module.label}}</h3>
+          <p class="text-justify col-xl-8  col-md-12 m-auto borderB hidden">{{module.description}}</p>
+        </div>
+
+        <div class="m-auto p-2 border-radius bg-dark col-xl-4 col-12-md text-white cursor">
+          <div (click)="router.navigate(['/lessons/'+ lesson._id])"
+               *ngFor="let lesson of module.lessons_list"
+               class="">
+            <p class=" ">{{lesson.label}}</p>
           </div>
         </div>
+
       </div>
     </div>
+  </div>
 </div>
+
+<app-main-loader *ngIf="!courses"></app-main-loader>

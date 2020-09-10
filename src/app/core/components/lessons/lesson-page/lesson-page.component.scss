@@ -3,10 +3,12 @@
 }
 
 .video {
-  width: 200px;
-  height: 150px;
   background-color: darksalmon;
-  margin-right: 30px;
+}
+video {
+  width: 200px;
+  height: 200px;
+  margin: auto auto;
 }
 
 .lesson-inner {
@@ -70,4 +72,10 @@ button {
 
 .sidenav {
   width: 250px;
+}
+
+@media screen and (max-width: 768px) {
+  .hidden {
+    display: none;
+  }
 }
