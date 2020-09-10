@@ -63,11 +63,9 @@ export class LessonPageComponent implements OnInit {
   }
 
   openForm() {
-    this.dialog.open(CreateLessonAdminComponent).afterClosed().subscribe(res => {
-      if (res) {
-        this.ngOnInit();
-      }
-    });
+    this.dialog.open(CreateLessonAdminComponent,
+      {data: this.lessonsList[this.lessonsList.length - 1].number}
+    ).afterClosed().subscribe(res => res && this.ngOnInit());
   }
 
   myLessons() {

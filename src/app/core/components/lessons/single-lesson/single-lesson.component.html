@@ -1,99 +1,100 @@
-<div class="lesson_page p-3 border bg-secondary mt-3" *ngIf="lesson">
+<div class="lesson_page p-3 border bg-secondary mt-3 border-radius height100" *ngIf="lesson">
 
   <div class="lesson">
 
 
-    <mat-card class="video_block">
-      <video width="99%" height="300px" controls src="{{lesson.video_path}}">
+    <mat-card class="col-md-12 col-xl-6">
+      <video class="heightVideo col-12" controls src="{{lesson.video_path}}">
         Your browser does not support the video tag.
       </video>
 
     </mat-card>
 
-    <div class="lesson_info">
-
-      <div class="info">
-        <h2 class="text-white">{{lesson.label}}</h2>
-        <p>{{lesson.description}}</p>
+    <div class="col-xl-6 col-md-12">
+      <div>
+        <h2 class="text-white text-center-md fn-size-md-1">{{lesson.label}}</h2>
+        <p class="text-justify fn-size-md-2 hidden">{{lesson.description}}</p>
       </div>
 
-      <div *ngIf="!spinnerStatus && isTeacher">
-        <label for="file-upload" class="custom-file-upload">
-          Замінити відео
-        </label>
-        <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
+      <div *ngIf="isTeacher">
+        <div *ngIf="!spinnerStatus">
+          <label for="file-upload" class="custom-file-upload">
+            Замінити відео
+          </label>
+          <input class="disable" id="file-upload" type="file" (change)="fileChange($event)"/>
+        </div>
+
+        <app-main-loader *ngIf="spinnerStatus"></app-main-loader>
+
+        <button mat-raised-button
+                type="button"
+                class="mb-2"
+                *ngIf="isTeacher"
+                (click)="editLesson()">
+          Редагувати урок
+        </button>
+        <br>
+        <button mat-raised-button
+                type="button"
+                class="mb-2"
+                *ngIf="isTeacher"
+                (click)="deleteLesson()">
+          Видалити урок
+        </button>
+        <br>
+        <button mat-raised-button
+                type="button"
+                *ngIf="isTeacher"
+                (click)="addQuestionToLesson()">
+          Додати питання до уроку
+        </button>
       </div>
-
-      <app-main-loader *ngIf="spinnerStatus"></app-main-loader>
-
-      <button mat-raised-button
-              type="button"
-              class="mb-2"
-              *ngIf="isTeacher"
-              (click)="editLesson()">
-        Редагувати урок
-      </button>
-      <br>
-      <button mat-raised-button
-              type="button"
-              class="mb-2"
-              *ngIf="isTeacher"
-              (click)="deleteLesson()">
-        Видалити урок
-      </button>
-      <br>
-      <button mat-raised-button
-              type="button"
-              *ngIf="isTeacher"
-              (click)="addQuestionToLesson()">
-        Додати питання до уроку
-      </button>
-
     </div>
-
   </div>
 
   <div class="lesson_test mb-3">
-
     <button mat-fab
             type="button"
             (click)="startTest()"
     >
       <mat-icon aria-hidden="false">school</mat-icon>
     </button>
-
   </div>
 
-  <div class="border m-3 p-3 ">
+  <div class="border m-3 p-3 border-radius ">
     <mat-paginator
       *ngIf="commentaries && commentaries.length"
       [length]="length"
       [pageSize]="pageSize"
       [pageIndex]="pageIndex"
       [pageSizeOptions]="[10, 25, 50, 100]"
-      (page)="getFilteredComments($event)">
+      (page)="getFilteredComments($event)"
+      class="border-radius ">
     </mat-paginator>
 
     <div *ngIf="commentaries">
-      <div *ngFor="let com of commentaries" class="hover">
-        <span class="text-white pl-2">{{com.user_id.name}} {{com.user_id.surname}} -</span> {{com.text}}
-        <button *ngIf="(com.user_id._id === userService.userInfo.value._id) "
-                mat-stroked-button
-                type="button"
-                class="ml-1 my-1"
-                (click)="delComment(com._id)"
-        >
-          <mat-icon aria-hidden="false">delete</mat-icon>
-        </button>
+      <div *ngFor="let com of commentaries" >
+        <span class="text-white pl-xl-2 pl-md-0">{{com.user_id.name}} {{com.user_id.surname}} -</span> {{com.text}}
 
-        <button *ngIf="com.user_id._id === userService.userInfo.value._id"
-                mat-stroked-button
-                type="button"
-                class="mx-2"
-                (click)="openEditComment(com._id, com.text)"
-        >
-          <mat-icon aria-hidden="false">edit</mat-icon>
-        </button>
+        <div class="hover">
+          <button *ngIf="(com.user_id._id === userService.userInfo.value._id) "
+                  mat-stroked-button
+                  type="button"
+                  class="ml-xl-1 ml-md-0 my-1 fn-size-md-2"
+                  (click)="delComment(com._id)"
+          >
+            <mat-icon aria-hidden="false">delete</mat-icon>
+          </button>
+
+          <button *ngIf="com.user_id._id === userService.userInfo.value._id"
+                  mat-stroked-button
+                  type="button"
+                  class="mx-2 fn-size-md-2"
+                  (click)="openEditComment(com._id, com.text)"
+          >
+            <mat-icon aria-hidden="false">edit</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <p *ngIf="commentaries && !commentaries.length" class="text-center text-secondary">Коментарів ще немає</p>
@@ -101,7 +102,7 @@
     <app-main-loader *ngIf="!commentaries"></app-main-loader>
 
     <div>
-      <mat-form-field class="example-full-width col-6 text-white">
+      <mat-form-field class="example-full-width col-xl-6 col-md-12 text-white mt-md-2">
         <mat-label>Коментар</mat-label>
         <textarea
           type="text" matInput

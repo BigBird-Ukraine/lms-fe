@@ -130,7 +130,7 @@ export class SingleLessonComponent implements OnInit {
 
   openEditComment(comId: string, text: string) {
     this.dialog.open(EditCommentComponent, {
-      width: '30%',
+      width: '90%',
       data: {comId, text}
     }).afterClosed().subscribe((editedText: string) => {
       if (editedText) {

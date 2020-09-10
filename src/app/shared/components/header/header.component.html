@@ -14,7 +14,6 @@
 
   <mat-nav-list class="nav">
     <div class="d-flex flex-wrap justify-content-between ">
-
       <a
         [matMenuTriggerFor]="menu"
         *ngIf="authService.isAuthenticated()"
@@ -23,15 +22,13 @@
 
       <a (click)="openRegForm()"
          *ngIf="!authService.isAuthenticated()"
+         class="font-size280"
       >Зареєструватися
       </a>
 
-      <div class="divider"
-           *ngIf="!authService.isAuthenticated()">
-      </div>
-
       <a (click)="openLogForm()"
          *ngIf="!authService.isAuthenticated()"
+         class="font-size280"
       >Увійти
       </a>
 
@@ -90,12 +87,6 @@
               [routerLink]="['/test/my']"
               *ngIf="isStudent || isTeacher && authService.isAuthenticated()"
       >Мої пройдені тести
-      </button>
-
-      <button mat-menu-item
-              [routerLink]="['/questions/add_questions']"
-              *ngIf="!isStudent && authService.isAuthenticated()"
-      >Додати питання
       </button>
     </mat-menu>
 

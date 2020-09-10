@@ -14,7 +14,7 @@
         <div class="">
 
           <tbody class="question_table  d-flex flex-wrap justify-content-center" formArrayName="question_list">
-          <mat-card class="question col-3 m-2 " *ngFor="let item of questions; let i = index;"
+          <mat-card class="question col-xl-3 col-md-12 m-2 " *ngFor="let item of questions; let i = index;"
                     [formGroupName]="i">
             <tr>
               <td class="q_text">
@@ -57,4 +57,5 @@
   </mat-card>
 </div>
 
-<app-main-loader *ngIf="!questions"></app-main-loader>
+<app-main-loader *ngIf="!questions || statusCheck"></app-main-loader>
+

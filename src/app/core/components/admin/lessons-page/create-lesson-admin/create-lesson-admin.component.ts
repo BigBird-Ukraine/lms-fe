@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {ILesson, Tags} from '../../interfaces';
 import {InfoHelperService} from '../../../../services/questions';
 import {AdminLessonService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class CreateLessonAdminComponent implements OnInit {
               private lessonService: AdminLessonService,
               private customSnackbarService: CustomSnackbarService,
               private dialog: MatDialog,
-              private dialogRef: MatDialogRef<CreateLessonAdminComponent>) {
+              private dialogRef: MatDialogRef<CreateLessonAdminComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
 
@@ -35,7 +36,7 @@ export class CreateLessonAdminComponent implements OnInit {
 
   formData() {
     this.lessonForm = this.fb.group({
-      number: this.fb.control(null, [Validators.required]),
+      number: this.fb.control(this.data + 1),
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null),
       tags: this.fb.array([]),

@@ -7,19 +7,6 @@
         (keydown.enter)="$event.preventDefault()"
   >
     <div class="form">
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Номер уроку</mat-label>
-        <input type="text" matInput
-               formControlName="number"
-               required>
-
-        <mat-error *ngIf="lessonForm.get('number').hasError('required')">
-          Вкажіть номер уроку
-        </mat-error>
-      </mat-form-field>
-
-
       <mat-form-field class="example-full-width">
         <mat-label>Назва уроку</mat-label>
         <input type="text" matInput

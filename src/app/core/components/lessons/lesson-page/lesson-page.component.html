@@ -1,22 +1,12 @@
 <mat-sidenav-container class="example-container">
-
-  <mat-sidenav class="sidenav" mode="side" opened  *ngIf="isTeacher">
-    <button mat-raised-button
-            color="primary"
-            type="button"
-            class="nav-btn"
-            (click)="openForm()"
-    >Додати урок
-    </button>
-  </mat-sidenav>
-
   <mat-sidenav-content>
     <div *ngIf="lessonsList"
          class="lesson-layout">
 
       <form [formGroup]="filterLessonsForm"
             (ngSubmit)="showFiltered()"
-            (keydown.enter)="$event.preventDefault()">
+            (keydown.enter)="$event.preventDefault()"
+      class="d-flex flex-wrap justify-content-around mb-3">
 
         <mat-form-field>
 
@@ -54,68 +44,82 @@
 
         <div>
           <mat-form-field>
-        <input matInput placeholder="Теги"
-               formGroupName="tags"
-               (keyup.enter)="newTag($event)"
-               [matAutocomplete]="autoTag"
-               #searchTag
-        >
+            <input matInput placeholder="Теги"
+                   formGroupName="tags"
+                   (keyup.enter)="newTag($event)"
+                   [matAutocomplete]="autoTag"
+                   #searchTag
+            >
 
-        <mat-autocomplete autoActiveFirstOption
-                          #autoTag="matAutocomplete">
-          <mat-option
-            *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
-            [value]="tag">
-            {{tag}}
-          </mat-option>
+            <mat-autocomplete autoActiveFirstOption
+                              #autoTag="matAutocomplete">
+              <mat-option
+                *ngFor="let tag of tagsForAutocomplete | filter: searchTag.value"
+                [value]="tag">
+                {{tag}}
+              </mat-option>
 
-        </mat-autocomplete>
-      </mat-form-field>
+            </mat-autocomplete>
+          </mat-form-field>
 
-        <div class="blocks">
-          <div *ngFor="let tag of tags"
-               class="block">
-            {{tag}}
-            <button class="mini_btn"
-                    type="button"
-                    (click)="delTag(tag)">
-              &times;
-            </button>
+          <div class="blocks">
+            <div *ngFor="let tag of tags"
+                 class="block">
+              {{tag}}
+              <button class="mini_btn"
+                      type="button"
+                      (click)="delTag(tag)">
+                &times;
+              </button>
+            </div>
+
           </div>
-
         </div>
-    </div>
 
-        <button type="submit"
-                color="primary"
-                mat-raised-button
-        >
-          Шукати
-        </button>
+        <div class="d-flex flex-wrap justify-content-center">
+          <button type="submit"
+                  color="primary"
+                  class="m-2"
+                  mat-raised-button
+          >
+            Шукати
+          </button>
 
-        <button mat-raised-button
-                color="primary"
-                type="button"
-                *ngIf="isTeacher && !isMyLesson && !isFiltered"
-                (click)="myLessons()"
-        >Мої уроки
-        </button>
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  *ngIf="isTeacher && !isMyLesson && !isFiltered"
+                  (click)="myLessons()"
+          >Мої уроки
+          </button>
 
-        <button mat-raised-button
-                color="primary"
-                type="button"
-                *ngIf="isTeacher && isMyLesson || isFiltered"
-                (click)="getLessons()"
-        >Всі уроки
-        </button>
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  *ngIf="isTeacher && isMyLesson || isFiltered"
+                  (click)="getLessons()"
+          >Всі уроки
+          </button>
+
+          <button *ngIf="isTeacher"
+                  mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  (click)="openForm()"
+          >Додати урок
+          </button>
+        </div>
 
       </form>
 
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let lesson of lessonsList; let i = index">
+        <mat-expansion-panel *ngFor="let lesson of lessonsList">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Урок {{i+1}}.
+              Урок {{lesson.number}}.
               {{lesson.label}}
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -123,9 +127,12 @@
           <div class="lesson-inner">
 
             <mat-card class="video">
+              <video controls src="{{lesson.video_path}}">
+                Your browser does not support the video tag.
+              </video>
             </mat-card>
 
-            <p>{{lesson.description}}</p>
+            <p class="ml-2 hidden">{{lesson.description}}</p>
 
           </div>
 
@@ -149,7 +156,7 @@
             <button mat-button
                     color="primary"
                     type="button"
-                    (click)="showLesson(lesson._id)" >
+                    (click)="showLesson(lesson._id)">
               Почати
             </button>
           </mat-action-row>

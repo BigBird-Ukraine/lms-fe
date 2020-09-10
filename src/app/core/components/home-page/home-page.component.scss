@@ -10,8 +10,27 @@ h1 {
   padding-top: 40px;
 }
 
-.intro {
-  height: 500px;
-  //background: rgba(46, 42, 218, 0.05) url('src/assets/images/background.jpg') center no-repeat;
-  background-size: cover;
+
+h2 {
+  color: silver;
+  padding-left: 46px;
 }
+
+
+@media screen and (max-width: 576px) {
+  h1 {
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    padding-left: 0;
+    padding-top: 40px;
+  }
+
+
+  h2 {
+    color: silver;
+    padding-left: 0;
+    text-align: center;
+  }
+}
+

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {CoursesRoutingModule} from './courses-routing.module';
 import {MyCoursesComponent} from './my-courses/my-courses.component';
+import {SharedModule} from '../../../shared/modules';
 
 
 
@@ -10,7 +11,8 @@ import {MyCoursesComponent} from './my-courses/my-courses.component';
   declarations: [MyCoursesComponent],
   imports: [
     CommonModule,
-    CoursesRoutingModule
+    CoursesRoutingModule,
+    SharedModule
   ]
 })
 export class CoursesModule { }
