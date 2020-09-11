@@ -38,7 +38,7 @@ export class CreateLessonAdminComponent implements OnInit {
     this.lessonForm = this.fb.group({
       number: this.fb.control(this.data + 1),
       label: this.fb.control(null, [Validators.required]),
-      description: this.fb.control(null),
+      description: this.fb.control(null, [Validators.required]),
       tags: this.fb.array([]),
       video_path: ''
     });

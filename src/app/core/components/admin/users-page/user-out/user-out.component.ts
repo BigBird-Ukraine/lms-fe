@@ -103,7 +103,8 @@ export class UserOutComponent implements OnInit {
   showActivityStudent(id: string) {
     this.dialog.open(AdminMyPassedTestComponent, {
       data: id,
-      height: '100%'
+      height: '100%',
+      width: '100vw'
     });
   }
 }

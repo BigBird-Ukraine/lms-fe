@@ -18,7 +18,8 @@ export class MyPassedTestWrapperComponent implements OnInit {
   ngOnInit() {
     this.dialog.open(MyPassedTestComponent, {
       data: this.authService.getAccessToken(),
-      height: '100vh'
+      height: '100vh',
+      width: '100vw'
     }).afterClosed().subscribe(res => this.router.navigate(['']));
   }
 

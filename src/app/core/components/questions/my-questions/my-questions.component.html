@@ -1,5 +1,6 @@
-<mat-card *ngIf="questions">
-  <button mat-raised-button
+<mat-card *ngIf="questions" >
+  <button *ngIf="questions.length"
+    mat-raised-button
           color="primary"
           type="button"
           [routerLink]="['/questions/add_questions']"

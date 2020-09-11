@@ -9,9 +9,11 @@
     <div class="border m-2 p-2 cursor col-3"
          (click)="openForm(2 , usersStatistic.blockedUser)"
     >Заблоковані користувачі: <br> <span class="text-danger">{{usersStatistic.blockedUser}}</span>
-
     </div>
 
-    <div class="border m-2 p-2 col-3">Не активовані користувачі: <br> <span>N</span></div>
+    <div class="border m-2 p-2 cursor col-3"
+         (click)="openForm(3 , usersStatistic.notActivatedUser)"
+    >Не активовані користувачі:  <br> <span class="text-danger">{{usersStatistic.notActivatedUser}}</span>
+    </div>
   </div>
 </div>

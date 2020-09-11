@@ -2,7 +2,8 @@ export interface QuestionData {
   data: {
     count: number;
     pageCount: number;
-    questions: QuestionModel[]
+    questions: QuestionModel[],
+    maxMark: number;
   };
 }
 
