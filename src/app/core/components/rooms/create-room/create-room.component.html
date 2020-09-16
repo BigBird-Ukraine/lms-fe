@@ -97,7 +97,7 @@
               mat-raised-button
               color="primary"
               type="submit"
-              [disabled]="roomForm.invalid"
+              [disabled]="roomForm.invalid || checkValidCloseDate()"
       >Створити
       </button>
     </div>

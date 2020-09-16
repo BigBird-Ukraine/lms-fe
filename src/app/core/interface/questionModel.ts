@@ -26,6 +26,7 @@ export interface Level {
 }
 
 export interface Groups {
+  _id: string;
   label: string;
 }
 

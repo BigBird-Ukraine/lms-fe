@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Groups, ICity} from '../../../interface';
+import {Groups, ICity, IGroup, IRoom} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RoomsService} from '../../../services/rooms';
+import {CustomSnackbarService} from '../../../../shared/services';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-create-room',
@@ -14,12 +17,15 @@ export class CreateRoomComponent implements OnInit {
   minDate = this.getDate();
   spinnerStatus = false;
 
-  group: Groups[] = [];
+  group: string[] = [];
   groupForAuto: Groups[] = [];
+  groupsId: string[] = [];
 
   citiesForAuto: Partial<ICity>[] = [];
 
-  constructor(private infoService: InfoHelperService, private fb: FormBuilder) {
+  constructor(private infoService: InfoHelperService, private fb: FormBuilder,
+              private roomService: RoomsService, private customSnackbarService: CustomSnackbarService,
+              private dialogRef: MatDialogRef<CreateRoomComponent>) {
     this.roomForm = this.fb.group({
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null, [Validators.required]),
@@ -50,10 +56,12 @@ export class CreateRoomComponent implements OnInit {
   }
 
   newGroups(group) {
-    const text = group.target.value;
+    const label = group.target.value;
 
-    if (text.length) {
-      this.group.push(text);
+    if (label.length) {
+      const [filterGroup] = this.groupForAuto.filter(groupRes => groupRes.label === label);
+      this.group.push(label);
+      this.groupsId.push(filterGroup._id);
     }
     group.target.value = '';
   }
@@ -69,7 +77,23 @@ export class CreateRoomComponent implements OnInit {
   }
 
   createRoom() {
-    this.roomForm.value.groups = this.group;
-    console.log(this.roomForm.value);
+    const room: IRoom = this.roomForm.value;
+    room.groups = this.groupsId;
+
+    this.spinnerStatus = true;
+    this.roomService.createRoom(room).subscribe(res => {
+      this.spinnerStatus = false;
+      this.customSnackbarService.open('Кімнату додано', '');
+      this.dialogRef.close(true);
+    }, err => {
+      this.spinnerStatus = false;
+      this.customSnackbarService.open(err.error.error.message, '');
+      this.dialogRef.close(false);
+    });
+  }
+
+  checkValidCloseDate() {
+    const {start_at, close_at} = this.roomForm.value;
+    return new Date(start_at) > new Date(close_at);
   }
 }

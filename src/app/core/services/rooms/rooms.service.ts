@@ -14,6 +14,16 @@ export class RoomsService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
+  createRoom(room: IRoom): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.post <void>(`${commonAuthPath}/rooms`, {...room}, options);
+  }
+
   getAllRooms(): Observable<IRoom[]> {
     const options = {
       headers: new HttpHeaders({

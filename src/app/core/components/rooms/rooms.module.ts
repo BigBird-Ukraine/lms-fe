@@ -12,7 +12,7 @@ import {
 
 import {RoomsComponent} from './rooms/rooms.component';
 import {RoomsRoutingModule} from './rooms-routing.module';
-import {AllRoomsResolverService} from '../../resolvers';
+import {AllRoomsResolverService, SingleRoomResolverService} from '../../resolvers';
 import {RoomComponent} from './room/room.component';
 import {MaterialModule, SharedModule} from '../../../shared/modules';
 import {CreateRoomComponent} from './create-room/create-room.component';
@@ -49,7 +49,7 @@ import {AngularDateTimePickerModule} from 'angular2-datetimepicker';
     MatPaginatorModule,
     MaterialModule
   ],
-  providers: [AllRoomsResolverService]
+  providers: [AllRoomsResolverService, SingleRoomResolverService]
 })
 export class RoomsModule {
 }

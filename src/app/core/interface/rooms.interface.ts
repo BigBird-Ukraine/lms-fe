@@ -1,5 +1,3 @@
-import {IGroup} from './group-interface';
-
 export interface IRoom {
   _id: string;
   label: string;
@@ -8,7 +6,7 @@ export interface IRoom {
   start_at: Date;
   close_at: Date;
   city: string;
-  groups?: Array<Partial<IGroup>>;
+  groups?: string[];
   booked_users?: IBookUser[];
   owner_id: string;
 }

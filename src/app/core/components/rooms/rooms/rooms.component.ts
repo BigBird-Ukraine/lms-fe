@@ -63,7 +63,11 @@ export class RoomsComponent implements OnInit {
 
   openForm() {
     this.dialog.open(CreateRoomComponent, {width: '100vw', height: '100vh'}
-    ).afterClosed().subscribe(res => res && this.ngOnInit());
+    ).afterClosed().subscribe(res => {
+      if (res) {
+        this.roomService.getAllRooms().subscribe(rooms => this.roomsList = rooms);
+      }
+    });
   }
 
   myRooms() {
