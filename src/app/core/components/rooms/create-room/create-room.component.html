@@ -1,0 +1,108 @@
+<h2 mat-dialog-title class="mat_dialog_title">Створити кімнату</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="roomForm"
+        (ngSubmit)="createRoom()"
+        (keydown.enter)="$event.preventDefault()"
+  >
+    <div class="form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Назва кімнати</mat-label>
+        <input type="text" matInput
+               formControlName="label"
+               required>
+
+        <mat-error *ngIf="roomForm.get('label').hasError('required')">
+          Вкажіть назву кімнати
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Опис кімнати</mat-label>
+        <textarea type="text" matInput formControlName="description"></textarea>
+        <mat-error *ngIf="roomForm.get('description').hasError('required')">
+          Додайте опис кімнати
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Кількість місць</mat-label>
+        <input type="text" matInput formControlName="count_all_places">
+        <mat-error *ngIf="roomForm.get('count_all_places').hasError('required')">
+          Додайте кількість вільних місць
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <div>
+        <div class="m-2">
+          <label for="start_at">Дата та час відкриття кімнати: </label><br>
+          <input id='start_at' formControlName="start_at" type="datetime-local" [min]="minDate">
+        </div>
+
+        <div class="m-2">
+          <label for="close_at">Дата та час закриття кімнати: </label><br>
+          <input id='close_at' formControlName="close_at" type="datetime-local" [min]="minDate">
+        </div>
+
+      </div>
+      <br>
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Вкажіть місто</mat-label>
+        <input type="text" matInput formControlName="city"
+               [matAutocomplete]="autoCity"
+               #searchCity>
+
+        <mat-autocomplete #autoCity="matAutocomplete">
+          <mat-option *ngFor="let city of citiesForAuto " [value]="city.title">
+            {{city.title}}
+          </mat-option>
+        </mat-autocomplete>
+
+        <mat-error *ngIf="roomForm.get('city').hasError('required')">
+          Додайте місто
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="Вкажіть групу"
+               formGroupName="groups"
+               (keyup.enter)="newGroups($event)"
+               [matAutocomplete]="autoGroup"
+               #searchGroup
+        >
+
+        <mat-autocomplete #autoGroup="matAutocomplete">
+          <mat-option *ngFor="let group of groupForAuto " [value]="group.label">
+            {{group.label}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="blocks">
+        <span *ngFor="let gr of group"
+              class="block">
+          {{gr}}
+        </span>
+      </div>
+
+
+      <button *ngIf="!spinnerStatus"
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="roomForm.invalid"
+      >Створити
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+
+
+
