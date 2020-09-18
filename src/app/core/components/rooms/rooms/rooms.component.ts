@@ -136,6 +136,8 @@ export class RoomsComponent implements OnInit {
   }
 
   deleteRoom(id: string) {
-    this.roomService.deleteRoom(id).subscribe(res => this.ngOnInit());
+    this.roomService.deleteRoom(id).subscribe(res => {
+      this.roomsList = this.roomsList.filter(room => room._id !== id);
+    });
   }
 }

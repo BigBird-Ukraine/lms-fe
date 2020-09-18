@@ -4,7 +4,6 @@
 
 .mat-typography {
   font-size: 16px;
-  width: 700px;
 }
 
 form {
@@ -37,6 +36,14 @@ form {
   height: 15px;
   font-size: 15px;
   line-height: 15px
+}
+
+.green {
+  color:green;
+}
+
+.red {
+  color: red;
 }
 
 @media screen and (max-width: 4800px) {

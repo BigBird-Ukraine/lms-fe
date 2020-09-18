@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Groups, ICity, IGroup, IRoom} from '../../../interface';
+import {Groups, ICity, IRoom, IValidDate} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoomsService} from '../../../services/rooms';
@@ -13,9 +13,11 @@ import {MatDialogRef} from '@angular/material';
 })
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
+  startAt: string;
+  closeAt: string;
 
-  minDate = this.getDate();
   spinnerStatus = false;
+  confirmStatus = false;
 
   group: string[] = [];
   groupForAuto: Groups[] = [];
@@ -29,30 +31,35 @@ export class CreateRoomComponent implements OnInit {
     this.roomForm = this.fb.group({
       label: this.fb.control(null, [Validators.required]),
       description: this.fb.control(null, [Validators.required]),
-      count_all_places: this.fb.control(null, [
-        Validators.required,
-        Validators.pattern(/^-?(0|[1-9]\d*)?$/),
-        Validators.min(1)
-      ]),
-      start_at: this.fb.control(null, [Validators.required]),
-      close_at: this.fb.control(null, [Validators.required]),
+      count_all_places: this.fb.control(null, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.min(1)]),
+      start_at: this.fb.control(null),
+      close_at: this.fb.control(null),
       city: this.fb.control(null, [Validators.required]),
       groups: this.fb.array([]),
     });
   }
 
-
   ngOnInit() {
-    this.getCities();
-    this.getGroups();
-  }
-
-  getGroups() {
+    this.infoService.getCities().subscribe((cities: ICity[]) => this.citiesForAuto = cities);
     this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups);
   }
 
-  getCities() {
-    this.infoService.getCities().subscribe((cities: ICity[]) => this.citiesForAuto = cities);
+  createRoom() {
+    const room: IRoom = this.roomForm.value;
+    room.groups = this.groupsId;
+    room.start_at = this.startAt;
+    room.close_at = this.closeAt;
+
+    this.spinnerStatus = true;
+    this.roomService.createRoom(room).subscribe(() => {
+      this.spinnerStatus = false;
+      this.customSnackbarService.open('Кімнату додано', '');
+      this.dialogRef.close(true);
+    }, err => {
+      this.spinnerStatus = false;
+      this.customSnackbarService.open(err.error.error.message, '');
+      this.dialogRef.close(false);
+    });
   }
 
   newGroups(group) {
@@ -66,34 +73,16 @@ export class CreateRoomComponent implements OnInit {
     group.target.value = '';
   }
 
+  changedDate(changedDate: IValidDate) {
+    const {start_at, close_at, status} = changedDate;
 
-  getDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = `${today.getMonth() + 1}`.padStart(2, '0');
-    const day = `${today.getDate()}`.padStart(2, '0');
-    const time = `T${today.getHours()}:${today.getMinutes()}`;
-    return [year, month, day].join('-') + time;
-  }
+    if (status) {
+      this.startAt = start_at;
+      this.closeAt = close_at;
+      this.confirmStatus = true;
+    } else {
+      this.confirmStatus = false;
+    }
 
-  createRoom() {
-    const room: IRoom = this.roomForm.value;
-    room.groups = this.groupsId;
-
-    this.spinnerStatus = true;
-    this.roomService.createRoom(room).subscribe(res => {
-      this.spinnerStatus = false;
-      this.customSnackbarService.open('Кімнату додано', '');
-      this.dialogRef.close(true);
-    }, err => {
-      this.spinnerStatus = false;
-      this.customSnackbarService.open(err.error.error.message, '');
-      this.dialogRef.close(false);
-    });
-  }
-
-  checkValidCloseDate() {
-    const {start_at, close_at} = this.roomForm.value;
-    return new Date(start_at) > new Date(close_at);
   }
 }

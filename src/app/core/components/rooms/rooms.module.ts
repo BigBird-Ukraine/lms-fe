@@ -1,14 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
-  DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
   MatDialogModule, MatExpansionModule, MatFormFieldModule,
-  MatIconModule, MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSidenavModule,
-
+  MatIconModule, MatInputModule, MatPaginatorModule, MatSidenavModule,
 } from '@angular/material';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import {RoomsComponent} from './rooms/rooms.component';
 import {RoomsRoutingModule} from './rooms-routing.module';
@@ -20,16 +19,16 @@ import {EditRoomComponent} from './edit-room/edit-room.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AngularDateTimePickerModule} from 'angular2-datetimepicker';
+import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 @NgModule({
   entryComponents: [CreateRoomComponent, EditRoomComponent],
-  declarations: [RoomsComponent, RoomComponent, CreateRoomComponent, EditRoomComponent],
+  declarations: [RoomsComponent, RoomComponent, CreateRoomComponent, EditRoomComponent, DatePickerComponent],
   imports: [
     RoomsRoutingModule,
     CommonModule,
     SharedModule,
-
 
     ScrollingModule,
     DragDropModule,
@@ -47,7 +46,8 @@ import {AngularDateTimePickerModule} from 'angular2-datetimepicker';
     MatIconModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MaterialModule
+    MaterialModule,
+    NgbTimepickerModule
   ],
   providers: [AllRoomsResolverService, SingleRoomResolverService]
 })

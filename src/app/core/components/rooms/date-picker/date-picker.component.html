@@ -1,0 +1,52 @@
+<div>
+  <div class="d-flex flex-wrap ">
+    <div class="col-3 mt-2M">
+      <div class="form-group">
+        <label for="inputDate">Введіть дату та час :</label>
+        <input id="inputDate" type="date" class="form-control"
+               [(ngModel)]="date"
+               [min]="getDate(false, false)"
+               (change)="dateChange()">
+        <p class="text-center text-danger mt-2" *ngIf="pickedDateStatus === false"> Виберіть коректну дату</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <div class="d-flex flex-wrap ">
+          <div class="px-2 col-6">
+            <p class="text-center ">Година початку</p>
+            <ngb-timepicker [formControl]="timeForm" [seconds]="false"
+                            [hourStep]="hourStep" [minuteStep]="minuteStep"
+                            (ngModelChange)="timePickerChange(true)"
+            ></ngb-timepicker>
+            <div *ngIf="timeForm.errors" class="small text-center text-danger m-auto">
+              <div *ngIf="timeForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
+              <div *ngIf="timeForm.errors['tooLate']">Виберіть ранішу годину</div>
+              <div *ngIf="timeForm.errors['tooEarly']">Виберіть пізнішу годину</div>
+            </div>
+          </div>
+
+          <div class="px-2 col-6">
+            <p class="text-center ">Година кінця</p>
+            <ngb-timepicker [formControl]="timeForm2" [seconds]="false"
+                            [hourStep]="hourStep" [minuteStep]="minuteStep"
+                            (ngModelChange)="timePickerChange(false)"
+            ></ngb-timepicker>
+            <div *ngIf="timeForm2.errors" class="small text-center text-danger m-auto">
+              <div *ngIf="timeForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
+              <div *ngIf="timeForm2.errors['tooLate']">Виберіть ранішу годину</div>
+              <div *ngIf="timeForm2.errors['tooEarly']">Виберіть пізнішу годину</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="small text-danger text-center">
+          <span *ngIf="statusTime === false &&  date || dateValidStatus === false">Не коректна година</span>
+          <br>
+          <span *ngIf="statusTime === false && !date">Виберіть дату</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
