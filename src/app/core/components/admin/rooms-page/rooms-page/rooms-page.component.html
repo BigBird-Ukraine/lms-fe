@@ -1,0 +1,38 @@
+<div class="p-3">
+  <button mat-raised-button (click)="createSettingRoom()" color="primary" class="mb-4">
+    Записати настройки кімнати
+  </button>
+  <div>
+    <p сlass="my-1 mx-3">Сетінги кімнат</p>
+    <mat-accordion *ngIf="settingRooms && settingRooms.length">
+      <mat-expansion-panel *ngFor="let settingRoom of settingRooms">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{settingRoom.label}}. <br>
+            Всіх місць: {{settingRoom.count_places}}
+            Годин без бронювання: {{settingRoom.period_time_to_sign_up}}
+            Мінімальна година початку: {{settingRoom.start_at.hour}}:{{settingRoom.start_at.minute}}
+            Мінімальна година кінця: {{settingRoom.close_at.hour}}:{{settingRoom.close_at.minute}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-action-row>
+          <button mat-button
+                  color="primary"
+                  type="button"
+                  (click)="editSettingRoom(settingRoom._id)">
+            Редагувати
+          </button>
+
+          <button mat-button
+                  color="primary"
+                  type="button"
+                  (click)="deleteSettingRoom(settingRoom._id)">
+            Удалити
+          </button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

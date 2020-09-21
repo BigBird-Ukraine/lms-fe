@@ -19,6 +19,8 @@ import {AdminLayoutComponent} from '../../../shared/components/admin-layout/admi
 import {SingleModuleResolverService} from './resolvers/single-module.resolver.service';
 import { AdminMyPassedTestComponent } from './passed-tests/admin-my-passed-test/admin-my-passed-test.component';
 import { AdminPassedQuestionComponent } from './passed-tests/admin-passed-question/admin-passed-question.component';
+import { CreateSettingsRoomComponent } from './rooms-page/create-settings-room/create-settings-room.component';
+import { RoomsPageComponent } from './rooms-page/rooms-page/rooms-page.component';
 
 const mat = [
   FlexModule,

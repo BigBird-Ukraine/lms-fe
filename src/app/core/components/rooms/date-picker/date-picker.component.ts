@@ -120,7 +120,7 @@ export class DatePickerComponent implements OnInit {
         return {tooEarly: true};
       }
 
-      if ((value.hour > 22 && value.minute >= 0) || (value.hour >= 22 && value.minute >= 30) || value.hour === 0) {
+      if ((value.hour > 23 && value.minute >= 0) || (value.hour >= 22 && value.minute >= 30) || value.hour === 0) {
         return {tooLate: true};
       }
 

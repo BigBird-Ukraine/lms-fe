@@ -10,3 +10,4 @@ export * from './lesson.interface';
 export * from './questionModel';
 export * from './city.interface';
 export * from './comment-interface';
+export * from './room-interface';

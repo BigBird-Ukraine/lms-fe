@@ -20,6 +20,7 @@ export class MainAdminComponent implements OnInit {
     {url: '/admin/adminPanel/courses', name: 'Курси'},
     {url: '/admin/adminPanel/modules', name: 'Модулі'},
     {url: '/admin/adminPanel/lessons', name: 'Уроки'},
+    {url: '/admin/adminPanel/rooms', name: 'Кімнати'},
     {url: '/admin/adminPanel/cities', name: 'Міста'}
   ];
   adminInfo: IUser;

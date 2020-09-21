@@ -7,7 +7,6 @@ import {
   MatDialogModule, MatExpansionModule, MatFormFieldModule,
   MatIconModule, MatInputModule, MatPaginatorModule, MatSidenavModule,
 } from '@angular/material';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import {RoomsComponent} from './rooms/rooms.component';
 import {RoomsRoutingModule} from './rooms-routing.module';

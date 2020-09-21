@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('src/app/core/components/admin/users-page/users.module').then(u => u.UsersModule)
       },
       {
+        path: 'rooms',
+        loadChildren: () => import('src/app/core/components/admin/rooms-page/room.module').then(r => r.RoomModule)
+      },
+      {
         path: 'cities',
         loadChildren: () => import('src/app/core/components/admin/cities-admin/cities.module').then(c => c.CitiesModule)
       },
