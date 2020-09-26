@@ -36,7 +36,6 @@
           </mat-form-field>
           <br>
 
-
           <app-date-picker (changedDate)="changedDate($event)"
                            [maxTime]="fullSettingRoom.close_at"
                            [minTime]="fullSettingRoom.start_at"
@@ -46,8 +45,8 @@
           <mat-form-field class="example-full-width ">
             <mat-label>Вкажіть місто</mat-label>
             <mat-select formControlName="city">
-              <mat-option *ngFor="let city of citiesForAuto " [value]="city">
-                {{city}}
+              <mat-option *ngFor="let city of citiesForAuto " [value]="city.title">
+                {{city.title}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="roomForm.get('city').hasError('required')">

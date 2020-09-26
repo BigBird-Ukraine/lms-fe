@@ -1,1 +1,61 @@
-<p>room works!</p>
+<div class="mt-2 bg-white min-vh-100 borderR">
+  <header>
+    <div class="d-flex flex-wrap col-10 m-auto">
+      <h1 class="col-2 pt-4 mx-3">{{room.label}}</h1>
+      <div class="col-9 mt-2">
+        <p class="p-2 bg-silver text-justify borderR">{{room.description}}</p>
+        <div class="d-flex flex-wrap">
+          <div class="p-2 bg-silver text-justify borderR col-4 heightTime d-flex">
+            <mat-icon aria-hidden="false" class="icon">event</mat-icon>
+            <p class="mx-2">{{startAt | date:'EEEE, MMMM d, y'}}</p>
+          </div>
+
+          <div class="p-2 bg-silver text-justify borderR col-3 text-center mx-2 d-flex heightTime">
+            <mat-icon aria-hidden="false" class="icon"><b>query_builder</b></mat-icon>
+            <p class="mx-2"><b>{{startAt | date:'H:mm'}} - {{closeAt | date:'H:mm'}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mt-5">
+    <div class="text-center">
+      <div class="d-flex flex-wrap justify-content-center">
+
+        <div class="d-flex flex-wrap ">
+          <div class="blockB "></div>
+          <div class="mx-1 ">
+            <h6>FREE</h6>
+            <p class="fn-s-10">{{room.count_all_places - room.countBookedPlaces}}</p>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap mx-5">
+          <div class="blockR "></div>
+          <div class="mx-1 ">
+            <h6>HAS USERS</h6>
+            <p class="fn-s-10"> {{room.countBookedPlaces}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <img src="../../../../../assets/images/line.jpg" alt="">
+        <h6>Проектор</h6>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-around col-8 m-auto">
+        <div *ngFor="let number of room.numbersPlaces" class="col-2 cursor" (click)="openForm(number)">
+          <div [className]="checkBookedTables(number) ?
+           'borderRed blockU text-center pt-2 m-3' :
+           'borderBlue blockU pt-2 m-3'">
+            {{number}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>

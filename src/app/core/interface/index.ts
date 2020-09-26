@@ -9,3 +9,4 @@ export * from './group-interface';
 export * from './comment-interface';
 export * from './rooms.interface';
 export * from './city.interface';
+export * from './setting-room.interface';

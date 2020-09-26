@@ -1,11 +1,22 @@
 import {NgModule} from '@angular/core';
-import {MainLoaderComponent} from '../components/main-loader/main-loader.component';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material';
+import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+
+import {MainLoaderComponent} from '../components/main-loader/main-loader.component';
+import {DatePickerComponent} from '../components/date-picker/date-picker.component';
 
 @NgModule({
-  declarations: [MainLoaderComponent],
-  imports: [MatProgressSpinnerModule],
-  exports: [MainLoaderComponent, MatProgressSpinnerModule],
+  declarations: [MainLoaderComponent, DatePickerComponent],
+  imports: [
+    MatProgressSpinnerModule,
+    NgbTimepickerModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  exports: [MainLoaderComponent, MatProgressSpinnerModule, DatePickerComponent],
 })
 
 export class SharedModule {

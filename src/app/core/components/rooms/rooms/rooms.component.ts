@@ -125,13 +125,15 @@ export class RoomsComponent implements OnInit {
     this.filterRoomForm.reset();
   }
 
-  editRoom(id: string) {
+  editRoom(room) {
     this.dialog.open(EditRoomComponent, {
-      data: id
-    }).afterClosed().subscribe(res => this.ngOnInit());
+      data: room,
+      width: '90vw',
+      height: '90vh'
+    }).afterClosed().subscribe(res => res && this.ngOnInit());
   }
 
-  showRoom(id) {
+  showRoom(id: string) {
     this.router.navigate([`/rooms/${id}`]);
   }
 

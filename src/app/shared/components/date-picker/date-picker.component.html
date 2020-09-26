@@ -33,7 +33,7 @@
                             (ngModelChange)="timePickerChange(false)"
             ></ngb-timepicker>
             <div *ngIf="timeForm2.errors" class="small text-center text-danger m-auto">
-              <div *ngIf="timeForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
+              <div *ngIf="timeForm2.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
               <div *ngIf="timeForm2.errors['tooLate']">Виберіть ранішу годину</div>
               <div *ngIf="timeForm2.errors['tooEarly']">Виберіть пізнішу годину</div>
             </div>

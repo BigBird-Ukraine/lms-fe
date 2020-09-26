@@ -79,7 +79,7 @@
 
       <button mat-menu-item
               [routerLink]="['/rooms']"
-              *ngIf="!isStudent && authService.isAuthenticated()"
+              *ngIf="authService.isAuthenticated()"
       >Кімнати
       </button>
 

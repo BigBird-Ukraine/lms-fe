@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -7,6 +7,7 @@ import {
   MatDialogModule, MatExpansionModule, MatFormFieldModule,
   MatIconModule, MatInputModule, MatPaginatorModule, MatSidenavModule,
 } from '@angular/material';
+import {DayPilotModule} from 'daypilot-pro-angular';
 
 import {RoomsComponent} from './rooms/rooms.component';
 import {RoomsRoutingModule} from './rooms-routing.module';
@@ -18,12 +19,14 @@ import {EditRoomComponent} from './edit-room/edit-room.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BookUserComponent} from './book-user/book-user.component';
 import {NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
-import { DatePickerComponent } from './date-picker/date-picker.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 @NgModule({
-  entryComponents: [CreateRoomComponent, EditRoomComponent],
-  declarations: [RoomsComponent, RoomComponent, CreateRoomComponent, EditRoomComponent, DatePickerComponent],
+  entryComponents: [CreateRoomComponent, EditRoomComponent, BookUserComponent],
+  declarations: [RoomsComponent, RoomComponent, CreateRoomComponent,
+    EditRoomComponent, BookUserComponent, CalendarComponent],
   imports: [
     RoomsRoutingModule,
     CommonModule,
@@ -33,6 +36,7 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
     DragDropModule,
     ReactiveFormsModule,
     FormsModule,
+    DayPilotModule,
 
     MatFormFieldModule,
     MatDialogModule,
@@ -48,7 +52,7 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
     MaterialModule,
     NgbTimepickerModule
   ],
-  providers: [AllRoomsResolverService, SingleRoomResolverService]
+  providers: [AllRoomsResolverService, SingleRoomResolverService, DatePipe]
 })
 export class RoomsModule {
 }

@@ -1,0 +1,47 @@
+<div class="d-flex flex-wrap justify-content-between">
+
+  <div class="col-5 border-right">
+    <button type="button" class="btn btn-primary"
+            (click)="setBookBtnStatus()">
+      <span *ngIf="!bookBtnStatus">Забронювати</span>
+      <span *ngIf="bookBtnStatus">Закрити</span>
+    </button>
+
+    <div *ngIf="bookBtnStatus">
+
+      <!--      <div appearance="standard">-->
+      <!--        <p>Година початку</p>-->
+      <!--        <ngb-timepicker [formControl]="startAtForm" [seconds]="false"-->
+      <!--                        [hourStep]="1" [minuteStep]="30"-->
+      <!--                        (ngModelChange)="changedDate()"-->
+      <!--        ></ngb-timepicker>-->
+      <!--        <div *ngIf="startAtForm.errors" class="small text-center text-danger m-auto">-->
+      <!--          <div *ngIf="startAtForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>-->
+      <!--          <div *ngIf="startAtForm.errors['tooLate']">Виберіть ранішу годину</div>-->
+      <!--          <div *ngIf="startAtForm.errors['tooEarly']">Виберіть пізнішу годину</div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <!--      <div appearance="standard">-->
+      <!--        <p>Година початку</p>-->
+      <!--        <ngb-timepicker [formControl]="closeAtForm" [seconds]="false"-->
+      <!--                        [hourStep]="1" [minuteStep]="30"-->
+      <!--                        (ngModelChange)="changedDate()"-->
+      <!--        ></ngb-timepicker>-->
+      <!--        <div *ngIf="closeAtForm.errors" class="small text-center text-danger m-auto">-->
+      <!--          <div *ngIf="closeAtForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>-->
+      <!--          <div *ngIf="closeAtForm.errors['tooLate']">Виберіть ранішу годину</div>-->
+      <!--          <div *ngIf="closeAtForm.errors['tooEarly']">Виберіть пізнішу годину</div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+
+      <button (click)="bookPlace()">Забронювати місце</button>
+
+    </div>
+  </div>
+
+  <div class="col-7 " *ngIf="tableSetting">
+    <app-calendar-component [tableSetting]="tableSetting"></app-calendar-component>
+  </div>
+</div>

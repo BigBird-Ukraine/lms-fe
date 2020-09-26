@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
 import {commonAuthPath} from '../../../shared/api';
-import {IRoom} from '../../interface';
+import {IBookUserFull, ICutRoom, IRoom, ISettingRoom} from '../../interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +35,14 @@ export class RoomsService {
     return this.http.get <IRoom[]>(`${commonAuthPath}/rooms`, options);
   }
 
-  getSingleRoom(id: string): Observable<IRoom> {
+  getSingleRoom(id: string): Observable<ICutRoom> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.get<IRoom>(`${commonAuthPath}/rooms/${id}`, options);
+    return this.http.get<ICutRoom>(`${commonAuthPath}/rooms/${id}`, options);
   }
 
   getMyRooms(): Observable<IRoom[]> {
@@ -73,5 +74,63 @@ export class RoomsService {
     };
 
     return this.http.delete<void>(`${commonAuthPath}/rooms/${id}`, options);
+  }
+
+  selectSettingRoomsByParams(params: any): Observable<Partial<ISettingRoom[]>> {
+    return this.http.get<Partial<ISettingRoom[]>>(`${commonAuthPath}/rooms/setting?select=${params}`, {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    });
+  }
+
+  getSettingRoomsById(id: string): Observable<ISettingRoom> {
+    return this.http.get<ISettingRoom>(`${commonAuthPath}/rooms/setting?_id=${id}`, {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    });
+  }
+
+  getSettingRoomsByParams(params: any): Observable<ISettingRoom> {
+    return this.http.get<ISettingRoom>(`${commonAuthPath}/rooms/setting`, {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      }),
+      params,
+    });
+  }
+
+  updateRoom(id: string, room: Partial<IRoom>): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.put<void>(`${commonAuthPath}/rooms/${id}`, room, options);
+  }
+
+  getBookTable(roomId: string, tableNumber: number): Observable<IBookUserFull[]> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<IBookUserFull[]>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, options);
+  }
+
+  bookTable(roomId: string, tableNumber: number, startAt: string, endAt: string) {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.post<any>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, {
+      rent_start: startAt,
+      rent_end: endAt
+    }, options);
   }
 }

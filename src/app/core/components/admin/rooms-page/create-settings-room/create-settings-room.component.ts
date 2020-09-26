@@ -3,7 +3,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 import {AdminRoomService} from '../../services/admin-room.service';
-import {CustomSnackbarService} from "../../../../../shared/services";
+import {CustomSnackbarService} from '../../../../../shared/services';
+import {ICity} from '../../interfaces';
+import {AdminCityService} from '../../services/admin-city.service';
 
 @Component({
   selector: 'app-create-settings-room',
@@ -21,11 +23,15 @@ export class CreateSettingsRoomComponent implements OnInit {
   hourStep = 1;
   minuteStep = 30;
 
+  citiesForAuto: ICity[];
+  cities: Partial<ICity[]> = [];
+
   constructor(private dialog: MatDialog,
               private dialogRef: MatDialogRef<any>,
               private customSnackbarService: CustomSnackbarService,
               private roomService: AdminRoomService,
-              ) {
+              private cityService: AdminCityService
+  ) {
   }
 
   ngOnInit() {
@@ -35,13 +41,17 @@ export class CreateSettingsRoomComponent implements OnInit {
       close_at: new FormControl(null, [Validators.min(1)]),
       count_places: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]{1,3}$')]),
       period_time_to_sign_up: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]{1,4}$')]),
+      cities: new FormControl([])
     });
+
+    this.cityService.getCities().subscribe(res => this.citiesForAuto = res);
   }
 
   saveSettingRoom() {
     const roomSetting = this.form.value;
     roomSetting.start_at = this.startAtForm.value;
     roomSetting.close_at = this.closeAtForm.value;
+    roomSetting.cities = this.cities;
 
     this.roomService.createSettingRoom(roomSetting).subscribe(() => {
       this.spinnerStatus = false;
@@ -84,5 +94,20 @@ export class CreateSettingsRoomComponent implements OnInit {
     date.setSeconds(time.second);
 
     return date;
+  }
+
+  newCity(city) {
+    const text = city.target.value;
+
+    if (text.length) {
+      this.cities.push(text);
+    }
+    city.target.value = '';
+  }
+
+  delCity(city) {
+    const index = this.cities.findIndex(delCity => delCity === city);
+
+    this.cities.splice(index, 1);
   }
 }

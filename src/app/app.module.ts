@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
@@ -29,6 +29,9 @@ import {AuthUserComponent} from './core/components/auth/auth-user/auth-user.comp
 import {RegistrationComponent} from './core/components/auth/registration/registration.component';
 import {AuthModule} from './core/components/auth/auth.module';
 import {AdminInterceptor} from './core/components/admin/admin.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localeUA from '@angular/common/locales/ru-UA';
+registerLocaleData(localeUA);
 
 const mat = [
   MaterialModule,
@@ -56,7 +59,7 @@ const mat = [
     MainLayoutComponent,
     FilterPipe,
     ConfirmLayoutComponent,
-    DeleteComponent,
+    DeleteComponent
   ],
   imports: [
     AppRoutingModule,
@@ -70,7 +73,7 @@ const mat = [
     AuthModule,
     SharedModule,
 
-    ...mat
+    ...mat,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -83,9 +86,11 @@ const mat = [
       useClass: AdminInterceptor
     },
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
+    {provide: LOCALE_ID, useValue: 'ru-UA'},
     MyGroupsResolverService,
     MyGroupResolverService
   ],
+  exports: []
 })
 
 

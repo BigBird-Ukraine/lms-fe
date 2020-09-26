@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {IValidDate} from '../../../interface';
+import {ITime, IValidDate} from '../../../core/interface';
 
 @Component({
   selector: 'app-date-picker',
@@ -9,6 +9,8 @@ import {IValidDate} from '../../../interface';
 })
 export class DatePickerComponent implements OnInit {
   @Output() changedDate = new EventEmitter<IValidDate>();
+  @Input() maxTime: ITime;
+  @Input() minTime: ITime;
 
   date: string;
   hourStep = 1;
@@ -116,11 +118,11 @@ export class DatePickerComponent implements OnInit {
         return {invalidMinute: true};
       }
 
-      if (value.hour < 12 && value.minute <= 30) {
+      if (value.hour < this.minTime.hour || value.hour === this.minTime.hour && value.minute < this.minTime.minute) {
         return {tooEarly: true};
       }
 
-      if ((value.hour > 23 && value.minute >= 0) || (value.hour >= 22 && value.minute >= 30) || value.hour === 0) {
+      if (value.hour > this.maxTime.hour || value.hour === this.maxTime.hour && value.minute > this.maxTime.minute) {
         return {tooLate: true};
       }
 

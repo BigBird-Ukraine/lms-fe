@@ -6,19 +6,23 @@ import {RoomRoutingModule} from './room-routing.module';
 import {CreateSettingsRoomComponent} from './create-settings-room/create-settings-room.component';
 import {RoomsPageComponent} from './rooms-page/rooms-page.component';
 import {AdminModule} from '../admin.module';
+import { CreateRoomComponent } from './create-room/create-room.component';
+import {AppModule} from '../../../../app.module';
+import {SharedModule} from '../../../../shared/modules';
 
 
 
 @NgModule({
-  entryComponents: [CreateSettingsRoomComponent],
-  declarations: [CreateSettingsRoomComponent, RoomsPageComponent],
+  entryComponents: [CreateSettingsRoomComponent, CreateRoomComponent],
+  declarations: [CreateSettingsRoomComponent, RoomsPageComponent, CreateRoomComponent],
   imports: [
     CommonModule,
     RoomRoutingModule,
 
     AdminModule,
     NgbModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    SharedModule
   ]
 })
 export class RoomModule {

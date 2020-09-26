@@ -42,13 +42,42 @@
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-          <mat-label>Скільки надається часу на бронювання</mat-label>
+          <mat-label>Скільки надається часу до бронювання</mat-label>
           <input placeholder="Написати кількість годин" matInput type="text" required
                  formControlName="period_time_to_sign_up" minlength="1">
           <mat-error *ngIf="form.get('period_time_to_sign_up').hasError('periodErr')" align="end">
             Введіть коректний період
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput required
+                 placeholder="Вкажіть міста "
+                 formGroupName="cities"
+                 (keyup.enter)="newCity($event)"
+                 [matAutocomplete]="autoCity"
+                 #searchCity
+          >
+          <mat-autocomplete #autoCity="matAutocomplete">
+            <mat-option *ngFor="let city of citiesForAuto"
+                        [value]="city.title">
+              {{city.title}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="blocks">
+          <div *ngFor="let city of cities"
+               class="block">
+            {{city}}
+            <button class="mini_btn"
+                    type="button"
+                    (click)="delCity(city)">
+              &times;
+            </button>
+          </div>
+
+        </div>
 
       </div>
     </form>

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
-import {Groups, ICity, IRoom, ISettingRoom, IValidDate} from '../../../interface';
-import {InfoHelperService} from '../../../services/questions';
-import {RoomsService} from '../../../services/rooms';
-import {CustomSnackbarService} from '../../../../shared/services';
+import {GroupModel, ICity, IRoom, ISettingRoom, IValidDate} from '../../interfaces';
+import {AdminRoomService} from '../../services';
+import {CustomSnackbarService} from '../../../../../shared/services';
+import {InfoHelperService} from '../../../../services';
 
 @Component({
   selector: 'app-create-room',
@@ -22,21 +22,22 @@ export class CreateRoomComponent implements OnInit {
   confirmStatus = false;
 
   group: string[] = [];
-  groupForAuto: Groups[] = [];
+  groupForAuto: GroupModel[] = [];
   groupsId: string[] = [];
 
-  citiesForAuto: string[] = [];
+  citiesForAuto: Partial<ICity>[] = [];
   settingRoomForAuto: Partial<ISettingRoom[]>;
   fullSettingRoom: ISettingRoom;
 
-  constructor(private infoService: InfoHelperService, private fb: FormBuilder,
-              private roomService: RoomsService, private customSnackbarService: CustomSnackbarService,
+  constructor(private fb: FormBuilder, private infoService: InfoHelperService,
+              private customSnackbarService: CustomSnackbarService, private roomService: AdminRoomService,
               private dialogRef: MatDialogRef<CreateRoomComponent>) {
   }
 
   ngOnInit() {
-    this.infoService.getGroups().subscribe((groups: Groups[]) => this.groupForAuto = groups);
-    this.roomService.selectSettingRoomsByParams('{"label": "1"}').subscribe(settingRooms => {
+    this.infoService.getCities().subscribe((cities: ICity[]) => this.citiesForAuto = cities);
+    this.infoService.getGroups().subscribe((groups: GroupModel[]) => this.groupForAuto = groups);
+    this.roomService.getSettingsRoom('{"label": "1"}').subscribe(settingRooms => {
       this.settingRoomForAuto = settingRooms;
     });
   }
@@ -80,13 +81,13 @@ export class CreateRoomComponent implements OnInit {
     } else {
       this.confirmStatus = false;
     }
+
   }
 
   getFullSettingRoom(event: any) {
     const {id, label} = event.value;
 
     this.roomService.getSettingRoomsById(id).subscribe(room => {
-      this.citiesForAuto = [...room[0].cities];
       this.roomForm = this.fb.group({
         label: this.fb.control(label),
         description: this.fb.control(null, [Validators.required]),
@@ -106,4 +107,5 @@ export class CreateRoomComponent implements OnInit {
       this.fullSettingRoom = room[0];
     });
   }
+
 }

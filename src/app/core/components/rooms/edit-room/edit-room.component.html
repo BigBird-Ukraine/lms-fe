@@ -1,1 +1,85 @@
-<p>edit-room works!</p>
+<div *ngIf="roomForm" >
+  <h2 mat-dialog-title class="mat_dialog_title">Редагувати "{{room.label}}" кімнату</h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="roomForm"
+          (ngSubmit)="editRoom()"
+          (keydown.enter)="$event.preventDefault()"
+    >
+      <div class="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Опис кімнати</mat-label>
+          <textarea type="text" matInput formControlName="description"></textarea>
+          <mat-error *ngIf="roomForm.get('description').hasError('required')">
+            Додайте опис кімнати
+          </mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Кількість місць</mat-label>
+          <input type="text" matInput formControlName="count_all_places">
+          <mat-error *ngIf="roomForm.get('count_all_places').hasError('required')">
+            Додайте кількість вільних місць
+          </mat-error>
+        </mat-form-field>
+        <br>
+
+        <app-date-picker (changedDate)="changedDate($event)"
+                         [maxTime]="settingRoom.close_at"
+                         [minTime]="settingRoom.start_at"
+        ></app-date-picker>
+        <br>
+
+        <mat-form-field class="example-full-width ">
+          <mat-label>Вкажіть місто</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of citiesForAuto " [value]="city.title">
+              {{city.title}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="roomForm.get('city').hasError('required')">
+            Додайте місто
+          </mat-error>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <input matInput
+                 placeholder="Вкажіть групу"
+                 formGroupName="groups"
+                 (keyup.enter)="newGroups($event)"
+                 [matAutocomplete]="autoGroup"
+                 #searchGroup
+          >
+
+          <mat-autocomplete #autoGroup="matAutocomplete">
+            <mat-option *ngFor="let group of groupForAuto " [value]="group.label">
+              {{group.label}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <div class="blocks">
+        <span *ngFor="let gr of groups"
+              class="block">
+          {{gr.label}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delGroup(gr.label)">
+              &times;
+            </button>
+        </span>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="roomForm.invalid || !statusTime"
+      >Редагувати
+      </button>
+    </form>
+  </mat-dialog-content>
+</div>
+
+<app-main-loader *ngIf="spinnerStatus"></app-main-loader>
