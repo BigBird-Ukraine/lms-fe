@@ -1,6 +1,4 @@
-import {ITime} from './setting-room.interface';
-import {UserModel} from './UserModel';
-import DateTimeFormat = Intl.DateTimeFormat;
+import { UserModel} from './UserModel';
 
 export interface IRoom {
   _id: string;
@@ -18,14 +16,14 @@ export interface IRoom {
 
 export interface IBookUser {
   id?: string;
-  user_id: string;
+  user_id?: string;
   table_number: number;
-  rent_start: Date;
-  rent_end: Date;
+  rent_start: string;
+  rent_end: string;
 }
 
 export interface IBookUserFull {
-  id?: string;
+  _id?: string;
   user_id: Partial<UserModel>;
   table_number: number;
   rent_start: Date;
@@ -43,6 +41,7 @@ export interface IBookRoomSetting {
   roomId: string;
   roomCloseAt: Date;
   roomStartAt: Date;
+  userInfo: Partial<UserModel>;
 }
 
 export interface ICutRoom {

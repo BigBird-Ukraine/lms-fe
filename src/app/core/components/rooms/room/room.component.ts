@@ -3,7 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 
 import {ICutRoom} from '../../../interface';
-import {BookUserComponent} from '../book-user/book-user.component';
+import {UserService} from '../../../services/user';
+import {RoomsService} from '../../../services/rooms';
+import {CalendarComponent} from '../calendar/calendar.component';
 
 @Component({
   selector: 'app-room',
@@ -16,7 +18,10 @@ export class RoomComponent implements OnInit {
   startAt: Date;
   closeAt: Date;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute,
+              private dialog: MatDialog,
+              private userService: UserService,
+              private roomsService: RoomsService) {
   }
 
   ngOnInit() {
@@ -30,17 +35,25 @@ export class RoomComponent implements OnInit {
   }
 
   openForm(tableNumber: number) {
-    this.dialog.open(BookUserComponent, {
+    this.dialog.open(CalendarComponent, {
         width: '90vw',
         height: '90vh',
         data: {
           tableNumber,
           roomId: this.room._id,
           roomCloseAt: this.room.close_at,
-          roomStartAt: this.room.start_at
-        }
+          roomStartAt: this.room.start_at,
+          userInfo: this.userService.userInfo.value
+        },
+        disableClose: true
       }
-    ).afterClosed().subscribe(res => res && this.ngOnInit());
+    ).afterClosed().subscribe((res) => {
+      if (res) {
+        this.roomsService.getSingleRoom(this.room._id).subscribe((room) => {
+          this.room = room;
+        });
+      }
+    });
   }
 
 

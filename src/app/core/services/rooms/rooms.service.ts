@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
 import {commonAuthPath} from '../../../shared/api';
-import {IBookUserFull, ICutRoom, IRoom, ISettingRoom} from '../../interface';
+import {IBookUser, IBookUserFull, ICutRoom, IRoom, ISettingRoom} from '../../interface';
 
 
 @Injectable({
@@ -121,16 +121,26 @@ export class RoomsService {
     return this.http.get<IBookUserFull[]>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, options);
   }
 
-  bookTable(roomId: string, tableNumber: number, startAt: string, endAt: string) {
+  bookTable(roomId: string, value: IBookUser): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.post<any>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, {
-      rent_start: startAt,
-      rent_end: endAt
+    return this.http.post<any>(`${commonAuthPath}/rooms/${roomId}/${value.table_number}`, {
+      rent_start: value.rent_start,
+      rent_end: value.rent_end
     }, options);
+  }
+
+  deleteBookedUser(rendId: string, roomId: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete<void>(`${commonAuthPath}/rooms/${roomId}/${rendId}`, options);
   }
 }
