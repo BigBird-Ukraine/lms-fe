@@ -6,6 +6,7 @@ import {Groups, ICity, IRoom, ISettingRoom, IValidDate} from '../../../interface
 import {InfoHelperService} from '../../../services/questions';
 import {RoomsService} from '../../../services/rooms';
 import {CustomSnackbarService} from '../../../../shared/services';
+import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 @Component({
   selector: 'app-create-room',

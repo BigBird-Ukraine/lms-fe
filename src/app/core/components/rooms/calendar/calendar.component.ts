@@ -8,6 +8,7 @@ import {IBookRoomSetting, IBookUserFull} from '../../../interface';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 import {CustomSnackbarService} from '../../../../shared/services';
 import {DeleteComponent} from '../../../../shared/components/delete/delete.component';
+import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 
 @Component({
@@ -37,8 +38,17 @@ export class CalendarComponent implements OnInit {
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<CalendarComponent>,
               private customSnackbarService: CustomSnackbarService,
+              private ioService: IoSocketService,
               @Inject(MAT_DIALOG_DATA) public data: IBookRoomSetting) {
     this.tableSetting = data;
+
+    ioService.joinToTable(data.roomId + '/' + data.tableNumber);
+    ioService.addBookedUser((res) => {
+      if (res.bookUserTable) {
+        console.log(res);
+        this.fillEvents([res.bookUserTable]);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -68,7 +78,7 @@ export class CalendarComponent implements OnInit {
           start,
           end,
           user_id: bUser.user_id._id,
-          text: `${bUser.user_id.name} ${bUser.user_id.surname}`,
+          text: bUser.user_id.name ?  `${bUser.user_id.name} ${bUser.user_id.surname}` : bUser.user_id,
           backColor: bUser.user_id._id === _id && '#FCB57A'
         }
       );
@@ -76,6 +86,7 @@ export class CalendarComponent implements OnInit {
   }
 
   setConfigs() {
+    const {_id} = this.tableSetting.userInfo;
     const roomService = this.roomService;
     const dialog = this.dialog;
     const tableSetting = this.tableSetting;
@@ -83,6 +94,7 @@ export class CalendarComponent implements OnInit {
     const bonedRefreshEvents = this.bonedRefreshEvents;
     const customSnackbarService = this.customSnackbarService;
     const bonedSetCloseStatus = this.bonedSetCloseStatus;
+    const socketService = this.ioService;
 
     this.config = {
       viewType: 'Day',
@@ -99,18 +111,19 @@ export class CalendarComponent implements OnInit {
         const confirm = dialog.open(ConfirmLayoutComponent);
         confirm.afterClosed().subscribe((result) => {
           if (result) {
-            roomService.bookTable(tableSetting.roomId, {
-              rent_start: args.start + 'Z',
-              rent_end: args.end + 'Z',
-              table_number: tableSetting.tableNumber
-            }).subscribe(
-              () => {
-                bonedRefreshEvents();
-                bonedNgOnInit();
-                bonedSetCloseStatus(true);
+            socketService.bookTable({
+              bookUserTable: {
+                rent_start: args.start + 'Z',
+                rent_end: args.end + 'Z',
+                table_number: tableSetting.tableNumber,
+                user_id: _id
               },
-              err => customSnackbarService.open(err.error.error.message)
-            );
+              room_id: tableSetting.roomId,
+              room: tableSetting.roomId + '/' + tableSetting.tableNumber
+            }).subscribe(res => {
+              bonedRefreshEvents();
+              bonedNgOnInit();
+            });
           }
         });
       },

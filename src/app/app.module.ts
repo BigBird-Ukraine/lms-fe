@@ -11,6 +11,9 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
+import { registerLocaleData } from '@angular/common';
+import localeUA from '@angular/common/locales/ru-UA';
+import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -29,9 +32,10 @@ import {AuthUserComponent} from './core/components/auth/auth-user/auth-user.comp
 import {RegistrationComponent} from './core/components/auth/registration/registration.component';
 import {AuthModule} from './core/components/auth/auth.module';
 import {AdminInterceptor} from './core/components/admin/admin.interceptor';
-import { registerLocaleData } from '@angular/common';
-import localeUA from '@angular/common/locales/ru-UA';
+
+
 registerLocaleData(localeUA);
+// const config: SocketIoConfig = { url: 'ws://localhost:3000', options: {} };
 
 const mat = [
   MaterialModule,
@@ -72,6 +76,7 @@ const mat = [
     FlexModule,
     AuthModule,
     SharedModule,
+    // SocketIoModule.forRoot(config),
 
     ...mat,
   ],

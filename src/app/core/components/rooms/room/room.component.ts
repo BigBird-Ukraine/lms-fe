@@ -6,6 +6,7 @@ import {ICutRoom} from '../../../interface';
 import {UserService} from '../../../services/user';
 import {RoomsService} from '../../../services/rooms';
 import {CalendarComponent} from '../calendar/calendar.component';
+import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 @Component({
   selector: 'app-room',
@@ -21,7 +22,8 @@ export class RoomComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private dialog: MatDialog,
               private userService: UserService,
-              private roomsService: RoomsService) {
+              private roomsService: RoomsService,
+              private socketService: IoSocketService) {
   }
 
   ngOnInit() {

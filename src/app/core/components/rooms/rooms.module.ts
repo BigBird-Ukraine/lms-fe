@@ -22,6 +22,7 @@ import {CreateRoomComponent} from './create-room/create-room.component';
 import {EditRoomComponent} from './edit-room/edit-room.component';
 import {CalendarComponent} from './calendar/calendar.component';
 
+
 @NgModule({
   entryComponents: [CreateRoomComponent, EditRoomComponent, CalendarComponent],
   declarations: [RoomsComponent, RoomComponent, CreateRoomComponent,
@@ -36,6 +37,7 @@ import {CalendarComponent} from './calendar/calendar.component';
     ReactiveFormsModule,
     FormsModule,
     DayPilotModule,
+
 
     MatFormFieldModule,
     MatDialogModule,

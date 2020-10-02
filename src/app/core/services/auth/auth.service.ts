@@ -96,7 +96,7 @@ export class AuthService {
     return !!this.getAccessToken();
   }
 
-  private deleteTokens(): void {
+  public deleteTokens(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
   }

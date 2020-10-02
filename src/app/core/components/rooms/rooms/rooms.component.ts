@@ -11,11 +11,13 @@ import {UserRolesEnum} from '../../../../shared/enums';
 import {IRoom} from '../../../interface';
 import {CreateRoomComponent} from '../create-room/create-room.component';
 import {EditRoomComponent} from '../edit-room/edit-room.component';
+import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.scss']
+  styleUrls: ['./rooms.component.scss'],
+  providers: [IoSocketService]
 })
 export class RoomsComponent implements OnInit {
   token = this.authService.getAccessToken();
