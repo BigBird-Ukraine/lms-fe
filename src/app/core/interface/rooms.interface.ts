@@ -38,6 +38,7 @@ export interface IValidDate {
 
 export interface IBookRoomSetting {
   tableNumber: number;
+  rent_start: Date;
   roomId: string;
   roomCloseAt: Date;
   roomStartAt: Date;

@@ -45,9 +45,17 @@ export class CalendarComponent implements OnInit {
     ioService.joinToTable(data.roomId + '/' + data.tableNumber);
     ioService.addBookedUser((res) => {
       if (res.bookUserTable) {
-        console.log(res);
         this.fillEvents([res.bookUserTable]);
       }
+    });
+
+    ioService.removeUserOfTable(res => {
+      this.events = this.events.filter(ev => {
+        const evStart = new Date(ev.start).getTime();
+        const rentStart = new Date(res.rent_start).getTime();
+
+        return evStart !== rentStart;
+      });
     });
   }
 
@@ -78,7 +86,7 @@ export class CalendarComponent implements OnInit {
           start,
           end,
           user_id: bUser.user_id._id,
-          text: bUser.user_id.name ?  `${bUser.user_id.name} ${bUser.user_id.surname}` : bUser.user_id,
+          text: bUser.user_id.name ? `${bUser.user_id.name} ${bUser.user_id.surname}` : bUser.user_id,
           backColor: bUser.user_id._id === _id && '#FCB57A'
         }
       );
@@ -87,7 +95,6 @@ export class CalendarComponent implements OnInit {
 
   setConfigs() {
     const {_id} = this.tableSetting.userInfo;
-    const roomService = this.roomService;
     const dialog = this.dialog;
     const tableSetting = this.tableSetting;
     const bonedNgOnInit = this.bonedNgOnInit;
@@ -133,7 +140,13 @@ export class CalendarComponent implements OnInit {
         if (data.user_id === tableSetting.userInfo._id) {
           dialog.open(DeleteComponent).afterClosed().subscribe((result) => {
             if (result) {
-              roomService.deleteBookedUser(data._id, tableSetting.roomId).subscribe(
+              console.log(data);
+              socketService.cancelBook({
+                rent_id: data._id,
+                room_id: tableSetting.roomId,
+                rent_start: data.start,
+                room: tableSetting.roomId + '/' + tableSetting.tableNumber
+              }).subscribe(
                 () => {
                   bonedRefreshEvents();
                   bonedNgOnInit();
