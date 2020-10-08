@@ -103,7 +103,7 @@
 
         </mat-expansion-panel>
 
-        <p class="text-center text-danger">Кімнат ще немає</p>
+        <p *ngIf="roomsList && !roomsList.length" class="text-center text-danger">Кімнат ще немає</p>
       </mat-accordion>
 
     </div>

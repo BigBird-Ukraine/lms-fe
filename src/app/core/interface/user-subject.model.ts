@@ -9,4 +9,8 @@ export interface IUserSubjectModel {
   _id?: string;
   photo_path?: string;
   groups_id?: [string];
+  booking_ban_status?: {
+    status: number,
+    date: Date
+  };
 }

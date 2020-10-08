@@ -13,6 +13,10 @@ export interface UserModel {
   photo_path?: string;
   population_point: string;
   passed_tests?: IPassedTest[];
+  booking_ban_status?: {
+    status: number,
+    date: Date
+  };
 }
 
 export interface IUser {

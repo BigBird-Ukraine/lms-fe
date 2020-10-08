@@ -28,10 +28,10 @@ export class CalendarComponent implements OnInit {
   status = false;
   closeStatus = false;
 
+
   bonedNgOnInit = this.ngOnInit.bind(this);
   bonedRefreshEvents = this.refreshEvents.bind(this);
   bonedSetCloseStatus = this.setCloseStatus.bind(this);
-
 
   constructor(private roomService: RoomsService,
               private datePipe: DatePipe,
@@ -68,6 +68,7 @@ export class CalendarComponent implements OnInit {
       });
   }
 
+
   formatDate(dateZ: Date) {
     const fullDateZ = new Date(dateZ);
     fullDateZ.setHours(fullDateZ.getHours() - 3);
@@ -97,9 +98,6 @@ export class CalendarComponent implements OnInit {
     const {_id} = this.tableSetting.userInfo;
     const dialog = this.dialog;
     const tableSetting = this.tableSetting;
-    const bonedNgOnInit = this.bonedNgOnInit;
-    const bonedRefreshEvents = this.bonedRefreshEvents;
-    const customSnackbarService = this.customSnackbarService;
     const bonedSetCloseStatus = this.bonedSetCloseStatus;
     const socketService = this.ioService;
 
@@ -128,8 +126,7 @@ export class CalendarComponent implements OnInit {
               room_id: tableSetting.roomId,
               room: tableSetting.roomId + '/' + tableSetting.tableNumber
             }).subscribe(res => {
-              bonedRefreshEvents();
-              bonedNgOnInit();
+              bonedSetCloseStatus(true);
             });
           }
         });
@@ -140,20 +137,14 @@ export class CalendarComponent implements OnInit {
         if (data.user_id === tableSetting.userInfo._id) {
           dialog.open(DeleteComponent).afterClosed().subscribe((result) => {
             if (result) {
-              console.log(data);
               socketService.cancelBook({
                 rent_id: data._id,
                 room_id: tableSetting.roomId,
                 rent_start: data.start,
                 room: tableSetting.roomId + '/' + tableSetting.tableNumber
-              }).subscribe(
-                () => {
-                  bonedRefreshEvents();
-                  bonedNgOnInit();
-                  bonedSetCloseStatus(true);
-                },
-                err => customSnackbarService.open(err.error.error.message)
-              );
+              }).subscribe(res => {
+                bonedSetCloseStatus(true);
+              });
             }
           });
         }
@@ -169,4 +160,5 @@ export class CalendarComponent implements OnInit {
   setCloseStatus(value) {
     this.closeStatus = value;
   }
+
 }

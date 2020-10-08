@@ -11,7 +11,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
-import { registerLocaleData } from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import localeUA from '@angular/common/locales/ru-UA';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 
@@ -76,7 +76,6 @@ const mat = [
     FlexModule,
     AuthModule,
     SharedModule,
-    // SocketIoModule.forRoot(config),
 
     ...mat,
   ],
@@ -93,7 +92,8 @@ const mat = [
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
     {provide: LOCALE_ID, useValue: 'ru-UA'},
     MyGroupsResolverService,
-    MyGroupResolverService
+    MyGroupResolverService,
+    DatePipe
   ],
   exports: []
 })
