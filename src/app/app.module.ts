@@ -13,7 +13,6 @@ import {MatProgressSpinnerModule} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import localeUA from '@angular/common/locales/ru-UA';
-import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -35,7 +34,6 @@ import {AdminInterceptor} from './core/components/admin/admin.interceptor';
 
 
 registerLocaleData(localeUA);
-// const config: SocketIoConfig = { url: 'ws://localhost:3000', options: {} };
 
 const mat = [
   MaterialModule,
@@ -76,7 +74,6 @@ const mat = [
     FlexModule,
     AuthModule,
     SharedModule,
-
     ...mat,
   ],
   bootstrap: [AppComponent],

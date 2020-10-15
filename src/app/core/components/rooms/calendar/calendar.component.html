@@ -1,5 +1,5 @@
 <daypilot-calendar *ngIf="status" [config]="config" [events]="events" #calendar></daypilot-calendar>
-<app-main-loader *ngIf="!status"></app-main-loader>
+<app-main-loader *ngIf="!status || ioService.spinnerStatus"></app-main-loader>
 <button *ngIf="status" type="button" class="btn btn-primary mt-2"
         (click)="dialogRef.close(closeStatus)">Закрити
 </button>

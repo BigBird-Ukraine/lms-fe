@@ -12,6 +12,6 @@ export interface IBookTableData {
 export interface ICancelBookData {
   room_id: string;
   room: string;
-  rent_start: Date;
-  rent_id: string;
+  rent_start: Date | string;
+  table_number: number;
 }

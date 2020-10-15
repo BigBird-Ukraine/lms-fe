@@ -46,6 +46,10 @@ form {
   color: red;
 }
 
+agm-map {
+  height: 400px;
+}
+
 @media screen and (max-width: 4800px) {
   mat-form-field {
     width: 90%;

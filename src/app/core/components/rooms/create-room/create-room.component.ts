@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 
-import {Groups, ICity, IRoom, ISettingRoom, IValidDate} from '../../../interface';
+import {Groups, IRoom, ISettingRoom, IUser, IValidDate, UserModel} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
 import {RoomsService} from '../../../services/rooms';
 import {CustomSnackbarService} from '../../../../shared/services';
-import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 @Component({
   selector: 'app-create-room',
@@ -29,6 +28,8 @@ export class CreateRoomComponent implements OnInit {
   citiesForAuto: string[] = [];
   settingRoomForAuto: Partial<ISettingRoom[]>;
   fullSettingRoom: ISettingRoom;
+
+  addressStatus = false;
 
   constructor(private infoService: InfoHelperService, private fb: FormBuilder,
               private roomService: RoomsService, private customSnackbarService: CustomSnackbarService,
@@ -102,9 +103,18 @@ export class CreateRoomComponent implements OnInit {
         close_at: this.fb.control(null),
         city: this.fb.control(null, [Validators.required]),
         groups: this.fb.array([]),
+        address: {
+          latitude: this.fb.control(null),
+          longitude: this.fb.control(null),
+        }
       });
 
       this.fullSettingRoom = room[0];
     });
+  }
+
+  getCoordinates(coordinates) {
+    this.roomForm.value.address = coordinates as Partial<IRoom>;
+    coordinates.latitude ? this.addressStatus = true : this.addressStatus = false;
   }
 }

@@ -12,14 +12,19 @@ export interface IRoom {
   groups?: string[];
   booked_users?: IBookUser[];
   owner_id: string;
+  address: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface IBookUser {
-  id?: string;
+  _id?: string;
   user_id?: string;
   table_number: number;
   rent_start: string;
   rent_end: string;
+  confirm_status: number;
 }
 
 export interface IBookUserFull {
@@ -28,6 +33,7 @@ export interface IBookUserFull {
   table_number: number;
   rent_start: Date;
   rent_end: Date;
+  confirm_status: number;
 }
 
 export interface IValidDate {
@@ -56,4 +62,9 @@ export interface ICutRoom {
   countBookedPlaces: number;
   numbersPlaces: number[];
   idPlaces: number[];
+  address?: {
+    latitude: number,
+    longitude: number
+  };
 }
+

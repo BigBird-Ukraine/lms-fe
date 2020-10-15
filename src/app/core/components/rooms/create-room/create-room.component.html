@@ -54,6 +54,13 @@
               Додайте місто
             </mat-error>
           </mat-form-field>
+
+          <br>
+          <app-google-map *ngIf="!roomForm.get('city').hasError('required')"
+                          (coordinates)="getCoordinates($event)"
+                          [city]="roomForm.get('city').value"
+          >
+          </app-google-map>
           <br>
 
           <mat-form-field class="example-full-width">
@@ -84,7 +91,7 @@
                 mat-raised-button
                 color="primary"
                 type="submit"
-                [disabled]="roomForm.invalid || !confirmStatus"
+                [disabled]="!addressStatus|| roomForm.invalid || !confirmStatus"
         >Створити
         </button>
       </form>

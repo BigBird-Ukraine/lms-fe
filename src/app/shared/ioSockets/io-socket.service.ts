@@ -13,16 +13,18 @@ import {IBookTableData, ICancelBookData} from '../models/interfaces/socketsData'
 })
 export class IoSocketService {
   private socket = io('ws://localhost:3000', {query: `Authorization=${this.authService.getAccessToken()}`});
+  public spinnerStatus;
 
   constructor(private authService: AuthService, private router: Router, private customSnackbarService: CustomSnackbarService) {
     this.errorCheck();
   }
 
-  joinToTable(id: string) {
-    this.socket.emit('table.join', id);
+  joinToTable(event: any) {
+    this.socket.emit('table.join', event);
   }
 
   bookTable(data: IBookTableData) {
+    this.setSpinnerStatus(true);
     return new Observable((subscriber) => {
       this.socket.emit('book_table', data);
       subscriber.next();
@@ -34,6 +36,7 @@ export class IoSocketService {
   }
 
   cancelBook(data: ICancelBookData) {
+    this.setSpinnerStatus(true);
     return new Observable((subscriber) => {
       this.socket.emit('cancel_book', data);
       subscriber.next();
@@ -52,11 +55,17 @@ export class IoSocketService {
           this.router.navigateByUrl('/');
           this.authService.deleteTokens();
           this.customSnackbarService.open(error.message, 'error');
+          this.setSpinnerStatus(false);
           window.location.reload();
           break;
         default:
+          this.setSpinnerStatus(false);
           this.customSnackbarService.open(error.message, 'error');
       }
     });
+  }
+
+  setSpinnerStatus(value) {
+    this.spinnerStatus = value;
   }
 }

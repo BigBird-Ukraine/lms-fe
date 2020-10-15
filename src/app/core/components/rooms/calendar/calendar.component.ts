@@ -6,7 +6,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {RoomsService} from '../../../services/rooms';
 import {IBookRoomSetting, IBookUserFull} from '../../../interface';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
-import {CustomSnackbarService} from '../../../../shared/services';
 import {DeleteComponent} from '../../../../shared/components/delete/delete.component';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
@@ -37,12 +36,12 @@ export class CalendarComponent implements OnInit {
               private datePipe: DatePipe,
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<CalendarComponent>,
-              private customSnackbarService: CustomSnackbarService,
-              private ioService: IoSocketService,
+              public ioService: IoSocketService,
               @Inject(MAT_DIALOG_DATA) public data: IBookRoomSetting) {
     this.tableSetting = data;
 
-    ioService.joinToTable(data.roomId + '/' + data.tableNumber);
+    ioService.joinToTable({room: data.roomId + '/' + data.tableNumber});
+
     ioService.addBookedUser((res) => {
       if (res.bookUserTable) {
         this.fillEvents([res.bookUserTable]);
@@ -50,12 +49,12 @@ export class CalendarComponent implements OnInit {
     });
 
     ioService.removeUserOfTable(res => {
+      const rentStart = new Date(res.rent_start).getTime();
       this.events = this.events.filter(ev => {
-        const evStart = new Date(ev.start).getTime();
-        const rentStart = new Date(res.rent_start).getTime();
-
+        const evStart = new Date(ev.start.value + '.000Z').getTime();
         return evStart !== rentStart;
       });
+      this.ioService.setSpinnerStatus(false);
     });
   }
 
@@ -92,6 +91,7 @@ export class CalendarComponent implements OnInit {
         }
       );
     });
+    this.ioService.setSpinnerStatus(false);
   }
 
   setConfigs() {
@@ -138,9 +138,9 @@ export class CalendarComponent implements OnInit {
           dialog.open(DeleteComponent).afterClosed().subscribe((result) => {
             if (result) {
               socketService.cancelBook({
-                rent_id: data._id,
+                table_number: tableSetting.tableNumber,
                 room_id: tableSetting.roomId,
-                rent_start: data.start,
+                rent_start: data.start + '.000Z',
                 room: tableSetting.roomId + '/' + tableSetting.tableNumber
               }).subscribe(res => {
                 bonedSetCloseStatus(true);

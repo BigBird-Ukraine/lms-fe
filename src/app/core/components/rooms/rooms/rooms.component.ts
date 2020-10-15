@@ -12,6 +12,7 @@ import {IRoom} from '../../../interface';
 import {CreateRoomComponent} from '../create-room/create-room.component';
 import {EditRoomComponent} from '../edit-room/edit-room.component';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
+import {MyBookingComponent} from '../my-booking/my-booking.component';
 
 @Component({
   selector: 'app-rooms',
@@ -142,6 +143,13 @@ export class RoomsComponent implements OnInit {
   deleteRoom(id: string) {
     this.roomService.deleteRoom(id).subscribe(res => {
       this.roomsList = this.roomsList.filter(room => room._id !== id);
+    });
+  }
+
+  myBooking() {
+    this.dialog.open(MyBookingComponent, {
+      width: '90vw',
+      height: '90vh'
     });
   }
 }

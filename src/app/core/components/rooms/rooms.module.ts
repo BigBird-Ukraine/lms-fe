@@ -21,22 +21,24 @@ import {MaterialModule, SharedModule} from '../../../shared/modules';
 import {CreateRoomComponent} from './create-room/create-room.component';
 import {EditRoomComponent} from './edit-room/edit-room.component';
 import {CalendarComponent} from './calendar/calendar.component';
-
+import { MyBookingComponent } from './my-booking/my-booking.component';
+import {GoogleMapComponent} from '../../../shared/components/google-map/google-map.component';
+import {GoogleMapModule} from '../../../shared/modules/google-map.module';
 
 @NgModule({
-  entryComponents: [CreateRoomComponent, EditRoomComponent, CalendarComponent],
+  entryComponents: [CreateRoomComponent, EditRoomComponent, CalendarComponent, MyBookingComponent],
   declarations: [RoomsComponent, RoomComponent, CreateRoomComponent,
-    EditRoomComponent, CalendarComponent],
+    EditRoomComponent, CalendarComponent, MyBookingComponent],
   imports: [
     RoomsRoutingModule,
     CommonModule,
     SharedModule,
-
     ScrollingModule,
     DragDropModule,
     ReactiveFormsModule,
     FormsModule,
     DayPilotModule,
+    GoogleMapModule,
 
 
     MatFormFieldModule,

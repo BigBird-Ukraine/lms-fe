@@ -121,26 +121,23 @@ export class RoomsService {
     return this.http.get<IBookUserFull[]>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, options);
   }
 
-  bookTable(roomId: string, value: IBookUser): Observable<any> {
+  confirmBooking(roomId: string, tableNumber: number, data: Partial<IRoom>): Observable<void> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.post<any>(`${commonAuthPath}/rooms/${roomId}/${value.table_number}`, {
-      rent_start: value.rent_start,
-      rent_end: value.rent_end
-    }, options);
+    return this.http.patch<void>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, data, options);
   }
 
-  deleteBookedUser(rendId: string, roomId: string): Observable<void> {
+  getMyBooking(): Observable<Partial<IRoom[]>> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()
       })
     };
 
-    return this.http.delete<void>(`${commonAuthPath}/rooms/${roomId}/${rendId}`, options);
+    return this.http.get<Partial<IRoom[]>>(`${commonAuthPath}/rooms/my_booking`, options);
   }
 }

@@ -6,6 +6,7 @@ import {ICutRoom} from '../../../interface';
 import {UserService} from '../../../services/user';
 import {RoomsService} from '../../../services/rooms';
 import {CalendarComponent} from '../calendar/calendar.component';
+import {HelperService} from '../../../../shared/services/helper.service';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class RoomComponent implements OnInit {
               private dialog: MatDialog,
               private userService: UserService,
               private roomsService: RoomsService,
-              private socketService: IoSocketService) {
+              private dateHelperService: HelperService,
+              private ioService: IoSocketService) {
   }
 
   ngOnInit() {
@@ -31,8 +33,9 @@ export class RoomComponent implements OnInit {
       .subscribe(
         res => {
           this.room = res.singleRoomResolverService;
-          this.startAt = this.getDateWithoutTimeZone(this.room.start_at);
-          this.closeAt = this.getDateWithoutTimeZone(this.room.close_at);
+          this.startAt = this.dateHelperService.getDateWithoutTimeZone(this.room.start_at);
+          this.closeAt = this.dateHelperService.getDateWithoutTimeZone(this.room.close_at);
+          this.ioService.joinToTable(null);
         });
   }
 
@@ -56,15 +59,6 @@ export class RoomComponent implements OnInit {
         });
       }
     });
-  }
-
-
-  getDateWithoutTimeZone(dateZ: string) {
-    const dTimezone = new Date();
-    const offset = dTimezone.getTimezoneOffset() / 60;
-    const date = new Date(Date.parse(dateZ));
-    date.setHours(date.getHours() + offset);
-    return date;
   }
 
   checkBookedTables(tableNumber: number) {
