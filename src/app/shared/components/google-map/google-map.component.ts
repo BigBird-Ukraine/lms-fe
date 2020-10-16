@@ -68,8 +68,8 @@ export class GoogleMapComponent implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           const selectedCity = results[0].address_components[3].long_name;
-          if (selectedCity === this.city) {
-            this.coordinates.emit({latitude, longitude});
+          if (!this.city || selectedCity === this.city) {
+            this.coordinates.emit({latitude, longitude, address: results[0].formatted_address});
             this.statusCitiesEquals = false;
             this.statusAddress = true;
           } else {

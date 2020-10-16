@@ -9,7 +9,7 @@ import {UserService} from '../user';
 import {commonAuthPath} from '../../../shared/api';
 import {ISuccessHttpResponse} from '../../../shared';
 
-const authApiUrls = {
+const authipUrls = {
   authUser: commonAuthPath + '/auth',
   logoutUser: commonAuthPath + '/auth/logout',
   refreshTokens: commonAuthPath + '/auth/refresh'
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   authRefreshToken(): Observable<any> {
-    return this.httpClient.post(authApiUrls.refreshTokens, null
+    return this.httpClient.post(authipUrls.refreshTokens, null
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;
@@ -46,7 +46,7 @@ export class AuthService {
 
   authUser(authInfo: Partial<UserModel>): Observable<any> {
     return this.httpClient
-      .post(authApiUrls.authUser, authInfo)
+      .post(authipUrls.authUser, authInfo)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           const {accessToken, refreshToken} = response.data as ITokensModel;
@@ -69,7 +69,7 @@ export class AuthService {
     };
 
     return this.httpClient
-      .post(authApiUrls.logoutUser, null, options)
+      .post(authipUrls.logoutUser, null, options)
       .pipe(
         tap(() => {
           this.deleteTokens();

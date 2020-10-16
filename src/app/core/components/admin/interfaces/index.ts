@@ -11,4 +11,4 @@ export * from './questionModel';
 export * from './city.interface';
 export * from './comment-interface';
 export * from './room-interface';
-export * from './api.interface';
+export * from './ip.interface';

@@ -13,9 +13,11 @@ export interface IRoom {
   booked_users?: IBookUser[];
   owner_id: string;
   address: {
+    address?: string;
     latitude: number;
     longitude: number;
   };
+  ip: string;
 }
 
 export interface IBookUser {

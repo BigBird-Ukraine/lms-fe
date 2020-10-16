@@ -46,8 +46,8 @@ const routes: Routes = [
         loadChildren: () => import('src/app/core/components/admin/cities-admin/cities.module').then(c => c.CitiesModule)
       },
       {
-        path: 'apis',
-        loadChildren: () => import('src/app/core/components/admin/api-address/api-address.module').then(a => a.ApiAddressModule)
+        path: 'ips',
+        loadChildren: () => import('src/app/core/components/admin/ip-address/ip-address.module').then(a => a.IpAddressModule)
       }
     ]
   }

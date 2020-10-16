@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <agm-map *ngIf="statusAddress" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+  <agm-map *ngIf="statusAddress && city" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
                 (dragEnd)="markerDragEnd($event)"></agm-marker>
   </agm-map>

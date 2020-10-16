@@ -7,3 +7,4 @@ export * from './admin-users.service';
 export * from './admin-module.service';
 export * from './admin-lesson.service';
 export * from './admin-room.service';
+export * from './admin-ip.service';

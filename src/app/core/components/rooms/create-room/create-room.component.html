@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="groupForAuto.length && settingRoomForAuto && ips">
   <h2 mat-dialog-title class="mat_dialog_title">Створити кімнату</h2>
   <mat-dialog-content class="mat-typography">
 
@@ -63,6 +63,20 @@
           </app-google-map>
           <br>
 
+          <mat-form-field class="example-full-width ">
+            <mat-label>Вкажіть ip адрес офісу</mat-label>
+            <mat-select formControlName="ip">
+              <mat-option *ngFor="let ip of ips " [value]="ip.ip">
+                {{ip.title}} - {{ip.address}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="roomForm.get('ip').hasError('required')">
+              Додайте ip
+            </mat-error>
+          </mat-form-field>
+
+          <br>
+
           <mat-form-field class="example-full-width">
             <input matInput
                    placeholder="Вкажіть групу"
@@ -82,10 +96,14 @@
         <span *ngFor="let gr of group"
               class="block">
           {{gr}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delGroup(gr)">
+                  &times;
+                </button>
         </span>
           </div>
         </div>
-
 
         <button *ngIf="!spinnerStatus"
                 mat-raised-button
@@ -98,3 +116,6 @@
     </div>
   </mat-dialog-content>
 </div>
+
+
+<app-main-loader *ngIf="!groupForAuto.length || !settingRoomForAuto || !ips"></app-main-loader>

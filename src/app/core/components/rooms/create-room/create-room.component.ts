@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 
-import {Groups, IRoom, ISettingRoom, IUser, IValidDate, UserModel} from '../../../interface';
+import {Groups, IIp, IRoom, ISettingRoom, IUser, IValidDate, UserModel} from '../../../interface';
 import {InfoHelperService} from '../../../services/questions';
 import {RoomsService} from '../../../services/rooms';
 import {CustomSnackbarService} from '../../../../shared/services';
+import {IpService} from '../../../services/ip';
 
 @Component({
   selector: 'app-create-room',
@@ -30,10 +31,12 @@ export class CreateRoomComponent implements OnInit {
   fullSettingRoom: ISettingRoom;
 
   addressStatus = false;
+  ips: IIp[];
+  coordinates: any;
 
   constructor(private infoService: InfoHelperService, private fb: FormBuilder,
               private roomService: RoomsService, private customSnackbarService: CustomSnackbarService,
-              private dialogRef: MatDialogRef<CreateRoomComponent>) {
+              private ipService: IpService, private dialogRef: MatDialogRef<CreateRoomComponent>) {
   }
 
   ngOnInit() {
@@ -41,6 +44,7 @@ export class CreateRoomComponent implements OnInit {
     this.roomService.selectSettingRoomsByParams('{"label": "1"}').subscribe(settingRooms => {
       this.settingRoomForAuto = settingRooms;
     });
+    this.ipService.getIps().subscribe(res => this.ips = res);
   }
 
   createRoom() {
@@ -48,6 +52,7 @@ export class CreateRoomComponent implements OnInit {
     room.groups = this.groupsId;
     room.start_at = this.startAt;
     room.close_at = this.closeAt;
+    room.address = this.coordinates;
 
     this.spinnerStatus = true;
     this.roomService.createRoom(room).subscribe(() => {
@@ -57,7 +62,6 @@ export class CreateRoomComponent implements OnInit {
     }, err => {
       this.spinnerStatus = false;
       this.customSnackbarService.open(err.error.error.message, '');
-      this.dialogRef.close(false);
     });
   }
 
@@ -106,7 +110,8 @@ export class CreateRoomComponent implements OnInit {
         address: {
           latitude: this.fb.control(null),
           longitude: this.fb.control(null),
-        }
+        },
+        ip: this.fb.control(null)
       });
 
       this.fullSettingRoom = room[0];
@@ -114,7 +119,11 @@ export class CreateRoomComponent implements OnInit {
   }
 
   getCoordinates(coordinates) {
-    this.roomForm.value.address = coordinates as Partial<IRoom>;
+    this.coordinates = {latitude: coordinates.latitude, longitude: coordinates.longitude};
     coordinates.latitude ? this.addressStatus = true : this.addressStatus = false;
+  }
+
+  delGroup(label: string) {
+    this.group = this.group.filter(group => group !== label);
   }
 }

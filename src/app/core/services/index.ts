@@ -6,3 +6,4 @@ export * from './tests';
 export * from './groups';
 export * from './courses';
 export * from './rooms';
+export * from './ip';
