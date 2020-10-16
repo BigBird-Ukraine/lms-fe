@@ -45,6 +45,10 @@ const routes: Routes = [
         path: 'cities',
         loadChildren: () => import('src/app/core/components/admin/cities-admin/cities.module').then(c => c.CitiesModule)
       },
+      {
+        path: 'apis',
+        loadChildren: () => import('src/app/core/components/admin/api-address/api-address.module').then(a => a.ApiAddressModule)
+      }
     ]
   }
 ];
