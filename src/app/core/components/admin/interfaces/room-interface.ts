@@ -9,11 +9,7 @@ export interface IRoom {
   groups?: string[];
   booked_users?: IBookUser[];
   owner_id: string;
-  address: {
-    address?: string;
-    latitude: number;
-    longitude: number;
-  };
+  ip_address: string;
 }
 
 export interface IBookUser {

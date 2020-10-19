@@ -4,13 +4,18 @@
     <div [className]="statusAddress ? 'green br' : 'red br' ">
       <input
         type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
-        placeholder="Обовязково вкажіть точну адресу офісу, в якій розміщена кімната"
+        placeholder="Обовязково вкажіть точну адресу офісу. Після вибору, натисність Enter"
         autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
         #search>
     </div>
   </div>
 
-  <agm-map *ngIf="statusAddress && city" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+  <agm-map  class="col-10"
+           *ngIf="statusAddress && city"
+           [latitude]="latitude"
+           [longitude]="longitude"
+           [zoom]="zoom"
+  >
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
                 (dragEnd)="markerDragEnd($event)"></agm-marker>
   </agm-map>

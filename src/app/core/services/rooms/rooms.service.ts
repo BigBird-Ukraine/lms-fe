@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
 import {commonAuthPath} from '../../../shared/api';
-import {IBookUser, IBookUserFull, ICutRoom, IRoom, ISettingRoom} from '../../interface';
+import {IBookUser, IBookUserFull, ICutRoom, IIp, IIpAddress, IRoom, ISettingRoom} from '../../interface';
 
 
 @Injectable({
@@ -121,7 +121,7 @@ export class RoomsService {
     return this.http.get<IBookUserFull[]>(`${commonAuthPath}/rooms/${roomId}/${tableNumber}`, options);
   }
 
-  confirmBooking(roomId: string, tableNumber: number, data: Partial<IRoom>): Observable<void> {
+  confirmBooking(roomId: string, tableNumber: number, data: IIpAddress): Observable<void> {
     const options = {
       headers: new HttpHeaders({
         Authorization: this.authService.getAccessToken()

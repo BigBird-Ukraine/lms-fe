@@ -54,28 +54,20 @@
               Додайте місто
             </mat-error>
           </mat-form-field>
-
-          <br>
-          <app-google-map *ngIf="!roomForm.get('city').hasError('required')"
-                          (coordinates)="getCoordinates($event)"
-                          [city]="roomForm.get('city').value"
-          >
-          </app-google-map>
           <br>
 
-          <mat-form-field class="example-full-width ">
-            <mat-label>Вкажіть ip адрес офісу</mat-label>
-            <mat-select formControlName="ip">
-              <mat-option *ngFor="let ip of ips " [value]="ip.ip">
-                {{ip.title}} - {{ip.address}}
+          <mat-form-field class="example-full-width " *ngIf="!roomForm.get('city').hasError('required')">
+            <mat-label>Вкажіть адрес офісу</mat-label>
+            <mat-select formControlName="ip_address">
+              <mat-option *ngFor="let ip of addressForAuto " [value]="ip._id">
+                {{ip.title}} - {{ip.fullAddress.address}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="roomForm.get('ip').hasError('required')">
-              Додайте ip
+            <mat-error *ngIf="roomForm.get('ip_address').hasError('required')">
+              Додайте адресу
             </mat-error>
           </mat-form-field>
 
-          <br>
 
           <mat-form-field class="example-full-width">
             <input matInput
@@ -109,7 +101,7 @@
                 mat-raised-button
                 color="primary"
                 type="submit"
-                [disabled]="!addressStatus|| roomForm.invalid || !confirmStatus"
+                [disabled]="!roomForm.value.ip_address || roomForm.invalid || !confirmStatus"
         >Створити
         </button>
       </form>

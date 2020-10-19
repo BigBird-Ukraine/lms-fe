@@ -27,12 +27,12 @@ export class CreateRoomComponent implements OnInit {
   groupsId: string[] = [];
 
   citiesForAuto: string[] = [];
+  addressForAuto: IIp[];
   settingRoomForAuto: Partial<ISettingRoom[]>;
+
   fullSettingRoom: ISettingRoom;
 
-  addressStatus = false;
   ips: IIp[];
-  coordinates: any;
 
   constructor(private infoService: InfoHelperService, private fb: FormBuilder,
               private roomService: RoomsService, private customSnackbarService: CustomSnackbarService,
@@ -44,7 +44,9 @@ export class CreateRoomComponent implements OnInit {
     this.roomService.selectSettingRoomsByParams('{"label": "1"}').subscribe(settingRooms => {
       this.settingRoomForAuto = settingRooms;
     });
-    this.ipService.getIps().subscribe(res => this.ips = res);
+    this.ipService.getIps().subscribe(res => {
+      this.ips = res;
+    });
   }
 
   createRoom() {
@@ -52,7 +54,6 @@ export class CreateRoomComponent implements OnInit {
     room.groups = this.groupsId;
     room.start_at = this.startAt;
     room.close_at = this.closeAt;
-    room.address = this.coordinates;
 
     this.spinnerStatus = true;
     this.roomService.createRoom(room).subscribe(() => {
@@ -107,20 +108,14 @@ export class CreateRoomComponent implements OnInit {
         close_at: this.fb.control(null),
         city: this.fb.control(null, [Validators.required]),
         groups: this.fb.array([]),
-        address: {
-          latitude: this.fb.control(null),
-          longitude: this.fb.control(null),
-        },
-        ip: this.fb.control(null)
+        ip_address: this.fb.control(null)
       });
 
+      this.roomForm.controls.city.valueChanges.subscribe((res) => {
+        this.addressForAuto = this.ips.filter(ip => ip.city === res);
+      });
       this.fullSettingRoom = room[0];
     });
-  }
-
-  getCoordinates(coordinates) {
-    this.coordinates = {latitude: coordinates.latitude, longitude: coordinates.longitude};
-    coordinates.latitude ? this.addressStatus = true : this.addressStatus = false;
   }
 
   delGroup(label: string) {

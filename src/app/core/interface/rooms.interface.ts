@@ -12,12 +12,7 @@ export interface IRoom {
   groups?: string[];
   booked_users?: IBookUser[];
   owner_id: string;
-  address: {
-    address?: string;
-    latitude: number;
-    longitude: number;
-  };
-  ip: string;
+  ip_address: string;
 }
 
 export interface IBookUser {
@@ -64,9 +59,5 @@ export interface ICutRoom {
   countBookedPlaces: number;
   numbersPlaces: number[];
   idPlaces: number[];
-  address?: {
-    latitude: number,
-    longitude: number
-  };
 }
 

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 
 import {CustomSnackbarService} from '../../../../../shared/services';
-import {IRoom} from '../../interfaces';
+import {IAddress, ICity, IIp} from '../../interfaces';
 import {AdminIpService} from '../../services';
+import {AdminCityService} from '../../services/admin-city.service';
 
 @Component({
   selector: 'app-create-ip',
@@ -14,28 +15,45 @@ import {AdminIpService} from '../../services';
 export class CreateIpComponent implements OnInit {
 
   form: FormGroup;
+  citiesForAuto: ICity[];
+  city: string;
+
+  statusRenderingMap = true;
 
   constructor(private adminIpService: AdminIpService,
+              private cityService: AdminCityService,
               private dialog: MatDialog,
               private snackbarService: CustomSnackbarService) {
   }
 
   ngOnInit() {
+    this.cityService.getCities().subscribe(res => this.citiesForAuto = res);
+
     this.form = new FormGroup({
       title: new FormControl(null, [Validators.required, Validators.min(1)]),
+      city: new FormControl(null, [Validators.required]),
       ip: new FormControl(null, [Validators.required, Validators.min(4)]),
-      address: new FormControl(null),
+      fullAddress: new FormControl(null),
+    });
+
+    this.form.controls.city.valueChanges.subscribe(() => {
+      this.statusRenderingMap = false;
+      setTimeout(() => {
+        this.statusRenderingMap = true;
+      }, 0);
     });
   }
 
   saveIp() {
-    this.adminIpService.createIp(this.form.value).subscribe(() => {
-      this.snackbarService.open(`Ip ${this.form.value.title} створено`);
+    const ipAddress: IIp = this.form.value;
+
+    this.adminIpService.createIp(ipAddress).subscribe(() => {
+      this.snackbarService.open(`${this.form.value.title} створено`);
       this.dialog.closeAll();
     });
   }
 
-  getCoordinates(data: Partial<IRoom>) {
-    this.form.value.address = data.address;
+  getCoordinates(data: any) {
+    this.form.value.fullAddress = data as IAddress;
   }
 }

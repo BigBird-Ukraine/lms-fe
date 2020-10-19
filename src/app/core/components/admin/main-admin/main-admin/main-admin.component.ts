@@ -22,7 +22,7 @@ export class MainAdminComponent implements OnInit {
     {url: '/admin/adminPanel/lessons', name: 'Уроки'},
     {url: '/admin/adminPanel/rooms', name: 'Кімнати'},
     {url: '/admin/adminPanel/cities', name: 'Міста'},
-    {url: '/admin/adminPanel/ips', name: 'IP Адреси'}
+    {url: '/admin/adminPanel/ips', name: 'Адреса офісів'}
   ];
   adminInfo: IUser;
 

@@ -5,10 +5,10 @@
       <div class="fields" fxLayout="column">
 
         <mat-form-field appearance="standard">
-          <mat-label>Назва ip</mat-label>
+          <mat-label>Назва офісу</mat-label>
           <input matInput type="text" required formControlName="title" minlength="2">
           <mat-error *ngIf="form.get('title').hasError('minlength')" align="end">
-            Назва IP має бути не менше 2-х символів
+            Назва  має бути не менше 2-х символів
           </mat-error>
         </mat-form-field>
 
@@ -20,7 +20,23 @@
           </mat-error>
         </mat-form-field>
 
-        <app-google-map (coordinates)="getCoordinates($event)"></app-google-map>
+        <mat-form-field class="example-full-width ">
+          <mat-label>Вкажіть місто</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of citiesForAuto " [value]="city.title">
+              {{city.title}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('city').hasError('required')">
+            Додайте місто
+          </mat-error>
+        </mat-form-field>
+        <br>
+
+        <app-google-map *ngIf="!form.get('city').hasError('required') && statusRenderingMap"
+                        (coordinates)="getCoordinates($event)"
+                        [city]="form.get('city').value">
+        </app-google-map>
 
       </div>
     </form>
@@ -28,7 +44,7 @@
 
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
-    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="saveIp()">
+    <button mat-raised-button color="primary" [disabled]="form.invalid || !form.value.fullAddress" (click)="saveIp()">
       Зберегти
     </button>
   </mat-card-actions>

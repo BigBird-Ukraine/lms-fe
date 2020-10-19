@@ -16,6 +16,7 @@ export class MyBookingComponent implements OnInit {
 
   myBooking: Partial<IRoom[]>;
   address: any;
+  ip: string;
 
   constructor(private dialogRef: MatDialogRef<MyBookingComponent>,
               private roomService: RoomsService,
@@ -40,8 +41,11 @@ export class MyBookingComponent implements OnInit {
 
   ngOnInit() {
     this.roomService.getMyBooking().subscribe(res => {
-      this.getMyGeolocation();
-      this.myBooking = res;
+      this.dateHelperService.getIPAddress().subscribe(resIp => {
+        this.ip = resIp.ip;
+        this.getMyGeolocation();
+        this.myBooking = res;
+      });
     });
   }
 
@@ -81,7 +85,7 @@ export class MyBookingComponent implements OnInit {
 
   confirmBooking(roomId: string, tableNumber: number, id: string) {
     this.socketService.setSpinnerStatus(true);
-    this.roomService.confirmBooking(roomId, tableNumber, {_id: id, address: this.address}).subscribe(res => {
+    this.roomService.confirmBooking(roomId, tableNumber, {_id: id, address: this.address, ip: this.ip}).subscribe(res => {
         this.myBooking = this.myBooking.map((bk => {
             return {
               ...bk,
@@ -106,6 +110,7 @@ export class MyBookingComponent implements OnInit {
           this.address = {latitude: position.coords.latitude, longitude: position.coords.longitude};
         });
     }
-
   }
+
+
 }
