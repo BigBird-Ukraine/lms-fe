@@ -31,6 +31,7 @@ import {AuthUserComponent} from './core/components/auth/auth-user/auth-user.comp
 import {RegistrationComponent} from './core/components/auth/registration/registration.component';
 import {AuthModule} from './core/components/auth/auth.module';
 import {AdminInterceptor} from './core/components/admin/admin.interceptor';
+import { HelperTextComponent } from './shared/components/helper-text/helper-text.component';
 
 
 registerLocaleData(localeUA);
@@ -52,7 +53,8 @@ const mat = [
     DeleteComponent,
 
     AuthUserComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HelperTextComponent
   ],
   declarations: [
     AppComponent,
@@ -61,7 +63,8 @@ const mat = [
     MainLayoutComponent,
     FilterPipe,
     ConfirmLayoutComponent,
-    DeleteComponent
+    DeleteComponent,
+    HelperTextComponent
   ],
   imports: [
     AppRoutingModule,

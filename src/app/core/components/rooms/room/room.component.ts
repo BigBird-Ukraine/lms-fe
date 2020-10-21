@@ -8,6 +8,9 @@ import {RoomsService} from '../../../services/rooms';
 import {CalendarComponent} from '../calendar/calendar.component';
 import {HelperService} from '../../../../shared/services/helper.service';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
+import {CustomSnackbarService} from '../../../../shared/services';
+import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
+import {HelperTextComponent} from '../../../../shared/components/helper-text/helper-text.component';
 
 @Component({
   selector: 'app-room',
@@ -42,7 +45,7 @@ export class RoomComponent implements OnInit {
   openForm(tableNumber: number) {
     this.dialog.open(CalendarComponent, {
         width: '90vw',
-        height: '90vh',
+        height: '60vh',
         data: {
           tableNumber,
           roomId: this.room._id,
@@ -66,4 +69,9 @@ export class RoomComponent implements OnInit {
     return !!iBookUser;
   }
 
+  openHelper() {
+   this.dialog.open(HelperTextComponent, {
+     width: '60%'
+   });
+  }
 }

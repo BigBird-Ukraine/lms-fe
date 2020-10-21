@@ -14,23 +14,15 @@
           <mat-panel-title>
             {{settingRoom.label}}. <br>
             <span class="mx-2">Всіх місць: {{settingRoom.count_places}}</span>
-            <span class="mx-2">Годин без бронювання: {{settingRoom.period_time_to_sign_up}}</span>
             <span class="mx-2">Міста: {{settingRoom.cities | json}}</span>
             <span class="mx-2">Мінімальна година початку: {{settingRoom.start_at.hour}}
-              :{{settingRoom.start_at.minute}}</span>
+              :{{settingRoom.start_at.minute}}0</span>
             <span class="mx-2">Мінімальна година кінця: {{settingRoom.close_at.hour}}
-              :{{settingRoom.close_at.minute}}</span>
+              :{{settingRoom.close_at.minute}}0</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <mat-action-row>
-          <button mat-button
-                  color="primary"
-                  type="button"
-                  (click)="editSettingRoom(settingRoom._id)">
-            Редагувати
-          </button>
-
           <button mat-button
                   color="primary"
                   type="button"
@@ -89,7 +81,7 @@
                 <button mat-button
                         color="primary"
                         type="button"
-                        (click)="editRoom(room._id)">
+                        (click)="editRoom(room)">
                   Редагувати
                 </button>
 

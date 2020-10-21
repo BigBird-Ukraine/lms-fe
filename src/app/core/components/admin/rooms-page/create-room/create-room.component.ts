@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 
-import {GroupModel, ICity, IRoom, ISettingRoom, IValidDate} from '../../interfaces';
-import {AdminRoomService} from '../../services';
+import {GroupModel, ICity, IRoom, ISettingRoom, IValidDate, IIp} from '../../interfaces';
+import {AdminIpService, AdminRoomService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {InfoHelperService} from '../../../../services';
 
@@ -23,15 +23,19 @@ export class CreateRoomComponent implements OnInit {
 
   group: string[] = [];
   groupForAuto: GroupModel[] = [];
+  addressForAuto: IIp[];
+
   groupsId: string[] = [];
 
   citiesForAuto: Partial<ICity>[] = [];
   settingRoomForAuto: Partial<ISettingRoom[]>;
   fullSettingRoom: ISettingRoom;
 
+  ips: IIp[];
+
   constructor(private fb: FormBuilder, private infoService: InfoHelperService,
               private customSnackbarService: CustomSnackbarService, private roomService: AdminRoomService,
-              private dialogRef: MatDialogRef<CreateRoomComponent>) {
+              private ipService: AdminIpService, private dialogRef: MatDialogRef<CreateRoomComponent>) {
   }
 
   ngOnInit() {
@@ -39,6 +43,9 @@ export class CreateRoomComponent implements OnInit {
     this.infoService.getGroups().subscribe((groups: GroupModel[]) => this.groupForAuto = groups);
     this.roomService.getSettingsRoom('{"label": "1"}').subscribe(settingRooms => {
       this.settingRoomForAuto = settingRooms;
+    });
+    this.ipService.getIps().subscribe(res => {
+      this.ips = res;
     });
   }
 
@@ -102,10 +109,18 @@ export class CreateRoomComponent implements OnInit {
         close_at: this.fb.control(null),
         city: this.fb.control(null, [Validators.required]),
         groups: this.fb.array([]),
+        ip_address: this.fb.control(null)
+      });
+
+      this.roomForm.controls.city.valueChanges.subscribe((res) => {
+        this.addressForAuto = this.ips.filter(ip => ip.city === res);
       });
 
       this.fullSettingRoom = room[0];
     });
   }
 
+  delGroup(label: string) {
+    this.group = this.group.filter(group => group !== label);
+  }
 }

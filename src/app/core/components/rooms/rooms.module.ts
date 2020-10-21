@@ -22,7 +22,6 @@ import {CreateRoomComponent} from './create-room/create-room.component';
 import {EditRoomComponent} from './edit-room/edit-room.component';
 import {CalendarComponent} from './calendar/calendar.component';
 import { MyBookingComponent } from './my-booking/my-booking.component';
-import {GoogleMapComponent} from '../../../shared/components/google-map/google-map.component';
 import {GoogleMapModule} from '../../../shared/modules/google-map.module';
 
 @NgModule({

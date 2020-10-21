@@ -12,7 +12,11 @@ export interface IUser {
   updated_at?: string;
   photo_path?: string;
   groups_id?: GroupModel[];
-  passed_test_id?: string; // for future
+  passed_test_id?: string;
   password?: string;
   population_point: string;
+  booking_ban_status?: {
+    status: number;
+    date: Date;
+  };
 }

@@ -15,7 +15,9 @@ export class IoSocketService {
   private socket = io('ws://localhost:3000', {query: `Authorization=${this.authService.getAccessToken()}`});
   public spinnerStatus;
 
-  constructor(private authService: AuthService, private router: Router, private customSnackbarService: CustomSnackbarService) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private customSnackbarService: CustomSnackbarService) {
     this.errorCheck();
   }
 

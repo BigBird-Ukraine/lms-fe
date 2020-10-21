@@ -74,6 +74,18 @@ button {
   width: 250px;
 }
 
+.borderR {
+  border-radius: 5px;
+}
+
+.cursor :hover {
+  cursor: pointer;
+}
+
+.bg-silver {
+  background-color: rgba(46, 42, 218, 0.05);
+}
+
 @media screen and (max-width: 768px) {
   .hidden {
     display: none;

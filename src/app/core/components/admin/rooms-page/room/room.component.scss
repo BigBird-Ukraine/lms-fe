@@ -10,9 +10,6 @@ h6 {
   background-color: rgba(46, 42, 218, 0.05);
 }
 
-.m-center {
-  margin: 0 auto;
-}
 
 .borderR {
   border: 2px solid black;
@@ -49,16 +46,9 @@ h6 {
 
 .cursor :hover {
   cursor: pointer;
-  background-color: rgba(46, 42, 218, 0.05)
+  background-color: silver;
 }
 
 .heightTime {
   height: 43px;
-}
-
-.cursorHelp :hover {
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-  opacity: 1;
 }

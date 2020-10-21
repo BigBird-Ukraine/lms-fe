@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {GroupModel, ICity, IIp, IRoom, ISettingRoom} from '../../interfaces';
+import {AdminIpService, AdminRoomService} from '../../services';
+import {InfoHelperService} from '../../../../services/questions';
 
-import {Groups, ICity, IGroup, IIp, IRoom, ISettingRoom} from '../../../interface';
-import {RoomsService} from '../../../services/rooms';
-import {InfoHelperService} from '../../../services/questions';
-import {IpService} from '../../../services/ip';
+
 
 @Component({
   selector: 'app-edit-room',
@@ -22,31 +22,31 @@ export class EditRoomComponent implements OnInit {
   roomForm: FormGroup;
 
   citiesForAuto: ICity[] = [];
-  groupForAuto: Groups[] = [];
+  groupForAuto: GroupModel[] = [];
   groups: any = [];
   groupsId: string[] = [];
 
   ips: IIp[];
   addressForAuto: IIp[];
 
-  constructor(private roomService: RoomsService,
+  constructor(private roomService: AdminRoomService,
               private dialogRef: MatDialogRef<EditRoomComponent>,
               private fb: FormBuilder,
               private infoService: InfoHelperService,
-              private ipService: IpService,
+              private ipService: AdminIpService,
               @Inject(MAT_DIALOG_DATA) public data: IRoom
   ) {
     this.room = data;
     this.groups = data.groups;
 
     this.infoService.getCities().subscribe((cities: ICity[]) => this.citiesForAuto = cities);
-    this.infoService.getGroups().subscribe((groups: IGroup[]) => this.groupForAuto = groups);
+    this.infoService.getGroups().subscribe((groups: GroupModel[]) => this.groupForAuto = groups);
     this.ipService.getIps().subscribe(res => {
       this.ips = res;
       this.addressForAuto = this.ips.filter(ip => ip.city === this.room.city);
     });
 
-    this.roomService.getSettingRoomsByParams({label: this.room.label}).subscribe(room => {
+    this.roomService.getSettingsRoom('{"label": "1"}').subscribe(room => {
       this.settingRoom = room[0];
 
       this.roomForm = this.fb.group({
@@ -88,7 +88,10 @@ export class EditRoomComponent implements OnInit {
     this.roomService.updateRoom(this.room._id, editRoom).subscribe(() => {
       this.spinnerStatus = false;
       this.dialogRef.close(true);
-    });
+    },
+      err => {
+        this.spinnerStatus = false;
+      });
   }
 
   changedDate($event: any) {
@@ -117,4 +120,5 @@ export class EditRoomComponent implements OnInit {
   delGroup(label) {
     this.groups = this.groups.filter(group => group.label !== label);
   }
+
 }

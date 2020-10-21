@@ -13,6 +13,7 @@ import {CreateRoomComponent} from '../create-room/create-room.component';
 import {EditRoomComponent} from '../edit-room/edit-room.component';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
 import {MyBookingComponent} from '../my-booking/my-booking.component';
+import {HelperService} from '../../../../shared/services/helper.service';
 
 @Component({
   selector: 'app-rooms',
@@ -36,6 +37,7 @@ export class RoomsComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private userService: UserService,
               private roomService: RoomsService,
+              public dateHelperService: HelperService,
               private fb: FormBuilder,
               private infoService: InfoHelperService,
               private router: Router,

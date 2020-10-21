@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="groupForAuto.length && settingRoomForAuto && ips">
   <h2 mat-dialog-title class="mat_dialog_title">Створити кімнату</h2>
   <mat-dialog-content class="mat-typography">
 
@@ -36,6 +36,7 @@
           </mat-form-field>
           <br>
 
+
           <app-date-picker (changedDate)="changedDate($event)"
                            [maxTime]="fullSettingRoom.close_at"
                            [minTime]="fullSettingRoom.start_at"
@@ -54,6 +55,19 @@
             </mat-error>
           </mat-form-field>
           <br>
+
+          <mat-form-field class="example-full-width " *ngIf="!roomForm.get('city').hasError('required')">
+            <mat-label>Вкажіть адрес офісу</mat-label>
+            <mat-select formControlName="ip_address">
+              <mat-option *ngFor="let ip of addressForAuto " [value]="ip._id">
+                {{ip.title}} - {{ip.fullAddress.address}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="roomForm.get('ip_address').hasError('required')">
+              Додайте адресу
+            </mat-error>
+          </mat-form-field>
+
 
           <mat-form-field class="example-full-width">
             <input matInput
@@ -74,19 +88,26 @@
         <span *ngFor="let gr of group"
               class="block">
           {{gr}}
+          <button class="mini_btn"
+                  type="button"
+                  (click)="delGroup(gr)">
+                  &times;
+                </button>
         </span>
           </div>
         </div>
-
 
         <button *ngIf="!spinnerStatus"
                 mat-raised-button
                 color="primary"
                 type="submit"
-                [disabled]="roomForm.invalid || !confirmStatus"
+                [disabled]="!roomForm.value.ip_address || roomForm.invalid || !confirmStatus"
         >Створити
         </button>
       </form>
     </div>
   </mat-dialog-content>
 </div>
+
+
+<app-loader *ngIf="!groupForAuto.length || !settingRoomForAuto || !ips"></app-loader>

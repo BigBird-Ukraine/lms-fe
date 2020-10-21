@@ -40,7 +40,6 @@ export class CreateSettingsRoomComponent implements OnInit {
       start_at: new FormControl(null, [Validators.min(1)]),
       close_at: new FormControl(null, [Validators.min(1)]),
       count_places: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]{1,3}$')]),
-      period_time_to_sign_up: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]{1,4}$')]),
       cities: new FormControl([])
     });
 

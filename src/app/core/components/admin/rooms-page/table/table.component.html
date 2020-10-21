@@ -1,0 +1,23 @@
+<p class="text-center text-danger"
+  *ngIf="tableUsers && !tableUsers.length">Ніхто ще не забронювався</p>
+
+<div *ngIf="tableUsers">
+  <div *ngFor="let tb of tableUsers" class="border m-2 p-2 borderR d-flex">
+    <div class="col-2"><p>{{tb.user_id.name}} {{tb.user_id.surname}}</p></div>
+    <div class="d-flex col-2">
+      <p>
+        <mat-icon aria-hidden="false" class="icon"><b>query_builder</b></mat-icon>
+      </p>
+      <p class="mx-2"><b>{{tb.rent_start | date:'H:mm'}} - {{tb.rent_end | date:'H:mm'}}</b></p>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-danger" (click)="deleteUserBooking(tb.rent_start, tb._id)">Видалити</button>
+    </div>
+  </div>
+</div>
+
+<button *ngIf="!spinnerStatus" type="button" class="btn btn-primary m-2"
+        (click)="dialogRef.close(deleteStatus)">Закрити
+</button>
+
+<app-loader *ngIf="spinnerStatus"></app-loader>

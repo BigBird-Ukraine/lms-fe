@@ -13,6 +13,7 @@ export interface IRoom {
   booked_users?: IBookUser[];
   owner_id: string;
   ip_address: string;
+  idPlaces?: number[];
 }
 
 export interface IBookUser {
@@ -22,6 +23,7 @@ export interface IBookUser {
   rent_start: string;
   rent_end: string;
   confirm_status: number;
+  cron_job_touched?: number;
 }
 
 export interface IBookUserFull {
@@ -31,6 +33,7 @@ export interface IBookUserFull {
   rent_start: Date;
   rent_end: Date;
   confirm_status: number;
+  cron_job_touched?: number;
 }
 
 export interface IValidDate {

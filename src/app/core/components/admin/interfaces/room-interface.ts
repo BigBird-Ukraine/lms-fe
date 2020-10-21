@@ -1,6 +1,7 @@
 export interface IRoom {
   _id: string;
   label: string;
+  description: string;
   count_all_places: number;
   free_places?: number;
   start_at: string;
@@ -10,6 +11,8 @@ export interface IRoom {
   booked_users?: IBookUser[];
   owner_id: string;
   ip_address: string;
+
+  idPlaces?: number[];
 }
 
 export interface IBookUser {
@@ -30,7 +33,6 @@ export interface ISettingRoom {
   start_at: ITime;
   close_at: ITime;
   count_places: number;
-  period_time_to_sign_up: number; // h
   cities: string[];
 }
 
@@ -38,4 +40,17 @@ export interface ITime {
   hour: number;
   minute: number;
   second: number;
+}
+
+export interface ITable {
+  confirm_status: number;
+  rent_end: Date;
+  rent_start: Date;
+  table_number: number;
+  user_id: {
+    _id: string,
+    name: string,
+    surname: string
+  };
+  _id: string;
 }

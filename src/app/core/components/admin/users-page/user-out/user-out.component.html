@@ -17,6 +17,19 @@
           <button mat-raised-button color="primary" [hidden]="user.status_id !== isBlocked" (click)="unBlockUser(user)">
             Розблокувати
           </button>
+
+          <button class="mx-2" mat-raised-button color="warn" *ngIf="user.booking_ban_status &&
+            user.booking_ban_status.status !== isBookingBlocked"
+                  (click)="blockBookingUser(user)">
+            Заблокувати можливіть бронювання
+          </button>
+
+          <button class="mx-2" mat-raised-button color="primary" *ngIf="user.booking_ban_status &&
+          user.booking_ban_status.status === isBookingBlocked"
+                  (click)="unBlockBookingUser(user)">
+            Розблокувати можливіть бронювання
+          </button>
+
           <button mat-icon-button class="icon" (click)="updateProfile(user)" [hidden]="user.status_id === isBlocked">
             <mat-icon color="primary">edit</mat-icon>
           </button>

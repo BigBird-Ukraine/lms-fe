@@ -73,47 +73,44 @@
 
       </form>
 
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let room of roomsList">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Кімната -{{room.label}}.
-              <p>Місто: {{room.city}}</p>
-              <p>Розпочаток: {{room.start_at | date}}</p>
-              <p>Закінчення: {{room.close_at | date}}</p>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
 
-          <mat-action-row>
-            <button mat-button
-                    color="primary"
-                    type="button"
-                    *ngIf="isMyRoom"
-                    (click)="editRoom(room)">
-              Редагувати
-            </button>
+      <div class="cursor">
+        <div *ngFor="let room of roomsList" class="m-2 p-2 bg-white border borderR "
+             (click)="showRoom(room._id)">
+          <div class="d-flex justify-content-around">
+            <p class="bg-silver border p-2 borderR"><span class="text-secondary">Місто -</span> {{room.city}}</p>
+            <p class="bg-silver border p-2 borderR"><span class="text-secondary">Кімната -</span> {{room.label}}</p>
+            <div class="d-flex flex-wrap">
+              <div class="p-2 bg-silver border text-justify borderR heightTime d-flex">
+                <mat-icon aria-hidden="false" class="icon">event</mat-icon>
+                <p
+                  class="mx-2">{{dateHelperService.getDateWithoutTimeZone(this.room.start_at) | date:'EEEE, d MMMM, y'}}</p>
+                <mat-icon aria-hidden="false" class="icon"><b>query_builder</b></mat-icon>
+                <p class="mx-2"><b>{{dateHelperService.getDateWithoutTimeZone(this.room.start_at) | date:'H:mm'}}
+                  - {{dateHelperService.getDateWithoutTimeZone(this.room.close_at) | date:'H:mm'}}</b></p>
+              </div>
+            </div>
+          </div>
+          <button mat-button
+                  color="primary"
+                  type="button"
+                  *ngIf="isMyRoom"
+                  (click)="editRoom(room)">
+            Редагувати
+          </button>
 
-            <button mat-button
-                    color="primary"
-                    type="button"
-                    *ngIf="isMyRoom"
-                    (click)="deleteRoom(room._id)">
-              Удалити
-            </button>
+          <button mat-button
+                  color="primary"
+                  type="button"
+                  *ngIf="isMyRoom"
+                  (click)="deleteRoom(room._id)">
+            Удалити
+          </button>
+        </div>
 
-            <button mat-button
-                    color="primary"
-                    type="button"
-                    (click)="showRoom(room._id)">
-              Почати
-            </button>
-          </mat-action-row>
 
-        </mat-expansion-panel>
-
-        <p *ngIf="roomsList && !roomsList.length" class="text-center text-danger">Кімнат ще немає</p>
-      </mat-accordion>
-
+      </div>
+      <p *ngIf="roomsList && !roomsList.length" class="text-center text-danger">Кімнат ще немає</p>
     </div>
 
     <app-main-loader *ngIf="!roomsList"></app-main-loader>

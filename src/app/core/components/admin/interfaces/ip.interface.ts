@@ -7,7 +7,13 @@ export interface IIp {
 }
 
 export interface IAddress {
-  address: string;
+  address?: string;
   latitude: number;
   longitude: number;
+}
+
+export interface IIpAddress {
+  _id: string;
+  address: IAddress;
+  ip: string;
 }

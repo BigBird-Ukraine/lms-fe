@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {IRoom, ISettingRoom} from '../interfaces';
+import {IBookUser, IRoom, ISettingRoom, ITable} from '../interfaces';
 import {commonAdminPath, commonAuthPath} from '../../../../shared/api';
-import {AdminAuthService} from "./admin-auth.service";
+import {AdminAuthService} from './admin-auth.service';
+import {ICutRoom} from '../../../interface';
 
 
 @Injectable({
@@ -24,6 +25,16 @@ export class AdminRoomService {
     };
 
     return this.http.post<void>(`${this.roomUrl}/setting`, room, options);
+  }
+
+  deleteSettingRoom(id: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete<void>(`${this.roomUrl}/setting/${id}`, options);
   }
 
   getSettingsRoom(params?: any): Observable<ISettingRoom[]> {
@@ -68,6 +79,16 @@ export class AdminRoomService {
     return this.http.get<IRoom[]>(`${this.roomUrl}`, options);
   }
 
+  updateRoom(id: string, room: Partial<IRoom>): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.put<void>(`${this.roomUrl}/${id}`, room, options);
+  }
+
   deleteRoom(id: string): Observable<void> {
     const options = {
       headers: new HttpHeaders({
@@ -75,8 +96,47 @@ export class AdminRoomService {
       })
     };
 
-    return this.http.delete<void>(`${this.roomUrl}`, options);
+    return this.http.delete<void>(`${this.roomUrl}/${id}`, options);
   }
 
+  getRoomsByParams(params): Observable<IRoom[]> {
+    return this.http.get<IRoom[]>(`${this.roomUrl}`, {
+      params: new HttpParams({
+        fromObject: params
+      }),
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    });
+  }
 
+  getSingleRoom(id: string): Observable<IRoom> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<IRoom>(`${this.roomUrl}/${id}`, options);
+  }
+
+  getUsersOfTables(roomId: any, tableNumber: any): Observable<ITable[]> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.get<ITable[]>(`${this.roomUrl}/${roomId}/${tableNumber}`, options);
+  }
+
+  deleteUserOfTable(rentStart: Date, tableId: string, roomId: string): Observable<void> {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: this.authService.getAccessToken()
+      })
+    };
+
+    return this.http.delete<void>(`${this.roomUrl}/${roomId}/${tableId}?rentStart=${rentStart}`, options);
+  }
 }

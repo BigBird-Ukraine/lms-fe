@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {AdminCoursesService, AdminQuestionsService} from '../../services';
+import {AdminQuestionsService} from '../../services';
 import {CustomSnackbarService} from '../../../../../shared/services';
 import {QuestionFormConsts} from '../../../../constans';
 import {Groups, Level, QuestionModel, Subject, Tags} from '../../../../interface';

@@ -41,15 +41,6 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
-          <mat-label>Скільки надається часу до бронювання</mat-label>
-          <input placeholder="Написати кількість годин" matInput type="text" required
-                 formControlName="period_time_to_sign_up" minlength="1">
-          <mat-error *ngIf="form.get('period_time_to_sign_up').hasError('periodErr')" align="end">
-            Введіть коректний період
-          </mat-error>
-        </mat-form-field>
-
         <mat-form-field class="example-full-width">
           <input matInput required
                  placeholder="Вкажіть міста "
@@ -86,7 +77,7 @@
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
     <button mat-raised-button color="primary"
-            [disabled]="form.invalid || !statusTime || startAtForm.invalid || closeAtForm.invalid"
+            [disabled]="form.invalid || !statusTime || startAtForm.invalid || closeAtForm.invalid || !cities.length"
             (click)="saveSettingRoom()">
       Зберегти
     </button>

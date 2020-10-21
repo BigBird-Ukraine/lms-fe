@@ -53,15 +53,17 @@ export class MyBookingComponent implements OnInit {
     this.dialog.open(DeleteComponent, {
       data: 'ваше бронювання ?..'
     }).afterClosed().subscribe((result) => {
-      this.socketService.setSpinnerStatus(true);
-      this.socketService.joinToTable({room: roomId + '/' + data.table_number});
+      if (result) {
+        this.socketService.setSpinnerStatus(true);
+        this.socketService.joinToTable({room: roomId + '/' + data.table_number});
 
-      this.socketService.cancelBook({
-        table_number: data.table_number,
-        room_id: roomId,
-        rent_start: data.rent_start,
-        room: roomId + '/' + data.table_number,
-      }).subscribe();
+        this.socketService.cancelBook({
+          table_number: data.table_number,
+          room_id: roomId,
+          rent_start: data.rent_start,
+          room: roomId + '/' + data.table_number,
+        }).subscribe();
+      }
     });
   }
 

@@ -8,6 +8,7 @@ import {IBookRoomSetting, IBookUserFull} from '../../../interface';
 import {ConfirmLayoutComponent} from '../../../../shared/components/confirm-layout/confirm-layout.component';
 import {DeleteComponent} from '../../../../shared/components/delete/delete.component';
 import {IoSocketService} from '../../../../shared/ioSockets/io-socket.service';
+import {HelperTextComponent} from '../../../../shared/components/helper-text/helper-text.component';
 
 
 @Component({
@@ -135,7 +136,8 @@ export class CalendarComponent implements OnInit {
       onEventClick(args) {
         const data = args.e.data;
         if (data.user_id === tableSetting.userInfo._id) {
-          dialog.open(DeleteComponent).afterClosed().subscribe((result) => {
+          dialog.open(DeleteComponent, {data: 'ваше бронювання?..', width: '27%'})
+            .afterClosed().subscribe((result) => {
             if (result) {
               socketService.cancelBook({
                 table_number: tableSetting.tableNumber,
@@ -161,4 +163,9 @@ export class CalendarComponent implements OnInit {
     this.closeStatus = value;
   }
 
+  openHelper() {
+    this.dialog.open(HelperTextComponent, {
+      width: '60%'
+    });
+  }
 }
