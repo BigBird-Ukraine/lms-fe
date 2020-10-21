@@ -46,7 +46,7 @@ export class EditLessonComponent implements OnInit {
   }
 
   fileChange(video) {
-    if (video.target.files.length > 0) {
+    if (video && video.target.files.length > 0) {
       const file = video.target.files[0];
 
       this.editLessonForm.get('video_path').setValue(file);

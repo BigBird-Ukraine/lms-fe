@@ -69,7 +69,7 @@ export class CreateRoomComponent implements OnInit {
   newGroups(group) {
     const label = group.target.value;
 
-    if (label.length) {
+    if (label && label.length) {
       const [filterGroup] = this.groupForAuto.filter(groupRes => groupRes.label === label);
       this.group.push(label);
       this.groupsId.push(filterGroup._id);

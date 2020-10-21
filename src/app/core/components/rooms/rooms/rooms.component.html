@@ -75,9 +75,8 @@
 
 
       <div class="cursor">
-        <div *ngFor="let room of roomsList" class="m-2 p-2 bg-white border borderR "
-             (click)="showRoom(room._id)">
-          <div class="d-flex justify-content-around">
+        <div *ngFor="let room of roomsList" class="m-2 p-2 bg-white border borderR ">
+          <div class="d-flex justify-content-around "   (click)="showRoom(room._id)">
             <p class="bg-silver border p-2 borderR"><span class="text-secondary">Місто -</span> {{room.city}}</p>
             <p class="bg-silver border p-2 borderR"><span class="text-secondary">Кімната -</span> {{room.label}}</p>
             <div class="d-flex flex-wrap">
@@ -91,21 +90,17 @@
               </div>
             </div>
           </div>
-          <button mat-button
-                  color="primary"
-                  type="button"
-                  *ngIf="isMyRoom"
-                  (click)="editRoom(room)">
-            Редагувати
-          </button>
-
-          <button mat-button
-                  color="primary"
-                  type="button"
-                  *ngIf="isMyRoom"
-                  (click)="deleteRoom(room._id)">
-            Удалити
-          </button>
+          <div >
+            <button type="button" class="btn btn-dark mx-2"
+                    *ngIf="isMyRoom"
+                    (click)="editRoom(room)">Редагувати
+            </button>
+            <button type="button" class="btn btn-dark"
+                    (click)="deleteRoom(room._id)"
+                    *ngIf="isMyRoom"
+            >Удалити
+            </button>
+          </div>
         </div>
 
 

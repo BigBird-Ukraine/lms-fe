@@ -104,7 +104,7 @@ export class EditRoomComponent implements OnInit {
   newGroups(group) {
     const label = group.target.value;
 
-    if (label.length) {
+    if (label && label.length) {
       const status = this.groups.find(lab => lab.label === label);
       if (!status) {
         this.groups.push({label});
