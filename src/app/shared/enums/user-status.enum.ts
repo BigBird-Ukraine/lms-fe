@@ -1,4 +1,5 @@
 export enum UserStatusEnum {
   ACTIVE = 1,
-  BLOCKED
+  BLOCKED,
+  BOOKING_BLOCKED = 5
 }

@@ -1,0 +1,17 @@
+<div class="p-3">
+  <button mat-raised-button (click)="create()" color="primary">
+    Записати адресу
+  </button>
+
+  <div class="d-flex flex-wrap m-2 p-2 ">
+
+    <div *ngFor="let ip of ips" class="m-2 p-3 border col-5">
+
+      <p><span class="text-muted"></span>{{ip.title}}</p>
+      <p><span class="text-muted">ip - </span>{{ip.ip}}</p>
+      <p><span class="text-muted">Адреса - </span>{{ip.fullAddress.address}}</p>
+
+      <button type="button" class="btn btn-danger m-2" (click)="deleteIp(ip._id)">Удалити</button >
+    </div>
+  </div>
+</div>

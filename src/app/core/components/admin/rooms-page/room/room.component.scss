@@ -1,0 +1,54 @@
+h6 {
+  font-size: 15px;
+}
+
+.fn-s-10 {
+  font-size: 13px;
+}
+
+.bg-silver {
+  background-color: rgba(46, 42, 218, 0.05);
+}
+
+
+.borderR {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.blockB {
+  height: 40px;
+  width: 25px;
+  border-radius: 3px;
+  background: cornflowerblue;
+}
+
+.blockR {
+  height: 40px;
+  width: 25px;
+  border-radius: 3px;
+  background: orange;
+}
+
+.blockU {
+  height: 40px;
+  width: 30px;
+  border-radius: 3px;
+}
+
+.borderBlue {
+  border: 1px solid dodgerblue;
+}
+
+.borderRed {
+  border: 1px solid orange;
+}
+
+.cursor :hover {
+  cursor: pointer;
+  background-color: silver;
+}
+
+.heightTime {
+  height: 43px;
+}

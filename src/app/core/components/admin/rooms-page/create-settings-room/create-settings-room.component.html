@@ -1,0 +1,87 @@
+<mat-card class="dialog">
+  <mat-card-title>Створення настроювання кімнати</mat-card-title>
+  <mat-dialog-content>
+    <form [formGroup]="form">
+      <div class="fields" fxLayout="column">
+        <mat-form-field appearance="standard">
+          <mat-label>Назва кімнати</mat-label>
+          <input matInput type="text" required formControlName="label" minlength="2">
+          <mat-error *ngIf="form.get('label').hasError('minlength')" align="end">
+            Назва кімнати має бути не менше 2-х символів
+          </mat-error>
+        </mat-form-field>
+
+        <div appearance="standard">
+          <p>Мінімальна година початку</p>
+          <ngb-timepicker [formControl]="startAtForm" [seconds]="false"
+                          [hourStep]="hourStep" [minuteStep]="minuteStep"
+                          (ngModelChange)="timePickerChange()"
+          ></ngb-timepicker>
+          <div *ngIf="startAtForm.errors" class="small text-center text-danger m-auto">
+            <div *ngIf="startAtForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
+          </div>
+        </div>
+
+        <div appearance="standard">
+          <p>Максимальна година початку</p>
+          <ngb-timepicker [formControl]="closeAtForm" [seconds]="false"
+                          [hourStep]="hourStep" [minuteStep]="minuteStep"
+                          (ngModelChange)="timePickerChange()"
+          ></ngb-timepicker>
+          <div *ngIf="closeAtForm.errors" class="small text-center text-danger m-auto">
+            <div *ngIf="closeAtForm.errors['invalidMinute']">Хвилини мають бути кратні 30</div>
+          </div>
+        </div>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Місць в кімнаті</mat-label>
+          <input matInput type="text" required formControlName="count_places" minlength="1">
+          <mat-error *ngIf="form.get('count_places').hasError('minPlaces')" align="end">
+            Вільних місць має бути від 1
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput required
+                 placeholder="Вкажіть міста "
+                 formGroupName="cities"
+                 (keyup.enter)="newCity($event)"
+                 [matAutocomplete]="autoCity"
+                 #searchCity
+          >
+          <mat-autocomplete #autoCity="matAutocomplete">
+            <mat-option *ngFor="let city of citiesForAuto"
+                        [value]="city.title">
+              {{city.title}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="blocks">
+          <div *ngFor="let city of cities"
+               class="block">
+            {{city}}
+            <button class="mini_btn"
+                    type="button"
+                    (click)="delCity(city)">
+              &times;
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="dialog.closeAll()">Скасувати</button>
+    <button mat-raised-button color="primary"
+            [disabled]="form.invalid || !statusTime || startAtForm.invalid || closeAtForm.invalid || !cities.length"
+            (click)="saveSettingRoom()">
+      Зберегти
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<app-loader *ngIf="spinnerStatus"></app-loader>

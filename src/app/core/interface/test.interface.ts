@@ -13,6 +13,7 @@ export interface IPassedTest {
   _id: string;
   lesson_id?: string;
   result: number;
+  maxMark: number;
   created_at?: string;
 }
 
@@ -25,6 +26,7 @@ export interface IPassedData {
       questions: Partial<QuestionModel[]>
     },
     passed_questions_id?: [Partial<QuestionModel>]
+    max_mark: number;
     result: number;
   }];
 }

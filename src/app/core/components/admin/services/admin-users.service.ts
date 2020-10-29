@@ -101,4 +101,8 @@ export class AdminUsersService {
 
     return this.httpClient.get<IPassedData>(`${commonAdminPath}/users/passed_tests?userId=${userId}`);
   }
+
+  manageUserBooking(user: IUser, block: string): Observable<void> {
+    return this.httpClient.post<void>(this.urlUsers + `/${user._id}/${block}`, null);
+  }
 }

@@ -14,6 +14,7 @@
 
     <div class="d-flex flex-wrap mt-2 mx-xl-3 mx-md-0">
       <div class="col-xl-2 col-md-12 bg-dark p-2">
+        <p class="text-danger"><span class="text-secondary">Максимальний бал: </span>{{test.max_mark}}</p>
         <p><span class="text-secondary">Результат:</span>
           <span *ngIf="test.result >= 5" class="text-danger ml-1">{{test.result}}</span>
           <span *ngIf="test.result < 5" class="text-danger"> <br> Тест провалено!</span>

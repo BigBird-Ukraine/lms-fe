@@ -19,6 +19,8 @@ export class RegistrationComponent implements OnInit {
   hide = true;
   hide2 = true;
 
+  statusRequest = false;
+
   constructor(private dialog: MatDialog,
               private customSnackbarService: CustomSnackbarService,
               private fb: FormBuilder,
@@ -93,8 +95,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   createUser(user: UserModel) {
+    this.statusRequest = true;
     this.userService.createUser(user).subscribe(() => {
-        this.customSnackbarService.open('Реєстрація успішна', 'success');
+        this.statusRequest = false;
+        this.customSnackbarService.open('Реєстрація успішна, підтвердіть, будьласка почту', 'success');
         this.dialog.closeAll();
       },
       () => this.customSnackbarService.open('Не вдала спроба', ''));

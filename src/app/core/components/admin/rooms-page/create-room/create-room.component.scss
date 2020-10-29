@@ -1,0 +1,91 @@
+.form-field {
+  width: inherit;
+}
+
+.mat-typography {
+  font-size: 16px;
+}
+
+form {
+  padding: 10px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.block {
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 5px;
+  background: #673ab7;
+  font-size: 12px;
+  color: white;
+}
+
+.mini_btn {
+  margin: 5px;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  font-size: 15px;
+  line-height: 15px
+}
+
+.green {
+  color:green;
+}
+
+.red {
+  color: red;
+}
+
+@media screen and (max-width: 4800px) {
+  mat-form-field {
+    width: 90%;
+  }
+
+  .example-full-width {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-form-field {
+    width: 80%;
+  }
+
+  .example-full-width {
+    width: 80%;
+    padding-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  mat-form-field {
+    width: 60%;
+  }
+
+  .example-full-width {
+    width: 40%;
+    padding-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  mat-form-field {
+    width: 40%;
+  }
+
+  .example-full-width {
+    width: 25%;
+    padding-bottom: 10px;
+  }
+}

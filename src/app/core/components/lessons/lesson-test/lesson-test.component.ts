@@ -106,7 +106,7 @@ export class LessonTestComponent implements OnInit {
     const {question_list} = test;
     this.statusCheck = true;
 
-    this.testService.sendTests(id, question_list, this.cutQuestions).subscribe((value: IUser) => {
+    this.testService.sendTests(id, question_list, this.cutQuestions, this.maxMark).subscribe((value: IUser) => {
         this.statusCheck = false;
         this.dialog.open(LessonTestResultComponent, {
           data: value

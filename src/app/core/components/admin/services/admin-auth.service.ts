@@ -7,7 +7,7 @@ import {commonAdminPath} from '../../../../shared/api';
 import {ISuccessHttpResponse} from '../../../../shared/models/interfaces';
 import {ITokensModel, UserModel} from '../../../interface';
 
-const authApiUrls = {
+const authipUrls = {
   authAdmin: commonAdminPath + '/auth',
   logoutAdmin: commonAdminPath + '/auth/logout',
   refreshTokens: commonAdminPath + '/auth/refresh',
@@ -27,7 +27,7 @@ export class AdminAuthService {
 
   authAdmin(authInfo: Partial<UserModel>): Observable<any> {
     return this.httpClient
-      .post(`${authApiUrls.authAdmin}`, authInfo)
+      .post(`${authipUrls.authAdmin}`, authInfo)
       .pipe(
         tap((response: ISuccessHttpResponse) => {
           const {accessToken, refreshToken} = response.data as ITokensModel;
@@ -41,12 +41,12 @@ export class AdminAuthService {
   }
 
   getAdminInfo(): Observable<any> {
-    return this.httpClient.get<any>(`${authApiUrls.getAdminInfo}`);
+    return this.httpClient.get<any>(`${authipUrls.getAdminInfo}`);
   }
 
   logout(): Observable<any> {
         return this.httpClient
-      .post(authApiUrls.logoutAdmin, null)
+      .post(authipUrls.logoutAdmin, null)
       .pipe(
         tap(() => {
           this.deleteTokens();
@@ -58,7 +58,7 @@ export class AdminAuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.httpClient.post(authApiUrls.refreshTokens, null
+    return this.httpClient.post(authipUrls.refreshTokens, null
     ).pipe(
       tap((response: ISuccessHttpResponse) => {
         const {accessToken, refreshToken} = response.data as ITokensModel;

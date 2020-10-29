@@ -1,0 +1,113 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav-content>
+    <div *ngIf="roomsList"
+         class="lesson-layout">
+
+      <form [formGroup]="filterRoomForm"
+            (ngSubmit)="showFiltered()"
+            (keydown.enter)="$event.preventDefault()"
+            class="d-flex flex-wrap justify-content-around mb-3">
+
+        <mat-form-field>
+
+          <input type="text"
+                 placeholder="Назва кімнати"
+                 matInput
+                 formControlName="label"
+                 [matAutocomplete]="autoRoom"
+                 #searchRoom
+          >
+          <mat-autocomplete autoActiveFirstOption
+                            #autoRoom="matAutocomplete">
+            <mat-option *ngFor="let room of roomsForAutocomplete " [value]="room">
+              {{room}}
+            </mat-option>
+          </mat-autocomplete>
+
+        </mat-form-field>
+
+        <div class="d-flex flex-wrap justify-content-center">
+          <button type="submit"
+                  color="primary"
+                  class="m-2"
+                  mat-raised-button
+          >
+            Шукати
+          </button>
+
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  *ngIf="isTeacher && !isMyRoom && !isFiltered"
+                  (click)="myRooms()"
+          >Мої кімнати
+          </button>
+
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  *ngIf="isTeacher && isMyRoom || isFiltered"
+                  (click)="getRooms()"
+          >Всі кімнати
+          </button>
+
+          <button *ngIf="isTeacher"
+                  mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  (click)="openForm()"
+          >Додати кімнату
+          </button>
+
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  class="m-2"
+                  (click)="myBooking()"
+          >Мої бронювання
+          </button>
+        </div>
+
+      </form>
+
+
+      <div class="cursor">
+        <div *ngFor="let room of roomsList" class="m-2 p-2 bg-white border borderR ">
+          <div class="d-flex justify-content-around "   (click)="showRoom(room._id)">
+            <p class="bg-silver border p-2 borderR"><span class="text-secondary">Місто -</span> {{room.city}}</p>
+            <p class="bg-silver border p-2 borderR"><span class="text-secondary">Кімната -</span> {{room.label}}</p>
+            <div class="d-flex flex-wrap">
+              <div class="p-2 bg-silver border text-justify borderR heightTime d-flex">
+                <mat-icon aria-hidden="false" class="icon">event</mat-icon>
+                <p
+                  class="mx-2">{{dateHelperService.getDateWithoutTimeZone(this.room.start_at) | date:'EEEE, d MMMM, y'}}</p>
+                <mat-icon aria-hidden="false" class="icon"><b>query_builder</b></mat-icon>
+                <p class="mx-2"><b>{{dateHelperService.getDateWithoutTimeZone(this.room.start_at) | date:'H:mm'}}
+                  - {{dateHelperService.getDateWithoutTimeZone(this.room.close_at) | date:'H:mm'}}</b></p>
+              </div>
+            </div>
+          </div>
+          <div >
+            <button type="button" class="btn btn-dark mx-2"
+                    *ngIf="isMyRoom"
+                    (click)="editRoom(room)">Редагувати
+            </button>
+            <button type="button" class="btn btn-dark"
+                    (click)="deleteRoom(room._id)"
+                    *ngIf="isMyRoom"
+            >Удалити
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+      <p *ngIf="roomsList && !roomsList.length" class="text-center text-danger">Кімнат ще немає</p>
+    </div>
+
+    <app-main-loader *ngIf="!roomsList"></app-main-loader>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -6,11 +6,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-
   constructor() {
   }
 
   ngOnInit() {
   }
+
 }
 

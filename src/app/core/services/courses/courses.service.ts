@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {AuthService} from '../auth';
 import {commonAuthPath} from '../../../shared/api';
-import {ICourse, PatricalICourse} from '../../components/admin/interfaces';
+import {PatricalICourse} from '../../components/admin/interfaces';
 
 @Injectable({
   providedIn: 'root'

@@ -17,11 +17,11 @@ export class TestService {
     return this.http.get<Partial<ITest>>(`${commonAuthPath}/lessons/${id}/test`);
   }
 
-  sendTests(id, test, questions: Partial<QuestionModel>[]): Observable<IUser> {
-    return this.http.post<IUser>(`${commonAuthPath}/lessons/${id}/test`, {test, questions});
+  sendTests(id, test, questions: Partial<QuestionModel>[], maxMark: number): Observable<Partial<IUser>> {
+    return this.http.post<Partial<IUser>>(`${commonAuthPath}/lessons/${id}/test`, {test, questions, max_mark: maxMark});
   }
 
-  sendFilteredTests(test, questions: Partial<QuestionModel>[]): Observable<IUser> {
-    return this.http.post<IUser>(`${commonAuthPath}/questions/test`, {test, questions});
+  sendFilteredTests(test, questions: Partial<QuestionModel>[], maxMark: number): Observable<IUser> {
+    return this.http.post<IUser>(`${commonAuthPath}/questions/test`, {test, questions, max_mark: maxMark});
   }
 }

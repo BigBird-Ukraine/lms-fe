@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
@@ -11,6 +11,8 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
+import {DatePipe, registerLocaleData} from '@angular/common';
+import localeUA from '@angular/common/locales/ru-UA';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -29,6 +31,10 @@ import {AuthUserComponent} from './core/components/auth/auth-user/auth-user.comp
 import {RegistrationComponent} from './core/components/auth/registration/registration.component';
 import {AuthModule} from './core/components/auth/auth.module';
 import {AdminInterceptor} from './core/components/admin/admin.interceptor';
+import { HelperTextComponent } from './shared/components/helper-text/helper-text.component';
+
+
+registerLocaleData(localeUA);
 
 const mat = [
   MaterialModule,
@@ -47,7 +53,8 @@ const mat = [
     DeleteComponent,
 
     AuthUserComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HelperTextComponent
   ],
   declarations: [
     AppComponent,
@@ -57,6 +64,7 @@ const mat = [
     FilterPipe,
     ConfirmLayoutComponent,
     DeleteComponent,
+    HelperTextComponent
   ],
   imports: [
     AppRoutingModule,
@@ -69,8 +77,7 @@ const mat = [
     FlexModule,
     AuthModule,
     SharedModule,
-
-    ...mat
+    ...mat,
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -83,9 +90,12 @@ const mat = [
       useClass: AdminInterceptor
     },
     {provide: MatPaginatorIntl, useValue: getUkrainianPaginatorIntl()},
+    {provide: LOCALE_ID, useValue: 'ru-UA'},
     MyGroupsResolverService,
-    MyGroupResolverService
+    MyGroupResolverService,
+    DatePipe
   ],
+  exports: []
 })
 
 

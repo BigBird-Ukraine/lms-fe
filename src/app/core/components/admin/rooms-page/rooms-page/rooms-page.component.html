@@ -1,0 +1,117 @@
+<div class="p-3">
+  <button mat-raised-button (click)="createSettingRoom()" color="primary" class="mb-4">
+    Записати настройки кімнати
+  </button>
+  <button mat-raised-button color="primary" type="button" class="m-2" (click)="openForm()"
+  >Додати кімнату
+  </button>
+
+  <div>
+    <p *ngIf="settingRooms && settingRooms.length" сlass="my-1 mx-3">Сетінги кімнат</p>
+    <mat-accordion *ngIf="settingRooms && settingRooms.length">
+      <mat-expansion-panel *ngFor="let settingRoom of settingRooms">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{settingRoom.label}}. <br>
+            <span class="mx-2">Всіх місць: {{settingRoom.count_places}}</span>
+            <span class="mx-2">Міста: {{settingRoom.cities | json}}</span>
+            <span class="mx-2">Мінімальна година початку: {{settingRoom.start_at.hour}}
+              :{{settingRoom.start_at.minute}}0</span>
+            <span class="mx-2">Мінімальна година кінця: {{settingRoom.close_at.hour}}
+              :{{settingRoom.close_at.minute}}0</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-action-row>
+          <button mat-button
+                  color="primary"
+                  type="button"
+                  (click)="deleteSettingRoom(settingRoom._id)">
+            Удалити
+          </button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-sidenav-container class="example-container mt-3">
+      <mat-sidenav-content>
+        <div *ngIf="roomsList"
+             class="lesson-layout">
+
+          <form [formGroup]="filterRoomForm"
+                (ngSubmit)="showFiltered()"
+                (keydown.enter)="$event.preventDefault()"
+                class="d-flex flex-wrap justify-content-around mb-3">
+
+            <mat-form-field>
+              <input type="text"
+                     placeholder="Назва кімнати"
+                     matInput
+                     formControlName="label"
+                     [matAutocomplete]="autoRoom"
+                     #searchRoom
+              >
+              <mat-autocomplete autoActiveFirstOption
+                                #autoRoom="matAutocomplete">
+                <mat-option *ngFor="let room of roomsForAutocomplete " [value]="room">
+                  {{room}}
+                </mat-option>
+              </mat-autocomplete>
+
+            </mat-form-field>
+            <div class="d-flex flex-wrap justify-content-center">
+              <button type="submit" color="primary" class="m-2" mat-raised-button>Шукати</button>
+            </div>
+          </form>
+
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let room of roomsList">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Кімната -{{room.label}}.
+                  <p class="mx-2">Місто: {{room.city}}</p>
+                  <p class="mx-2">Розпочаток: {{room.start_at | date: 'dd-MM-yyyy H:mm'}}</p>
+                  <p class="mx-2">Закінчення: {{room.close_at | date: 'dd-MM-yyyy H:mm'}}</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-action-row>
+                <button mat-button
+                        color="primary"
+                        type="button"
+                        (click)="editRoom(room)">
+                  Редагувати
+                </button>
+
+                <button mat-button
+                        color="primary"
+                        type="button"
+                        (click)="deleteRoom(room._id)">
+                  Удалити
+                </button>
+
+                <button mat-button
+                        color="primary"
+                        type="button"
+                        (click)="showRoom(room._id)">
+                  Почати
+                </button>
+              </mat-action-row>
+
+            </mat-expansion-panel>
+
+            <p *ngIf="!roomsList && !roomsList.length" class="text-center text-danger">Кімнат ще немає</p>
+          </mat-accordion>
+
+        </div>
+
+        <app-loader *ngIf="!roomsList"></app-loader>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+  </div>
+</div>
+
+<app-loader *ngIf="!settingRooms"></app-loader>

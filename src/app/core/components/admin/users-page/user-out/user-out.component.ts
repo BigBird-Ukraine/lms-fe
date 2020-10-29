@@ -18,6 +18,7 @@ import {AdminMyPassedTestComponent} from '../../passed-tests/admin-my-passed-tes
 export class UserOutComponent implements OnInit {
   @Input() data: IUserModel;
   isBlocked = UserStatusEnum.BLOCKED;
+  isBookingBlocked = UserStatusEnum.BOOKING_BLOCKED;
   roles = [
     {name: 'Адміністратор', value: UserRolesEnum.ADMIN},
     {name: 'Вчитель', value: UserRolesEnum.TEACHER},
@@ -28,6 +29,7 @@ export class UserOutComponent implements OnInit {
 
   constructor(private adminUsersService: AdminUsersService,
               private dialog: MatDialog,
+              private userService: AdminUsersService,
               private snackbarService: CustomSnackbarService) {
   }
 
@@ -103,7 +105,29 @@ export class UserOutComponent implements OnInit {
   showActivityStudent(id: string) {
     this.dialog.open(AdminMyPassedTestComponent, {
       data: id,
-      height: '100%'
+      height: '100%',
+      width: '100vw'
     });
+  }
+
+  blockBookingUser(user: IUser) {
+    const index: number = this.data.users.indexOf(user);
+
+    this.userService.manageUserBooking(user, 'blockBooking').subscribe(() => {
+      this.snackbarService.open('Можливіть бронювання заблоковано');
+      this.data.users[index].booking_ban_status.status = UserStatusEnum.BOOKING_BLOCKED;
+      this.data.users[index].updated_at = this.updatedAt;
+    });
+  }
+
+  unBlockBookingUser(user: IUser) {
+    const index: number = this.data.users.indexOf(user);
+
+    this.userService.manageUserBooking(user, 'unblockBooking').subscribe(() => {
+      this.snackbarService.open('Можливіть бронювання розблоковано');
+      this.data.users[index].booking_ban_status.status = UserStatusEnum.ACTIVE;
+      this.data.users[index].updated_at = this.updatedAt;
+    });
+
   }
 }

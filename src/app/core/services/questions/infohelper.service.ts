@@ -6,10 +6,11 @@ import {
   Level,
   Subject,
   Tags,
-  Groups
+  Groups, ICity
 } from '../../interface';
 
 import {commonAuthPath} from '../../../shared';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class InfoHelperService {
 
   getGroups(): Observable<Groups[]> {
     return this.http.get<Groups[]>(`${commonAuthPath}/helpers/groups`);
+  }
+
+  getCities(): Observable<ICity[]> {
+    return this.http.get<ICity[]>(`${commonAuthPath}/helpers/city`);
   }
 }

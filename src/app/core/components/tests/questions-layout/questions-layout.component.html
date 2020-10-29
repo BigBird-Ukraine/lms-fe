@@ -5,6 +5,7 @@
     </mat-card-title>
     <p *ngIf="questions && questions.length">Оцінювання: <br> За одну правильну відповідь , ви отримуєте <span class="font-weight-bold">10</span>
       балів, за одну помилку, в вас забирають <span class="font-weight-bold">5</span> балів</p>
+    <p *ngIf="questions && questions.length">Максимально можливий бал за цей тест, становить: <span class="text-danger">{{maxMark}}</span></p>
 
     <mat-card-content>
       <form [formGroup]="questionForm"

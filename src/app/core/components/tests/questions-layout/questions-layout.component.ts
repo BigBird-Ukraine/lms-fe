@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
 
-import {QuestionsService, TestService, UserService} from '../../../services';
+import {QuestionsService, TestService} from '../../../services';
 import {QuestionData, QuestionModel} from '../../../interface';
 import {LessonTestResultComponent} from '../../lessons/lesson-test-result/lesson-test-result.component';
 
@@ -19,6 +19,7 @@ export class QuestionsLayoutComponent implements OnInit {
   questionForm: FormGroup;
   check: any;
   count = true;
+  maxMark: number;
 
   statusCheck = false;
 
@@ -27,8 +28,7 @@ export class QuestionsLayoutComponent implements OnInit {
               private fb: FormBuilder,
               private dialog: MatDialog,
               private testService: TestService,
-              private router: Router,
-              private userService: UserService
+              private router: Router
   ) {
   }
 
@@ -47,6 +47,7 @@ export class QuestionsLayoutComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: object) => {
       this.questionsService.findQuestionByParams(params).subscribe((questions: QuestionData) => {
         this.questions = questions.data.questions;
+        this.maxMark = questions.data.maxMark;
         this.questions.forEach((el) => {
           this.cutQuestions.push({question: el.question, description: el.description, level: el.level, subject: el.subject});
           const questionListArr = (this.questionForm.get('question_list')) as FormArray;
@@ -100,7 +101,7 @@ export class QuestionsLayoutComponent implements OnInit {
     const {question_list} = test;
     this.statusCheck = true;
 
-    this.testService.sendFilteredTests(question_list, this.cutQuestions).subscribe((value) => {
+    this.testService.sendFilteredTests(question_list, this.cutQuestions, this.maxMark).subscribe((value) => {
         this.statusCheck = false;
         this.dialog.open(LessonTestResultComponent, {
           data: value

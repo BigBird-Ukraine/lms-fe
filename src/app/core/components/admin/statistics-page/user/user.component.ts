@@ -15,7 +15,17 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data.typeRequest === 1 ? this.getActiveUsers() : this.getBlockedUsers();
+    switch (this.data.typeRequest) {
+      case 1 :
+        this.getActiveUsers();
+        break;
+      case 2 :
+        this.getBlockedUsers();
+        break;
+      case 3 :
+        this.getNotActivatedUsers();
+        break;
+    }
   }
 
   getActiveUsers() {
@@ -24,6 +34,9 @@ export class UserComponent implements OnInit {
 
   getBlockedUsers() {
     this.userService.getUsersByStatus('2').subscribe(blockedUsers => this.users = blockedUsers);
+  }
 
+  getNotActivatedUsers() {
+    this.userService.getUsersByStatus('3').subscribe(notActivatedUsers => this.users = notActivatedUsers);
   }
 }
